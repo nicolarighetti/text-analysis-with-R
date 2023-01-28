@@ -6,9 +6,10 @@ website:
   title: "text-analysis-with-R"
   navbar:
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+      - text: "Home"
+        file: index.qmd
+      - text: "Tutorials"
+        file: about.qmd
 
 format:
   html:
