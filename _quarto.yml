@@ -4,6 +4,17 @@ project:
  
 website:
   title: Text Analysis With R
+  page-footer: 
+   left: "Copyright 2023, Nicola Righetti" 
+   right: 
+     - icon: wordpress
+       href: https://www.nicolarighetti.net
+     - icon: github
+       href: https://github.com/nicolarighetti
+     - icon: mastodon 
+       href: https://mas.to/@nicolarighetti
+     - icon: linkedin
+       href: https://www.linkedin.com/in/nicolarighetti79/
   navbar:
     background: primary
     search: true
