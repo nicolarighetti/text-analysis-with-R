@@ -3,14 +3,42 @@ project:
   output-dir: docs
  
 website:
-  title: "text-analysis-with-R"
+  title: Text Analysis With R
   navbar:
+    background: primary
+    search: true
     left:
       - text: "Home"
         file: index.qmd
-      - text: "Tutorials"
-        file: about.qmd
-
+      - sidebar:day1
+      - sidebar:day2
+      - sidebar:day3
+      
+  sidebar:
+      - id: day1
+        title: "Day One"
+        style: "docked"
+        background: light
+        collapse-level: 2
+        contents: 
+          - day1-program.qmd
+          - day1.qmd
+          - day1-tutorial.qmd
+    
+      - id: day2
+        title: "Day Two"
+        contents:
+          - day2-program.qmd
+          - day2.qmd
+          - day2-tutorial.qmd
+    
+      - id: day3
+        title: "Day Three"
+        contents:     
+          - day3-program.qmd
+          - day3.qmd
+          - day3-tutorial.qmd
+  
 format:
   html:
     theme: cosmo

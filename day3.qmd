@@ -1,0 +1,4 @@
+---
+title: "Advanced techniques in text analysis with R"
+format: revealjs
+---

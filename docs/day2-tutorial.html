@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Text Analysis With R</title>
+<title>Text Analysis With R - R Tutorial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -63,7 +63,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -80,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page">
+    <a class="nav-link" href="./index.html">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -88,10 +88,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Day One</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-day-one">    
-        <li>
-    <a class="dropdown-item" href="./day1-program.html">
- <span class="dropdown-text">Program</span></a>
-  </li>  
         <li>
     <a class="dropdown-item" href="./day1.html">
  <span class="dropdown-text">Introduction to text analysis and R</span></a>
@@ -108,10 +104,6 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-day-two">    
         <li>
-    <a class="dropdown-item" href="./day2-program.html">
- <span class="dropdown-text">Program</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="./day2.html">
  <span class="dropdown-text">Intermediate techniques in text analysis with R</span></a>
   </li>  
@@ -127,10 +119,6 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-day-three">    
         <li>
-    <a class="dropdown-item" href="./day3-program.html">
- <span class="dropdown-text">Program</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="./day3.html">
  <span class="dropdown-text">Advanced techniques in text analysis with R</span></a>
   </li>  
@@ -145,29 +133,44 @@ ul.task-list li input[type="checkbox"] {
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">R Tutorial</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./day2.html" class="sidebar-item-text sidebar-link">Intermediate techniques in text analysis with R</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./day2-tutorial.html" class="sidebar-item-text sidebar-link active">R Tutorial</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#main-targets-and-objectives" id="toc-main-targets-and-objectives" class="nav-link active" data-scroll-target="#main-targets-and-objectives">Main targets and objectives</a></li>
-  <li><a href="#program" id="toc-program" class="nav-link" data-scroll-target="#program">Program</a></li>
-  <li><a href="#prerequisites-and-requirements" id="toc-prerequisites-and-requirements" class="nav-link" data-scroll-target="#prerequisites-and-requirements">Prerequisites and requirements</a></li>
-  <li><a href="#about-me" id="toc-about-me" class="nav-link" data-scroll-target="#about-me">About me</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Text Analysis With R</h1>
+<h1 class="title d-none d-lg-block">R Tutorial</h1>
 </div>
 
 
@@ -182,34 +185,8 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Over the last few years, social research methodologies have rapidly evolved. Particularly in the communication sciences field, the enormous amount of documents made available by digital media has motivated researchers to identify and develop new methods for large-scale analysis of text data. Computational methodologies have proved helpful in extracting information from texts relying on the power of algorithms. Researchers have increasingly employed them to analyze data from various sources, such as social media, online newspapers, and political speeches. This three-day seminar will provide an overview of computational methodologies for text analysis and guide the participants to the essential tools to conduct computational analysis on text data.</p>
-<section id="main-targets-and-objectives" class="level2">
-<h2 class="anchored" data-anchor-id="main-targets-and-objectives">Main targets and objectives</h2>
-<p>This course is intended for communication and social sciences researchers at the Ph.D.&nbsp;and postdoc levels who want an overview of the computational techniques available for analyzing text data. The most important analytical techniques and their R software implementations will be presented. Hands-on tutorials will guide participants in the analysis of real-world data.</p>
-</section>
-<section id="program" class="level2">
-<h2 class="anchored" data-anchor-id="program">Program</h2>
-<p>The seminar introduces basic concepts and principles of computational text analysis and their implementation in R. It offers an overview of the most common approaches, from exploratory analysis to the supervised, semi-supervised, and unsupervised text analysis methods, including dictionary-based analysis, topic modeling, and machine learning classification techniques. It guides the participants step by step through the different phases of a text data analysis project, from data collection and preprocessing to the R coding necessary to conduct the analysis, and offers the opportunity to apply methodological knowledge to real-world data during hands-on coding sessions. A detailed program is outlined below.</p>
-</section>
-<section id="prerequisites-and-requirements" class="level2">
-<h2 class="anchored" data-anchor-id="prerequisites-and-requirements">Prerequisites and requirements</h2>
-<p>No previous experience with R and automated text analysis techniques is assumed. An introduction to R will be provided at the beginning of the course.</p>
-<p>Participants need to bring their laptops with them, on which they must have R and RStudio installed beforehand. Both softwares are free and available for Mac and Windows. Please follow the instructions provided at <a href="https://posit.co/download/rstudio-desktop/" class="uri">https://posit.co/download/rstudio-desktop/</a>] to install R and RStudio (possibly the last version).</p>
-<p>If you prefer instead to open a free account on RStudio Cloud, follow the instructions at this link: <a href="https://posit.cloud/plans/free" class="uri">https://posit.cloud/plans/free</a>.</p>
-</section>
-<section id="about-me" class="level2">
-<h2 class="anchored" data-anchor-id="about-me">About me</h2>
-<p>My name is Nicola Righetti, and I am a researcher in Computational Communication Science at the Department of Communication of the University of Vienna (Austria), where I teach Advanced Data Analysis with R and other methodological classes. I am also an associate researcher at the Computational Communication Lab of the same university, a research center whose goal is to facilitate the development and application of computational methods through excellence in empirical research and the advancement of novel theoretical and methodological perspectives.</p>
-<p>More about me:</p>
-<p>Website: <a href="https://www.nicolarighetti.net" class="uri">https://www.nicolarighetti.net</a></p>
-<p>Mastodon: <a href="https://mas.to/@nicolarighetti">https://mas.to/@nicolarighetti</a></p>
-<p>LinkedIn: <a href="https://www.linkedin.com/in/nicolarighetti79/" class="uri">https://www.linkedin.com/in/nicolarighetti79/</a><br>
-<br>
-<br>
-</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -1,0 +1,4 @@
+---
+title: "Introduction to text analysis and R"
+format: revealjs
+---

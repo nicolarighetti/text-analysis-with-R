@@ -1,0 +1,25 @@
+---
+title: "Program"
+---
+
+## Introduction to text analysis and R
+
+-   9:00 am - 9:30 am: Introduction and overview of the seminar: text analysis and its applications in communication science.
+
+-   9:30 am - 10:30 am: Getting started with R: installing packages and working with basic data types and functions.
+
+-   10:30 am - 11:00 am: Coffee Break.
+
+-   11:00 am - 12:00 pm: Basic concepts and principles of text analysis, including reading text files, data - preparation, preprocessing, and cleaning (e.g., removing stop words, handling special characters, tokenization, lemmatization and stemming, part-of-speech tagging, feature selection).
+
+-   12:00 pm - 1:00 pm: Lunch.
+
+-   1:00 pm - 2:00 pm: Basic text analysis techniques: using Quanteda for creating and using corpus objects in R and exploring text data (word frequency analysis, collocations, and KWIC).
+
+-   2:00 pm - 3:00 pm: Hands-on exercises using real-world data sets.
+
+-   3:00 pm - 3:30 pm: Coffee Break.
+
+-   3:30 pm - 4:30 pm: Introduction to dictionaries in R: automated sentiment analysis and content analysis, with hands-on exercises.
+
+-   4:30 pm - 5:00 pm: Summary of the day's topics and key takeaways.
