@@ -1,3 +1,13 @@
 ---
 title: "R Tutorial"
 ---
+
+# Unsupervised text classification methods {#sec-unsupervised-text-classification-methods}
+
+# Unsupervised text classification methods: Laboratory with real-world data sets {#sec-unsupervised-text-classification-methods-laboratory-with-real-world-data-sets}
+
+# Supervised classification methods {#sec-supervised-classification-methods}
+
+# Supervised classification methods: Laboratory with real-world data sets {#sec-supervised-classification-methods-laboratory-with-real-world-data-sets}
+
+# Other text analysis techniques {#sec-other-text-analysis-techniques}

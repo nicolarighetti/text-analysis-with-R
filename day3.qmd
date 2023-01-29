@@ -2,3 +2,45 @@
 title: "Advanced techniques in text analysis with R"
 format: revealjs
 ---
+
+# Text classification techniques beyond topic modeling {background-color="#2780e3"}
+## Unsupervised text classification 
+## Supervised text classification
+
+# Unsupervised text classification methods {background-color="#2780e3"}
+## Text scaling
+## Correspondence analysis
+## Clustering
+# Hands-on tutorial {background-color="#2780e3"}
+Click \[here\](day3-tutorial.hmtl#/sec-unsupervised-text-classification-methods) to open the tutorial
+
+# Coffee Break {background-color="#daffad"}
+See you at 11:00
+
+# Laboratory with real-world data sets {background-color="#2780e3"}
+Click \[here\](day3-tutorial.hmtl#/sec-unsupervised-text-classification-methods-laboratory-with-real-world-data-sets) to open the laboratory
+
+# Lunch {background-color="#daffad"}
+See you at 1:00 pm
+
+# Supervised classification methods
+## Overview of algorithms
+# Hands-on tutorial {background-color="#2780e3"}
+Click \[here\](day3-tutorial.hmtl#/sec-supervised-classification-methods) to open the tutorial.
+
+# Laboratory with real-world data sets {background-color="#2780e3"}
+Click \[here\](day3-tutorial.hmtl#/sec-supervised-classification-methods-laboratory-with-real-world-data-sets) to open the laboratory.
+
+# Coffee Break {background-color="#daffad"}
+See you at 15:30
+
+# Overview of other text analysis techniques {background-color="#2780e3"}
+## network analysis
+## named entity recognition
+## word embeddings
+
+# Hands-on tutorial {background-color="#2780e3"}
+Click \[here\](day2-tutorial.hmtl#/sec-other-text-analysis-techniques) to open the tutorial
+
+# Conclusions and wrap up of the seminar {background-color="#2780e3"}
+

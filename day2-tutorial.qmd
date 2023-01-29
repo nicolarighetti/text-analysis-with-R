@@ -1,3 +1,11 @@
 ---
-title: "R Tutorial"
+title: "Hands-on Tutorials (Day Two)"
 ---
+
+# Introduction to R for topic modeling {#sec-introduction-to-r-for-topic-modeling}
+
+# Advanced topics in topic models {#sec-advanced-topics-in-topic-models}
+
+# Advanced topic modeling methods {#sec-advanced-topic-modeling-methods}
+
+# Laboratory with real-world data {#sec-laboratory-using-real-world-data}

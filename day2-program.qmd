@@ -1,27 +1,23 @@
 ---
-title: "Program"
+title: "Intermediate techniques in text analysis with R"
 ---
-
-## Intermediate techniques in text analysis with R
 
 -   9:00 am - 9:30 am: Overview of common text analysis techniques: text classification and clustering algorithms.
 
 -   9:30 am - 10:00 am: Topic modeling: using algorithms to identify the main topics in a text corpus with - applications in communication science.
 
--   10:00 am - 10:30 am: Introduction to R for topic modeling.
+-   10:00 am - 10:30 am: Introduction to R for topic modeling, with hands-on exercises.
 
 -   10:30 am - 11:00 am: Break.
 
--   11:00 am - 12:00 pm: Using R to perform topic modeling: hands-on exercises using real-world data sets.
+-   11:00 am - 12:00 pm: Identify the number of topics, assess quality, and validate, with hands-on exercises.
 
 -   12:00 pm - 1:00 pm: Lunch.
 
--   1:00 pm - 2:00 pm: Advanced topics in topic models: identify the number of topics, assess quality, and validate.
+-   1:00 pm - 2:30 pm: Advanced topic modeling methods: Structural Topic Models and Seeded Topic Models, with hands-on exercises.
 
--   2:00 pm - 3:00 pm: Advanced techniques in topic models: Structural Topic Models and Seeded Topic Models.
+-   2:30 pm - 3:00 pm: Coffee Break.
 
--   3:00 pm - 3:30 pm: Coffee Break.
-
--   3:00 pm - 4:30 pm: Hands-on exercises using real-world data sets.
+-   3:00 pm - 4:30 pm: Laboratory with real-world data.
 
 -   4:30 pm - 5:00 pm: Summary of the day's topics and key takeaways.

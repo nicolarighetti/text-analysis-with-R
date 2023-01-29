@@ -2,3 +2,38 @@
 title: "Intermediate techniques in text analysis with R"
 format: revealjs
 ---
+
+# Overview of common text analysis techniques {background-color="#2780e3"}
+## Text classification
+## Custering algorithms
+
+# Topic modeling {background-color="#2780e3"}
+## Topic modeling in communication science.
+## Introduction to R for topic modeling.
+# Hands-on tutorial {background-color="#2780e3"}
+Click \[here\](day2-tutorial.hmtl#/sec-introduction-to-r-for-topic-modeling) to open the tutorial
+
+# Coffee Break {background-color="#daffad"}
+
+# Advanced topics in topic models {background-color="#2780e3"}
+## Identify the number of topics
+## Assess the quality of the model
+## Validation
+# Hands-on tutorial {background-color="#2780e3"}
+Click \[here\](day2-tutorial.hmtl#/sec-advanced-topics-in-topic-models) to open the tutorial
+
+# Lunch {background-color="#daffad"}
+See you at 1:00 pm
+
+# Advanced topic modeling methods {background-color="#2780e3"} 
+## Structural Topic Models
+## Seeded Topic Models
+# Hands-on tutorial {background-color="#2780e3"}
+Click \[here\](day2-tutorial.hmtl#/sec-advanced-topic-modeling-methods) to open the tutorial
+
+# Coffee Break {background-color="#daffad"}
+
+# Laboratory with real-world data {background-color="#2780e3"}
+Click \[here\](day2-tutorial.hmtl#/sec-laboratory-using-real-world-data) to open the tutorial
+
+# Wrap up and key takeaways {background-color="#2780e3"}

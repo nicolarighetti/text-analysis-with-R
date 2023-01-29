@@ -2,7 +2,7 @@
 title: "Hands-on Tutorials (Day One)"
 ---
 
-# Getting started with R  {#sec-getting-started-with-r}
+# Getting started with R {#sec-getting-started-with-r}
 
 ```{r}
 1+1

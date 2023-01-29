@@ -32,7 +32,7 @@ Click [here](day1-tutorial.hmtl#/sec-getting-started-with-r) to open the tutoria
 
 See you at 11:00 am
 
-# Basic concepts and principles  {background-color="#2780e3"}
+# Basic concepts and principles {background-color="#2780e3"}
 
 ## Reading text files
 
@@ -41,10 +41,15 @@ See you at 11:00 am
 ## Cleaning and pre-processing text data
 
 ## Handling special characters
+
 ## Removing stop words
+
 ## Tokenization
+
 ## Lemmatization and stemming
+
 ## Part-of-speech tagging
+
 ## Feature selection
 
 # Hands-on tutorial {background-color="#2780e3"}
@@ -88,4 +93,3 @@ See you at 3:30 pm
 Click [here](day1-tutorial.html#/sec-using-dictionaries-in-r) to open the tutorial
 
 # Wrap up and key takeaways {background-color="#2780e3"}
- 

@@ -44,23 +44,23 @@
   {
     "objectID": "day1-program.html",
     "href": "day1-program.html",
-    "title": "Program",
+    "title": "Introduction to text analysis and R",
     "section": "",
-    "text": "9:00 am - 9:30 am: Introduction and overview of the seminar: text analysis and its applications in communication science.\n9:30 am - 10:30 am: Getting started with R: installing packages and working with basic data types and functions.\n10:30 am - 11:00 am: Coffee Break.\n11:00 am - 12:00 pm: Basic concepts and principles of text analysis, including reading text files, data - preparation, preprocessing, and cleaning (e.g., removing stop words, handling special characters, tokenization, lemmatization and stemming, part-of-speech tagging, feature selection).\n12:00 pm - 1:00 pm: Lunch.\n1:00 pm - 2:00 pm: Basic text analysis techniques: using Quanteda for creating and using corpus objects in R and exploring text data (word frequency analysis, collocations, and KWIC).\n2:00 pm - 3:00 pm: Hands-on exercises using real-world data sets.\n3:00 pm - 3:30 pm: Coffee Break.\n3:30 pm - 4:30 pm: Introduction to dictionaries in R: automated sentiment analysis and content analysis, with hands-on exercises.\n4:30 pm - 5:00 pm: Summary of the day’s topics and key takeaways."
+    "text": "9:00 am - 9:30 am: Introduction and overview of the seminar: text analysis and its applications in communication science.\n9:30 am - 10:30 am: Getting started with R: installing packages and working with basic data types and functions, with hands-on exercises.\n10:30 am - 11:00 am: Coffee Break.\n11:00 am - 12:00 pm: Basic concepts and principles of text analysis, with hands-on exercises.\n12:00 pm - 1:00 pm: Lunch.\n1:00 pm - 2:00 pm: Basic text analysis techniques: using Quanteda for creating and using corpus objects in R and exploring text data (word frequency analysis, collocations, and KWIC).\n2:00 pm - 3:00 pm: Hands-on exercises using real-world data sets.\n3:00 pm - 3:30 pm: Coffee Break.\n3:30 pm - 4:30 pm: Introduction to dictionaries in R: automated sentiment analysis and content analysis, with hands-on exercises.\n4:30 pm - 5:00 pm: Summary of the day’s topics and key takeaways."
   },
   {
     "objectID": "day2-program.html",
     "href": "day2-program.html",
-    "title": "Program",
+    "title": "Intermediate techniques in text analysis with R",
     "section": "",
-    "text": "9:00 am - 9:30 am: Overview of common text analysis techniques: text classification and clustering algorithms.\n9:30 am - 10:00 am: Topic modeling: using algorithms to identify the main topics in a text corpus with - applications in communication science.\n10:00 am - 10:30 am: Introduction to R for topic modeling.\n10:30 am - 11:00 am: Break.\n11:00 am - 12:00 pm: Using R to perform topic modeling: hands-on exercises using real-world data sets.\n12:00 pm - 1:00 pm: Lunch.\n1:00 pm - 2:00 pm: Advanced topics in topic models: identify the number of topics, assess quality, and validate.\n2:00 pm - 3:00 pm: Advanced techniques in topic models: Structural Topic Models and Seeded Topic Models.\n3:00 pm - 3:30 pm: Coffee Break.\n3:00 pm - 4:30 pm: Hands-on exercises using real-world data sets.\n4:30 pm - 5:00 pm: Summary of the day’s topics and key takeaways."
+    "text": "9:00 am - 9:30 am: Overview of common text analysis techniques: text classification and clustering algorithms.\n9:30 am - 10:00 am: Topic modeling: using algorithms to identify the main topics in a text corpus with - applications in communication science.\n10:00 am - 10:30 am: Introduction to R for topic modeling, with hands-on exercises.\n10:30 am - 11:00 am: Break.\n11:00 am - 12:00 pm: Identify the number of topics, assess quality, and validate, with hands-on exercises.\n12:00 pm - 1:00 pm: Lunch.\n1:00 pm - 2:30 pm: Advanced topic modeling methods: Structural Topic Models and Seeded Topic Models, with hands-on exercises.\n2:30 pm - 3:00 pm: Coffee Break.\n3:00 pm - 4:30 pm: Laboratory with real-world data.\n4:30 pm - 5:00 pm: Summary of the day’s topics and key takeaways."
   },
   {
     "objectID": "day3-program.html",
     "href": "day3-program.html",
-    "title": "Program",
+    "title": "Advanced techniques in text analysis with R",
     "section": "",
-    "text": "9:00 am - 9:30 am: Overview of text classification techniques beyond topic modeling: unsupervised and supervised methods.\n9:30 am - 10:30 am: Unsupervised text classification: Text scaling, correspondence analysis, clustering, and applications in communication science.\n10:30 am - 11:00 am: Break.\n11:00 am - 12:00 pm: Unsupervised text classification: hands-on exercises using real-world data sets.\n12:00 pm - 1:00 pm: Lunch.\n1:00 pm - 2:00 pm: Supervised classification: using R to classify text data into different categories, with an overview of algorithms.\n2:00 pm - 3:00 pm: Using R to perform supervised text classification: hands-on exercises using real-world data sets.\n3:00 pm - 3:30 pm: Coffee Break.\n3:30 pm - 4:30 pm: Overview of other advanced techniques in text analysis (word embedding, network analysis, named entity recognition).\n4:30 pm - 5:00 pm: Conclusion and wrap-up of the seminar."
+    "text": "9:00 am - 9:30 am: Overview of text classification techniques beyond topic modeling: unsupervised and supervised methods.\n9:30 am - 10:30 am: Unsupervised text classification: Text scaling, correspondence analysis, clustering, and applications in communication science, with hands-on exercises.\n10:30 am - 11:00 am: Break.\n11:00 am - 12:00 pm: Laboratory with real-world data sets.\n12:00 pm - 1:00 pm: Lunch.\n1:00 pm - 2:00 pm: Supervised classification: using R to classify text data into different categories, with an overview of algorithms and hands-on exercises.\n2:00 pm - 3:00 pm: Laboratory with real-world data sets.\n3:00 pm - 3:30 pm: Coffee Break.\n3:30 pm - 4:30 pm: Overview of other text analysis techniques, with hands-on exercises.\n4:30 pm - 5:00 pm: Conclusion and wrap-up of the seminar."
   },
   {
     "objectID": "day3-program.html#advanced-techniques-in-text-analysis-with-r-1",
@@ -348,5 +348,145 @@
     "title": "Introduction to text analysis and R",
     "section": "Installing and loading packages",
     "text": "Installing and loading packages"
+  },
+  {
+    "objectID": "day2.html#text-classification",
+    "href": "day2.html#text-classification",
+    "title": "Intermediate techniques in text analysis with R",
+    "section": "Text classification",
+    "text": "Text classification"
+  },
+  {
+    "objectID": "day2.html#custering-algorithms",
+    "href": "day2.html#custering-algorithms",
+    "title": "Intermediate techniques in text analysis with R",
+    "section": "Custering algorithms",
+    "text": "Custering algorithms"
+  },
+  {
+    "objectID": "day2.html#topic-modeling-in-communication-science.",
+    "href": "day2.html#topic-modeling-in-communication-science.",
+    "title": "Intermediate techniques in text analysis with R",
+    "section": "Topic modeling in communication science.",
+    "text": "Topic modeling in communication science."
+  },
+  {
+    "objectID": "day2.html#introduction-to-r-for-topic-modeling.",
+    "href": "day2.html#introduction-to-r-for-topic-modeling.",
+    "title": "Intermediate techniques in text analysis with R",
+    "section": "Introduction to R for topic modeling.",
+    "text": "Introduction to R for topic modeling."
+  },
+  {
+    "objectID": "day2.html#identify-the-number-of-topics",
+    "href": "day2.html#identify-the-number-of-topics",
+    "title": "Intermediate techniques in text analysis with R",
+    "section": "Identify the number of topics",
+    "text": "Identify the number of topics"
+  },
+  {
+    "objectID": "day2.html#assess-the-quality-of-the-model",
+    "href": "day2.html#assess-the-quality-of-the-model",
+    "title": "Intermediate techniques in text analysis with R",
+    "section": "Assess the quality of the model",
+    "text": "Assess the quality of the model"
+  },
+  {
+    "objectID": "day2.html#validation",
+    "href": "day2.html#validation",
+    "title": "Intermediate techniques in text analysis with R",
+    "section": "Validation",
+    "text": "Validation"
+  },
+  {
+    "objectID": "day2.html#structural-topic-models",
+    "href": "day2.html#structural-topic-models",
+    "title": "Intermediate techniques in text analysis with R",
+    "section": "Structural Topic Models",
+    "text": "Structural Topic Models"
+  },
+  {
+    "objectID": "day2.html#seeded-topic-models",
+    "href": "day2.html#seeded-topic-models",
+    "title": "Intermediate techniques in text analysis with R",
+    "section": "Seeded Topic Models",
+    "text": "Seeded Topic Models"
+  },
+  {
+    "objectID": "day2-tutorial.html",
+    "href": "day2-tutorial.html",
+    "title": "Hands-on Tutorials (Day Two)",
+    "section": "",
+    "text": "Introduction to R for topic modeling\n\n\nAdvanced topics in topic models\n\n\nAdvanced topic modeling methods\n\n\nLaboratory with real-world data"
+  },
+  {
+    "objectID": "day3.html#unsupervised-text-classification",
+    "href": "day3.html#unsupervised-text-classification",
+    "title": "Advanced techniques in text analysis with R",
+    "section": "Unsupervised text classification",
+    "text": "Unsupervised text classification"
+  },
+  {
+    "objectID": "day3.html#supervised-text-classification",
+    "href": "day3.html#supervised-text-classification",
+    "title": "Advanced techniques in text analysis with R",
+    "section": "Supervised text classification",
+    "text": "Supervised text classification"
+  },
+  {
+    "objectID": "day3.html#text-scaling",
+    "href": "day3.html#text-scaling",
+    "title": "Advanced techniques in text analysis with R",
+    "section": "Text scaling",
+    "text": "Text scaling"
+  },
+  {
+    "objectID": "day3.html#correspondence-analysis",
+    "href": "day3.html#correspondence-analysis",
+    "title": "Advanced techniques in text analysis with R",
+    "section": "Correspondence analysis",
+    "text": "Correspondence analysis"
+  },
+  {
+    "objectID": "day3.html#clustering",
+    "href": "day3.html#clustering",
+    "title": "Advanced techniques in text analysis with R",
+    "section": "Clustering",
+    "text": "Clustering"
+  },
+  {
+    "objectID": "day3.html#overview-of-algorithms",
+    "href": "day3.html#overview-of-algorithms",
+    "title": "Advanced techniques in text analysis with R",
+    "section": "Overview of algorithms",
+    "text": "Overview of algorithms"
+  },
+  {
+    "objectID": "day3.html#network-analysis",
+    "href": "day3.html#network-analysis",
+    "title": "Advanced techniques in text analysis with R",
+    "section": "network analysis",
+    "text": "network analysis"
+  },
+  {
+    "objectID": "day3.html#named-entity-recognition",
+    "href": "day3.html#named-entity-recognition",
+    "title": "Advanced techniques in text analysis with R",
+    "section": "named entity recognition",
+    "text": "named entity recognition"
+  },
+  {
+    "objectID": "day3.html#word-embeddings",
+    "href": "day3.html#word-embeddings",
+    "title": "Advanced techniques in text analysis with R",
+    "section": "word embeddings",
+    "text": "word embeddings"
+  },
+  {
+    "objectID": "day3-tutorial.html",
+    "href": "day3-tutorial.html",
+    "title": "R Tutorial",
+    "section": "",
+    "text": "Unsupervised text classification methods\n\n\nUnsupervised text classification methods: Laboratory with real-world data sets\n\n\nSupervised classification methods\n\n\nSupervised classification methods: Laboratory with real-world data sets\n\n\nOther text analysis techniques"
   }
 ]
