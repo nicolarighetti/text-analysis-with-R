@@ -49,7 +49,7 @@ See you at 11:00 am
 
 # Hands-on tutorial {background-color="#2780e3"}
 
-Click [here](day1-tutorial.qmd#sec-cleaning-and-pre-processing-text-data) to open the tutorial
+Click [here](day1-tutorial.html#/sec-cleaning-and-pre-processing-text-data) to open the tutorial
 
 # Lunch {background-color="#daffad"}
 
@@ -71,7 +71,7 @@ See you at 1:00 pm
 
 # Hands-on tutorial {background-color="#2780e3"}
 
-Click [here](day1-tutorial.qmd#sec-basic-text-analysis-techniques) to open the tutorial
+Click [here](day1-tutorial.html#/sec-basic-text-analysis-techniques) to open the tutorial
 
 # Coffee break {background-color="#daffad"}
 
@@ -85,7 +85,7 @@ See you at 3:30 pm
 
 # Hands-on tutorial {background-color="#2780e3"}
 
-Click [here](day1-tutorial.qmd#sec-using-dictionaries-in-r) to open the tutorial
+Click [here](day1-tutorial.html#/sec-using-dictionaries-in-r) to open the tutorial
 
 # Wrap up and key takeaways {background-color="#2780e3"}
  
