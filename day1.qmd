@@ -26,7 +26,7 @@ format: revealjs
 
 # Hands-on tutorial {background-color="#2780e3"}
 
-Click [here](day1-tutorial.qmd#sec-getting-started-with-r) to open the tutorial
+Click [here](day1-tutorial.hmtl#/sec-getting-started-with-r) to open the tutorial
 
 # Coffee Break {background-color="#daffad"}
 
