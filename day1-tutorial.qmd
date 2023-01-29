@@ -1,15 +1,15 @@
 ---
-title: "R Tutorial"
+title: "Hands-on Tutorials (Day One)"
 ---
 
-# Getting started with R 
+# Getting started with R  {#sec-getting-started-with-r}
 
 ```{r}
 1+1
 ```
 
-# Cleaning and pre-processing text data
+# Cleaning and pre-processing text data {#sec-cleaning-and-pre-processing-text-data}
 
-# Basic text analysis techniques
+# Basic text analysis techniques {#sec-basic-text-analysis-techniques}
 
-# Using dictionaries in R
+# Using dictionaries in R {#sec-using-dictionaries-in-r}
