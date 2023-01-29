@@ -39,7 +39,7 @@
     "href": "day1-tutorial.html",
     "title": "R Tutorial",
     "section": "",
-    "text": "1 + 1\n\n[1] 2"
+    "text": "Getting started with R\n\n1+1\n\n[1] 2\n\n\n\n\nCleaning and pre-processing text data\n\n\nBasic text analysis techniques\n\n\nUsing dictionaries in R"
   },
   {
     "objectID": "day1-program.html",
@@ -68,5 +68,285 @@
     "title": "Program",
     "section": "Advanced techniques in text analysis with R",
     "text": "Advanced techniques in text analysis with R\n\n9:00 am - 9:30 am: Overview of text classification techniques beyond topic modeling: unsupervised and supervised methods.\n9:30 am - 10:30 am: Unsupervised text classification: Text scaling, correspondence analysis, clustering, and applications in communication science.\n10:30 am - 11:00 am: Break.\n11:00 am - 12:00 pm: Unsupervised text classification: hands-on exercises using real-world data sets.\n12:00 pm - 1:00 pm: Lunch.\n1:00 pm - 2:00 pm: Supervised classification: using R to classify text data into different categories, with an overview of algorithms.\n2:00 pm - 3:00 pm: Using R to perform supervised text classification: hands-on exercises using real-world data sets.\n3:00 pm - 3:30 pm: Coffee Break.\n3:30 pm - 4:30 pm: Overview of other advanced techniques in text analysis (word embedding, network analysis, named entity recognition).\n4:30 pm - 5:00 pm: Conclusion and wrap-up of the seminar."
+  },
+  {
+    "objectID": "day1.html#introduction-and-overview-of-the-seminar",
+    "href": "day1.html#introduction-and-overview-of-the-seminar",
+    "title": "Introduction to text analysis and R",
+    "section": "Introduction and overview of the seminar",
+    "text": "Introduction and overview of the seminar\n\nAbout Me\nOverview of the program: from zero to hero\n\n\ntext analysis and its applications in communication science.\n9:30 am - 10:30 am: Getting started with R: installing packages and working with basic data types and functions.\n10:30 am - 11:00 am: Coffee Break.\n11:00 am - 12:00 pm: Basic concepts and principles of text analysis, including reading text files, data - preparation, preprocessing, and cleaning (e.g., removing stop words, handling special characters, tokenization, lemmatization and stemming, part-of-speech tagging, feature selection).\n12:00 pm - 1:00 pm: Lunch.\n1:00 pm - 2:00 pm: Basic text analysis techniques: using Quanteda for creating and using corpus objects in R and exploring text data (word frequency analysis, collocations, and KWIC).\n2:00 pm - 3:00 pm: Hands-on exercises using real-world data sets.\n3:00 pm - 3:30 pm: Coffee Break.\n3:30 pm - 4:30 pm: Introduction to dictionaries in R: automated sentiment analysis and content analysis, with hands-on exercises.\n4:30 pm - 5:00 pm: Summary of the day’s topics and key takeaways."
+  },
+  {
+    "objectID": "day1.html#about-me",
+    "href": "day1.html#about-me",
+    "title": "Introduction to text analysis and R",
+    "section": "About Me",
+    "text": "About Me"
+  },
+  {
+    "objectID": "day1.html#text-analysis-and-its-applications-in-communication-science",
+    "href": "day1.html#text-analysis-and-its-applications-in-communication-science",
+    "title": "Introduction to text analysis and R",
+    "section": "Text analysis and its applications in communication science",
+    "text": "Text analysis and its applications in communication science"
+  },
+  {
+    "objectID": "day1.html#getting-started-with-r-installing-packages-and-working-with-basic-data-types-and-functions.",
+    "href": "day1.html#getting-started-with-r-installing-packages-and-working-with-basic-data-types-and-functions.",
+    "title": "Introduction to text analysis and R",
+    "section": "Getting started with R: installing packages and working with basic data types and functions.",
+    "text": "Getting started with R: installing packages and working with basic data types and functions.\n10:30 am - 11:00 am: Coffee Break.\n11:00 am - 12:00 pm: Basic concepts and principles of text analysis, including reading text files, data - preparation, preprocessing, and cleaning (e.g., removing stop words, handling special characters, tokenization, lemmatization and stemming, part-of-speech tagging, feature selection).\n12:00 pm - 1:00 pm: Lunch.\n1:00 pm - 2:00 pm: Basic text analysis techniques: using Quanteda for creating and using corpus objects in R and exploring text data (word frequency analysis, collocations, and KWIC).\n2:00 pm - 3:00 pm: Hands-on exercises using real-world data sets.\n3:00 pm - 3:30 pm: Coffee Break.\n3:30 pm - 4:30 pm: Introduction to dictionaries in R: automated sentiment analysis and content analysis, with hands-on exercises.\n4:30 pm - 5:00 pm: Summary of the day’s topics and key takeaways."
+  },
+  {
+    "objectID": "day1.html#getting-started-with-r",
+    "href": "day1.html#getting-started-with-r",
+    "title": "Introduction to text analysis and R",
+    "section": "Getting started with R",
+    "text": "Getting started with R\n\nRstudio interface\nUploading data\nData structures and data types\nObjects and Functions\nInstalling and loading packages (or “libraries”)\n\nInstalling Quanteda"
+  },
+  {
+    "objectID": "day1.html#coffee-break",
+    "href": "day1.html#coffee-break",
+    "title": "Introduction to text analysis and R",
+    "section": "Coffee Break",
+    "text": "Coffee Break\nSee you at 11:00 am"
+  },
+  {
+    "objectID": "day1.html#basic-concepts-and-principles-of-text-analysis",
+    "href": "day1.html#basic-concepts-and-principles-of-text-analysis",
+    "title": "Introduction to text analysis and R",
+    "section": "Basic concepts and principles of text analysis",
+    "text": "Basic concepts and principles of text analysis\n\nReading text files\nThe bags-of-words representation\nCleaning and pre-processing text data\n\nHandling special characters\nRemoving stop words\nTokenization\nLemmatization and stemming\nPart-of-speech tagging\nFeature selection"
+  },
+  {
+    "objectID": "day1.html#lunch",
+    "href": "day1.html#lunch",
+    "title": "Introduction to text analysis and R",
+    "section": "Lunch",
+    "text": "Lunch\nSee you at 1:00 pm"
+  },
+  {
+    "objectID": "day1.html#basic-text-analysis-techniques",
+    "href": "day1.html#basic-text-analysis-techniques",
+    "title": "Introduction to text analysis and R",
+    "section": "Basic text analysis techniques",
+    "text": "Basic text analysis techniques\n\nIntroduction to Quanteda\nCreating corpus and DFM objects\nExploring text data\n\nWord frequency analysis\nCollocations\nKWIC"
+  },
+  {
+    "objectID": "day1.html#hands-on-exercises-using-real-world-data-sets",
+    "href": "day1.html#hands-on-exercises-using-real-world-data-sets",
+    "title": "Introduction to text analysis and R",
+    "section": "Hands-on exercises using real-world data sets",
+    "text": "Hands-on exercises using real-world data sets\nOpen the tutorial"
+  },
+  {
+    "objectID": "day1.html#coffee-break-1",
+    "href": "day1.html#coffee-break-1",
+    "title": "Introduction to text analysis and R",
+    "section": "Coffee break",
+    "text": "Coffee break\nSee you at 3:30 pm"
+  },
+  {
+    "objectID": "day1.html#introduction-to-dictionaries-in-r",
+    "href": "day1.html#introduction-to-dictionaries-in-r",
+    "title": "Introduction to text analysis and R",
+    "section": "Introduction to dictionaries in R",
+    "text": "Introduction to dictionaries in R\n\nAutomated sentiment analysis\nAutomated content analysis"
+  },
+  {
+    "objectID": "day1.html#hands-on-exercises-on-dictionary-analysis",
+    "href": "day1.html#hands-on-exercises-on-dictionary-analysis",
+    "title": "Introduction to text analysis and R",
+    "section": "Hands-on exercises on dictionary analysis",
+    "text": "Hands-on exercises on dictionary analysis"
+  },
+  {
+    "objectID": "day1.html#wrap-up-and-key-takeaways",
+    "href": "day1.html#wrap-up-and-key-takeaways",
+    "title": "Introduction to text analysis and R",
+    "section": "Wrap up and key takeaways",
+    "text": "Wrap up and key takeaways"
+  },
+  {
+    "objectID": "day1.html#basic-concepts-and-principles",
+    "href": "day1.html#basic-concepts-and-principles",
+    "title": "Introduction to text analysis and R",
+    "section": "Basic concepts and principles",
+    "text": "Basic concepts and principles\n\nReading text files\nThe bags-of-words representation\nCleaning and pre-processing text data\n\nHandling special characters\nRemoving stop words\nTokenization\nLemmatization and stemming\nPart-of-speech tagging\nFeature selection"
+  },
+  {
+    "objectID": "day1.html#coffee-break-background-color-green",
+    "href": "day1.html#coffee-break-background-color-green",
+    "title": "Introduction to text analysis and R",
+    "section": "## Coffee break {background-color=” green”}",
+    "text": "## Coffee break {background-color=” green”}\nSee you at 3:30 pm"
+  },
+  {
+    "objectID": "day1.html#overview-of-the-program",
+    "href": "day1.html#overview-of-the-program",
+    "title": "Introduction to text analysis and R",
+    "section": "Overview of the program",
+    "text": "Overview of the program"
+  },
+  {
+    "objectID": "day1.html#rstudio-interface",
+    "href": "day1.html#rstudio-interface",
+    "title": "Introduction to text analysis and R",
+    "section": "Rstudio interface",
+    "text": "Rstudio interface"
+  },
+  {
+    "objectID": "day1.html#uploading-data",
+    "href": "day1.html#uploading-data",
+    "title": "Introduction to text analysis and R",
+    "section": "Uploading data",
+    "text": "Uploading data"
+  },
+  {
+    "objectID": "day1.html#data-structures-and-data-types",
+    "href": "day1.html#data-structures-and-data-types",
+    "title": "Introduction to text analysis and R",
+    "section": "Data structures and data types",
+    "text": "Data structures and data types"
+  },
+  {
+    "objectID": "day1.html#objects-and-functions",
+    "href": "day1.html#objects-and-functions",
+    "title": "Introduction to text analysis and R",
+    "section": "Objects and Functions",
+    "text": "Objects and Functions"
+  },
+  {
+    "objectID": "day1.html#installing-and-loading-packages-or-libraries",
+    "href": "day1.html#installing-and-loading-packages-or-libraries",
+    "title": "Introduction to text analysis and R",
+    "section": "Installing and loading packages (or “libraries”)",
+    "text": "Installing and loading packages (or “libraries”)"
+  },
+  {
+    "objectID": "day1.html#reading-text-files",
+    "href": "day1.html#reading-text-files",
+    "title": "Introduction to text analysis and R",
+    "section": "Reading text files",
+    "text": "Reading text files"
+  },
+  {
+    "objectID": "day1.html#the-bags-of-words-representation",
+    "href": "day1.html#the-bags-of-words-representation",
+    "title": "Introduction to text analysis and R",
+    "section": "The bags-of-words representation",
+    "text": "The bags-of-words representation"
+  },
+  {
+    "objectID": "day1.html#cleaning-and-pre-processing-text-data",
+    "href": "day1.html#cleaning-and-pre-processing-text-data",
+    "title": "Introduction to text analysis and R",
+    "section": "Cleaning and pre-processing text data",
+    "text": "Cleaning and pre-processing text data"
+  },
+  {
+    "objectID": "day1.html#handling-special-characters",
+    "href": "day1.html#handling-special-characters",
+    "title": "Introduction to text analysis and R",
+    "section": "Handling special characters",
+    "text": "Handling special characters"
+  },
+  {
+    "objectID": "day1.html#removing-stop-words",
+    "href": "day1.html#removing-stop-words",
+    "title": "Introduction to text analysis and R",
+    "section": "Removing stop words",
+    "text": "Removing stop words"
+  },
+  {
+    "objectID": "day1.html#tokenization",
+    "href": "day1.html#tokenization",
+    "title": "Introduction to text analysis and R",
+    "section": "Tokenization",
+    "text": "Tokenization"
+  },
+  {
+    "objectID": "day1.html#lemmatization-and-stemming",
+    "href": "day1.html#lemmatization-and-stemming",
+    "title": "Introduction to text analysis and R",
+    "section": "Lemmatization and stemming",
+    "text": "Lemmatization and stemming"
+  },
+  {
+    "objectID": "day1.html#part-of-speech-tagging",
+    "href": "day1.html#part-of-speech-tagging",
+    "title": "Introduction to text analysis and R",
+    "section": "Part-of-speech tagging",
+    "text": "Part-of-speech tagging"
+  },
+  {
+    "objectID": "day1.html#feature-selection",
+    "href": "day1.html#feature-selection",
+    "title": "Introduction to text analysis and R",
+    "section": "Feature selection",
+    "text": "Feature selection"
+  },
+  {
+    "objectID": "day1.html#introduction-to-quanteda",
+    "href": "day1.html#introduction-to-quanteda",
+    "title": "Introduction to text analysis and R",
+    "section": "Introduction to Quanteda",
+    "text": "Introduction to Quanteda"
+  },
+  {
+    "objectID": "day1.html#creating-corpus-and-dfm-objects",
+    "href": "day1.html#creating-corpus-and-dfm-objects",
+    "title": "Introduction to text analysis and R",
+    "section": "Creating corpus and DFM objects",
+    "text": "Creating corpus and DFM objects"
+  },
+  {
+    "objectID": "day1.html#exploring-text-data",
+    "href": "day1.html#exploring-text-data",
+    "title": "Introduction to text analysis and R",
+    "section": "Exploring text data",
+    "text": "Exploring text data"
+  },
+  {
+    "objectID": "day1.html#word-frequency-analysis",
+    "href": "day1.html#word-frequency-analysis",
+    "title": "Introduction to text analysis and R",
+    "section": "Word frequency analysis",
+    "text": "Word frequency analysis"
+  },
+  {
+    "objectID": "day1.html#collocations",
+    "href": "day1.html#collocations",
+    "title": "Introduction to text analysis and R",
+    "section": "Collocations",
+    "text": "Collocations"
+  },
+  {
+    "objectID": "day1.html#kwic",
+    "href": "day1.html#kwic",
+    "title": "Introduction to text analysis and R",
+    "section": "KWIC",
+    "text": "KWIC"
+  },
+  {
+    "objectID": "day1.html#automated-sentiment-analysis",
+    "href": "day1.html#automated-sentiment-analysis",
+    "title": "Introduction to text analysis and R",
+    "section": "Automated sentiment analysis",
+    "text": "Automated sentiment analysis"
+  },
+  {
+    "objectID": "day1.html#automated-content-analysis",
+    "href": "day1.html#automated-content-analysis",
+    "title": "Introduction to text analysis and R",
+    "section": "Automated content analysis",
+    "text": "Automated content analysis"
+  },
+  {
+    "objectID": "day1.html#installing-and-loading-packages",
+    "href": "day1.html#installing-and-loading-packages",
+    "title": "Introduction to text analysis and R",
+    "section": "Installing and loading packages",
+    "text": "Installing and loading packages"
   }
 ]

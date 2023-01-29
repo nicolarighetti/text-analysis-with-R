@@ -2,6 +2,14 @@
 title: "R Tutorial"
 ---
 
+# Getting started with R 
+
 ```{r}
-1 + 1
+1+1
 ```
+
+# Cleaning and pre-processing text data
+
+# Basic text analysis techniques
+
+# Using dictionaries in R

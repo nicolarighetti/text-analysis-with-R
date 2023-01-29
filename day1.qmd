@@ -1,4 +1,91 @@
 ---
 title: "Introduction to text analysis and R"
+author: "Nicola Righetti"
 format: revealjs
 ---
+
+# Introduction {background-color="#2780e3"}
+
+## Text analysis and its applications in communication science
+
+## Overview of the program
+
+## About Me
+
+# Getting started with R {background-color="#2780e3"}
+
+## Rstudio interface
+
+## Uploading data
+
+## Data structures and data types
+
+## Objects and Functions
+
+## Installing and loading packages
+
+# Hands-on tutorial {background-color="#2780e3"}
+
+Click here to open the tutorial
+
+# Coffee Break {background-color="#daffad"}
+
+See you at 11:00 am
+
+# Basic concepts and principles  {background-color="#2780e3"}
+
+## Reading text files
+
+## The bags-of-words representation
+
+## Cleaning and pre-processing text data
+
+## Handling special characters
+## Removing stop words
+## Tokenization
+## Lemmatization and stemming
+## Part-of-speech tagging
+## Feature selection
+
+# Hands-on tutorial {background-color="#2780e3"}
+
+Click here to open the tutorial
+
+# Lunch {background-color="#daffad"}
+
+See you at 1:00 pm
+
+# Basic text analysis techniques {background-color="#2780e3"}
+
+## Introduction to Quanteda
+
+## Creating corpus and DFM objects
+
+## Exploring text data
+
+## Word frequency analysis
+
+## Collocations
+
+## KWIC
+
+# Hands-on tutorial {background-color="#2780e3"}
+
+Click here to open the tutorial
+
+# Coffee break {background-color="#daffad"}
+
+See you at 3:30 pm
+
+# Introduction to dictionaries in R {background-color="#2780e3"}
+
+## Automated sentiment analysis
+
+## Automated content analysis
+
+# Hands-on tutorial {background-color="#2780e3"}
+
+Click here to open the tutorial
+
+# Wrap up and key takeaways {background-color="#2780e3"}
+ 
