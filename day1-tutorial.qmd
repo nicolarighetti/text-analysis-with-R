@@ -189,6 +189,8 @@ inaugural_df <- read.csv("data/data_inaugural.csv") %>%
 head(inaugural_df)
 ```
 
+## Remove punctuation
+
 The `gsub` function in R can be utilized to match a pattern, indicated by the first argument, and replace it with the specified second argument. In this case, the first argument can be a regular expression.
 
 Tip: What is the `substr` function? Read the function documentation by typing `?substr` in the Console.
@@ -206,11 +208,15 @@ substr(first_5_rows, start = 1, stop = 50)
 inaugural_df$texts_clean <- gsub("'", " ", inaugural_df$texts_clean)
 ```
 
+## Convert to lowercase
+
 Convert to lowercase using the function `tolower`.
 
 ```{r}
 inaugural_df$texts_clean <- tolower(inaugural_df$texts_clean)
 ```
+
+## Stop words
 
 Stopwords can be conveniently removed using text analysis packages, which often include pre-compiled stopword lists in different languages, such as the [stopwords](https://cran.r-project.org/web/packages/stopwords/index.html) package. Other packages like Quanteda import stopword lists from this package.
 
@@ -228,6 +234,8 @@ head(quanteda::stopwords(language = "it"))
 # chinese
 head(quanteda::stopwords(language = "zh", source = "misc"))
 ```
+
+## Lemmatization
 
 Lemmatization is a more complex process, typically provided by tools that also include part-of-speech annotation. One such tool is [TreeTagger](https://www.cis.lmu.de/~schmid/tools/TreeTagger/), which is independent from R but utilized by other R packages that provide lemmatization functions, such as [textstem](https://github.com/trinker/textstem). Another option is [UDPipe](https://ufal.mff.cuni.cz/udpipe), which we will be using in this tutorial.
 
