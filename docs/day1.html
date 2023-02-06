@@ -511,11 +511,11 @@ Nicola Righetti
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>  case A_var  B_var C_var      E_var                   F_var
-1 id_1  0.28    red     9 2023-02-07           Coding is fun
-2 id_2 -2.20   blue     4 2023-02-09 The cat is on the table
-3 id_3  1.88  white    10 2023-02-10         Cogito ergo sum
-4 id_4  0.58  green     6 2023-02-11      This is a sentence
-5 id_5 -2.12 yellow     3 2023-02-16 Ceci n'est pas une pipe</code></pre>
+1 id_1  1.74    red     2 2023-02-08           Coding is fun
+2 id_2 -1.36   blue     8 2023-02-09 The cat is on the table
+3 id_3  1.11  white     5 2023-02-15         Cogito ergo sum
+4 id_4 -0.37  green     7 2023-02-16      This is a sentence
+5 id_5  0.37 yellow     3 2023-02-17 Ceci n'est pas une pipe</code></pre>
 </div>
 </div>
 </section>
@@ -642,8 +642,8 @@ docs    my cat is on the table hates jim's dog likes
 <p><span class="math display">\[
 p(W_i|\mu)={\frac{M!}{\prod_{j=1}^{J} W_{ij}!}\prod_{j=1}^{J}\mu_j^{W_{ij}}.}
 \]</span></p>
-<p>Where <span class="math inline">\(M\)</span> is the document length (i.e., the total number of words, or <strong>tokens</strong>), <span class="math inline">\(W_{ij}\)</span> is the frequency of the word <span class="math inline">\(j\)</span> in document <span class="math inline">\(W_i\)</span>, and <span class="math inline">\(\mu_j\)</span> is the probability of occurrence of the word <span class="math inline">\(j\)</span> under the model<sup>1</sup> (and <span class="math inline">\(!\)</span> means <em>factorial</em>, i.e., the sum of multiplication of all the integers smaller than that positive integer (e.g., <span class="math inline">\(3!=3*2*1=6\)</span>).</p>
-<aside><ol class="aside-footnotes"><li id="fn1"><p><span class="math inline">\(!\)</span> means <em>factorial</em>, i.e., the sum of multiplication of all the integers smaller than that positive integer (e.g., <span class="math inline">\(3!=3*2*1=6\)</span></p></li></ol></aside></section>
+<p>Where <span class="math inline">\(M\)</span> is the document length (i.e., the total number of words, or <strong>tokens</strong>), <span class="math inline">\(W_{ij}\)</span> is the frequency of the word <span class="math inline">\(j\)</span> in document <span class="math inline">\(W_i\)</span>, and <span class="math inline">\(\mu_j\)</span> is the probability of occurrence of the word <span class="math inline">\(j\)</span> under the model (and <span class="math inline">\(!\)</span> means <em>factorial</em>, i.e., the sum of multiplication of all the integers smaller than that positive integer (e.g., <span class="math inline">\(3!=3*2*1=6\)</span>).</p>
+</section>
 <section class="slide level2">
 
 <p>In real-world situations, we typically observe the word counts <span class="math inline">\(W_i\)</span> and estimate the underlying parameter <span class="math inline">\(\mu_j\)</span> using the maximum likelihood estimate, which is simply the number of times word <span class="math inline">\(j\)</span> is used divided by the total number of tokens.</p>
@@ -724,7 +724,7 @@ p{(W_{disputed}|\hat\mu_H)=\frac{17!}{(15!)(2!)(0!)}(.64)^{15}(.08)^2(.28)^0} \\
 <section class="slide level2">
 
 <p>The common techniques in data cleaning and pre-processing include using regular expressions (regex)<sup>1</sup> and Part-of-Speech (POS) tagging. Regular expressions are patterns that describe a set of strings and can be used to identify elements such as punctuation marks and spaces.</p>
-<aside><ol class="aside-footnotes"><li id="fn2"><p>For example, see p.&nbsp;314 in Eisele, O., Escalante-Block, E., Kluknavská, A., &amp; Boomgaarden, H. G. (2022). <a href="https://www.tandfonline.com/doi/pdf/10.1080/10361146.2022.2045900">The politicising spark? Exploring the impact of# MeToo on the gender equality discourse in Australian print media.</a> Australian journal of political science, 57(4), 309-327</p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>For example, see p.&nbsp;314 in Eisele, O., Escalante-Block, E., Kluknavská, A., &amp; Boomgaarden, H. G. (2022). <a href="https://www.tandfonline.com/doi/pdf/10.1080/10361146.2022.2045900">The politicising spark? Exploring the impact of# MeToo on the gender equality discourse in Australian print media.</a> Australian journal of political science, 57(4), 309-327</p></li></ol></aside></section>
 <section id="removing-punctuation" class="slide level2">
 <h2>Removing punctuation</h2>
 <p>Unless researchers are specifically studying the use of punctuation, punctuation marks are usually removed as they do not carry the meanings that social science researchers are typically interested in<sup>1</sup>.</p>
@@ -736,7 +736,7 @@ p{(W_{disputed}|\hat\mu_H)=\frac{17!}{(15!)(2!)(0!)}(.64)^{15}(.08)^2(.28)^0} \\
 <pre><code>[1] "We shall overcome because the arc of the moral universe is long but it bends toward justice "</code></pre>
 </div>
 </div>
-<aside><ol class="aside-footnotes"><li id="fn3"><p>Martin Luther King, Jr., Washington National Cathedral, March 31, 1968</p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn2"><p>Martin Luther King, Jr., Washington National Cathedral, March 31, 1968</p></li></ol></aside></section>
 <section id="convert-to-lowercase" class="slide level2">
 <h2>Convert to lowercase</h2>
 <p>The software we are using is case-sensitive, meaning that words written in uppercase and lowercase are treated as distinct, even though they have the same meaning. As a result, it is common practice to convert all text to lowercase.</p>
@@ -789,7 +789,7 @@ p{(W_{disputed}|\hat\mu_H)=\frac{17!}{(15!)(2!)(0!)}(.64)^{15}(.08)^2(.28)^0} \\
 <section class="slide level2">
 
 <p>Lemmatization is typically provided by tools that also include part-of-speech annotation. One such tool is <a href="https://www.cis.lmu.de/~schmid/tools/TreeTagger/">TreeTagger</a>, which is independent from R but utilized by other R packages that provide lemmatization functions, such as <a href="https://github.com/trinker/textstem">textstem</a>. Another option is <a href="https://ufal.mff.cuni.cz/udpipe">UDPipe</a><sup>1</sup>, which we will be using in the tutorial. The UDPipe annotation process is based on pre-trained models build on Universal Dependencies treebanks and are made available for more than 65 languages.</p>
-<aside><ol class="aside-footnotes"><li id="fn4"><p>Straka, M., &amp; Straková, J. (2017, August). <a href="https://ufal.mff.cuni.cz/~straka/papers/2017-conll_udpipe.pdf">Tokenizing, pos tagging, lemmatizing and parsing ud 2.0 with udpipe.</a> In&nbsp;<em>Proceedings of the CoNLL 2017 shared task: Multilingual parsing from raw text to universal dependencies</em>&nbsp;(pp.&nbsp;88-99).</p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn3"><p>Straka, M., &amp; Straková, J. (2017, August). <a href="https://ufal.mff.cuni.cz/~straka/papers/2017-conll_udpipe.pdf">Tokenizing, pos tagging, lemmatizing and parsing ud 2.0 with udpipe.</a> In&nbsp;<em>Proceedings of the CoNLL 2017 shared task: Multilingual parsing from raw text to universal dependencies</em>&nbsp;(pp.&nbsp;88-99).</p></li></ol></aside></section>
 <section id="stemming" class="slide level2">
 <h2>Stemming</h2>
 <p>Lemmatization maps words to their base form while stemming trims the endings of words, which typically carry inflections.</p>
@@ -891,15 +891,21 @@ p{(W_{disputed}|\hat\mu_H)=\frac{17!}{(15!)(2!)(0!)}(.64)^{15}(.08)^2(.28)^0} \\
 <p>When creating a corpus, it is possible to include additional variables from the original data set as <code>docvars</code> and use them to subset the corpus. By doing so, we can incorporate additional information into our analysis and make it more nuanced.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>ps_corpus <span class="ot">&lt;-</span> ps <span class="sc">%&gt;%</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">corpus</span>(<span class="at">text_field =</span> <span class="st">"transcript"</span>) </span>
-<span id="cb31-3"><a href="#cb31-3"></a></span>
-<span id="cb31-4"><a href="#cb31-4"></a><span class="co"># names of the covariates</span></span>
-<span id="cb31-5"><a href="#cb31-5"></a><span class="fu">names</span>(<span class="fu">docvars</span>(ps_corpus))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">corpus</span>(<span class="at">text_field =</span> <span class="st">"transcript"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># names of the covariates</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="fu">names</span>(<span class="fu">docvars</span>(ps_corpus))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "title"     "date"      "url"       "president" "n"        </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># some summary stats</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a><span class="fu">summary</span>(ps_corpus, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># some summary stats</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="fu">summary</span>(ps_corpus, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Corpus consisting of 108 documents, showing 2 documents:
 
@@ -922,9 +928,11 @@ p{(W_{disputed}|\hat\mu_H)=\frac{17!}{(15!)(2!)(0!)}(.64)^{15}(.08)^2(.28)^0} \\
 
 <p>Variables can also be used to subset the corpus.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>ps_corpus_sub <span class="ot">&lt;-</span> <span class="fu">corpus_subset</span>(ps_corpus, </span>
-<span id="cb35-2"><a href="#cb35-2"></a>                               president <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Woodrow Wilson"</span>, <span class="st">"William Taft"</span>))</span>
-<span id="cb35-3"><a href="#cb35-3"></a><span class="fu">ndoc</span>(ps_corpus_sub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>ps_corpus_sub <span class="ot">&lt;-</span> <span class="fu">corpus_subset</span>(ps_corpus, </span>
+<span id="cb36-2"><a href="#cb36-2"></a>                               president <span class="sc">%in%</span> </span>
+<span id="cb36-3"><a href="#cb36-3"></a>                                 <span class="fu">c</span>(<span class="st">"Woodrow Wilson"</span>, </span>
+<span id="cb36-4"><a href="#cb36-4"></a>                                   <span class="st">"William Taft"</span>))</span>
+<span id="cb36-5"><a href="#cb36-5"></a><span class="fu">ndoc</span>(ps_corpus_sub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 6</code></pre>
 </div>
@@ -934,16 +942,19 @@ p{(W_{disputed}|\hat\mu_H)=\frac{17!}{(15!)(2!)(0!)}(.64)^{15}(.08)^2(.28)^0} \\
 
 <p>Tokenization is an important step in the process of transforming a corpus into a Document Feature Matrix (DFM). It involves dividing the document into smaller chunks, typically by word.</p>
 <p>During this step, it’s possible to clean and preprocess the data by removing punctuation, stopwords, and converting words to lowercase, as well as transforming them into their lemma or base form. By doing so, the data can be made ready for further analysis.</p>
+</section>
+<section class="slide level2">
+
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>ps_tokens <span class="ot">&lt;-</span> ps_corpus <span class="sc">%&gt;%</span></span>
-<span id="cb37-2"><a href="#cb37-2"></a>  <span class="fu">tokens</span>(<span class="at">remove_punct =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb37-3"><a href="#cb37-3"></a>  <span class="fu">tokens_tolower</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb37-4"><a href="#cb37-4"></a>  <span class="fu">tokens_remove</span>(<span class="fu">stopwords</span>(<span class="st">"en"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb37-5"><a href="#cb37-5"></a>  <span class="fu">tokens_replace</span>(<span class="at">pattern =</span> ps_annotation<span class="sc">$</span>token, </span>
-<span id="cb37-6"><a href="#cb37-6"></a>                 <span class="at">replacement =</span> ps_annotation<span class="sc">$</span>lemma,</span>
-<span id="cb37-7"><a href="#cb37-7"></a>                 <span class="at">valuetype =</span> <span class="st">"fixed"</span>)</span>
-<span id="cb37-8"><a href="#cb37-8"></a></span>
-<span id="cb37-9"><a href="#cb37-9"></a><span class="fu">head</span>(ps_tokens, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>ps_tokens <span class="ot">&lt;-</span> ps_corpus <span class="sc">%&gt;%</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a>  <span class="fu">tokens</span>(<span class="at">remove_punct =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb38-3"><a href="#cb38-3"></a>  <span class="fu">tokens_tolower</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb38-4"><a href="#cb38-4"></a>  <span class="fu">tokens_remove</span>(<span class="fu">stopwords</span>(<span class="st">"en"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb38-5"><a href="#cb38-5"></a>  <span class="fu">tokens_replace</span>(<span class="at">pattern =</span> ps_annotation<span class="sc">$</span>token, </span>
+<span id="cb38-6"><a href="#cb38-6"></a>                 <span class="at">replacement =</span> ps_annotation<span class="sc">$</span>lemma,</span>
+<span id="cb38-7"><a href="#cb38-7"></a>                 <span class="at">valuetype =</span> <span class="st">"fixed"</span>)</span>
+<span id="cb38-8"><a href="#cb38-8"></a></span>
+<span id="cb38-9"><a href="#cb38-9"></a><span class="fu">head</span>(ps_tokens, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Tokens consisting of 1 document and 5 docvars.
 text1 :
@@ -1017,6 +1028,9 @@ docs       mr president fellow citizen
 <section class="slide level2">
 
 <p>It is crucial to consider the weighting method used when analyzing text data, as it greatly affects the results. The Term Frequency Inverse Document Frequency (tf-idf) weighting method is frequently used and balances the importance of each term by taking into account its frequency within the entire corpus, reducing the significance of common words.</p>
+</section>
+<section class="slide level2">
+
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>$`Abraham Lincoln`
@@ -1065,12 +1079,12 @@ dfm tfidf weighted dfm:</code></pre>
 <h2>Selecting features based on frequency</h2>
 <p>Once the weighting has been chosen, the features of the DFM can be filtered to retain only the most crucial ones. This reduction in the number of features makes the analysis less computationally intensive and, in some cases, allows for otherwise complex analyses to be performed even on a personal computer. Additionally, thoughtful selection of features can lead to more impactful analysis results.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>ps_dfm_trim <span class="ot">&lt;-</span> <span class="fu">dfm_trim</span>(ps_dfm, </span>
-<span id="cb49-2"><a href="#cb49-2"></a>                        <span class="at">min_termfreq =</span> <span class="st">"0.001"</span>, </span>
-<span id="cb49-3"><a href="#cb49-3"></a>                        <span class="at">max_termfreq =</span> <span class="st">"0.90"</span>,</span>
-<span id="cb49-4"><a href="#cb49-4"></a>                        <span class="at">termfreq_type =</span> <span class="st">"prop"</span>)</span>
-<span id="cb49-5"><a href="#cb49-5"></a></span>
-<span id="cb49-6"><a href="#cb49-6"></a><span class="fu">dim</span>(ps_dfm_trim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>ps_dfm_trim <span class="ot">&lt;-</span> <span class="fu">dfm_trim</span>(ps_dfm, </span>
+<span id="cb50-2"><a href="#cb50-2"></a>                        <span class="at">min_termfreq =</span> <span class="st">"0.001"</span>, </span>
+<span id="cb50-3"><a href="#cb50-3"></a>                        <span class="at">max_termfreq =</span> <span class="st">"0.90"</span>,</span>
+<span id="cb50-4"><a href="#cb50-4"></a>                        <span class="at">termfreq_type =</span> <span class="st">"prop"</span>)</span>
+<span id="cb50-5"><a href="#cb50-5"></a></span>
+<span id="cb50-6"><a href="#cb50-6"></a><span class="fu">dim</span>(ps_dfm_trim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 108 165</code></pre>
 </div>
@@ -1086,7 +1100,7 @@ dfm tfidf weighted dfm:</code></pre>
 <h1>Exploring text data</h1>
 <p>The Quanteda <code>summary</code> function provides a general overview of a corpus object, including the number of types, tokens, and sentences. This same information can also be obtained at the group level. It is possible to compare different documents or groups of documents using measures such as lexical diversity.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">head</span>(<span class="fu">summary</span>(ps_corpus))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="fu">head</span>(<span class="fu">summary</span>(ps_corpus))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Text Types Tokens Sentences
 1 text1  1571  15968       533
@@ -1123,10 +1137,10 @@ dfm tfidf weighted dfm:</code></pre>
 
 <p>The <code>topfeatures</code> function calculates the frequency of words and can be applied to the entire document-feature matrix (dfm) or to specific groups.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>ps_corpus_groups <span class="ot">&lt;-</span> ps <span class="sc">%&gt;%</span></span>
-<span id="cb53-2"><a href="#cb53-2"></a>  <span class="fu">corpus</span>(<span class="at">text_field =</span> <span class="st">"transcript"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb53-3"><a href="#cb53-3"></a>  <span class="fu">corpus_group</span>(<span class="at">groups =</span> ps<span class="sc">$</span>president, <span class="at">concatenator =</span> <span class="st">" "</span>)</span>
-<span id="cb53-4"><a href="#cb53-4"></a><span class="fu">head</span>(<span class="fu">summary</span>(ps_corpus_groups, <span class="at">n=</span><span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a>ps_corpus_groups <span class="ot">&lt;-</span> ps <span class="sc">%&gt;%</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a>  <span class="fu">corpus</span>(<span class="at">text_field =</span> <span class="st">"transcript"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb54-3"><a href="#cb54-3"></a>  <span class="fu">corpus_group</span>(<span class="at">groups =</span> ps<span class="sc">$</span>president, <span class="at">concatenator =</span> <span class="st">" "</span>)</span>
+<span id="cb54-4"><a href="#cb54-4"></a><span class="fu">head</span>(<span class="fu">summary</span>(ps_corpus_groups, <span class="at">n=</span><span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Text Types Tokens Sentences       president  n
 1 Abraham Lincoln  3106  26202       866 Abraham Lincoln 15
@@ -1139,22 +1153,25 @@ dfm tfidf weighted dfm:</code></pre>
 
 <p>For a more in-depth look into the content of documents, the <code>kwic</code> (Keywords in Context) function allows you to search for keywords within a specified context or window of words.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">textstat_lexdiv</span>(</span>
-<span id="cb55-2"><a href="#cb55-2"></a>  <span class="fu">dfm</span>(<span class="fu">tokens</span>(ps_corpus_groups)), </span>
-<span id="cb55-3"><a href="#cb55-3"></a>    <span class="at">measure =</span> <span class="st">"K"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb55-4"><a href="#cb55-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb55-5"><a href="#cb55-5"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">fct_reorder</span>(document, <span class="fu">desc</span>(K)), <span class="at">y=</span>K)) <span class="sc">+</span></span>
-<span id="cb55-6"><a href="#cb55-6"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb55-7"><a href="#cb55-7"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb55-8"><a href="#cb55-8"></a>  <span class="fu">ylab</span>(<span class="st">"Yule's K"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="fu">textstat_lexdiv</span>(</span>
+<span id="cb56-2"><a href="#cb56-2"></a>  <span class="fu">dfm</span>(<span class="fu">tokens</span>(ps_corpus_groups)), </span>
+<span id="cb56-3"><a href="#cb56-3"></a>    <span class="at">measure =</span> <span class="st">"K"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb56-4"><a href="#cb56-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb56-5"><a href="#cb56-5"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">fct_reorder</span>(document, <span class="fu">desc</span>(K)), <span class="at">y=</span>K)) <span class="sc">+</span></span>
+<span id="cb56-6"><a href="#cb56-6"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb56-7"><a href="#cb56-7"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb56-8"><a href="#cb56-8"></a>  <span class="fu">ylab</span>(<span class="st">"Yule's K"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section class="slide level2">
 
-<img data-src="day1_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch"></section>
+
+<img data-src="day1_files/figure-revealjs/unnamed-chunk-36-1.png" width="960" class="r-stretch"></section>
 <section id="word-frequency-analysis" class="slide level2">
 <h2>Word frequency analysis</h2>
 <p>The <code>topfeatures</code> function returns the frequency of words.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="fu">topfeatures</span>(ps_dfm, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="fu">topfeatures</span>(ps_dfm, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>government     states       year       make     people 
       1867       1789       1432       1381       1329 </code></pre>
@@ -1162,8 +1179,8 @@ dfm tfidf weighted dfm:</code></pre>
 </div>
 <p>This function can be applied to the whole <code>dfm</code> or to subgroups.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="co"># top features by president (show the first three in the corpus)</span></span>
-<span id="cb58-2"><a href="#cb58-2"></a><span class="fu">topfeatures</span>(ps_dfm, <span class="at">groups =</span> ps<span class="sc">$</span>president, <span class="at">n =</span> <span class="dv">5</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="co"># top features by president (show the first three in the corpus)</span></span>
+<span id="cb59-2"><a href="#cb59-2"></a><span class="fu">topfeatures</span>(ps_dfm, <span class="at">groups =</span> ps<span class="sc">$</span>president, <span class="at">n =</span> <span class="dv">5</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$`Abraham Lincoln`
    federal    slavery     states government       upon 
@@ -1179,8 +1196,8 @@ government     states       upon        may     public
 <h2>KWIC</h2>
 <p>To get a more qualitative glimpse into the documents, the <code>kwic</code> function (Keywords in Context) enables searching for keywords within a context of a few words (<code>window</code>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="fu">kwic</span>(ps_tokens, <span class="at">pattern =</span> <span class="st">"America"</span>, </span>
-<span id="cb60-2"><a href="#cb60-2"></a>     <span class="at">window =</span> <span class="dv">3</span>, <span class="at">valuetype =</span> <span class="st">"fixed"</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="fu">kwic</span>(ps_tokens, <span class="at">pattern =</span> <span class="st">"America"</span>, </span>
+<span id="cb61-2"><a href="#cb61-2"></a>     <span class="at">window =</span> <span class="dv">3</span>, <span class="at">valuetype =</span> <span class="st">"fixed"</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Keyword-in-context with 2 matches.                                                        
  [text2, 2308]                New York South | America |
@@ -1195,10 +1212,10 @@ government     states       upon        may     public
 <h2>Collocations</h2>
 <p>Collocations are multi-word expressions, such as “President of the United States”, that can provide valuable information and are sometimes treated as a single word in analysis.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="fu">textstat_collocations</span>(<span class="fu">tokens</span>(ps_corpus, <span class="at">remove_punct =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb62-2"><a href="#cb62-2"></a>                      <span class="at">size =</span> <span class="dv">3</span>,</span>
-<span id="cb62-3"><a href="#cb62-3"></a>                      <span class="at">min_count =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb62-4"><a href="#cb62-4"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="fu">textstat_collocations</span>(<span class="fu">tokens</span>(ps_corpus, <span class="at">remove_punct =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb63-2"><a href="#cb63-2"></a>                      <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb63-3"><a href="#cb63-3"></a>                      <span class="at">min_count =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb63-4"><a href="#cb63-4"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          collocation count count_nested length   lambda         z
 1        in which the    65            0      3 2.831689 16.238012
@@ -1214,21 +1231,21 @@ government     states       upon        may     public
 
 <p>An analyst might want to treat them as a single word, instead of multiple words.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a>coll_ps <span class="ot">&lt;-</span></span>
-<span id="cb64-2"><a href="#cb64-2"></a>  <span class="fu">textstat_collocations</span>(<span class="fu">tokens</span>(ps_corpus, <span class="at">remove_punct =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb64-3"><a href="#cb64-3"></a>                        <span class="at">size =</span> <span class="dv">2</span>,</span>
-<span id="cb64-4"><a href="#cb64-4"></a>                        <span class="at">min_count =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb64-5"><a href="#cb64-5"></a>  <span class="fu">filter</span>(z <span class="sc">&gt;</span> <span class="dv">15</span> <span class="sc">&amp;</span> <span class="fu">str_detect</span>(collocation,</span>
-<span id="cb64-6"><a href="#cb64-6"></a>                             <span class="fu">regex</span>(</span>
-<span id="cb64-7"><a href="#cb64-7"></a>                               <span class="at">pattern =</span> <span class="st">"american"</span>,</span>
-<span id="cb64-8"><a href="#cb64-8"></a>                               <span class="at">ignore_case =</span> <span class="cn">TRUE</span></span>
-<span id="cb64-9"><a href="#cb64-9"></a>                             )))</span>
-<span id="cb64-10"><a href="#cb64-10"></a></span>
-<span id="cb64-11"><a href="#cb64-11"></a>ps_tokens_comp <span class="ot">&lt;-</span></span>
-<span id="cb64-12"><a href="#cb64-12"></a>  <span class="fu">tokens_compound</span>(<span class="fu">tokens</span>(ps_corpus, <span class="at">remove_punct =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb64-13"><a href="#cb64-13"></a>                  <span class="at">pattern =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"american"</span>, <span class="st">"people"</span>),</span>
-<span id="cb64-14"><a href="#cb64-14"></a>                                 <span class="fu">c</span>(<span class="st">"united"</span>, <span class="st">"states"</span>, <span class="st">"of"</span>, <span class="st">"america"</span>)),</span>
-<span id="cb64-15"><a href="#cb64-15"></a>                  <span class="at">join =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>coll_ps <span class="ot">&lt;-</span></span>
+<span id="cb65-2"><a href="#cb65-2"></a>  <span class="fu">textstat_collocations</span>(<span class="fu">tokens</span>(ps_corpus, <span class="at">remove_punct =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb65-3"><a href="#cb65-3"></a>                        <span class="at">size =</span> <span class="dv">2</span>,</span>
+<span id="cb65-4"><a href="#cb65-4"></a>                        <span class="at">min_count =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb65-5"><a href="#cb65-5"></a>  <span class="fu">filter</span>(z <span class="sc">&gt;</span> <span class="dv">15</span> <span class="sc">&amp;</span> <span class="fu">str_detect</span>(collocation,</span>
+<span id="cb65-6"><a href="#cb65-6"></a>                             <span class="fu">regex</span>(</span>
+<span id="cb65-7"><a href="#cb65-7"></a>                               <span class="at">pattern =</span> <span class="st">"american"</span>,</span>
+<span id="cb65-8"><a href="#cb65-8"></a>                               <span class="at">ignore_case =</span> <span class="cn">TRUE</span></span>
+<span id="cb65-9"><a href="#cb65-9"></a>                             )))</span>
+<span id="cb65-10"><a href="#cb65-10"></a></span>
+<span id="cb65-11"><a href="#cb65-11"></a>ps_tokens_comp <span class="ot">&lt;-</span></span>
+<span id="cb65-12"><a href="#cb65-12"></a>  <span class="fu">tokens_compound</span>(<span class="fu">tokens</span>(ps_corpus, <span class="at">remove_punct =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb65-13"><a href="#cb65-13"></a>                  <span class="at">pattern =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"american"</span>, <span class="st">"people"</span>),</span>
+<span id="cb65-14"><a href="#cb65-14"></a>                                 <span class="fu">c</span>(<span class="st">"united"</span>, <span class="st">"states"</span>, <span class="st">"of"</span>, <span class="st">"america"</span>)),</span>
+<span id="cb65-15"><a href="#cb65-15"></a>                  <span class="at">join =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
@@ -1279,44 +1296,22 @@ government     states       upon        may     public
 </section>
 <section class="slide level2">
 
-<p>The <code>tokens_lookup</code> function applies a dictionary to a set of documents and returns the frequency count for each category.</p>
+<p>The <code>dfm_lookup</code> function applies a dictionary to a set of documents and returns the frequency count for each category.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a>ps_tokens_lsd <span class="ot">&lt;-</span> <span class="fu">tokens_lookup</span>(ps_tokens, </span>
-<span id="cb67-2"><a href="#cb67-2"></a>                               <span class="at">dictionary =</span> LSD2015)</span>
-<span id="cb67-3"><a href="#cb67-3"></a></span>
-<span id="cb67-4"><a href="#cb67-4"></a>ps_tokens_lsd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>ps_lsd <span class="ot">&lt;-</span> <span class="fu">dfm_lookup</span>(ps_dfm, </span>
+<span id="cb68-2"><a href="#cb68-2"></a>                     <span class="at">dictionary =</span> LSD2015)</span>
+<span id="cb68-3"><a href="#cb68-3"></a></span>
+<span id="cb68-4"><a href="#cb68-4"></a>ps_lsd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Tokens consisting of 108 documents and 5 docvars.
-text1 :
- [1] "positive" "positive" "positive" "positive" "positive" "positive"
- [7] "positive" "positive" "positive" "positive" "positive" "positive"
-[ ... and 1,239 more ]
-
-text2 :
- [1] "positive" "positive" "positive" "positive" "positive" "positive"
- [7] "positive" "positive" "positive" "positive" "positive" "negative"
-[ ... and 696 more ]
-
-text3 :
- [1] "positive" "positive" "negative" "positive" "positive" "positive"
- [7] "positive" "negative" "positive" "positive" "positive" "negative"
-[ ... and 39 more ]
-
-text4 :
- [1] "positive" "positive" "positive" "positive" "positive" "positive"
- [7] "positive" "positive" "positive" "positive" "positive" "positive"
-[ ... and 997 more ]
-
-text5 :
- [1] "positive" "positive" "positive" "positive" "positive" "positive"
- [7] "positive" "positive" "positive" "positive" "positive" "positive"
-[ ... and 1,410 more ]
-
-text6 :
- [1] "negative" "positive" "positive" "positive" "positive" "positive"
- [7] "positive" "positive" "positive" "positive" "positive" "negative"
-[ ... and 129 more ]
-
+<pre><code>Document-feature matrix of: 108 documents, 4 features (50.00% sparse) and 5 docvars.
+       features
+docs    negative positive neg_positive neg_negative
+  text1      624      627            0            0
+  text2      262      446            0            0
+  text3       10       41            0            0
+  text4      318      690            0            0
+  text5      414     1008            0            0
+  text6       29      112            0            0
 [ reached max_ndoc ... 102 more documents ]</code></pre>
 </div>
 </div>
@@ -1331,7 +1326,7 @@ text6 :
 
 <p>Let’s plot the results with <code>ggplot2</code>:</p>
 
-<img data-src="day1_files/figure-revealjs/unnamed-chunk-44-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="day1_files/figure-revealjs/unnamed-chunk-46-1.png" width="960" class="r-stretch"></section></section>
 <section id="hands-on-tutorial-4" class="title-slide slide level1 center" data-background-color="#2780e3">
 <h1>Hands-on tutorial</h1>
 <p>Click <a href="day1-tutorial.html#/sec-using-dictionaries-in-r">here</a> to open the tutorial</p>

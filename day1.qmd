@@ -264,9 +264,7 @@ $$
 p(W_i|\mu)={\frac{M!}{\prod_{j=1}^{J} W_{ij}!}\prod_{j=1}^{J}\mu_j^{W_{ij}}.} 
 $$
 
-Where $M$ is the document length (i.e., the total number of words, or **tokens**), $W_{ij}$ is the frequency of the word $j$ in document $W_i$, and $\mu_j$ is the probability of occurrence of the word $j$ under the model[^1] (and $!$ means *factorial*, i.e., the sum of multiplication of all the integers smaller than that positive integer (e.g., $3!=3*2*1=6$).
-
-[^1]: $!$ means *factorial*, i.e., the sum of multiplication of all the integers smaller than that positive integer (e.g., $3!=3*2*1=6$
+Where $M$ is the document length (i.e., the total number of words, or **tokens**), $W_{ij}$ is the frequency of the word $j$ in document $W_i$, and $\mu_j$ is the probability of occurrence of the word $j$ under the model (and $!$ means *factorial*, i.e., the sum of multiplication of all the integers smaller than that positive integer (e.g., $3!=3*2*1=6$).
 
 ------------------------------------------------------------------------
 
@@ -344,17 +342,17 @@ The cleaning and pre-processing phase encompasses techniques for reducing the co
 
 ------------------------------------------------------------------------
 
-The common techniques in data cleaning and pre-processing include using regular expressions (regex)[^2] and Part-of-Speech (POS) tagging. Regular expressions are patterns that describe a set of strings and can be used to identify elements such as punctuation marks and spaces.
+The common techniques in data cleaning and pre-processing include using regular expressions (regex)[^1] and Part-of-Speech (POS) tagging. Regular expressions are patterns that describe a set of strings and can be used to identify elements such as punctuation marks and spaces.
 
-[^2]: For example, see p. 314 in Eisele, O., Escalante-Block, E., Kluknavská, A., & Boomgaarden, H. G. (2022). [The politicising spark? Exploring the impact of# MeToo on the gender equality discourse in Australian print media.](https://www.tandfonline.com/doi/pdf/10.1080/10361146.2022.2045900) Australian journal of political science, 57(4), 309-327
+[^1]: For example, see p. 314 in Eisele, O., Escalante-Block, E., Kluknavská, A., & Boomgaarden, H. G. (2022). [The politicising spark? Exploring the impact of# MeToo on the gender equality discourse in Australian print media.](https://www.tandfonline.com/doi/pdf/10.1080/10361146.2022.2045900) Australian journal of political science, 57(4), 309-327
 
 ------------------------------------------------------------------------
 
 ## Removing punctuation
 
-Unless researchers are specifically studying the use of punctuation, punctuation marks are usually removed as they do not carry the meanings that social science researchers are typically interested in[^3].
+Unless researchers are specifically studying the use of punctuation, punctuation marks are usually removed as they do not carry the meanings that social science researchers are typically interested in[^2].
 
-[^3]: Martin Luther King, Jr., Washington National Cathedral, March 31, 1968
+[^2]: Martin Luther King, Jr., Washington National Cathedral, March 31, 1968
 
 ```{r}
 s1 <- c("We shall overcome because the arc of the moral universe is long, but it bends toward justice.")
@@ -458,9 +456,9 @@ multigsub(pattern = annotated_text$token,
 
 ------------------------------------------------------------------------
 
-Lemmatization is typically provided by tools that also include part-of-speech annotation. One such tool is [TreeTagger](https://www.cis.lmu.de/~schmid/tools/TreeTagger/), which is independent from R but utilized by other R packages that provide lemmatization functions, such as [textstem](https://github.com/trinker/textstem). Another option is [UDPipe](https://ufal.mff.cuni.cz/udpipe)[^4], which we will be using in the tutorial. The UDPipe annotation process is based on pre-trained models build on Universal Dependencies treebanks and are made available for more than 65 languages.
+Lemmatization is typically provided by tools that also include part-of-speech annotation. One such tool is [TreeTagger](https://www.cis.lmu.de/~schmid/tools/TreeTagger/), which is independent from R but utilized by other R packages that provide lemmatization functions, such as [textstem](https://github.com/trinker/textstem). Another option is [UDPipe](https://ufal.mff.cuni.cz/udpipe)[^3], which we will be using in the tutorial. The UDPipe annotation process is based on pre-trained models build on Universal Dependencies treebanks and are made available for more than 65 languages.
 
-[^4]: Straka, M., & Straková, J. (2017, August). [Tokenizing, pos tagging, lemmatizing and parsing ud 2.0 with udpipe.](https://ufal.mff.cuni.cz/~straka/papers/2017-conll_udpipe.pdf) In *Proceedings of the CoNLL 2017 shared task: Multilingual parsing from raw text to universal dependencies* (pp. 88-99).
+[^3]: Straka, M., & Straková, J. (2017, August). [Tokenizing, pos tagging, lemmatizing and parsing ud 2.0 with udpipe.](https://ufal.mff.cuni.cz/~straka/papers/2017-conll_udpipe.pdf) In *Proceedings of the CoNLL 2017 shared task: Multilingual parsing from raw text to universal dependencies* (pp. 88-99).
 
 ## Stemming
 
@@ -538,10 +536,16 @@ When creating a corpus, it is possible to include additional variables from the 
 ```{r echo=TRUE}
 ps_corpus <- ps %>%
   corpus(text_field = "transcript") 
+```
 
+------------------------------------------------------------------------
+
+```{r echo=TRUE}
 # names of the covariates
 names(docvars(ps_corpus))
+```
 
+```{r echo=TRUE}
 # some summary stats
 summary(ps_corpus, 2)
 ```
@@ -552,7 +556,9 @@ Variables can also be used to subset the corpus.
 
 ```{r echo=TRUE}
 ps_corpus_sub <- corpus_subset(ps_corpus, 
-                               president %in% c("Woodrow Wilson", "William Taft"))
+                               president %in% 
+                                 c("Woodrow Wilson", 
+                                   "William Taft"))
 ndoc(ps_corpus_sub)
 ```
 
@@ -561,6 +567,8 @@ ndoc(ps_corpus_sub)
 Tokenization is an important step in the process of transforming a corpus into a Document Feature Matrix (DFM). It involves dividing the document into smaller chunks, typically by word.
 
 During this step, it's possible to clean and preprocess the data by removing punctuation, stopwords, and converting words to lowercase, as well as transforming them into their lemma or base form. By doing so, the data can be made ready for further analysis.
+
+------------------------------------------------------------------------
 
 ```{r echo=TRUE}
 ps_tokens <- ps_corpus %>%
@@ -618,6 +626,8 @@ This helps to reduce the significance of frequent words and highlight terms with
 ------------------------------------------------------------------------
 
 It is crucial to consider the weighting method used when analyzing text data, as it greatly affects the results. The Term Frequency Inverse Document Frequency (tf-idf) weighting method is frequently used and balances the importance of each term by taking into account its frequency within the entire corpus, reducing the significance of common words.
+
+------------------------------------------------------------------------
 
 ```{r}
 topfeatures(ps_dfm, groups = ps_tfidf@docvars$president, n = 2)[c(1,2)]
@@ -703,6 +713,8 @@ textstat_lexdiv(
   xlab("") +
   ylab("Yule's K")
 ```
+
+------------------------------------------------------------------------
 
 ```{r}
 textstat_lexdiv(
@@ -803,13 +815,13 @@ LSD2015 <- data_dictionary_LSD2015
 
 ------------------------------------------------------------------------
 
-The `tokens_lookup` function applies a dictionary to a set of documents and returns the frequency count for each category.
+The `dfm_lookup` function applies a dictionary to a set of documents and returns the frequency count for each category.
 
 ```{r echo=TRUE}
-ps_tokens_lsd <- tokens_lookup(ps_tokens, 
-                               dictionary = LSD2015)
+ps_lsd <- dfm_lookup(ps_dfm, 
+                     dictionary = LSD2015)
 
-ps_tokens_lsd
+ps_lsd
 ```
 
 ------------------------------------------------------------------------
@@ -821,7 +833,7 @@ ps_corpus_summ <- summary(
                                 field = "president"))
 )
 
-dfmat_gov_lsd <- dfm(ps_tokens_lsd) %>% 
+dfmat_lsd <- dfm(ps_lsd) %>% 
   dfm_group(groups = president) %>%
   convert(to = "data.frame") %>%
   left_join(ps_corpus_summ[, c("Types", "president")], 
@@ -837,7 +849,7 @@ dfmat_gov_lsd <- dfm(ps_tokens_lsd) %>%
 Let's plot the results with `ggplot2`:
 
 ```{r}
-ggplot(dfmat_gov_lsd) +
+ggplot(dfmat_lsd) +
   geom_col(aes(x=fct_reorder(doc_id, desc(neg_prop)), 
                y=neg_prop), fill="red") +
     geom_line(aes(x=fct_reorder(doc_id, desc(pos_prop)), 

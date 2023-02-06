@@ -1,5 +1,6 @@
 ---
 title: "Hands-on Tutorials (Day One)"
+number-sections: true
 ---
 
 # Getting started with R {#sec-getting-started-with-r}
@@ -171,7 +172,7 @@ install.packages("quanteda.textplots")
 
 ## Load data
 
-The data set in this tutorial contains US presidential inaugural address texts, and metadata, from 1789 to present.
+The data set in this tutorial contains US presidential inaugural address texts, and metadata, from 1789 to present. Download the data set [here](https://drive.google.com/file/d/1t3DArZXy--yWQHAT7wMdbQsspUmhR86B/view?usp=sharing) and save it to your data folder.
 
 ```{r}
 library(tidyverse)
