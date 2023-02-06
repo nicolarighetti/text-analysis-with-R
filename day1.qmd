@@ -1,6 +1,5 @@
 ---
 title: "Introduction to text analysis and R"
-author: "Nicola Righetti"
 format: 
   revealjs:
     theme: 
@@ -188,11 +187,9 @@ uk_immig_news %>%
 
 # Hands-on tutorial {background-color="#2780e3"}
 
-Click [here](day1-tutorial.hmtl#/sec-getting-started-with-r) to open the tutorial.
+Click [here](https://nicolarighetti.github.io/text-analysis-with-R/day1-tutorial.html#sec-getting-started-with-r) to open the tutorial.
 
 # Coffee Break {background-color="#daffad"}
-
-See you at 11:00 am
 
 # Basic concepts and principles {background-color="#2780e3"}
 
@@ -505,11 +502,9 @@ Another method of selecting features involves setting a cutoff threshold for the
 
 # Hands-on tutorial {background-color="#2780e3"}
 
-Click [here](day1-tutorial.html#/sec-basic-regex-and-lemmatizazion) to open the tutorial
+Click [here](https://nicolarighetti.github.io/text-analysis-with-R/day1-tutorial.html#sec-basic-regex-and-lemmatizazion) to open the tutorial
 
 # Lunch {background-color="#daffad"}
-
-See you at 1:30 pm
 
 # Basic text analysis techniques {background-color="#2780e3"}
 
@@ -678,7 +673,7 @@ dim(ps_dfm_trim)
 
 # Hands-on tutorial {background-color="#2780e3"}
 
-Click [here](day1-tutorial.html#/sec-basic-text-analysis-techniques) to open the tutorial
+Click [here](https://nicolarighetti.github.io/text-analysis-with-R/day1-tutorial.html#sec-basic-text-analysis-techniques) to open the tutorial
 
 # Exploring text data
 
@@ -796,11 +791,9 @@ kwic(ps_tokens_comp,
 
 # Hands-on tutorial {background-color="#2780e3"}
 
-Click [here](day1-tutorial.html#/sec-exploring-text-data) to open the tutorial
+Click [here](https://nicolarighetti.github.io/text-analysis-with-R/day1-tutorial.html#sec-exploring-text-data) to open the tutorial
 
 # Coffee break {background-color="#daffad"}
-
-See you at 3:30 pm
 
 # Introduction to dictionaries in R {background-color="#2780e3"}
 
@@ -866,6 +859,6 @@ ggplot(dfmat_lsd) +
 
 # Hands-on tutorial {background-color="#2780e3"}
 
-Click [here](day1-tutorial.html#/sec-using-dictionaries-in-r) to open the tutorial
+Click [here](https://nicolarighetti.github.io/text-analysis-with-R/day1-tutorial.html#using-dictionaries-in-r) to open the tutorial
 
 # Wrap up and key takeaways {background-color="#2780e3"}

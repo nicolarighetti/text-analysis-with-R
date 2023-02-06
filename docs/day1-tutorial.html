@@ -712,8 +712,12 @@ Attaching package: 'janitor'</code></pre>
 <section id="corpus" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="corpus"><span class="header-section-number">3.1</span> Corpus</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>inaug_corpus <span class="ot">&lt;-</span> inaugural_df <span class="sc">%&gt;%</span></span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">corpus</span>(<span class="at">text_field =</span> <span class="st">"texts_clean"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first remove punctuation</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>inaugural_df<span class="sc">$</span>texts <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"'"</span>, <span class="st">" "</span>, inaugural_df<span class="sc">$</span>texts)</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create the corpus</span></span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>inaug_corpus <span class="ot">&lt;-</span> inaugural_df <span class="sc">%&gt;%</span></span>
+<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">corpus</span>(<span class="at">text_field =</span> <span class="st">"texts_clean"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># which other variables in this data set?</span></span>
@@ -1105,7 +1109,7 @@ dfm tfidf weighted dfm:</code></pre>
 <div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># top five features in each president sub-corpus</span></span>
 <span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="fu">topfeatures</span>(inaug_noun_dfm, </span>
 <span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">groups =</span> president, </span>
-<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="dv">5</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$Adams
 government     nation     people      union       upon 
@@ -1117,139 +1121,7 @@ $Biden
 
 $Buchanan
        state        shall constitution   government       people 
-          27           18           17           14           13 
-
-$Bush
-america freedom  nation      's      we 
-     38      38      37      30      27 
-
-$Carter
-  nation       we   people strength    world 
-      14        8        7        7        6 
-
-$Cleveland
-    people government     public    citizen      shall 
-        40         31         19         18         14 
-
-$Clinton
-      we    world  america american  century 
-      40       35       34       30       24 
-
-$Coolidge
-   country     nation government     people       make 
-        20         17         16         15         14 
-
-$Eisenhower
-  world  nation   peace  people freedom 
-     32      29      23      21      21 
-
-$Garfield
-  government       people         make constitution        state 
-          24           21           17           17           16 
-
-$Grant
- country   nation   people question   office 
-      16       11        9        9        9 
-
-$Harding
-     world       make    america        war government 
-        28         15         15         15         14 
-
-$Harrison
-     power     people      state government       upon 
-        73         67         67         55         55 
-
-$Hayes
-   country government       upon      party      state 
-        20         20         15         14         12 
-
-$Hoover
-government        law     nation       upon   progress 
-        30         21         18         17         16 
-
-$Jackson
-government     people      state      power     public 
-        22         13         13         13         11 
-
-$Jefferson
-    public    citizen         we government     fellow 
-        18         17         17         16         15 
-
-$Johnson
-nation    man     we change people 
-    13     12     12     12      9 
-
-$Kennedy
-   let     we   side  world nation 
-    16     12      8      8      7 
-
-$Lincoln
-       state        union constitution        shall          law 
-          27           24           24           22           22 
-
-$Madison
-    war  nation country   state  public 
-     17      13      11      10       8 
-
-$McKinley
-      upon government     people   congress        law 
-        42         40         37         27         22 
-
-$Monroe
-     state government        war    citizen     people 
-        56         37         31         29         26 
-
-$Nixon
-     we   world     let   peace america 
-     46      33      33      31      27 
-
-$Obama
-     we  nation      's america  people 
-     44      23      23      19      18 
-
-$Pierce
-      upon      power     nation      state government 
-        24         13         12         11         10 
-
-$Polk
-government      state      union      power        one 
-        50         42         32         25         19 
-
-$Reagan
-        we government     people      world   american 
-        52         36         26         25         24 
-
-$Roosevelt
-    nation     people         we government        man 
-        40         33         32         27         24 
-
-$Taft
-government       make   business        law      state 
-        28         27         22         21         17 
-
-$Taylor
-     shall government    country       duty  interests 
-        15          8          6          6          4 
-
-$Truman
- nation   world   peace freedom  people 
-     24      23      15      13      12 
-
-$Trump
- america american  country   nation   people 
-      19       15       12       11       10 
-
-$`Van Buren`
-     people     country  government institution        upon 
-         20          17          17          17          13 
-
-$Washington
-government    citizen    present    country     public 
-        10          6          6          6          6 
-
-$Wilson
-  upon    man nation  shall   life 
-    21     17     15     15     14 </code></pre>
+          27           18           17           14           13 </code></pre>
 </div>
 </div>
 <ul>

@@ -289,6 +289,10 @@ In this tutorial, we utilize the Quanteda package to clean the data and generate
 ## Corpus
 
 ```{r}
+# first remove punctuation
+inaugural_df$texts <- gsub("'", " ", inaugural_df$texts)
+
+# create the corpus
 inaug_corpus <- inaugural_df %>%
   corpus(text_field = "texts_clean") 
 ```
@@ -543,7 +547,7 @@ topfeatures(inaug_noun_dfm, n = 5)
 # top five features in each president sub-corpus
 topfeatures(inaug_noun_dfm, 
             groups = president, 
-            n = 5)
+            n = 5)[1:3]
 ```
 
 -   Your turn: Find the top 7 words by party
