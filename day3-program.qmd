@@ -4,15 +4,15 @@ title: "Advanced techniques in text analysis with R"
 
 -   9:00 am - 9:30 am: Overview of text classification techniques beyond topic modeling: unsupervised and supervised methods.
 
--   9:30 am - 10:30 am: Unsupervised text classification: Text scaling, correspondence analysis, clustering, and applications in communication science, with hands-on exercises.
+-   9:30 am - 10:30 am: Unsupervised text classification: Correspondence analysis, clustering, text scaling, and applications in communication science, with hands-on exercises.
 
 -   10:30 am - 11:00 am: Break.
 
--   11:00 am - 12:00 pm: Laboratory with real-world data sets.
+-   11:00 am - 12:30 pm: Laboratory with real-world data sets.
 
--   12:00 pm - 1:00 pm: Lunch.
+-   12:30 pm - 1:30 pm: Lunch.
 
--   1:00 pm - 2:00 pm: Supervised classification: using R to classify text data into different categories, with an overview of algorithms and hands-on exercises.
+-   1:30 pm - 2:00 pm: Supervised classification: using R to classify text data into different categories, with an overview of algorithms and hands-on exercises.
 
 -   2:00 pm - 3:00 pm: Laboratory with real-world data sets.
 

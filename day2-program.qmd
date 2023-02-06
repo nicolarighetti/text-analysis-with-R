@@ -10,11 +10,11 @@ title: "Intermediate techniques in text analysis with R"
 
 -   10:30 am - 11:00 am: Break.
 
--   11:00 am - 12:00 pm: Identify the number of topics, assess quality, and validate, with hands-on exercises.
+-   11:00 am - 12:30 pm: Identify the number of topics, assess quality, and validate, with hands-on exercises.
 
--   12:00 pm - 1:00 pm: Lunch.
+-   12:30 pm - 1:30 pm: Lunch.
 
--   1:00 pm - 2:30 pm: Advanced topic modeling methods: Structural Topic Models and Seeded Topic Models, with hands-on exercises.
+-   1:30 pm - 2:30: Advanced topic modeling methods: Structural Topic Models and Seeded Topic Models, with hands-on exercises.
 
 -   2:30 pm - 3:00 pm: Coffee Break.
 

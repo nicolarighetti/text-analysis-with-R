@@ -4,12 +4,768 @@ title: "Hands-on Tutorials (Day One)"
 
 # Getting started with R {#sec-getting-started-with-r}
 
+1.  Open RStudio and **create a project** named **text-analysis-with-r**. This will be your designated workspace during the seminar.
+
+2.  Within the main project folder, create a folder named "data" to store your data sets.
+
+3.  Create a new script and save it as "day1". This is where you will store today's code. Check the environment panel and observe that the script file has an .r extension (e.g. day1.r).
+
+4.  To learn how to **execute R code**:
+
+    1.  Type `1+1` in the console and press enter. When writing code in the console, it can be immediately executed by pressing enter, but it won't be saved.
+
+    2.  Type `1+1` in the script. To run an R command from the script, place the cursor on the corresponding line and click the "Run" button at the top of the file window or press "CTRL-Enter".
+
 ```{r}
-1+1
+1 + 1 
 ```
 
-# Cleaning and pre-processing text data {#sec-cleaning-and-pre-processing-text-data}
+Tip: It is crucial to provide comments and annotations to make the code more readable. To add a comment, type a hash symbol (#) followed by your comment or annotation. The hash symbol indicates to R that the line should not be executed.
+
+```{r}
+# this is a way to sum two numbers, using the sign "+"
+1 + 1 
+
+# this is another way, using the function "sum"
+sum(1, 1)
+```
+
+5.  Instead of just printing the output of a function, you can save it as an "object" with a meaningful and concise name. This allows you to further manipulate the object using additional functions.
+
+```{r}
+# create an object out1 equal to 4 
+out1 <- sum(2,2)
+
+# create an object out2 equal to 6
+out2 <- 6
+
+# use the created objects in a new arithmetic operation
+(out1 * out2)/out1^2
+```
+
+## Install a package
+
+1.  Use the function `install.packages` to install the `tidyverse` package, a collection of R packages designed for data science and particularly useful for data manipulation.
+
+```{r eval=FALSE}
+install.packages("tidyverse")
+```
+
+2.  Load the package, using the function `library`:
+
+```{r}
+library(tidyverse)
+```
+
+## Load, save, and explore data sets
+
+1.  Import a sample data set using the `read.csv` function and label it `df` (short for data frame). Observe that the `df` object is now available in your environment.
+
+```{r}
+df <- read.csv("https://raw.githubusercontent.com/nicolarighetti/text-analysis-with-R/main/data/data-type-tutorial-day-1.csv")
+```
+
+2.  **Save** the data to your local folder "data" using the `write.csv` function.
+
+```{r}
+write.csv(df, file = "data/toydata_1.csv", row.names = FALSE)
+```
+
+3.  **Remove** the `df` object from the environment using the `rm` function. Observe that it has been removed from the environment panel.
+
+```{r}
+rm(df)
+```
+
+4.  Import the data set from your local folder using the `read.csv` function and specifying the file path.
+
+```{r}
+df <- read.csv("data/toydata_1.csv")
+```
+
+5.  Examine the first few rows of the data set using the `head` function. Observe that the data type is indicated just below the column name.
+
+```{r}
+head(df)
+```
+
+6.  Investigate the structure of the data set using the `str` function.
+
+```{r}
+str(df)
+```
+
+7.  To access the values in a single column of a data frame, use the following syntax: the name of the data frame, followed by the dollar sign `$` and the name of the column.
+
+```{r}
+# get the values from column F_var
+df$F_var
+
+# get the values from column C_var
+df$C_var
+```
+
+8.  You can **add new columns** to the data frame:
+
+```{r}
+# add a new column including numbers from 1 to 5
+df$new_column <- c(1,2,3,4,5)
+
+# check the updated data frame
+head(df)
+```
+
+9.  Modify an existing column by applying a function and overwriting the original values.
+
+```{r}
+# capitalize the B_var content 
+df$B_var <- toupper(df$B_var)
+
+# check the result
+head(df$B_var)
+
+# Convert all letters back to lowercase
+df$B_var <- tolower(df$B_var)
+```
+
+10. Create a new column with the transformed values of another column.
+
+```{r}
+# create a new column with capitalized B_var content
+df$B_uppercase <- toupper(df$B_var)
+
+# check the output
+head(df)
+```
+
+**Your turn!**
+
+1.  Access and print the values in the column `A_var` and `C_var`.
+
+2.  Multiply `A_var` and `C_var`.
+
+3.  Access and print the values in the column `F_var`.
+
+4.  In the data frame `df`, create a new column `F_lowercase` that contains the `F_var` values transformed to lowercase with the function `tolower`.
+
+5.  Check the `df` data frame using the `head` and the `str` function.
+
+6.  Save the object in a CSV file called `df_test.csv`, in your data folder.
+
+7.  Remove the `df` object from the environment using the `rm` function (`rm(df)`).
+
+8.  Load the `df_test.csv` file using the `read.csv` function.
+
+# Basic regex and lemmatization {#sec-basic-regex-and-lemmatizazion}
+
+The majority of common text preparation operations for analysis are readily available in text analysis packages. This tutorial will cover basic [regex](https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html) operations and lemmatization.
+
+```{r eval=FALSE}
+# install the necessary packages
+install.packages("janitor")
+install.packages("udpipe")
+install.packages("quanteda")
+install.packages("quanteda.textstats")
+install.packages("quanteda.textplots")
+```
+
+## Load data
+
+The data set in this tutorial contains US presidential inaugural address texts, and metadata, from 1789 to present.
+
+```{r}
+library(tidyverse)
+library(quanteda)
+library(udpipe)
+library(janitor)
+```
+
+```{r}
+inaugural_df <- read.csv("data/data_inaugural.csv") %>%
+  # janitor's function to create well formatted column names
+  clean_names()
+
+head(inaugural_df)
+```
+
+The `gsub` function in R can be utilized to match a pattern, indicated by the first argument, and replace it with the specified second argument. In this case, the first argument can be a regular expression.
+
+Tip: What is the `substr` function? Read the function documentation by typing `?substr` in the Console.
+
+```{r}
+inaugural_df$texts_clean <- gsub("[[:punct:]]+", " ", 
+                                 inaugural_df$texts)
+
+first_5_rows <- head(inaugural_df$texts_clean, 5) 
+substr(first_5_rows, start = 1, stop = 50)
+```
+
+```{r}
+# also remove apostrophes 
+inaugural_df$texts_clean <- gsub("'", " ", inaugural_df$texts_clean)
+```
+
+Convert to lowercase using the function `tolower`.
+
+```{r}
+inaugural_df$texts_clean <- tolower(inaugural_df$texts_clean)
+```
+
+Stopwords can be conveniently removed using text analysis packages, which often include pre-compiled stopword lists in different languages, such as the [stopwords](https://cran.r-project.org/web/packages/stopwords/index.html) package. Other packages like Quanteda import stopword lists from this package.
+
+```{r}
+# inspect the first few English stopwords
+head(quanteda::stopwords(language = "en"))
+```
+
+```{r}
+# inspect the first few Italian stopwords
+head(quanteda::stopwords(language = "it"))
+```
+
+```{r}
+# chinese
+head(quanteda::stopwords(language = "zh", source = "misc"))
+```
+
+Lemmatization is a more complex process, typically provided by tools that also include part-of-speech annotation. One such tool is [TreeTagger](https://www.cis.lmu.de/~schmid/tools/TreeTagger/), which is independent from R but utilized by other R packages that provide lemmatization functions, such as [textstem](https://github.com/trinker/textstem). Another option is [UDPipe](https://ufal.mff.cuni.cz/udpipe), which we will be using in this tutorial.
+
+```{r eval=FALSE}
+# download the udpipe English model (just once)
+udpipe_model_en <- udpipe_download_model(language = "english")
+```
+
+```{r echo=FALSE}
+udpipe_model_en <- udpipe_load_model("english-ewt-ud-2.5-191206.udpipe")
+```
+
+```{r eval=FALSE}
+# load the udpipe English model
+udpipe_english_model <- udpipe_load_model(udpipe_model_en)
+```
+
+```{r}
+# annotate the text (it can take a while...)
+annotated_text <- udpipe_annotate(udpipe_model_en, 
+                                  x = inaugural_df$texts_clean, 
+                                  tagger = "default", 
+                                  parser = "none") %>%
+                  as.data.frame()
+```
+
+Relevant part of the output are `lemma` and `upos` ([Universal Part-of-Speech tags](https://universaldependencies.org/u/pos/index.html)).
+
+```{r}
+head(annotated_text)
+```
+
+```{r}
+ggplot(annotated_text) +
+  geom_bar(aes(x=fct_infreq(upos)), fill="snow3", col="grey20") +
+  theme_linedraw() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  xlab("UPOS")
+```
+
+With this annotation, texts can be lemmatized or the analysis can be focused on specific words, such as nouns, while excluding others.
+
+```{r}
+# keep only nouns
+annotated_text_nouns <- annotated_text[annotated_text$upos=="NOUN",]
+head(unique(annotated_text_nouns$lemma))
+```
+
+```{r}
+# keep only verbs
+annotated_text_verbs <- annotated_text[annotated_text$upos=="VERB",]
+head(unique(annotated_text_verbs$lemma))
+```
 
 # Basic text analysis techniques {#sec-basic-text-analysis-techniques}
 
-# Using dictionaries in R {#sec-using-dictionaries-in-r}
+In this tutorial, we utilize the Quanteda package to clean the data and generate a corpus and document term matrix. Additionally, we conduct basic exploratory analysis.
+
+## Corpus
+
+```{r}
+inaug_corpus <- inaugural_df %>%
+  corpus(text_field = "texts_clean") 
+```
+
+```{r}
+# which other variables in this data set?
+names(docvars(inaug_corpus))
+```
+
+```{r}
+# access the year variable
+docvars(inaug_corpus, field = "year")
+```
+
+```{r}
+# summary statistics at document level
+summary(inaug_corpus, 3)[,1:4]
+```
+
+A corpus can be organized into groups using grouping variables.
+
+```{r}
+# statistics by party
+inaug_corpus_party <- corpus_group(inaug_corpus, groups = party)
+summary(inaug_corpus_party, 3)[,1:4]
+```
+
+It is possible to create sub-corpora that fulfill one or more criteria.
+
+```{r}
+# only documents published after 1950
+inaug_corpus_1950 <- corpus_subset(inaug_corpus, year > 1950)
+summary(inaug_corpus_1950, 3)[,1:4]
+```
+
+```{r}
+# only documents published in after 1950 and from Democratic presidents
+inaug_corpus_1950_dem <- corpus_subset(inaug_corpus, 
+                                year > 1950 & party == "Democratic")
+summary(inaug_corpus_1950_dem, 3)[,1:4]
+```
+
+## Tokens
+
+The next step is tokenization, during which basic text cleaning procedures can be applied.
+
+We will begin by creating a token object that retains the original text.
+
+```{r echo=TRUE}
+inaug_tokens <- inaug_corpus %>%
+  tokens()
+
+inaug_tokens[1:2]
+```
+
+Next, we perform standard text cleaning operations.
+
+```{r}
+inaug_tokens_clean <- inaug_tokens %>%
+  # remove stopwords
+  tokens_remove(stopwords("en")) %>%
+  # remove punctuation
+  tokens(remove_punct = TRUE) %>%
+  # convert to lowercase
+  tokens_tolower()
+  
+```
+
+Here, we can utilize the `UDPipe` annotated text to lemmatize the text.
+
+```{r}
+inaug_tokens_lemma <- inaug_tokens_clean %>%
+  tokens_replace(
+    # search for the original token
+    pattern = annotated_text$token, 
+    # replace it with its canonical form
+    replacement = annotated_text$lemma,
+    # use exact matching
+    valuetype = "fixed")
+
+head(inaug_tokens_lemma, 2)
+```
+
+We can concentrate on specific textual features, like nouns.
+
+```{r}
+inaug_tokens_nouns <- inaug_tokens_lemma %>%
+  tokens_select(annotated_text$lemma[annotated_text$upos=="NOUN"],
+                selection = "keep",
+                valuetype = "fixed")
+
+head(inaug_tokens_nouns, 2)
+```
+
+## DFM
+
+We can now create a Document Feature Matrix.
+
+```{r}
+inaug_noun_dfm <- dfm(inaug_tokens_nouns)
+
+dim(inaug_noun_dfm) # 59 documents and 3747 words
+```
+
+```{r}
+inaug_noun_dfm
+```
+
+## DFM weighting
+
+The original Document-Feature Matrix contains word count frequencies, but this representation can be easily altered. The Document-Term Matrix (`dfm`) can be transformed to express relative frequencies (proportions) or binary values, where 1 represents the presence of a word and 0 represents its absence in a document.
+
+```{r}
+# proportions
+dfm_weight(inaug_noun_dfm, scheme = "prop")[1:2,1:6]
+```
+
+```{r}
+# boolean
+dfm_weight(inaug_noun_dfm, scheme = "boolean")[1:2,1:4]
+```
+
+```{r}
+# tf-idf
+inaug_noun_tfidf <- dfm_tfidf(inaug_noun_dfm)
+inaug_noun_tfidf[1:4,1:4]
+```
+
+## Top features
+
+The most frequently occurring features can be extracted using the `topfeatures` function.
+
+```{r}
+# standard dfm
+topfeatures(inaug_noun_dfm, n = 5)
+```
+
+```{r}
+# tf-idf weighted dfm
+topfeatures(inaug_noun_tfidf, n = 5)
+```
+
+Documents within a corpus can be grouped based on a grouping variable, and the top features can be extracted for each group.
+
+```{r}
+topfeatures(inaug_noun_tfidf, groups = year, n = 3)[1:3]
+```
+
+## Similarity
+
+We can determine the degree of similarity between documents or group of documents, aggregated by a grouping variable. Notice the difference in similarity when using different weighting schemes.
+
+```{r}
+library(quanteda.textstats)
+
+inaug_dfm_sim <- textstat_simil(dfm_group(inaug_noun_dfm, 
+                                          groups = party),
+                             method = "cosine")
+
+inaug_tfidf_sim <- textstat_simil(
+  dfm_tfidf(
+    dfm_group(inaug_noun_dfm, groups = party)),
+  method = "cosine")
+
+cat("standard weighted dfm (cosine similarity):")
+as.data.frame.table(as.matrix(inaug_dfm_sim)) %>%
+  filter(Var1 == "Democratic" & Var2 == "Republican") %>%
+  mutate(Freq = round(Freq, 3))
+cat("\ndfm tfidf weighted dfm:")
+as.data.frame.table(as.matrix(inaug_tfidf_sim)) %>%
+  filter(Var1 == "Democratic" & Var2 == "Republican") %>%
+  mutate(Freq = round(Freq, 3))
+```
+
+## Selecting features based on frequency
+
+You can filter the `dfm` by selecting a minimum and/or maximum frequency for terms and/or documents. Any terms or documents that fall below or above the specified range will either be retained or removed
+
+```{r echo=TRUE}
+inaug_dfm_trim <- dfm_trim(inaug_noun_dfm, 
+                        # keep only words occurring >= 5 times
+                        min_termfreq = 5, 
+                        termfreq_type = "count",
+                        # and in at least 0.4 of the documents
+                        min_docfreq = 0.4,
+                        docfreq_type = "prop")
+
+dim(inaug_dfm_trim)
+
+```
+
+Multiple combinations are available. Some of these are discussed in literature, such as removing words that appear in more than 99% of documents or less than 0.5% of documents for LDA topic modeling[^1].
+
+[^1]: *"Thus, relative pruning is recommended to strip very rare and extremely frequent word occurrences from the observed data. Moreover, relative pruning reduces the size of the corpus vocabulary, which will enhance the algorithm's performance remarkably (Denny & Spirling, 2017) and will stabilize LDA's stochastic inference. In our empirical study, relative pruning was applied, removing all terms that occurred in more than 99% or less than .5% of all documents (Denny & Spirling, 2017; Grimmer, 2010; Grimmer & Stewart, 2013)."*
+
+    Maier, D., Waldherr, A., Miltner, P., Wiedemann, G., Niekler, A., Keinert, A., \... & Adam, S. (2018). [Applying LDA topic modeling in communication research: Toward a valid and reliable methodology.](https://boris.unibe.ch/112835/7/Maier%20et%20al_2018_Applying%20LDA%20topic%20modeling%20in%20communication%20research.pdf) *Communication Methods and Measures*, *12*(2-3), 93-118.
+
+```{r}
+inaug_dfm_trim <- dfm_trim(inaug_noun_dfm, 
+                        # remove words occurring 
+                        # in more than 99% of documents
+                        max_docfreq = 0.99, 
+                        # and less than .5% of documents
+                        min_docfreq = 0.5,
+                        docfreq_type = "prop")
+
+dim(inaug_dfm_trim)
+
+```
+
+# Exploring text data {#sec-exploring-text-data}
+
+We have already learned how to obtain basic statistics for the corpus, including aggregated statistics based on a grouping variable.
+
+```{r}
+inaug_corpus_party <- corpus_group(inaug_corpus,
+                                   groups = party)
+
+summary(inaug_corpus_party, 3)[,1:4]
+```
+
+-   Your turn: Try to group the corpus using another variable (hint: inspect the name of the variables using `names(docvars(inaug_corpus))`).
+
+## Lexical Diversity
+
+Many statistics can be computed. For example, lexical diversity (e.g., using Yule's K).
+
+```{r}
+textstat_lexdiv(
+  dfm(tokens(inaug_corpus_party)), 
+    measure = "K") %>%
+  ggplot() +
+  geom_col(aes(x=fct_reorder(document, desc(K)), y=K),
+           fill = "lightgreen", col = "black") +
+  xlab("") +
+  ylab("Yule's K") +
+  theme_classic(base_size = 13) +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)) 
+
+```
+
+## Word frequency analysis
+
+We have observed that frequency analysis can be conducted at the document or group level. It is possible to generate plots that display various frequencies and compare documents.
+
+```{r}
+# top 5 features in the corpus
+topfeatures(inaug_noun_dfm, n = 5)
+```
+
+```{r}
+# top five features in each president sub-corpus
+topfeatures(inaug_noun_dfm, 
+            groups = president, 
+            n = 5)
+```
+
+-   Your turn: Find the top 7 words by party
+
+A simple word cloud.
+
+```{r}
+library(quanteda.textplots)
+quanteda.textplots::textplot_wordcloud(inaug_noun_dfm)
+```
+
+A comparison word cloud.
+
+```{r}
+dem_rep <- dfm_subset(
+  inaug_noun_dfm, party %in% c("Democratic", "Republican")) %>%
+  dfm_group(groups = party)
+
+textplot_wordcloud(dem_rep, 
+                   comparison = TRUE, 
+                   max_words = 100,
+                   color = c("blue", "red"))
+```
+
+## Keyness
+
+"Keyness" is a metric that measures the differential occurrence of features across documents. In this context, the documents are determined based on a "target" document index in the `dfm`, with the reference group consisting of all remaining documents.
+
+What are Trump-specific words?
+
+```{r}
+inaug_noun_pres <- dfm_group(inaug_noun_dfm, groups = president)
+keyness_trump <- textstat_keyness(inaug_noun_pres, 
+                                  target = "Trump")
+```
+
+```{r}
+head(keyness_trump)
+```
+
+```{r}
+textplot_keyness(keyness_trump)
+```
+
+## KWIC
+
+A specific word is "trillion". What are these words about? Let's use the `kwic` function.
+
+```{r}
+trump_corpus <- corpus_subset(inaug_corpus, president == "Trump")
+trump_tokens <- tokens(trump_corpus)
+kwic(trump_tokens, pattern = "trillion", 
+     window = 5) 
+```
+
+-   Your turn: what is the word "job" about?
+
+## Collocations
+
+Collocations are multi-word expressions, or adjacent fixed-length collocations.
+
+```{r}
+textstat_collocations(inaug_tokens_clean, 
+                      size = 2, min_count = 3) %>%
+  head()
+```
+
+You may want to compound certain important collocations.
+
+```{r echo=TRUE}
+coll_pp <- textstat_collocations(inaug_tokens_clean, 
+                      size = 2, min_count = 3) %>%
+  filter(z > 3)
+
+head(coll_pp)
+```
+
+```{r}
+inaug_tokens_comp <- tokens_compound(inaug_tokens_clean, 
+                                  pattern = coll_pp,
+                                  join = FALSE)
+
+kwic(inaug_tokens_comp, 
+     pattern = c("united_*", "american_*"), 
+     window = 1) %>%
+  head()
+```
+
+```{r}
+# compounding manually
+ps_tokens_comp <- tokens_compound(inaug_tokens_clean, 
+                                  pattern = list(
+                                    c("american", "people"), 
+                                    c("fellow", "citizen")),
+                                  join = FALSE)
+
+kwic(ps_tokens_comp, 
+     pattern = c("american_*", "fellow_*"), window = 1) %>%
+  head()
+```
+
+## Feature co-occurrence matrix
+
+The feature co-occurrence matrix measures the co-occurrence of features within a specified context. The context can be defined as a document or a window within a set of documents.
+
+```{r}
+inaug_noun_fcm <- fcm(inaug_noun_dfm, 
+                      context = "document")
+```
+
+```{r}
+head(inaug_noun_fcm)
+```
+
+A feature co-occurrence matrix can be visualized as a network, where edges represent the co-occurrence of features.
+
+```{r}
+# identify the top co
+feat <- names(topfeatures(inaug_noun_fcm, 30))
+
+inaug_noun_fcm_sub <- fcm_select(inaug_noun_fcm, pattern = feat)
+
+textplot_network(inaug_noun_fcm_sub, 
+                 # "min_freq": a frequency count threshold or proportion 
+                 # for co-occurrence frequencies of features to be included.
+                 min_freq = 0.5)
+
+```
+
+# Using dictionaries in R
+
+In this tutorial we learn to import and apply a dictionary, and to build and apply a user-defined dictionary.
+
+A Quanteda built-in dictionary is the `LSD2015` sentiment dictionary.
+
+```{r}
+LSD2015 <- data_dictionary_LSD2015
+```
+
+The dictionary can be applied to `dfm` with the `dfm_lookup` function.
+
+```{r}
+inaug_lsd <- dfm_lookup(inaug_noun_dfm, 
+                        dictionary = LSD2015)
+```
+
+The resulting output can be analyzed in aggregated form using a grouping variable.
+
+```{r}
+df_lsd <- 
+  # output from tokens_lookup
+  inaug_lsd %>%
+  # to dfm
+  dfm() %>% 
+  # group data by variable
+  dfm_group(groups = party) %>%
+  # convert to data frame to perform data manipulation easily
+  convert(to = "data.frame")
+  
+# create a summary of the party-grouped corpus to get type and tokens statistics
+inaug_corpus_party_summ <- summary(inaug_corpus_party)
+
+df_lsd <- df_lsd %>%
+  # merge the sentiment df and the types metrics by year
+  left_join(inaug_corpus_party_summ[, c("Tokens", "Text")], 
+            by = c("doc_id" = "Text")) %>%
+  # proportions out of total types
+  mutate(neg_prop = negative/Tokens,
+         pos_prop = positive/Tokens) %>%
+    # difference in polarity and total emotions
+  mutate(diff = pos_prop - neg_prop,
+         emot = pos_prop + neg_prop)
+
+head(df_lsd)
+```
+
+To plot data with `ggplot2` is always convenient to reshape it in "long" format.
+
+```{r}
+df_lsd <- df_lsd %>%
+  pivot_longer(-doc_id)
+
+head(df_lsd)
+```
+
+Plot the results with `ggplot2`.
+
+```{r}
+df_lsd %>%
+  filter(name %in% c("neg_prop", "pos_prop")) %>%
+  ggplot() +
+  geom_col(aes(x = doc_id,
+               y = value, group = name, fill = name), 
+           # "dodge" to place columns side-by-side
+           position = "dodge") +
+  scale_fill_manual(values = c(neg_prop = "skyblue",
+                                pos_prop = "tomato"),
+                    labels = c("Negative", "Positive"),
+                    name = "Emotions") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+  xlab("") +
+  ylab("Proportions") +
+  ggtitle("Simple sentiment analysis with Quanteda and LSD2015",
+          subtitle = "Proportion of emotional words out of total tokens")
+```
+
+-   Tip: Try to type "stack" instead of "dodge" and see how the chart changes.
+
+To create an user-defined dictionary:
+
+```{r}
+my_dictionary <-
+  dictionary(
+    list(
+      christmas = c("Christmas", "Santa", "holiday"),
+      opposition = c("Opposition", "reject", "notincorpus"),
+      taxing = "taxing",
+      taxation = "taxation",
+      taxregex = "tax*",
+      country = "america"
+    )
+  )
+
+dfm_lookup(inaug_noun_dfm, 
+           dictionary = my_dictionary)
+```

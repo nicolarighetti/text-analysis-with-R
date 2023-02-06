@@ -1,32 +1,194 @@
 ---
 title: "Introduction to text analysis and R"
 author: "Nicola Righetti"
-format: revealjs
+format: 
+  revealjs:
+    theme: 
+      - custom.scss
 ---
 
-# Introduction {background-color="#2780e3"}
+# Introduction
 
-## Text analysis and its applications in communication science
+Textual documents are of great interest to social scientists. Think in the field of political communication: politicians communicate, persuade, and verbally negotiate, both in written and spoken form. Texts of political speeches, legislation proposals, parliamentary interventions, statements and interviews, social media messages provide a rich source of material for studying political dynamics.
 
-## Overview of the program
+------------------------------------------------------------------------
 
-## About Me
+Similarly, more generally, written and spoken texts provide an inexhaustible source of insights into culture understood sociologically, social relationships, and of course the dynamics of communication on old and new media.
+
+Given the amount of textual documents, and the impossibility or the enormous amount of resources required to analyze them manually, quantitative, statistical and computational text analysis techniques have and continue to attract great interest. In this seminar, we will present a wide introduction to the available methods.
+
+# Overview {background-color="#2780e3"}
+
+[![Adapted from Grimmer, J., & Stewart, B. M. (2013). Text as data: The promise and pitfalls of automatic content analysis methods for political texts. Political analysis, 21(3), 267-297.](slides-figures/overview.png)](https://www.cambridge.org/core/journals/political-analysis/article/text-as-datathe-promise-and-pitfalls-of-automatic-content-analysis-methods-for-politicaltexts/F7AAC8B2909441603FEB25C156448F20)
+
+## Seminar sections
+
+::: columns
+::: {.column width="50%"}
+**Tripartite structure:**
+
+-   Frontal lessons
+-   Tutorials
+-   Laboratory with new (or your) data
+:::
+
+::: {.column width="50%"}
+**Basic objectives:**
+
+-   Get an overview of methods
+-   Run an analysis by following a script
+-   Test yourself with an independent analysis
+:::
+:::
 
 # Getting started with R {background-color="#2780e3"}
 
+```{r}
+library(tidyverse)
+library(quanteda)
+library(quanteda.textplots)
+library(quanteda.textstats)
+library(udpipe)
+library(textplot)
+
+
+multigsub <- function (pattern, replacement, text.var, leadspace = FALSE, 
+    trailspace = FALSE, fixed = TRUE, trim = TRUE, order.pattern = fixed, 
+    ...) 
+{
+    if (leadspace | trailspace) 
+        replacement <- spaste(replacement, trailing = trailspace, 
+            leading = leadspace)
+    if (fixed && order.pattern) {
+        ord <- rev(order(nchar(pattern)))
+        pattern <- pattern[ord]
+        if (length(replacement) != 1) 
+            replacement <- replacement[ord]
+    }
+    if (length(replacement) == 1) 
+        replacement <- rep(replacement, length(pattern))
+    for (i in seq_along(pattern)) {
+        text.var <- gsub(pattern[i], replacement[i], text.var, 
+            fixed = fixed, ...)
+    }
+    if (trim) 
+        text.var <- gsub("\\s+", " ", gsub("^\\s+|\\s+$", "", 
+            text.var, perl = TRUE), perl = TRUE)
+    text.var
+}
+```
+
+## What is R
+
+R is a free software environment for statistical computing and graphics. It compiles and runs on a wide variety of UNIX platforms, Windows and MacOS.
+
+Created by the New Zealand and Canadian statistics professors Ross Ihaka and Robert Gentleman at the University of Auckland (New Zealand). It is one of the most commonly used programming languages in data mining.
+
+The first official 1.0 version was released on 29 February 2000. The latest release (as of today, 7 February 2023), has been R 4.2.2 on 31 October 2022.
+
+Official website: <https://www.r-project.org/>
+
+## Resources and help
+
+The R programming language boasts a thriving community of both users and developers.
+
+There are numerous resources available online for learning to code in R, as well as for getting assistance with common coding challenges.
+
+A popular destination for the R community is Stack Overflow, where one can find numerous questions and answers tagged with "R": <https://stackoverflow.com/questions/tagged/r>
+
+## Rstudio
+
+RStudio is an integrated development environment (IDE) for R (and Python).
+
+It includes a console, syntax-highlighting editor that supports direct code execution, and tools for plotting, history, debugging, and workspace management.
+
+RStudio is available in open source and commercial editions and runs on the desktop (Windows, Mac, and Linux).
+
+<https://posit.co/products/open-source/rstudio/>
+
 ## Rstudio interface
 
-## Uploading data
+![RStudio interface](slides-figures/fig01.png "Title: R Studio interface")
 
-## Data structures and data types
+## RStudio projects
+
+RStudio projects are specialized environments dedicated to a specific data analysis projects.
+
+These projects provide a dedicated workspace on your computer where you can efficiently organize data, scripts, and the results of your analysis, along with their corresponding folders.
+
+It is recommended to create separate projects for each data analysis project, and for the purposes of this seminar, we will also create an RStudio project.
+
+## Data formats
+
+Both R and RStudio are capable of handling a variety of **data formats**, such as CSV, RDS, and XLSX. Data can be uploaded and saved in these different formats through the use of specific **functions**. The most frequently used format is **CSV**, and it can be imported using the following method:
+
+```{r eval=FALSE, echo=TRUE}
+my_data <- read.csv(file = "name_of_my_csv_data_file.csv")
+```
+
+The `read.csv` function can read files stored locally and online (e.g., on GitHub repositories):
+
+```{r echo=TRUE}
+uk_immig_news <- read.csv("https://raw.githubusercontent.com/nicolarighetti/text-analysis-with-R/main/data/data_corpus_immigrationnews_df.csv")
+```
 
 ## Objects and Functions
 
-## Installing and loading packages
+The R language can be thought of as comprising objects and functions. Objects are named entities that hold information, while functions are actions that modify the objects.
+
+A data analysis script, essentially a piece of code, can be seen as a logical sequence of manipulations on data objects, ultimately resulting in an output object that represents the outcome of the analysis.
+
+------------------------------------------------------------------------
+
+Functions can be viewed as "machines" that transform an object into another object. For example, the arithmetic operation of addition is a function that takes two or more numbers as inputs and returns their sum.
+
+The inputs to a function are referred to as arguments, and the output or result of the function is its value.
+
+```{r echo=TRUE}
+sum_output <- sum(2,2)
+
+print(sum_output)
+```
+
+## Packages
+
+R packages, or libraries, are collections of functions that enhance the capabilities of R. For instance, the Quanteda package provides text analysis functions for R users, and the stringr package offers a comprehensive set of functions that simplify working with character sequences (such as text).
+
+## Data structures and data types
+
+Data can come in various formats, with the most common being the tabular format. This format represents a matrix of cases and variables, where cases are represented by rows and variables by columns. The cells of the matrix hold a case's measurement for a given variable.
+
+In R, this is referred to as a data frame format. A data frame can consist of different data types, including numeric, integer, nominal, as well as dates and times.
+
+```{r}
+df <- data.frame(case = paste0("id_", c(1:5)), 
+           A_var = round(rnorm(n = 5), 2),
+           B_var = c("red", "blue", "white", "green", "yellow"),
+           C_var = sample(1:10, 5),
+           E_var = Sys.Date() + sort(sample(1:10, 5)),
+           F_var = c("Coding is fun",
+                     "The cat is on the table",
+                     "Cogito ergo sum",
+                     "This is a sentence",
+                     "Ceci n'est pas une pipe"))
+
+df
+```
+
+------------------------------------------------------------------------
+
+Text analysis primarily involves the analysis of textual data, which is usually in the form of sentences or extended text. In R, these data are stored as **character** data types.
+
+```{r}
+uk_immig_news %>%
+  select(doc_id, text, paperName) %>%
+  mutate(text = paste0(substr(text, 1, 20), "...")) %>%
+  head()
+```
 
 # Hands-on tutorial {background-color="#2780e3"}
 
-Click [here](day1-tutorial.hmtl#/sec-getting-started-with-r) to open the tutorial
+Click [here](day1-tutorial.hmtl#/sec-getting-started-with-r) to open the tutorial.
 
 # Coffee Break {background-color="#daffad"}
 
@@ -34,49 +196,595 @@ See you at 11:00 am
 
 # Basic concepts and principles {background-color="#2780e3"}
 
-## Reading text files
-
 ## The bags-of-words representation
+
+To analyze text statistically, the text must be transformed into a numerical representation that is suitable for mathematical analysis. One of the most commonly used representations is the bag-of-words model.
+
+The bag-of-words model represents text as a collection of its individual words, disregarding grammar and word order, but keeping track of word frequency. This representation is commonly known as a Document-Term-Matrix, Term-Document-Matrix, or Document-Feature-Matrix, and is abbreviated as DTM, TDM, or DFM.
+
+------------------------------------------------------------------------
+
+In text analysis, each document serves as a case and the words in the document are the variables. The smallest unit of analysis is referred to as a document and can range from a sentence fragment to an entire collection of documents, depending on the analysis unit. The cells in the matrix represent the frequency or weighted frequency of a specific word in a specific document.
+
+Mathematically, each document is represented as a numerical vector, which is a series of numbers. The vectors, not the words, are the objects of statistical analysis.
+
+------------------------------------------------------------------------
+
+The content of the matrix's cells are usually the **frequencies** or weighted frequencies of appearance of a specific word in a specific document.
+
+In mathematical terms, each documents is represented as a **numeric vector**, that is a series of numbers. The vectors, and not the words, are the object of statistical analysis.
+
+## From text to data
+
+The process of text analysis usually starts with a collection of documents, known as a **corpus**.
+
+```{r echo=TRUE}
+library(quanteda)
+text <- c("My cat is on the table", "My cat hates Jim's dog", "My cat likes milk", "This dog is nice", "I love this dog", "This dog is furry")
+
+text %>%
+  corpus()
+```
+
+------------------------------------------------------------------------
+
+To perform statistical analysis, the corpus is transformed into a Document-Feature-Matrix (`dfm`).
+
+```{r echo=TRUE}
+dfm1 <- text %>%
+  corpus() %>%
+  tokens() %>%
+  dfm()
+
+dfm1
+```
+
+## Words and probabilities
+
+To understand how statistical processing is done on textual data, consider a corpus of documents from three known authors and one unknown author. We can predict the most likely author of the contested document by using probability calculation.
+
+```{r}
+wc <- data.frame(authors = c("Hamilton", "Jay", "Madison", "Disputed Essay"),
+                 by = c(859, 82, 474, 15), 
+                 man = c(102, 0, 17, 2), 
+                 upon = c(374, 1, 7, 0))
+
+wc
+```
+
+------------------------------------------------------------------------
+
+Probabilistic models describe the data generation process using probabilities and unknown parameters, which can be estimated from the observed data. One such model is the multinomial distribution, which is a natural choice for the count data in a document term matrix.
+
+------------------------------------------------------------------------
+
+A document, $W_i$, can be considered as a random draw from a multinomial distribution with a parameter $\mu$. The multinomial distribution is an extension of the binomial distribution and its probability mass function is given as:
+
+$$
+p(W_i|\mu)={\frac{M!}{\prod_{j=1}^{J} W_{ij}!}\prod_{j=1}^{J}\mu_j^{W_{ij}}.} 
+$$
+
+Where $M$ is the document length (i.e., the total number of words, or **tokens**), $W_{ij}$ is the frequency of the word $j$ in document $W_i$, and $\mu_j$ is the probability of occurrence of the word $j$ under the model[^1] (and $!$ means *factorial*, i.e., the sum of multiplication of all the integers smaller than that positive integer (e.g., $3!=3*2*1=6$).
+
+[^1]: $!$ means *factorial*, i.e., the sum of multiplication of all the integers smaller than that positive integer (e.g., $3!=3*2*1=6$
+
+------------------------------------------------------------------------
+
+In real-world situations, we typically observe the word counts $W_i$ and estimate the underlying parameter $\mu_j$ using the maximum likelihood estimate, which is simply the number of times word $j$ is used divided by the total number of tokens.
+
+$$\hat \mu_j = \frac{W_{ij}}{M_i}$$
+
+------------------------------------------------------------------------
+
+With regards to the disputed essay, its author is one of the three possible authors. The multinomial language model provides a way to assess the probability that the disputed essay was written by each author.
+
+```{r}
+wc %>%
+  rowwise() %>%
+  mutate(M = sum(by, man, upon))
+```
+
+------------------------------------------------------------------------
+
+We assume each author uses a separate multinomial distribution with a fixed parameter $\mu_j$ that generates documents with different word frequencies.
+
+$$
+W_H \sim Multinomial(M=1335, \mu_H)\\
+W_J \sim Multinomial(M=83, \mu_J)\\
+W_M \sim Multinomial(M=498, \mu_M)
+$$
+
+------------------------------------------------------------------------
+
+We can estimate the author-specific $\mu$ using the maximum likelihood estimate $\hat \mu_j = \frac{W_{ij}}{M_i}$. For example, for Hamilton:
+
+$$
+\begin{aligned}
+& \hat \mu_H = (\frac{859}{859+102+374}, \frac{102}{859+102+374}, \frac{374}{859+102+374})\\
+& = (.64, .08, .28) 
+\end{aligned}
+$$
+
+```{r}
+
+wc %>%
+  rowwise() %>%
+  mutate(M = sum(by, man, upon)) %>%
+  ungroup() %>%
+  mutate(mu_by = round(by/M,2),
+         mu_man = round(man/M,2),
+         upon_man = round(upon/M,2))
+
+```
+
+------------------------------------------------------------------------
+
+Using the multinomial mass probability function $p(W_i|\mu)={\frac{M!}{\prod_{j=1}^{J} W_{ij}!}\prod_{j=1}^{J}\mu_j^{W_{ij}}}$ we can calculate the probability that the disputed document was generated by one of the three authors. For example, the probability that the disputed text was written by Hamilton is:
+
+$$
+p{(W_{disputed}|\hat\mu_H)=\frac{17!}{(15!)(2!)(0!)}(.64)^{15}(.08)^2(.28)^0} \\
+=0.001 
+$$
+
+The probabilities for Jay and Madison are 0 and 0.077, respectively. This calculation clearly favors Madison as the author of the disputed essay.
+
+# Preparing the data for the analysis {background-color="#2780e3"}
 
 ## Cleaning and pre-processing text data
 
-## Handling special characters
+A text analysis project begins with the crucial step of data cleaning and pre-processing. This phase involves a series of actions that aim to simplify the complex structure of the text data, leading to the creation of a Document Term Matrix ready for analysis.
+
+------------------------------------------------------------------------
+
+Data cleaning is vital as it ensures the validity of the analysis. The adage "garbage in, garbage out" is particularly applicable to textual data due to its complexity. Overall, data cleaning and pre-processing are critical steps in a text analysis project that lay the foundation for accurate and meaningful results.
+
+------------------------------------------------------------------------
+
+The cleaning and pre-processing phase encompasses techniques for reducing the complexity of the data, such as removing punctuation, converting all text to lowercase, removing stop words, eliminating extra white spaces, performing lemmatization or stemming, and retaining only the most relevant words.
+
+------------------------------------------------------------------------
+
+The common techniques in data cleaning and pre-processing include using regular expressions (regex)[^2] and Part-of-Speech (POS) tagging. Regular expressions are patterns that describe a set of strings and can be used to identify elements such as punctuation marks and spaces.
+
+[^2]: For example, see p. 314 in Eisele, O., Escalante-Block, E., Kluknavská, A., & Boomgaarden, H. G. (2022). [The politicising spark? Exploring the impact of# MeToo on the gender equality discourse in Australian print media.](https://www.tandfonline.com/doi/pdf/10.1080/10361146.2022.2045900) Australian journal of political science, 57(4), 309-327
+
+------------------------------------------------------------------------
+
+## Removing punctuation
+
+Unless researchers are specifically studying the use of punctuation, punctuation marks are usually removed as they do not carry the meanings that social science researchers are typically interested in[^3].
+
+[^3]: Martin Luther King, Jr., Washington National Cathedral, March 31, 1968
+
+```{r}
+s1 <- c("We shall overcome because the arc of the moral universe is long, but it bends toward justice.")
+
+s1 
+
+gsub("[[:punct:] ]+", " ", s1)
+
+```
+
+## Convert to lowercase
+
+The software we are using is case-sensitive, meaning that words written in uppercase and lowercase are treated as distinct, even though they have the same meaning. As a result, it is common practice to convert all text to lowercase.
+
+```{r}
+gsub("[[:punct:] ]+", " ", s1)
+
+s1 %>%
+  as_tibble() %>%
+  mutate(value = gsub("[[:punct:]]+", " ", value)) %>%
+  tolower()
+```
 
 ## Removing stop words
 
-## Tokenization
+Stop words are commonly used grammatical parts of a language that do not carry any meaning and are usually removed.
 
-## Lemmatization and stemming
+```{r}
+stpwrds <- paste(paste0("\\b", 
+                        stopwords(), collapse = "|",
+                        paste0("\\b")))
 
-## Part-of-speech tagging
+s1 %>%
+  as_tibble() %>%
+  mutate(value = gsub("[[:punct:]]+", " ", value)) %>%
+  tolower()
+
+s1 %>%
+  as_tibble() %>%
+  mutate(value = gsub("[[:punct:]]+", " ", value)) %>%
+  mutate(value = tolower(value)) %>%
+  mutate(value = gsub(stpwrds, "", value)) %>%
+  as.character()
+```
+
+## Remove extra white space
+
+t is common for text to have excessive whitespaces scattered throughout, which may result from removing words. These whitespaces can be present between words or at the beginning and end of the document.
+
+```{r}
+s1 %>%
+  as_tibble() %>%
+  mutate(value = gsub("[[:punct:]]+", " ", value)) %>%
+  mutate(value = tolower(value)) %>%
+  mutate(value = gsub(stpwrds, "", value)) %>%
+  as.character()
+
+s1 %>%
+  as_tibble() %>%
+  mutate(value = gsub("[[:punct:]]+", " ", value)) %>%
+  mutate(value = tolower(value)) %>%
+  mutate(value = gsub(stpwrds, "", value)) %>%
+  mutate(value = gsub("\\s+", " ", value)) %>%
+  mutate(value = trimws(value, which = "both")) %>%
+  as.character()
+
+s2 <- s1 %>%
+  as_tibble() %>%
+  mutate(value = gsub("[[:punct:]]+", " ", value)) %>%
+  mutate(value = tolower(value)) %>%
+  mutate(value = gsub(stpwrds, "", value)) %>%
+  mutate(value = gsub("\\s+", " ", value)) %>%
+  mutate(value = trimws(value, which = "both")) %>%
+  as.character()
+
+```
+
+## Lemmatization
+
+In many instances, words may be written in variations, but share a common origin and convey the same information. For instance, the words "words" and "word" may be distinct types in the vocabulary, however they represent the singular and plural forms of the same term "word".
+
+Lemmatization involves mapping words to their lemma, which is their standard form, often found in a dictionary. It helps to simplify the complexity of the words in the text.
+
+```{r}
+udpipe_en_model <- udpipe_download_model(language = "english")
+ud_english <- udpipe_load_model(udpipe_en_model$file_model)
+
+annotated_text <- udpipe_annotate(ud_english, x = s2, 
+                                  tagger = "default", 
+                                  parser = "default")
+
+annotated_text <- as.data.frame(annotated_text)
+
+s2 
+
+multigsub(pattern = annotated_text$token,
+          replacement = annotated_text$lemma,
+          text.var = s2)
+
+```
+
+------------------------------------------------------------------------
+
+Lemmatization is typically provided by tools that also include part-of-speech annotation. One such tool is [TreeTagger](https://www.cis.lmu.de/~schmid/tools/TreeTagger/), which is independent from R but utilized by other R packages that provide lemmatization functions, such as [textstem](https://github.com/trinker/textstem). Another option is [UDPipe](https://ufal.mff.cuni.cz/udpipe)[^4], which we will be using in the tutorial. The UDPipe annotation process is based on pre-trained models build on Universal Dependencies treebanks and are made available for more than 65 languages.
+
+[^4]: Straka, M., & Straková, J. (2017, August). [Tokenizing, pos tagging, lemmatizing and parsing ud 2.0 with udpipe.](https://ufal.mff.cuni.cz/~straka/papers/2017-conll_udpipe.pdf) In *Proceedings of the CoNLL 2017 shared task: Multilingual parsing from raw text to universal dependencies* (pp. 88-99).
+
+## Stemming
+
+Lemmatization maps words to their base form while stemming trims the endings of words, which typically carry inflections.
+
+This process is generally faster and can be useful in certain scenarios, such as when the emphasis is on a quantitative rather than a lexical analysis.
+
+```{r}
+txt <- "taxing taxes taxation tax"
+txt
+as.character(tokens_wordstem(quanteda::tokens(txt)))
+
+cat("\n")
+
+txt <- "argue argued argues arguing"
+txt
+as.character(tokens_wordstem(quanteda::tokens(txt)))
+
+```
 
 ## Feature selection
 
+We started with a 66-word sentence and through several steps, we arrived at a 30-word sentence. To further streamline our data for a more impactful analysis, there are two common approaches: selecting the most relevant features based on their grammatical function or based on their frequency.
+
+------------------------------------------------------------------------
+
+For instance, if the focus is on topic identification, we may choose to work with only the most meaningful parts of the text such as nouns and verbs while excluding adjectives. On the other hand, if we are interested in the emotional tone, we may opt to work with adjectives only. To choose terms based on their grammatical functions, a Part-of-Speech (POS) analysis is necessary. This procedure identifies the grammatical role of words in the text.
+
+```{r}
+annotated_text %>%
+  select(token, lemma, upos, token_id, head_token_id) %>%
+  head(n=4)
+```
+
+------------------------------------------------------------------------
+
+POS-tagging enables the analysis of the dependency structure of a sentence.
+
+![Dependency Parser](slides-figures/dependency-parser-example.png "Title: Dependency Parser")
+
+------------------------------------------------------------------------
+
+Another method of selecting features involves setting a cutoff threshold for the words to be included. Words that appear fewer times than the threshold are then excluded from the analysis. This can be done once the term document matrix has been constructed.
+
 # Hands-on tutorial {background-color="#2780e3"}
 
-Click [here](day1-tutorial.html#/sec-cleaning-and-pre-processing-text-data) to open the tutorial
+Click [here](day1-tutorial.html#/sec-basic-regex-and-lemmatizazion) to open the tutorial
 
 # Lunch {background-color="#daffad"}
 
-See you at 1:00 pm
+See you at 1:30 pm
 
 # Basic text analysis techniques {background-color="#2780e3"}
 
 ## Introduction to Quanteda
 
-## Creating corpus and DFM objects
+[Quanteda](https://cran.r-project.org/web/packages/quanteda/index.html) is one of the most comprehensive and recent R text analysis packages available, providing a wide range of functionalities for quantitative text analysis. It enables users to manage text corpora, process and manipulate tokens, extract and analyze keywords, perform machine learning tasks, visualize results, and more.
 
-## Exploring text data
+------------------------------------------------------------------------
 
-## Word frequency analysis
+## From texts to corpus, tokens and DFM
 
-## Collocations
+Quanteda offers a fast way of creating a Document Feature Matrix, which it calls a `dfm`. As an example, we can use a sample data frame containing US Presidential speeches from the [Miller Center of Public Affairs](https://millercenter.org/the-presidency/presidential-speeches) to quickly generate a corpus and `dfm`. It is important to create both a corpus and `dfm` as they enable different types of analysis.
 
-## KWIC
+```{r echo=TRUE}
+ps <- read.csv("data/presidential-speeches-sample.csv")
+ps_annotation <- read.csv("data/presidential-speeches-sample-udpipe-annotate.csv")
+head(ps[, c("date", "president", "title", "transcript")])
+```
+
+------------------------------------------------------------------------
+
+When creating a corpus, it is possible to include additional variables from the original data set as `docvars` and use them to subset the corpus. By doing so, we can incorporate additional information into our analysis and make it more nuanced.
+
+```{r echo=TRUE}
+ps_corpus <- ps %>%
+  corpus(text_field = "transcript") 
+
+# names of the covariates
+names(docvars(ps_corpus))
+
+# some summary stats
+summary(ps_corpus, 2)
+```
+
+------------------------------------------------------------------------
+
+Variables can also be used to subset the corpus.
+
+```{r echo=TRUE}
+ps_corpus_sub <- corpus_subset(ps_corpus, 
+                               president %in% c("Woodrow Wilson", "William Taft"))
+ndoc(ps_corpus_sub)
+```
+
+------------------------------------------------------------------------
+
+Tokenization is an important step in the process of transforming a corpus into a Document Feature Matrix (DFM). It involves dividing the document into smaller chunks, typically by word.
+
+During this step, it's possible to clean and preprocess the data by removing punctuation, stopwords, and converting words to lowercase, as well as transforming them into their lemma or base form. By doing so, the data can be made ready for further analysis.
+
+```{r echo=TRUE}
+ps_tokens <- ps_corpus %>%
+  tokens(remove_punct = TRUE) %>%
+  tokens_tolower() %>%
+  tokens_remove(stopwords("en")) %>%
+  tokens_replace(pattern = ps_annotation$token, 
+                 replacement = ps_annotation$lemma,
+                 valuetype = "fixed")
+
+head(ps_tokens, 1)
+```
+
+------------------------------------------------------------------------
+
+We finally create the `dfm` from the tokenized object.
+
+```{r}
+ps_dfm <- dfm(ps_tokens)
+
+ps_dfm
+```
+
+## DFM weighting
+
+In a standard Document Feature Matrix (DFM), documents are represented as counts of individual words. However, there are different methods for assigning numerical values to word frequencies.
+
+One such method is to represent each word as a proportion instead of a count. Another method is to assign a value of 1 to words that are present in a document and 0 to words that are absent, regardless of their frequency.
+
+```{r}
+round(as.matrix(dfm_weight(ps_dfm, scheme = "prop")[1:2,1:4]), 3)
+```
+
+------------------------------------------------------------------------
+
+Alternatively, words can be represented by a binary value of 1 if they appear in a document and 0 if they do not, regardless of the number of occurrences.
+
+```{r}
+round(as.matrix(dfm_weight(ps_dfm, scheme = "boolean")[1:2,1:4]), 3)
+```
+
+------------------------------------------------------------------------
+
+The tf-idf weighting method (**Term Frequency Inverse Document Frequency**) is a common approach in computational linguistics. It takes into account the frequency of a term within a document and its frequency across the entire corpus.
+
+```{r}
+ps_tfidf <- dfm_tfidf(ps_dfm)
+round(as.matrix(ps_tfidf[1:4,1:4]), 3)
+```
+
+------------------------------------------------------------------------
+
+This helps to reduce the significance of frequent words and highlight terms with an intermediate frequency, which provide meaningful information about the text. The goal is to find a balance between words that are too common and not informative and those that are too rare and infrequent to be useful in making generalizations.
+
+------------------------------------------------------------------------
+
+It is crucial to consider the weighting method used when analyzing text data, as it greatly affects the results. The Term Frequency Inverse Document Frequency (tf-idf) weighting method is frequently used and balances the importance of each term by taking into account its frequency within the entire corpus, reducing the significance of common words.
+
+```{r}
+topfeatures(ps_dfm, groups = ps_tfidf@docvars$president, n = 2)[c(1,2)]
+```
+
+```{r}
+topfeatures(ps_tfidf, groups = ps_tfidf@docvars$president, n = 2)[c(1,2)]
+```
+
+------------------------------------------------------------------------
+
+Different weightings highlight different aspects of the text, and it's not uncommon for tf-idf weighting to provide more insightful results, such as highlighting distinctive differences between authors or groups of texts. However, it's important to be aware of the weighting method used, as it can greatly impact the conclusions drawn from the analysis.
+
+```{r}
+ps_tfidf_sim <- textstat_simil(
+  dfm_tfidf(dfm_group(ps_dfm,
+                      groups = ps_tfidf@docvars$president)),
+            method = "cosine")
+
+ps_dfm_sim <- textstat_simil(dfm_group(ps_dfm, 
+                                       groups = ps_tfidf@docvars$president),
+                             method = "cosine")
+
+cat("standard weighted dfm (cosine similarity):")
+as.data.frame.table(as.matrix(ps_dfm_sim)) %>%
+  filter(Var1 == "Abraham Lincoln" & Var2 == "Barack Obama") %>%
+  mutate(Freq = round(Freq, 3))
+cat("\ndfm tfidf weighted dfm:")
+as.data.frame.table(as.matrix(ps_tfidf_sim)) %>%
+  filter(Var1 == "Abraham Lincoln" & Var2 == "Barack Obama") %>%
+    mutate(Freq = round(Freq, 3))
+```
+
+------------------------------------------------------------------------
+
+## Selecting features based on frequency
+
+Once the weighting has been chosen, the features of the DFM can be filtered to retain only the most crucial ones. This reduction in the number of features makes the analysis less computationally intensive and, in some cases, allows for otherwise complex analyses to be performed even on a personal computer. Additionally, thoughtful selection of features can lead to more impactful analysis results.
+
+```{r echo=TRUE}
+ps_dfm_trim <- dfm_trim(ps_dfm, 
+                        min_termfreq = "0.001", 
+                        max_termfreq = "0.90",
+                        termfreq_type = "prop")
+
+dim(ps_dfm_trim)
+```
 
 # Hands-on tutorial {background-color="#2780e3"}
 
 Click [here](day1-tutorial.html#/sec-basic-text-analysis-techniques) to open the tutorial
+
+# Exploring text data
+
+The Quanteda `summary` function provides a general overview of a corpus object, including the number of types, tokens, and sentences. This same information can also be obtained at the group level. It is possible to compare different documents or groups of documents using measures such as lexical diversity.
+
+```{r echo=TRUE}
+head(summary(ps_corpus))
+```
+
+------------------------------------------------------------------------
+
+The `topfeatures` function calculates the frequency of words and can be applied to the entire document-feature matrix (dfm) or to specific groups.
+
+```{r echo=TRUE}
+ps_corpus_groups <- ps %>%
+  corpus(text_field = "transcript") %>%
+  corpus_group(groups = ps$president, concatenator = " ")
+head(summary(ps_corpus_groups, n=3))
+```
+
+------------------------------------------------------------------------
+
+For a more in-depth look into the content of documents, the `kwic` (Keywords in Context) function allows you to search for keywords within a specified context or window of words.
+
+```{r eval=FALSE, echo=TRUE}
+textstat_lexdiv(
+  dfm(tokens(ps_corpus_groups)), 
+    measure = "K") %>%
+  ggplot() +
+  geom_col(aes(x=fct_reorder(document, desc(K)), y=K)) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  xlab("") +
+  ylab("Yule's K")
+```
+
+```{r}
+textstat_lexdiv(
+  dfm(tokens(ps_corpus_groups)), 
+    measure = "K") %>%
+  ggplot() +
+  geom_col(aes(x=fct_reorder(document, desc(K)), y=K)) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  xlab("") +
+  ylab("Yule's K")
+```
+
+## Word frequency analysis
+
+The `topfeatures` function returns the frequency of words.
+
+```{r echo=TRUE}
+topfeatures(ps_dfm, n = 5)
+```
+
+This function can be applied to the whole `dfm` or to subgroups.
+
+```{r echo=TRUE}
+# top features by president (show the first three in the corpus)
+topfeatures(ps_dfm, groups = ps$president, n = 5)[1:2]
+```
+
+## KWIC
+
+To get a more qualitative glimpse into the documents, the `kwic` function (Keywords in Context) enables searching for keywords within a context of a few words (`window`).
+
+```{r echo=TRUE}
+kwic(ps_tokens, pattern = "America", 
+     window = 3, valuetype = "fixed")[1:2]
+```
+
+## Collocations
+
+Collocations are multi-word expressions, such as "President of the United States", that can provide valuable information and are sometimes treated as a single word in analysis.
+
+```{r echo=TRUE}
+textstat_collocations(tokens(ps_corpus, remove_punct = TRUE),
+                      size = 3,
+                      min_count = 20) %>%
+  head()
+```
+
+------------------------------------------------------------------------
+
+An analyst might want to treat them as a single word, instead of multiple words.
+
+```{r echo=TRUE}
+coll_ps <-
+  textstat_collocations(tokens(ps_corpus, remove_punct = TRUE),
+                        size = 2,
+                        min_count = 20) %>%
+  filter(z > 15 & str_detect(collocation,
+                             regex(
+                               pattern = "american",
+                               ignore_case = TRUE
+                             )))
+
+ps_tokens_comp <-
+  tokens_compound(tokens(ps_corpus, remove_punct = TRUE),
+                  pattern = list(c("american", "people"),
+                                 c("united", "states", "of", "america")),
+                  join = FALSE)
+
+```
+
+------------------------------------------------------------------------
+
+```{r}
+kwic(ps_tokens_comp,
+     pattern = c("american_*", "united_*"),
+     window = 2) %>%
+  head()
+```
+
+# Hands-on tutorial {background-color="#2780e3"}
+
+Click [here](day1-tutorial.html#/sec-exploring-text-data) to open the tutorial
 
 # Coffee break {background-color="#daffad"}
 
@@ -84,9 +792,65 @@ See you at 3:30 pm
 
 # Introduction to dictionaries in R {background-color="#2780e3"}
 
-## Automated sentiment analysis
-
 ## Automated content analysis
+
+Automated content analysis using dictionaries is a common approach. A dictionary is a set of categories, each consisting of a group of related words. This allows documents to be "measured" by counting the number of words in each category, which can refer to anything from emotions to concepts. The analysis of emotions is known as sentiment analysis.
+
+```{r}
+head(data_dictionary_LSD2015)
+LSD2015 <- data_dictionary_LSD2015
+```
+
+------------------------------------------------------------------------
+
+The `tokens_lookup` function applies a dictionary to a set of documents and returns the frequency count for each category.
+
+```{r echo=TRUE}
+ps_tokens_lsd <- tokens_lookup(ps_tokens, 
+                               dictionary = LSD2015)
+
+ps_tokens_lsd
+```
+
+------------------------------------------------------------------------
+
+```{r}
+ps_corpus_summ <- summary(
+  corpus_group(ps_corpus, 
+               groups = docvars(ps_corpus,
+                                field = "president"))
+)
+
+dfmat_gov_lsd <- dfm(ps_tokens_lsd) %>% 
+  dfm_group(groups = president) %>%
+  convert(to = "data.frame") %>%
+  left_join(ps_corpus_summ[, c("Types", "president")], 
+            by = c("doc_id" = "president")) %>%
+  mutate(neg_prop = negative/Types,
+         pos_prop = positive/Types) %>%
+  mutate(diff = pos_prop - neg_prop,
+         emot = pos_prop + neg_prop)
+```
+
+------------------------------------------------------------------------
+
+Let's plot the results with `ggplot2`:
+
+```{r}
+ggplot(dfmat_gov_lsd) +
+  geom_col(aes(x=fct_reorder(doc_id, desc(neg_prop)), 
+               y=neg_prop), fill="red") +
+    geom_line(aes(x=fct_reorder(doc_id, desc(pos_prop)), 
+               y=pos_prop, group = 1), col="red") +
+      geom_col(aes(x=fct_reorder(doc_id, desc(emot)), 
+               y=emot, group = 1), col="orange", alpha=0.3) +
+      geom_line(aes(x=fct_reorder(doc_id, desc(diff)), 
+               y=diff, group = 1), col="darkblue", linetype=2) +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  xlab("") +
+  ylab("") +
+  ggtitle("Sentiment analysis (LSD2015)")
+```
 
 # Hands-on tutorial {background-color="#2780e3"}
 

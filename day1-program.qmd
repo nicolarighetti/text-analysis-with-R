@@ -8,13 +8,11 @@ title: "Introduction to text analysis and R"
 
 -   10:30 am - 11:00 am: Coffee Break.
 
--   11:00 am - 12:00 pm: Basic concepts and principles of text analysis, with hands-on exercises.
+-   11:00 am - 12:30 pm: Basic concepts and principles of text analysis, with hands-on exercises.
 
--   12:00 pm - 1:00 pm: Lunch.
+-   12:30 pm - 1:30 pm: Lunch.
 
--   1:00 pm - 2:00 pm: Basic text analysis techniques: using Quanteda for creating and using corpus objects in R and exploring text data (word frequency analysis, collocations, and KWIC).
-
--   2:00 pm - 3:00 pm: Hands-on exercises using real-world data sets.
+-   1:30 pm - 3:00 pm: Basic text analysis techniques: using Quanteda for creating and using corpus objects in R and exploring text data (word frequency analysis, collocations, and KWIC), with hands-on exercises using real-world data sets.
 
 -   3:00 pm - 3:30 pm: Coffee Break.
 
