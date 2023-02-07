@@ -253,7 +253,7 @@ udpipe_model_en <- udpipe_load_model("english-ewt-ud-2.5-191206.udpipe")
 
 ```{r eval=FALSE}
 # load the udpipe English model
-udpipe_english_model <- udpipe_load_model(udpipe_model_en)
+udpipe_model_en <- udpipe_load_model(udpipe_model_en)
 ```
 
 ```{r}
@@ -300,7 +300,7 @@ In this tutorial, we utilize the Quanteda package to clean the data and generate
 ## Corpus
 
 ```{r}
-# first remove punctuation
+# first remove apostrophes
 inaugural_df$texts <- gsub("'", " ", inaugural_df$texts)
 
 # create the corpus

@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -90,7 +153,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="dropdown-menu" aria-labelledby="nav-menu-day-one">    
         <li>
     <a class="dropdown-item" href="./day1-program.html">
- <span class="dropdown-text">Program</span></a>
+ <span class="dropdown-text">Introduction to text analysis and R</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./day1.html">
@@ -109,7 +172,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="dropdown-menu" aria-labelledby="nav-menu-day-two">    
         <li>
     <a class="dropdown-item" href="./day2-program.html">
- <span class="dropdown-text">Program</span></a>
+ <span class="dropdown-text">Intermediate techniques in text analysis with R</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./day2.html">
@@ -128,7 +191,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="dropdown-menu" aria-labelledby="nav-menu-day-three">    
         <li>
     <a class="dropdown-item" href="./day3-program.html">
- <span class="dropdown-text">Program</span></a>
+ <span class="dropdown-text">Advanced techniques in text analysis with R</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./day3.html">
@@ -162,7 +225,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./day2-program.html" class="sidebar-item-text sidebar-link">Program</a>
+  <a href="./day2-program.html" class="sidebar-item-text sidebar-link">Intermediate techniques in text analysis with R</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -184,9 +247,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sec-introduction-to-r-for-topic-modeling" id="toc-sec-introduction-to-r-for-topic-modeling" class="nav-link active" data-scroll-target="#sec-introduction-to-r-for-topic-modeling">Introduction to R for topic modeling</a></li>
-  <li><a href="#sec-advanced-topics-in-topic-models" id="toc-sec-advanced-topics-in-topic-models" class="nav-link" data-scroll-target="#sec-advanced-topics-in-topic-models">Advanced topics in topic models</a></li>
-  <li><a href="#sec-advanced-topic-modeling-methods" id="toc-sec-advanced-topic-modeling-methods" class="nav-link" data-scroll-target="#sec-advanced-topic-modeling-methods">Advanced topic modeling methods</a></li>
+  <li><a href="#sec-introduction-to-r-for-topic-modeling" id="toc-sec-introduction-to-r-for-topic-modeling" class="nav-link active" data-scroll-target="#sec-introduction-to-r-for-topic-modeling">Topic modeling</a></li>
+  <li><a href="#sec-advanced-topic-modeling-methods" id="toc-sec-advanced-topic-modeling-methods" class="nav-link" data-scroll-target="#sec-advanced-topic-modeling-methods">Advanced topic modeling methods</a>
+  <ul class="collapse">
+  <li><a href="#identify-the-number-of-topics" id="toc-identify-the-number-of-topics" class="nav-link" data-scroll-target="#identify-the-number-of-topics">Identify the number of topics</a>
+  <ul class="collapse">
+  <li><a href="#coherence-and-exclusivity" id="toc-coherence-and-exclusivity" class="nav-link" data-scroll-target="#coherence-and-exclusivity">Coherence and exclusivity</a></li>
+  <li><a href="#held-out-likelihood-perplexity" id="toc-held-out-likelihood-perplexity" class="nav-link" data-scroll-target="#held-out-likelihood-perplexity">Held-out likelihood (perplexity)</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sec-structural-topic-models" id="toc-sec-structural-topic-models" class="nav-link" data-scroll-target="#sec-structural-topic-models">Structural Topic Models</a>
+  <ul class="collapse">
+  <li><a href="#determine-the-number-of-topics" id="toc-determine-the-number-of-topics" class="nav-link" data-scroll-target="#determine-the-number-of-topics">Determine the number of topics</a></li>
+  <li><a href="#estimate-effects" id="toc-estimate-effects" class="nav-link" data-scroll-target="#estimate-effects">Estimate effects</a></li>
+  <li><a href="#estimates" id="toc-estimates" class="nav-link" data-scroll-target="#estimates">Estimates</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
+  </ul></li>
+  <li><a href="#sec-seeded-topic-models" id="toc-sec-seeded-topic-models" class="nav-link" data-scroll-target="#sec-seeded-topic-models">Seeded Topic Models</a></li>
   <li><a href="#sec-laboratory-using-real-world-data" id="toc-sec-laboratory-using-real-world-data" class="nav-link" data-scroll-target="#sec-laboratory-using-real-world-data">Laboratory with real-world data</a></li>
   </ul>
 </nav>
@@ -212,13 +289,2715 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <section id="sec-introduction-to-r-for-topic-modeling" class="level1">
-<h1>Introduction to R for topic modeling</h1>
-</section>
-<section id="sec-advanced-topics-in-topic-models" class="level1">
-<h1>Advanced topics in topic models</h1>
+<h1>Topic modeling</h1>
+<p>Install the required packages for this tutorial.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Package names</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tidyverse"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tidytext"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"quanteda"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"textstem"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"topicmodels"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ldatuning"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"topicdoc"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"stm"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"udpipe"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"parallel"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"doParallel"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"seededlda"</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Install packages not yet installed</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>installed_packages <span class="ot">&lt;-</span> packages <span class="sc">%in%</span> <span class="fu">rownames</span>(<span class="fu">installed.packages</span>())</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">any</span>(installed_packages <span class="sc">==</span> <span class="cn">FALSE</span>)) {</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(packages[<span class="sc">!</span>installed_packages])</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+✔ ggplot2 3.4.0     ✔ purrr   1.0.1
+✔ tibble  3.1.8     ✔ dplyr   1.1.0
+✔ tidyr   1.3.0     ✔ stringr 1.5.0
+✔ readr   2.1.3     ✔ forcats 1.0.0
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Package version: 3.2.4
+Unicode version: 14.0
+ICU version: 70.1
+Parallel computing: 8 of 8 threads used.
+See https://quanteda.io for tutorials and examples.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(textstem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: koRpus.lang.en
+Loading required package: koRpus
+Loading required package: sylly
+For information on available language packages for 'koRpus', run
+
+  available.koRpus.lang()
+
+and see ?install.koRpus.lang()
+
+
+Attaching package: 'koRpus'
+
+The following objects are masked from 'package:quanteda':
+
+    tokens, types
+
+The following object is masked from 'package:readr':
+
+    tokenize</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(topicmodels)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ldatuning)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(topicdoc)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>stm v1.3.6 successfully loaded. See ?stm for help. 
+ Papers, resources, and other materials at structuraltopicmodel.com</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(udpipe)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parallel)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(doParallel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: foreach
+
+Attaching package: 'foreach'
+
+The following objects are masked from 'package:purrr':
+
+    accumulate, when
+
+Loading required package: iterators</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(seededlda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: proxyC
+
+Attaching package: 'proxyC'
+
+The following object is masked from 'package:stats':
+
+    dist
+
+
+Attaching package: 'seededlda'
+
+The following objects are masked from 'package:topicmodels':
+
+    terms, topics
+
+The following object is masked from 'package:stats':
+
+    terms</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ukimmig2010 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">text =</span> quanteda<span class="sc">::</span>data_char_ukimmig2010)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>ukimmig2010<span class="sc">$</span>party <span class="ot">&lt;-</span> <span class="fu">names</span>(quanteda<span class="sc">::</span>data_char_ukimmig2010)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>ukimmig2010 <span class="ot">&lt;-</span> ukimmig2010 <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">lemma =</span> <span class="fu">tolower</span>(text)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">lemma =</span> <span class="fu">lemmatize_strings</span>(lemma))</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>ukimmig2010_corpus <span class="ot">&lt;-</span> quanteda<span class="sc">::</span><span class="fu">corpus</span>(ukimmig2010,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">docid_field =</span> <span class="st">"party"</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">text_field =</span> <span class="st">"lemma"</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>ukimmig2010_dfm <span class="ot">&lt;-</span> ukimmig2010_corpus <span class="sc">%&gt;%</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  quanteda<span class="sc">::</span><span class="fu">tokens</span>(<span class="at">remove_punct =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">remove_symbols =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_tolower</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_remove</span>(<span class="fu">stopwords</span>(<span class="st">"en"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm_trim</span>(<span class="at">min_docfreq =</span> <span class="fl">0.5</span>, <span class="at">max_docfreq =</span> <span class="fl">0.99</span>, </span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>           <span class="at">docfreq_type =</span> <span class="st">"prop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm_subset</span>(<span class="fu">ntoken</span>(.) <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ukimmig2010_dtm <span class="ot">&lt;-</span> <span class="fu">convert</span>(ukimmig2010_dfm, <span class="at">to =</span> <span class="st">"topicmodels"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The basic function to fit a topic model is <code>LDA</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>topicModel <span class="ot">&lt;-</span> <span class="fu">LDA</span>(ukimmig2010_dtm, </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">k =</span> <span class="dv">5</span>, </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method=</span><span class="st">"Gibbs"</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>topicmodels<span class="sc">::</span><span class="fu">terms</span>(topicModel, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Topic 1   Topic 2  Topic 3      Topic 4       Topic 5  
+[1,] "control" "new"    "uk"         "people"      "asylum" 
+[2,] "year"    "border" "british"    "system"      "right"  
+[3,] "work"    "must"   "immigrant"  "citizenship" "country"
+[4,] "eu"      "can"    "national"   "end"         "much"   
+[5,] "student" "live"   "government" "refugee"     "illegal"</code></pre>
+</div>
+</div>
+<p>Considering the output of the function <code>LDA</code>, the <code>beta</code> matrix includes the information about the distribution of terms by topics.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tidy_model <span class="ot">&lt;-</span> <span class="fu">tidy</span>(topicModel)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>top_terms <span class="ot">&lt;-</span> tidy_model <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>, beta) <span class="sc">%&gt;%</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(topic, <span class="sc">-</span>beta)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>top_terms <span class="sc">%&gt;%</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">reorder_within</span>(term, beta, topic)) <span class="sc">%&gt;%</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(term, beta)) <span class="sc">+</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_reordered</span>() <span class="sc">+</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> topic, <span class="at">scales =</span> <span class="st">"free_x"</span>) <span class="sc">+</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="day2-tutorial_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Information about the distribution of topics in each documents is in the matrix <code>gamma</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>tidy_model_gamma <span class="ot">&lt;-</span> <span class="fu">tidy</span>(topicModel, <span class="at">matrix =</span> <span class="st">"gamma"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tidy_model_gamma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  document     topic gamma
+  &lt;chr&gt;        &lt;int&gt; &lt;dbl&gt;
+1 BNP              1 0.167
+2 Coalition        1 0.258
+3 Conservative     1 0.305
+4 Greens           1 0.215
+5 Labour           1 0.243
+6 LibDem           1 0.156</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>tidy_model_gamma <span class="ot">&lt;-</span> tidy_model_gamma <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">document =</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>           mgsub<span class="sc">::</span><span class="fu">mgsub</span>(<span class="at">string =</span> document,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">pattern =</span> <span class="fu">unique</span>(tidy_model_gamma<span class="sc">$</span>document),</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">replacement =</span> <span class="fu">names</span>(data_char_ukimmig2010),</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fixed =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidy_model_gamma) <span class="sc">+</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> topic, <span class="at">y =</span> gamma)) <span class="sc">+</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> document, <span class="at">nrow =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="day2-tutorial_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>You may want to assign the most prevalent topic to each document in the corpus.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">docvars</span>(ukimmig2010_corpus, <span class="st">"pred_topic"</span>) <span class="ot">&lt;-</span> topicmodels<span class="sc">::</span><span class="fu">topics</span>(topicModel)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">docvars</span>(ukimmig2010_corpus))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   9 obs. of  2 variables:
+ $ text      : chr  "IMMIGRATION: AN UNPARALLELED CRISIS WHICH ONLY THE BNP CAN SOLVE. \n\n- At current immigration and birth rates,"| __truncated__ "IMMIGRATION. \n\nThe Government believes that immigration has enriched our culture and strengthened our economy"| __truncated__ "Attract the brightest and best to our country.\n\nImmigration has enriched our nation over the years and we wan"| __truncated__ "Immigration.\n\nMigration is a fact of life.  People have always moved from one country to another, and as a pr"| __truncated__ ...
+ $ pred_topic: int  3 2 1 1 1 4 5 5 1</code></pre>
+</div>
+</div>
 </section>
 <section id="sec-advanced-topic-modeling-methods" class="level1">
 <h1>Advanced topic modeling methods</h1>
+<section id="identify-the-number-of-topics" class="level2">
+<h2 class="anchored" data-anchor-id="identify-the-number-of-topics">Identify the number of topics</h2>
+<p>There are different algorithms for estimating the optimal number of topics. The <code>ldatuning</code> package provides a function <code>FindTopicsNumber</code> that calculates different metrics to estimate the most preferable number of topics for LDA model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>tn <span class="ot">&lt;-</span> <span class="fu">FindTopicsNumber</span>(ukimmig2010_dtm, </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">topics =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">50</span>, <span class="at">by =</span> <span class="dv">5</span>),</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">metrics =</span> <span class="fu">c</span>(<span class="st">"Griffiths2004"</span>, </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"CaoJuan2009"</span>, </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Arun2010"</span>, </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Deveaud2014"</span>))</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">FindTopicsNumber_plot</span>(tn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The `&lt;scale&gt;` argument of `guides()` cannot be `FALSE`. Use "none" instead as
+of ggplot2 3.3.4.
+ℹ The deprecated feature was likely used in the ldatuning package.
+  Please report the issue at &lt;]8;;https://github.com/nikita-moor/ldatuning/issueshttps://github.com/nikita-moor/ldatuning/issues]8;;&gt;.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="day2-tutorial_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<hr>
+<p>Here, the <code>Griffiths2004</code> approach is actually based on the log-likelihood maximization and it is described in the related paper<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. It is also the default approach of <code>ldatuning</code>. The Deveaud2014 is also a common choice.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tn,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> topics, <span class="at">y =</span> Griffiths2004)) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Griffiths2004"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="day2-tutorial_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Based on this indication, we can peraphs fit a model with about 15 topics.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>topicModel15 <span class="ot">&lt;-</span> <span class="fu">LDA</span>(ukimmig2010_dtm, </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">k =</span> <span class="dv">15</span>, </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method=</span><span class="st">"Gibbs"</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>topicmodels<span class="sc">::</span><span class="fu">terms</span>(topicModel15, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Topic 1  Topic 2       Topic 3     Topic 4   Topic 5      Topic 6 
+[1,] "much"   "people"      "limit"     "seeker"  "government" "asylum"
+[2,] "uk"     "make"        "can"       "system"  "must"       "right" 
+[3,] "eu"     "country"     "eu"        "part"    "child"      "live"  
+[4,] "can"    "ensure"      "immigrant" "allow"   "national"   "high"  
+[5,] "arrive" "citizenship" "give"      "control" "immigrant"  "allow" 
+     Topic 7   Topic 8   Topic 9       Topic 10  Topic 11   Topic 12   
+[1,] "end"     "uk"      "migrant"     "system"  "country"  "british"  
+[2,] "control" "asylum"  "citizenship" "house"   "year"     "illegal"  
+[3,] "support" "control" "detention"   "work"    "national" "immigrant"
+[4,] "new"     "citizen" "non"         "uk"      "work"     "right"    
+[5,] "people"  "year"    "control"     "british" "apply"    "country"  
+     Topic 13  Topic 14  Topic 15 
+[1,] "student" "border"  "work"   
+[2,] "border"  "point"   "economy"
+[3,] "need"    "benefit" "make"   
+[4,] "police"  "new"     "future" 
+[5,] "ensure"  "take"    "people" </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>tidy_model_gamma_15 <span class="ot">&lt;-</span> <span class="fu">tidy</span>(topicModel15, <span class="at">matrix =</span> <span class="st">"gamma"</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>tidy_model_gamma_15 <span class="ot">&lt;-</span> tidy_model_gamma_15 <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">document =</span> </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>           mgsub<span class="sc">::</span><span class="fu">mgsub</span>(<span class="at">string =</span> document,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">pattern =</span> <span class="fu">unique</span>(tidy_model_gamma_15<span class="sc">$</span>document),</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">replacement =</span> <span class="fu">names</span>(data_char_ukimmig2010),</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fixed =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidy_model_gamma_15) <span class="sc">+</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> topic, <span class="at">y =</span> gamma)) <span class="sc">+</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> document, <span class="at">nrow =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="day2-tutorial_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="coherence-and-exclusivity" class="level3">
+<h3 class="anchored" data-anchor-id="coherence-and-exclusivity">Coherence and exclusivity</h3>
+<p>The package <code>topicdoc</code> provides diagnostic measures for topic models. They can be used to compare different models. Usually, models with a different number of topics are being compared.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>topicModel_diag <span class="ot">&lt;-</span> <span class="fu">topic_diagnostics</span>(topicModel, ukimmig2010_dtm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A particularly useful and commonly-used metrics are <strong>semantic coherence</strong> and <strong>exclusivity</strong>. A good topic model should have coherent topics (i.e., about a single theme and not a mixture of different themes), which also are well distinguishable from each other, without overlaps (exclusivity).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>topicModel_diag <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">topic =</span> <span class="fu">as_factor</span>(topic_num)) <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> topic_coherence, <span class="at">y =</span> topic_exclusivity, <span class="at">color =</span> topic),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="at">label =</span> <span class="st">"Semantic Coherence"</span>) <span class="sc">+</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Exclusivity"</span>) <span class="sc">+</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"A topic model with 5 topics"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="day2-tutorial_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="held-out-likelihood-perplexity" class="level3">
+<h3 class="anchored" data-anchor-id="held-out-likelihood-perplexity">Held-out likelihood (perplexity)</h3>
+<p><strong>Perplexity</strong> is a metric for the accuracy of a probability model in predicting a sample and can be used as a measure of a topic model’s ability to predict new data. <strong>The lower the perplexity, the better the model.</strong></p>
+<p>Topic models with different number of topics can be compared based on perplexity using <strong>cross-validation</strong>. This involves dividing data into subsets (usually 5), and using one subset as the validation set while using the remaining as the training set. This ensures that each data point has an equal opportunity of being part of the validation and training sets.</p>
+<p>This method is useful in evaluating the overall performance of the model on unseen data and in determining optimal values for tuning the number of topics.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>cluster <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(<span class="fu">detectCores</span>(<span class="at">logical =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="dv">1</span>) </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">registerDoParallel</span>(cluster)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">clusterEvalQ</span>(cluster, {</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">library</span>(topicmodels)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] "topicmodels" "stats"       "graphics"    "grDevices"   "utils"      
+[6] "datasets"    "methods"     "base"       
+
+[[2]]
+[1] "topicmodels" "stats"       "graphics"    "grDevices"   "utils"      
+[6] "datasets"    "methods"     "base"       
+
+[[3]]
+[1] "topicmodels" "stats"       "graphics"    "grDevices"   "utils"      
+[6] "datasets"    "methods"     "base"       
+
+[[4]]
+[1] "topicmodels" "stats"       "graphics"    "grDevices"   "utils"      
+[6] "datasets"    "methods"     "base"       
+
+[[5]]
+[1] "topicmodels" "stats"       "graphics"    "grDevices"   "utils"      
+[6] "datasets"    "methods"     "base"       
+
+[[6]]
+[1] "topicmodels" "stats"       "graphics"    "grDevices"   "utils"      
+[6] "datasets"    "methods"     "base"       
+
+[[7]]
+[1] "topicmodels" "stats"       "graphics"    "grDevices"   "utils"      
+[6] "datasets"    "methods"     "base"       </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>burnin <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>iter <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>keep <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>full_data <span class="ot">&lt;-</span> ukimmig2010_dtm</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(full_data)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>folds <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>splitfolds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>folds, n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>candidate_k <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">50</span>, <span class="dv">100</span>)</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="fu">clusterExport</span>(cluster, <span class="fu">c</span>(<span class="st">"full_data"</span>, <span class="st">"burnin"</span>, <span class="st">"iter"</span>, <span class="st">"keep"</span>, <span class="st">"splitfolds"</span>, <span class="st">"folds"</span>, <span class="st">"candidate_k"</span>))</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a><span class="co"># we parallelize by the different number of topics.  </span></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a><span class="co"># A processor is allocated a value of k, and does the cross-validation serially.  This is because it is assumed there are more candidate values of k than there are cross-validation folds, hence it will be more efficient to parallelise</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>({</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">foreach</span>(<span class="at">j =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(candidate_k), <span class="at">.combine =</span> rbind) <span class="sc">%dopar%</span>{</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>   k <span class="ot">&lt;-</span> candidate_k[j]</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>   results_1k <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> folds, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>   <span class="fu">colnames</span>(results_1k) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"k"</span>, <span class="st">"perplexity"</span>)</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>   <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>folds){</span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>      train_set <span class="ot">&lt;-</span> full_data[splitfolds <span class="sc">!=</span> i , ]</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>      valid_set <span class="ot">&lt;-</span> full_data[splitfolds <span class="sc">==</span> i, ]</span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>      fitted <span class="ot">&lt;-</span> <span class="fu">LDA</span>(train_set, <span class="at">k =</span> k, <span class="at">method =</span> <span class="st">"Gibbs"</span>,</span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>                    <span class="at">control =</span> <span class="fu">list</span>(<span class="at">burnin =</span> burnin, <span class="at">iter =</span> iter, <span class="at">keep =</span> keep) )</span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>      results_1k[i,] <span class="ot">&lt;-</span> <span class="fu">c</span>(k, <span class="fu">perplexity</span>(fitted, <span class="at">newdata =</span> valid_set))</span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>   }</span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>   <span class="fu">return</span>(results_1k)</span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   user  system elapsed 
+  0.018   0.001   3.589 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cluster)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>results_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(results)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results_df, <span class="fu">aes</span>(<span class="at">x =</span> k, <span class="at">y =</span> perplexity)) <span class="sc">+</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">ggtitle</span>(<span class="st">"5-fold cross-validation"</span>) <span class="sc">+</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Candidate number of topics"</span>, </span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Perplexity when fitting the trained model to the hold-out set"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="day2-tutorial_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="sec-structural-topic-models" class="level1">
+<h1>Structural Topic Models</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>usa_inaugural_df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">"data/usa_inaugural_df.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the udpipe English model</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>udpipe_english_model <span class="ot">&lt;-</span> <span class="fu">udpipe_load_model</span>(<span class="at">file =</span> <span class="st">"./english-ewt-ud-2.5-191206.udpipe"</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># annotate the text</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>usa_inaugural_udpipe <span class="ot">&lt;-</span> <span class="fu">udpipe_annotate</span>(udpipe_english_model, </span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">x =</span> usa_inaugural_df<span class="sc">$</span>text, </span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">tagger =</span> <span class="st">"default"</span>, </span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">parser =</span> <span class="st">"none"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">as.data.frame</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>inaug_dfm <span class="ot">&lt;-</span> usa_inaugural_df <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">corpus</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  quanteda<span class="sc">::</span><span class="fu">tokens</span>(<span class="at">remove_punct =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">remove_symbols =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_tolower</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_remove</span>(<span class="fu">stopwords</span>(<span class="st">"en"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># lemmatization</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_replace</span>(</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">pattern =</span> usa_inaugural_udpipe<span class="sc">$</span>token, </span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">replacement =</span> usa_inaugural_udpipe<span class="sc">$</span>lemma,</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">valuetype =</span> <span class="st">"fixed"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dfm</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dfm_trim</span>(<span class="at">min_docfreq =</span> <span class="fl">0.5</span>, <span class="at">max_docfreq =</span> <span class="fl">0.99</span>, </span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>           <span class="at">docfreq_type =</span> <span class="st">"prop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm_subset</span>(<span class="fu">ntoken</span>(.) <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>inaug_stm_dfm <span class="ot">&lt;-</span> <span class="fu">convert</span>(inaug_dfm, <span class="at">to =</span> <span class="st">"stm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">prepDocuments</span>(inaug_stm_dfm<span class="sc">$</span>documents, </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>                     inaug_stm_dfm<span class="sc">$</span>vocab, </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>                     inaug_stm_dfm<span class="sc">$</span>meta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="determine-the-number-of-topics" class="level2">
+<h2 class="anchored" data-anchor-id="determine-the-number-of-topics">Determine the number of topics</h2>
+<p>There is not a “right” answer to the number of topics that are appropriate for a given corpus, but the function <code>searchK</code> uses a data-driven approach to selecting the number of topics. The function will perform several automated tests to help choose the number of topics.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>k_search <span class="ot">&lt;-</span> <span class="fu">searchK</span>(out<span class="sc">$</span>documents, out<span class="sc">$</span>vocab, <span class="at">K =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>),</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">prevalence =</span> <span class="sc">~</span><span class="fu">s</span>(Year) <span class="sc">+</span> Party, </span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> out<span class="sc">$</span>meta, <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Beginning Spectral Initialization 
+     Calculating the gram matrix...
+     Finding anchor words...
+    .....
+     Recovering initialization...
+    .
+Initialization complete.
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 1 (approx. per word bound = -4.964) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 2 (approx. per word bound = -4.952, relative change = 2.346e-03) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 3 (approx. per word bound = -4.948, relative change = 8.514e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 4 (approx. per word bound = -4.945, relative change = 5.089e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 5 (approx. per word bound = -4.943, relative change = 3.822e-04) 
+Topic 1: shall, now, people, upon, government 
+ Topic 2: we, america, world, new, nation 
+ Topic 3: government, states, people, power, upon 
+ Topic 4: war, nation, every, we, united 
+ Topic 5: nation, can, man, must, world 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 6 (approx. per word bound = -4.942, relative change = 3.254e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 7 (approx. per word bound = -4.940, relative change = 2.992e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 8 (approx. per word bound = -4.939, relative change = 2.880e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 9 (approx. per word bound = -4.937, relative change = 2.819e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 10 (approx. per word bound = -4.936, relative change = 2.711e-04) 
+Topic 1: shall, upon, people, law, now 
+ Topic 2: we, america, new, world, must 
+ Topic 3: government, states, power, people, union 
+ Topic 4: war, nation, every, we, united 
+ Topic 5: nation, can, world, must, man 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 11 (approx. per word bound = -4.935, relative change = 2.523e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 12 (approx. per word bound = -4.934, relative change = 2.276e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 13 (approx. per word bound = -4.933, relative change = 2.007e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 14 (approx. per word bound = -4.932, relative change = 1.745e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 15 (approx. per word bound = -4.931, relative change = 1.505e-04) 
+Topic 1: shall, upon, law, people, government 
+ Topic 2: we, america, new, world, people 
+ Topic 3: government, power, states, people, union 
+ Topic 4: war, nation, every, we, united 
+ Topic 5: nation, world, can, peace, man 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 16 (approx. per word bound = -4.930, relative change = 1.295e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 17 (approx. per word bound = -4.930, relative change = 1.116e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 18 (approx. per word bound = -4.929, relative change = 9.683e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 19 (approx. per word bound = -4.929, relative change = 8.510e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 20 (approx. per word bound = -4.929, relative change = 7.562e-05) 
+Topic 1: upon, law, government, shall, people 
+ Topic 2: we, new, america, world, people 
+ Topic 3: government, power, states, people, union 
+ Topic 4: war, nation, every, we, united 
+ Topic 5: nation, world, can, peace, man 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 21 (approx. per word bound = -4.928, relative change = 6.827e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 22 (approx. per word bound = -4.928, relative change = 6.216e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 23 (approx. per word bound = -4.928, relative change = 5.697e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 24 (approx. per word bound = -4.927, relative change = 5.200e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 25 (approx. per word bound = -4.927, relative change = 4.795e-05) 
+Topic 1: upon, government, law, people, shall 
+ Topic 2: we, new, america, world, people 
+ Topic 3: government, power, states, people, union 
+ Topic 4: war, nation, every, we, great 
+ Topic 5: nation, world, peace, can, man 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 26 (approx. per word bound = -4.927, relative change = 4.373e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 27 (approx. per word bound = -4.927, relative change = 4.013e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 28 (approx. per word bound = -4.927, relative change = 3.656e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 29 (approx. per word bound = -4.926, relative change = 3.335e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 30 (approx. per word bound = -4.926, relative change = 3.096e-05) 
+Topic 1: government, upon, law, people, shall 
+ Topic 2: we, new, america, world, people 
+ Topic 3: government, power, states, union, people 
+ Topic 4: war, nation, every, great, we 
+ Topic 5: nation, world, peace, can, man 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 31 (approx. per word bound = -4.926, relative change = 2.824e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 32 (approx. per word bound = -4.926, relative change = 2.618e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 33 (approx. per word bound = -4.926, relative change = 2.413e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 34 (approx. per word bound = -4.926, relative change = 2.230e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 35 (approx. per word bound = -4.926, relative change = 2.046e-05) 
+Topic 1: government, upon, law, people, shall 
+ Topic 2: we, new, america, world, people 
+ Topic 3: government, power, states, union, people 
+ Topic 4: war, great, nation, every, we 
+ Topic 5: nation, world, peace, can, man 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 36 (approx. per word bound = -4.926, relative change = 1.920e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 37 (approx. per word bound = -4.926, relative change = 1.795e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 38 (approx. per word bound = -4.925, relative change = 1.655e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 39 (approx. per word bound = -4.925, relative change = 1.559e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 40 (approx. per word bound = -4.925, relative change = 1.451e-05) 
+Topic 1: government, upon, law, people, shall 
+ Topic 2: we, new, america, world, people 
+ Topic 3: government, power, states, union, people 
+ Topic 4: war, great, nation, every, we 
+ Topic 5: nation, world, peace, can, man 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 41 (approx. per word bound = -4.925, relative change = 1.387e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 42 (approx. per word bound = -4.925, relative change = 1.315e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 43 (approx. per word bound = -4.925, relative change = 1.263e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 44 (approx. per word bound = -4.925, relative change = 1.218e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 45 (approx. per word bound = -4.925, relative change = 1.154e-05) 
+Topic 1: government, upon, law, people, shall 
+ Topic 2: we, new, america, world, let 
+ Topic 3: government, power, union, states, people 
+ Topic 4: war, great, nation, every, we 
+ Topic 5: nation, world, peace, man, can 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 46 (approx. per word bound = -4.925, relative change = 1.126e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 47 (approx. per word bound = -4.925, relative change = 1.049e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Model Converged 
+Beginning Spectral Initialization 
+     Calculating the gram matrix...
+     Finding anchor words...
+    ..........
+     Recovering initialization...
+    .
+Initialization complete.
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 1 (approx. per word bound = -4.951) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 2 (approx. per word bound = -4.932, relative change = 3.699e-03) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 3 (approx. per word bound = -4.924, relative change = 1.630e-03) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 4 (approx. per word bound = -4.919, relative change = 1.019e-03) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 5 (approx. per word bound = -4.915, relative change = 7.648e-04) 
+Topic 1: shall, now, take, office, oath 
+ Topic 2: we, america, new, world, freedom 
+ Topic 3: government, union, states, power, constitution 
+ Topic 4: war, year, without, we, less 
+ Topic 5: man, thing, nation, see, life 
+ Topic 6: law, upon, can, people, may 
+ Topic 7: we, responsibility, government, people, peace 
+ Topic 8: government, country, people, great, every 
+ Topic 9: nation, country, peace, united, resource 
+ Topic 10: must, change, world, can, people 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 6 (approx. per word bound = -4.912, relative change = 6.139e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 7 (approx. per word bound = -4.910, relative change = 5.009e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 8 (approx. per word bound = -4.908, relative change = 4.106e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 9 (approx. per word bound = -4.906, relative change = 3.384e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 10 (approx. per word bound = -4.905, relative change = 2.826e-04) 
+Topic 1: shall, now, take, constitution, office 
+ Topic 2: we, america, new, world, freedom 
+ Topic 3: government, union, power, states, constitution 
+ Topic 4: war, year, we, less, force 
+ Topic 5: thing, man, nation, see, we 
+ Topic 6: law, upon, people, government, public 
+ Topic 7: we, responsibility, government, peace, world 
+ Topic 8: country, government, great, every, people 
+ Topic 9: nation, peace, country, freedom, justice 
+ Topic 10: must, change, world, can, make 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 11 (approx. per word bound = -4.904, relative change = 2.391e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 12 (approx. per word bound = -4.903, relative change = 2.054e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 13 (approx. per word bound = -4.902, relative change = 1.790e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 14 (approx. per word bound = -4.901, relative change = 1.571e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 15 (approx. per word bound = -4.900, relative change = 1.394e-04) 
+Topic 1: shall, now, constitution, take, office 
+ Topic 2: we, america, new, time, world 
+ Topic 3: union, government, power, states, constitution 
+ Topic 4: war, year, force, we, less 
+ Topic 5: thing, man, nation, we, great 
+ Topic 6: law, upon, people, government, public 
+ Topic 7: we, responsibility, government, peace, world 
+ Topic 8: country, government, every, great, people 
+ Topic 9: nation, peace, country, freedom, can 
+ Topic 10: must, change, can, world, make 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 16 (approx. per word bound = -4.900, relative change = 1.253e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 17 (approx. per word bound = -4.899, relative change = 1.135e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 18 (approx. per word bound = -4.899, relative change = 1.030e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 19 (approx. per word bound = -4.898, relative change = 9.369e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 20 (approx. per word bound = -4.898, relative change = 8.672e-05) 
+Topic 1: shall, now, constitution, take, office 
+ Topic 2: we, america, new, time, together 
+ Topic 3: union, government, power, states, constitution 
+ Topic 4: war, year, force, we, less 
+ Topic 5: thing, man, nation, we, great 
+ Topic 6: upon, law, people, government, public 
+ Topic 7: we, responsibility, government, peace, world 
+ Topic 8: country, every, government, great, united 
+ Topic 9: nation, peace, freedom, country, free 
+ Topic 10: must, change, can, world, make 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 21 (approx. per word bound = -4.897, relative change = 8.025e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 22 (approx. per word bound = -4.897, relative change = 7.511e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 23 (approx. per word bound = -4.897, relative change = 7.008e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 24 (approx. per word bound = -4.896, relative change = 6.584e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 25 (approx. per word bound = -4.896, relative change = 6.256e-05) 
+Topic 1: shall, now, take, constitution, office 
+ Topic 2: we, america, time, new, people 
+ Topic 3: union, government, power, states, constitution 
+ Topic 4: war, force, year, make, may 
+ Topic 5: thing, man, nation, we, great 
+ Topic 6: upon, law, people, government, public 
+ Topic 7: we, responsibility, peace, government, world 
+ Topic 8: country, every, government, great, united 
+ Topic 9: nation, peace, freedom, world, country 
+ Topic 10: must, can, change, make, world 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 26 (approx. per word bound = -4.896, relative change = 5.902e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 27 (approx. per word bound = -4.896, relative change = 5.616e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 28 (approx. per word bound = -4.895, relative change = 5.367e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 29 (approx. per word bound = -4.895, relative change = 5.109e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 30 (approx. per word bound = -4.895, relative change = 4.892e-05) 
+Topic 1: shall, now, take, constitution, office 
+ Topic 2: we, america, time, new, people 
+ Topic 3: union, government, power, states, constitution 
+ Topic 4: war, force, year, make, great 
+ Topic 5: thing, man, nation, we, great 
+ Topic 6: upon, law, people, government, public 
+ Topic 7: we, responsibility, peace, government, world 
+ Topic 8: country, every, government, great, united 
+ Topic 9: nation, peace, freedom, world, free 
+ Topic 10: must, can, change, make, world 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 31 (approx. per word bound = -4.895, relative change = 4.665e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 32 (approx. per word bound = -4.894, relative change = 4.506e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 33 (approx. per word bound = -4.894, relative change = 4.330e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 34 (approx. per word bound = -4.894, relative change = 4.133e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 35 (approx. per word bound = -4.894, relative change = 3.994e-05) 
+Topic 1: shall, now, take, constitution, may 
+ Topic 2: we, america, time, new, people 
+ Topic 3: union, power, government, states, constitution 
+ Topic 4: war, force, great, make, year 
+ Topic 5: thing, man, nation, we, great 
+ Topic 6: upon, law, people, government, public 
+ Topic 7: we, responsibility, peace, world, government 
+ Topic 8: country, every, government, great, united 
+ Topic 9: nation, peace, freedom, world, free 
+ Topic 10: must, can, change, make, one 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 36 (approx. per word bound = -4.894, relative change = 3.844e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 37 (approx. per word bound = -4.893, relative change = 3.682e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 38 (approx. per word bound = -4.893, relative change = 3.559e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 39 (approx. per word bound = -4.893, relative change = 3.360e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 40 (approx. per word bound = -4.893, relative change = 3.230e-05) 
+Topic 1: shall, now, take, may, office 
+ Topic 2: we, america, time, new, people 
+ Topic 3: union, power, government, states, constitution 
+ Topic 4: war, great, make, force, peace 
+ Topic 5: thing, man, nation, we, great 
+ Topic 6: upon, law, people, government, public 
+ Topic 7: we, responsibility, world, peace, government 
+ Topic 8: country, every, government, great, united 
+ Topic 9: nation, freedom, peace, world, free 
+ Topic 10: must, can, change, make, one 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 41 (approx. per word bound = -4.893, relative change = 3.051e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 42 (approx. per word bound = -4.893, relative change = 2.926e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 43 (approx. per word bound = -4.892, relative change = 2.772e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 44 (approx. per word bound = -4.892, relative change = 2.665e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 45 (approx. per word bound = -4.892, relative change = 2.473e-05) 
+Topic 1: shall, now, take, may, office 
+ Topic 2: we, america, time, new, people 
+ Topic 3: union, power, government, states, constitution 
+ Topic 4: war, great, make, force, peace 
+ Topic 5: thing, man, nation, we, great 
+ Topic 6: law, upon, people, government, public 
+ Topic 7: we, responsibility, world, peace, government 
+ Topic 8: country, every, government, united, public 
+ Topic 9: nation, freedom, peace, world, free 
+ Topic 10: must, can, change, make, one 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 46 (approx. per word bound = -4.892, relative change = 2.380e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 47 (approx. per word bound = -4.892, relative change = 2.275e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 48 (approx. per word bound = -4.892, relative change = 2.163e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 49 (approx. per word bound = -4.892, relative change = 2.075e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 50 (approx. per word bound = -4.892, relative change = 1.948e-05) 
+Topic 1: shall, now, may, take, office 
+ Topic 2: we, america, time, new, people 
+ Topic 3: union, power, government, states, constitution 
+ Topic 4: war, great, make, force, peace 
+ Topic 5: thing, man, nation, we, great 
+ Topic 6: law, upon, people, government, public 
+ Topic 7: we, responsibility, world, peace, government 
+ Topic 8: country, every, government, public, united 
+ Topic 9: nation, freedom, peace, world, free 
+ Topic 10: must, can, change, make, one 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 51 (approx. per word bound = -4.892, relative change = 1.853e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 52 (approx. per word bound = -4.891, relative change = 1.821e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 53 (approx. per word bound = -4.891, relative change = 1.700e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 54 (approx. per word bound = -4.891, relative change = 1.658e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 55 (approx. per word bound = -4.891, relative change = 1.588e-05) 
+Topic 1: shall, now, may, upon, office 
+ Topic 2: we, america, time, new, people 
+ Topic 3: union, power, government, states, constitution 
+ Topic 4: war, great, make, force, peace 
+ Topic 5: thing, man, nation, we, great 
+ Topic 6: law, upon, people, government, public 
+ Topic 7: we, responsibility, world, peace, government 
+ Topic 8: country, every, government, public, united 
+ Topic 9: nation, freedom, peace, world, free 
+ Topic 10: must, can, change, make, one 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 56 (approx. per word bound = -4.891, relative change = 1.518e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 57 (approx. per word bound = -4.891, relative change = 1.470e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 58 (approx. per word bound = -4.891, relative change = 1.444e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 59 (approx. per word bound = -4.891, relative change = 1.383e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 60 (approx. per word bound = -4.891, relative change = 1.349e-05) 
+Topic 1: shall, now, upon, may, can 
+ Topic 2: we, america, time, new, people 
+ Topic 3: union, power, government, states, constitution 
+ Topic 4: war, great, make, force, peace 
+ Topic 5: thing, man, nation, we, great 
+ Topic 6: law, upon, people, government, public 
+ Topic 7: we, world, responsibility, peace, government 
+ Topic 8: country, every, government, public, citizen 
+ Topic 9: nation, freedom, peace, world, free 
+ Topic 10: must, can, change, make, one 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 61 (approx. per word bound = -4.891, relative change = 1.291e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 62 (approx. per word bound = -4.891, relative change = 1.234e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 63 (approx. per word bound = -4.891, relative change = 1.236e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 64 (approx. per word bound = -4.891, relative change = 1.219e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 65 (approx. per word bound = -4.891, relative change = 1.166e-05) 
+Topic 1: shall, now, upon, may, can 
+ Topic 2: we, america, new, time, people 
+ Topic 3: union, power, government, states, constitution 
+ Topic 4: war, great, make, force, peace 
+ Topic 5: thing, man, nation, we, life 
+ Topic 6: law, upon, people, government, public 
+ Topic 7: we, world, responsibility, peace, government 
+ Topic 8: country, every, government, public, citizen 
+ Topic 9: nation, freedom, peace, world, free 
+ Topic 10: must, can, change, make, one 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 66 (approx. per word bound = -4.891, relative change = 1.157e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 67 (approx. per word bound = -4.890, relative change = 1.142e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 68 (approx. per word bound = -4.890, relative change = 1.114e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 69 (approx. per word bound = -4.890, relative change = 1.138e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 70 (approx. per word bound = -4.890, relative change = 1.087e-05) 
+Topic 1: shall, now, upon, may, can 
+ Topic 2: we, america, new, people, time 
+ Topic 3: union, power, government, states, constitution 
+ Topic 4: war, great, make, force, peace 
+ Topic 5: thing, man, nation, we, life 
+ Topic 6: law, people, government, upon, public 
+ Topic 7: world, we, responsibility, peace, government 
+ Topic 8: country, every, government, public, citizen 
+ Topic 9: nation, freedom, peace, world, free 
+ Topic 10: must, can, change, make, one 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 71 (approx. per word bound = -4.890, relative change = 1.104e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 72 (approx. per word bound = -4.890, relative change = 1.066e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Model Converged 
+Beginning Spectral Initialization 
+     Calculating the gram matrix...
+     Finding anchor words...
+    ...............
+     Recovering initialization...
+    .
+Initialization complete.
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 1 (approx. per word bound = -4.941) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 2 (approx. per word bound = -4.917, relative change = 4.932e-03) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 3 (approx. per word bound = -4.905, relative change = 2.428e-03) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 4 (approx. per word bound = -4.898, relative change = 1.481e-03) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 5 (approx. per word bound = -4.892, relative change = 1.029e-03) 
+Topic 1: shall, chief, constitution, administration, subject 
+ Topic 2: america, we, new, together, world 
+ Topic 3: union, government, states, constitution, upon 
+ Topic 4: war, year, every, part, without 
+ Topic 5: thing, man, great, see, life 
+ Topic 6: law, upon, people, can, may 
+ Topic 7: we, responsibility, people, government, peace 
+ Topic 8: country, government, great, people, protect 
+ Topic 9: nation, country, resource, peace, justice 
+ Topic 10: must, change, world, make, people 
+ Topic 11: oath, now, take, shall, require 
+ Topic 12: freedom, world, nation, free, know 
+ Topic 13: we, let, ask, can, nation 
+ Topic 14: power, citizen, government, duty, public 
+ Topic 15: sense, people, government, find, united 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 6 (approx. per word bound = -4.889, relative change = 7.688e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 7 (approx. per word bound = -4.886, relative change = 5.993e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 8 (approx. per word bound = -4.883, relative change = 4.791e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 9 (approx. per word bound = -4.882, relative change = 3.933e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 10 (approx. per word bound = -4.880, relative change = 3.262e-04) 
+Topic 1: shall, administration, subject, chief, upon 
+ Topic 2: we, america, new, together, nation 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, year, less, force, part 
+ Topic 5: thing, man, great, nation, see 
+ Topic 6: law, upon, people, can, may 
+ Topic 7: we, responsibility, government, peace, world 
+ Topic 8: country, great, government, states, people 
+ Topic 9: nation, country, peace, resource, can 
+ Topic 10: must, change, world, make, can 
+ Topic 11: now, oath, take, require, people 
+ Topic 12: freedom, world, nation, free, know 
+ Topic 13: we, let, ask, can, nation 
+ Topic 14: power, citizen, may, every, principle 
+ Topic 15: people, government, sense, find, states 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 11 (approx. per word bound = -4.879, relative change = 2.737e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 12 (approx. per word bound = -4.877, relative change = 2.335e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 13 (approx. per word bound = -4.876, relative change = 1.985e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 14 (approx. per word bound = -4.876, relative change = 1.728e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 15 (approx. per word bound = -4.875, relative change = 1.502e-04) 
+Topic 1: shall, administration, subject, upon, chief 
+ Topic 2: we, america, new, together, people 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, force, year, less, may 
+ Topic 5: thing, man, great, nation, life 
+ Topic 6: law, upon, people, may, can 
+ Topic 7: we, responsibility, world, peace, government 
+ Topic 8: country, great, government, states, united 
+ Topic 9: nation, country, peace, resource, can 
+ Topic 10: must, change, can, world, make 
+ Topic 11: now, oath, take, people, require 
+ Topic 12: freedom, world, nation, free, know 
+ Topic 13: we, let, ask, can, man 
+ Topic 14: power, citizen, may, every, principle 
+ Topic 15: people, government, sense, states, spirit 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 16 (approx. per word bound = -4.874, relative change = 1.322e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 17 (approx. per word bound = -4.874, relative change = 1.194e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 18 (approx. per word bound = -4.873, relative change = 1.045e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 19 (approx. per word bound = -4.873, relative change = 9.702e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 20 (approx. per word bound = -4.872, relative change = 8.994e-05) 
+Topic 1: shall, upon, chief, subject, administration 
+ Topic 2: we, america, new, together, people 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, force, year, may, less 
+ Topic 5: thing, man, great, nation, life 
+ Topic 6: law, upon, people, may, can 
+ Topic 7: we, responsibility, world, peace, government 
+ Topic 8: country, great, government, states, united 
+ Topic 9: nation, country, peace, resource, can 
+ Topic 10: must, change, can, make, world 
+ Topic 11: now, oath, take, people, require 
+ Topic 12: freedom, world, nation, free, know 
+ Topic 13: we, let, ask, man, can 
+ Topic 14: power, citizen, may, every, principle 
+ Topic 15: people, government, sense, states, spirit 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 21 (approx. per word bound = -4.872, relative change = 8.328e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 22 (approx. per word bound = -4.871, relative change = 7.691e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 23 (approx. per word bound = -4.871, relative change = 7.270e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 24 (approx. per word bound = -4.871, relative change = 6.877e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 25 (approx. per word bound = -4.870, relative change = 6.450e-05) 
+Topic 1: shall, chief, upon, office, subject 
+ Topic 2: we, america, new, together, people 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, force, may, year, purpose 
+ Topic 5: thing, man, great, nation, life 
+ Topic 6: law, upon, people, may, public 
+ Topic 7: we, responsibility, world, peace, government 
+ Topic 8: country, great, government, states, united 
+ Topic 9: nation, country, peace, can, resource 
+ Topic 10: must, change, make, can, world 
+ Topic 11: now, oath, can, people, take 
+ Topic 12: freedom, world, nation, free, know 
+ Topic 13: we, let, ask, man, nation 
+ Topic 14: power, citizen, may, principle, every 
+ Topic 15: people, government, sense, states, spirit 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 26 (approx. per word bound = -4.870, relative change = 6.079e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 27 (approx. per word bound = -4.870, relative change = 5.735e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 28 (approx. per word bound = -4.870, relative change = 5.400e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 29 (approx. per word bound = -4.869, relative change = 4.997e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 30 (approx. per word bound = -4.869, relative change = 4.627e-05) 
+Topic 1: shall, chief, upon, office, may 
+ Topic 2: we, america, new, together, people 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, force, may, year, make 
+ Topic 5: thing, man, great, nation, life 
+ Topic 6: law, upon, people, may, public 
+ Topic 7: responsibility, we, world, peace, government 
+ Topic 8: country, great, government, states, united 
+ Topic 9: nation, country, peace, can, resource 
+ Topic 10: must, change, make, can, world 
+ Topic 11: now, oath, can, people, question 
+ Topic 12: freedom, world, nation, free, know 
+ Topic 13: we, let, ask, man, nation 
+ Topic 14: power, citizen, principle, may, every 
+ Topic 15: people, government, sense, states, spirit 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 31 (approx. per word bound = -4.869, relative change = 4.234e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 32 (approx. per word bound = -4.869, relative change = 3.971e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 33 (approx. per word bound = -4.869, relative change = 3.604e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 34 (approx. per word bound = -4.868, relative change = 3.322e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 35 (approx. per word bound = -4.868, relative change = 3.030e-05) 
+Topic 1: shall, upon, chief, office, may 
+ Topic 2: we, america, new, together, people 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, force, may, make, year 
+ Topic 5: thing, man, great, nation, life 
+ Topic 6: law, upon, people, public, may 
+ Topic 7: responsibility, we, world, peace, government 
+ Topic 8: country, great, government, states, united 
+ Topic 9: nation, country, can, peace, resource 
+ Topic 10: must, change, make, can, world 
+ Topic 11: now, can, oath, people, question 
+ Topic 12: freedom, world, nation, free, know 
+ Topic 13: we, let, ask, man, nation 
+ Topic 14: power, citizen, principle, every, may 
+ Topic 15: people, government, sense, states, spirit 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 36 (approx. per word bound = -4.868, relative change = 2.780e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 37 (approx. per word bound = -4.868, relative change = 2.576e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 38 (approx. per word bound = -4.868, relative change = 2.359e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 39 (approx. per word bound = -4.868, relative change = 2.159e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 40 (approx. per word bound = -4.868, relative change = 2.053e-05) 
+Topic 1: shall, upon, may, chief, office 
+ Topic 2: we, america, new, people, together 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, force, make, may, year 
+ Topic 5: thing, man, great, nation, life 
+ Topic 6: law, upon, people, public, government 
+ Topic 7: responsibility, we, world, peace, government 
+ Topic 8: country, great, government, states, united 
+ Topic 9: nation, country, can, peace, resource 
+ Topic 10: must, change, make, can, world 
+ Topic 11: now, can, oath, one, people 
+ Topic 12: freedom, world, nation, free, know 
+ Topic 13: we, let, ask, man, nation 
+ Topic 14: power, citizen, principle, every, may 
+ Topic 15: people, government, sense, spirit, states 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 41 (approx. per word bound = -4.868, relative change = 1.859e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 42 (approx. per word bound = -4.868, relative change = 1.745e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 43 (approx. per word bound = -4.867, relative change = 1.626e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 44 (approx. per word bound = -4.867, relative change = 1.544e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 45 (approx. per word bound = -4.867, relative change = 1.496e-05) 
+Topic 1: shall, upon, may, office, chief 
+ Topic 2: we, america, new, people, together 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, force, make, may, year 
+ Topic 5: thing, man, great, nation, life 
+ Topic 6: upon, law, people, public, government 
+ Topic 7: responsibility, we, world, peace, government 
+ Topic 8: country, great, government, states, united 
+ Topic 9: nation, can, country, peace, resource 
+ Topic 10: must, change, make, can, world 
+ Topic 11: now, can, oath, one, question 
+ Topic 12: freedom, world, nation, free, know 
+ Topic 13: we, let, ask, man, nation 
+ Topic 14: power, citizen, every, principle, may 
+ Topic 15: people, government, sense, spirit, states 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 46 (approx. per word bound = -4.867, relative change = 1.324e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 47 (approx. per word bound = -4.867, relative change = 1.200e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 48 (approx. per word bound = -4.867, relative change = 1.219e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 49 (approx. per word bound = -4.867, relative change = 1.077e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Model Converged 
+Beginning Spectral Initialization 
+     Calculating the gram matrix...
+     Finding anchor words...
+    ....................
+     Recovering initialization...
+    .
+Initialization complete.
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 1 (approx. per word bound = -4.939) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 2 (approx. per word bound = -4.909, relative change = 6.111e-03) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 3 (approx. per word bound = -4.894, relative change = 3.001e-03) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 4 (approx. per word bound = -4.885, relative change = 1.857e-03) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 5 (approx. per word bound = -4.879, relative change = 1.296e-03) 
+Topic 1: shall, chief, constitution, president, subject 
+ Topic 2: america, new, we, together, world 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, year, every, without, just 
+ Topic 5: thing, man, see, life, nation 
+ Topic 6: people, rule, may, can, law 
+ Topic 7: responsibility, we, peace, world, home 
+ Topic 8: country, protect, people, every, government 
+ Topic 9: nation, country, resource, justice, peace 
+ Topic 10: must, change, world, new, old 
+ Topic 11: oath, now, shall, take, office 
+ Topic 12: freedom, world, nation, know, free 
+ Topic 13: we, let, ask, nation, can 
+ Topic 14: public, power, duty, citizen, every 
+ Topic 15: sense, people, find, government, united 
+ Topic 16: upon, law, question, government, country 
+ Topic 17: shall, law, can, provide, may 
+ Topic 18: power, government, since, great, united 
+ Topic 19: much, one, can, people, great 
+ Topic 20: people, government, we, must, economy 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 6 (approx. per word bound = -4.874, relative change = 9.809e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 7 (approx. per word bound = -4.870, relative change = 7.775e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 8 (approx. per word bound = -4.867, relative change = 6.324e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 9 (approx. per word bound = -4.864, relative change = 5.200e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 10 (approx. per word bound = -4.862, relative change = 4.308e-04) 
+Topic 1: shall, chief, constitution, president, country 
+ Topic 2: america, new, we, together, world 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, less, year, every, just 
+ Topic 5: thing, man, life, see, nation 
+ Topic 6: people, rule, may, law, upon 
+ Topic 7: responsibility, we, peace, world, home 
+ Topic 8: country, protect, every, people, one 
+ Topic 9: nation, country, resource, peace, can 
+ Topic 10: must, change, world, old, new 
+ Topic 11: now, oath, take, shall, office 
+ Topic 12: freedom, world, nation, know, free 
+ Topic 13: we, ask, let, can, man 
+ Topic 14: power, public, duty, citizen, character 
+ Topic 15: people, government, sense, find, spirit 
+ Topic 16: upon, law, question, government, country 
+ Topic 17: shall, law, make, can, provide 
+ Topic 18: great, power, united, since, states 
+ Topic 19: much, can, one, people, great 
+ Topic 20: we, people, must, government, economy 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 11 (approx. per word bound = -4.860, relative change = 3.566e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 12 (approx. per word bound = -4.859, relative change = 2.963e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 13 (approx. per word bound = -4.858, relative change = 2.484e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 14 (approx. per word bound = -4.857, relative change = 2.098e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 15 (approx. per word bound = -4.856, relative change = 1.767e-04) 
+Topic 1: shall, chief, constitution, country, president 
+ Topic 2: america, new, we, together, world 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, less, every, year, give 
+ Topic 5: thing, man, nation, life, great 
+ Topic 6: people, rule, may, free, upon 
+ Topic 7: responsibility, we, peace, world, home 
+ Topic 8: country, every, protect, people, one 
+ Topic 9: nation, country, resource, can, peace 
+ Topic 10: change, must, old, world, new 
+ Topic 11: now, oath, take, shall, office 
+ Topic 12: freedom, world, nation, know, free 
+ Topic 13: we, ask, let, can, man 
+ Topic 14: power, public, duty, citizen, character 
+ Topic 15: people, government, sense, spirit, find 
+ Topic 16: upon, question, law, government, public 
+ Topic 17: law, shall, make, may, provide 
+ Topic 18: great, united, since, power, states 
+ Topic 19: can, much, one, people, great 
+ Topic 20: we, must, people, government, economy 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 16 (approx. per word bound = -4.855, relative change = 1.504e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 17 (approx. per word bound = -4.855, relative change = 1.283e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 18 (approx. per word bound = -4.854, relative change = 1.090e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 19 (approx. per word bound = -4.854, relative change = 9.356e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 20 (approx. per word bound = -4.853, relative change = 8.160e-05) 
+Topic 1: shall, chief, may, constitution, country 
+ Topic 2: america, we, new, together, world 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, less, every, give, year 
+ Topic 5: thing, man, nation, life, great 
+ Topic 6: rule, people, may, free, upon 
+ Topic 7: responsibility, world, peace, we, home 
+ Topic 8: country, every, protect, one, people 
+ Topic 9: nation, country, resource, can, peace 
+ Topic 10: change, must, old, world, new 
+ Topic 11: now, oath, take, people, office 
+ Topic 12: freedom, world, nation, know, must 
+ Topic 13: we, ask, let, man, can 
+ Topic 14: power, public, duty, citizen, character 
+ Topic 15: people, government, sense, spirit, find 
+ Topic 16: upon, question, law, government, public 
+ Topic 17: law, shall, make, may, government 
+ Topic 18: great, since, united, states, power 
+ Topic 19: can, much, one, people, right 
+ Topic 20: we, must, people, government, economy 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 21 (approx. per word bound = -4.853, relative change = 6.842e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 22 (approx. per word bound = -4.853, relative change = 6.054e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 23 (approx. per word bound = -4.852, relative change = 5.349e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 24 (approx. per word bound = -4.852, relative change = 4.630e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 25 (approx. per word bound = -4.852, relative change = 4.200e-05) 
+Topic 1: shall, chief, may, country, constitution 
+ Topic 2: america, we, new, together, world 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, less, give, every, nation 
+ Topic 5: thing, man, nation, life, great 
+ Topic 6: rule, people, may, free, upon 
+ Topic 7: responsibility, world, peace, we, home 
+ Topic 8: country, every, protect, one, people 
+ Topic 9: nation, country, resource, peace, can 
+ Topic 10: change, must, old, world, new 
+ Topic 11: now, oath, take, people, office 
+ Topic 12: freedom, world, nation, must, know 
+ Topic 13: we, ask, let, man, can 
+ Topic 14: power, public, duty, character, citizen 
+ Topic 15: people, government, sense, spirit, find 
+ Topic 16: upon, question, law, government, country 
+ Topic 17: law, shall, make, may, government 
+ Topic 18: great, since, united, states, power 
+ Topic 19: can, much, one, people, right 
+ Topic 20: we, must, people, government, economy 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 26 (approx. per word bound = -4.852, relative change = 3.823e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 27 (approx. per word bound = -4.852, relative change = 3.372e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 28 (approx. per word bound = -4.851, relative change = 3.084e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 29 (approx. per word bound = -4.851, relative change = 2.797e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 30 (approx. per word bound = -4.851, relative change = 2.635e-05) 
+Topic 1: shall, chief, may, country, measure 
+ Topic 2: america, we, new, together, world 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, less, give, shall, nation 
+ Topic 5: thing, man, nation, life, great 
+ Topic 6: rule, people, free, may, upon 
+ Topic 7: responsibility, world, peace, we, home 
+ Topic 8: country, every, protect, one, people 
+ Topic 9: nation, country, peace, resource, can 
+ Topic 10: change, must, old, world, man 
+ Topic 11: now, oath, take, people, office 
+ Topic 12: freedom, world, nation, must, live 
+ Topic 13: ask, we, let, man, can 
+ Topic 14: power, public, character, duty, citizen 
+ Topic 15: people, government, sense, spirit, find 
+ Topic 16: upon, question, government, country, law 
+ Topic 17: law, shall, make, government, may 
+ Topic 18: great, since, united, states, power 
+ Topic 19: can, much, one, people, make 
+ Topic 20: we, must, people, government, economy 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 31 (approx. per word bound = -4.851, relative change = 2.304e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 32 (approx. per word bound = -4.851, relative change = 2.241e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 33 (approx. per word bound = -4.851, relative change = 2.080e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 34 (approx. per word bound = -4.851, relative change = 1.974e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 35 (approx. per word bound = -4.851, relative change = 1.778e-05) 
+Topic 1: shall, chief, may, measure, present 
+ Topic 2: america, we, new, together, world 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, shall, less, give, nation 
+ Topic 5: thing, man, nation, life, great 
+ Topic 6: rule, free, people, may, upon 
+ Topic 7: responsibility, world, peace, we, must 
+ Topic 8: country, every, protect, one, people 
+ Topic 9: nation, country, peace, resource, can 
+ Topic 10: change, must, old, man, way 
+ Topic 11: now, oath, take, people, office 
+ Topic 12: freedom, world, nation, must, live 
+ Topic 13: ask, we, let, man, peace 
+ Topic 14: power, public, character, duty, citizen 
+ Topic 15: people, government, sense, spirit, states 
+ Topic 16: upon, question, country, government, public 
+ Topic 17: law, shall, make, government, may 
+ Topic 18: great, since, united, states, power 
+ Topic 19: can, much, one, people, make 
+ Topic 20: we, must, people, government, economy 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 36 (approx. per word bound = -4.851, relative change = 1.777e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 37 (approx. per word bound = -4.850, relative change = 1.723e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 38 (approx. per word bound = -4.850, relative change = 1.674e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 39 (approx. per word bound = -4.850, relative change = 1.522e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 40 (approx. per word bound = -4.850, relative change = 1.490e-05) 
+Topic 1: shall, chief, may, measure, present 
+ Topic 2: america, we, new, together, world 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, shall, give, nation, year 
+ Topic 5: thing, man, nation, life, great 
+ Topic 6: rule, free, people, may, upon 
+ Topic 7: responsibility, world, peace, we, must 
+ Topic 8: country, every, protect, one, people 
+ Topic 9: nation, country, peace, resource, can 
+ Topic 10: change, must, old, man, nation 
+ Topic 11: now, oath, take, people, office 
+ Topic 12: freedom, world, nation, must, live 
+ Topic 13: ask, we, let, peace, man 
+ Topic 14: power, public, character, duty, citizen 
+ Topic 15: people, government, sense, upon, public 
+ Topic 16: upon, question, country, government, public 
+ Topic 17: law, shall, make, government, may 
+ Topic 18: great, since, united, states, power 
+ Topic 19: can, much, one, people, make 
+ Topic 20: we, must, people, government, economy 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 41 (approx. per word bound = -4.850, relative change = 1.509e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 42 (approx. per word bound = -4.850, relative change = 1.505e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 43 (approx. per word bound = -4.850, relative change = 1.375e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 44 (approx. per word bound = -4.850, relative change = 1.370e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 45 (approx. per word bound = -4.850, relative change = 1.462e-05) 
+Topic 1: shall, chief, may, measure, present 
+ Topic 2: america, we, new, together, world 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, shall, year, nation, give 
+ Topic 5: thing, man, nation, life, great 
+ Topic 6: rule, free, people, may, peace 
+ Topic 7: responsibility, world, peace, we, must 
+ Topic 8: country, every, protect, one, citizen 
+ Topic 9: nation, country, peace, resource, can 
+ Topic 10: change, must, old, man, nation 
+ Topic 11: now, oath, people, take, office 
+ Topic 12: freedom, world, nation, must, live 
+ Topic 13: ask, we, let, peace, man 
+ Topic 14: power, public, character, duty, citizen 
+ Topic 15: people, government, sense, upon, public 
+ Topic 16: upon, question, country, government, public 
+ Topic 17: law, shall, make, government, may 
+ Topic 18: great, since, united, states, power 
+ Topic 19: can, much, one, people, make 
+ Topic 20: we, must, people, government, economy 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 46 (approx. per word bound = -4.850, relative change = 1.445e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 47 (approx. per word bound = -4.850, relative change = 1.441e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 48 (approx. per word bound = -4.850, relative change = 1.392e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 49 (approx. per word bound = -4.850, relative change = 1.300e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 50 (approx. per word bound = -4.850, relative change = 1.428e-05) 
+Topic 1: shall, chief, may, measure, day 
+ Topic 2: america, we, new, together, world 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, shall, year, nation, give 
+ Topic 5: thing, man, nation, life, great 
+ Topic 6: rule, free, people, may, peace 
+ Topic 7: responsibility, world, peace, must, we 
+ Topic 8: country, every, protect, one, citizen 
+ Topic 9: nation, country, peace, resource, can 
+ Topic 10: change, must, old, man, nation 
+ Topic 11: now, oath, people, take, office 
+ Topic 12: freedom, world, nation, must, live 
+ Topic 13: ask, we, let, peace, man 
+ Topic 14: power, public, character, duty, principle 
+ Topic 15: people, government, sense, upon, public 
+ Topic 16: upon, question, country, government, public 
+ Topic 17: law, shall, make, government, may 
+ Topic 18: great, since, united, states, power 
+ Topic 19: can, much, one, people, make 
+ Topic 20: we, must, people, economy, government 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 51 (approx. per word bound = -4.850, relative change = 1.273e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 52 (approx. per word bound = -4.849, relative change = 1.213e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 53 (approx. per word bound = -4.849, relative change = 1.287e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 54 (approx. per word bound = -4.849, relative change = 1.346e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 55 (approx. per word bound = -4.849, relative change = 1.145e-05) 
+Topic 1: shall, chief, may, measure, day 
+ Topic 2: america, new, we, together, world 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, shall, year, nation, give 
+ Topic 5: thing, man, nation, life, great 
+ Topic 6: rule, free, may, people, peace 
+ Topic 7: responsibility, world, peace, must, we 
+ Topic 8: country, every, protect, one, citizen 
+ Topic 9: nation, country, peace, resource, can 
+ Topic 10: change, must, old, man, nation 
+ Topic 11: now, oath, people, take, united 
+ Topic 12: freedom, world, nation, must, live 
+ Topic 13: ask, we, let, peace, man 
+ Topic 14: power, public, character, principle, duty 
+ Topic 15: people, government, upon, sense, public 
+ Topic 16: upon, question, country, government, public 
+ Topic 17: law, shall, make, government, may 
+ Topic 18: great, since, united, states, power 
+ Topic 19: can, much, one, people, make 
+ Topic 20: we, must, economy, people, government 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 56 (approx. per word bound = -4.849, relative change = 1.181e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 57 (approx. per word bound = -4.849, relative change = 1.215e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 58 (approx. per word bound = -4.849, relative change = 1.130e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 59 (approx. per word bound = -4.849, relative change = 1.180e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 60 (approx. per word bound = -4.849, relative change = 1.123e-05) 
+Topic 1: shall, chief, may, measure, day 
+ Topic 2: america, new, we, together, world 
+ Topic 3: union, government, states, constitution, power 
+ Topic 4: war, shall, year, nation, give 
+ Topic 5: thing, man, nation, life, great 
+ Topic 6: rule, free, may, peace, people 
+ Topic 7: responsibility, world, peace, must, we 
+ Topic 8: country, every, protect, one, citizen 
+ Topic 9: nation, country, peace, resource, can 
+ Topic 10: change, must, man, old, nation 
+ Topic 11: now, oath, people, take, united 
+ Topic 12: freedom, world, nation, live, must 
+ Topic 13: ask, we, let, peace, man 
+ Topic 14: power, public, character, principle, may 
+ Topic 15: people, government, upon, sense, public 
+ Topic 16: upon, question, country, public, government 
+ Topic 17: law, shall, make, government, may 
+ Topic 18: great, since, united, states, power 
+ Topic 19: can, much, one, people, great 
+ Topic 20: we, must, economy, government, people 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Model Converged </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.searchK</span>(k_search)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="day2-tutorial_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>k_search</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$results
+   K   exclus    semcoh   heldout residual     bound    lbound em.its
+1  5 8.782945 -7.944008 -4.960393 1.624187   -117078 -117073.2     48
+2 10 9.285102 -11.98722 -4.967642 1.532483 -116254.2 -116239.1     73
+3 15  9.29123 -11.69239 -5.034053 1.615663 -115704.1 -115676.2     50
+4 20 9.328248 -12.40123  -5.00695 1.760186 -115273.8 -115231.5     61
+
+$call
+searchK(documents = out$documents, vocab = out$vocab, K = c(5, 
+    10, 15, 20), init.type = "Spectral", prevalence = ~s(Year) + 
+    Party, data = out$meta)
+
+attr(,"class")
+[1] "searchK"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>k_search<span class="sc">$</span>results <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(K, exclus, semcoh) <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">K =</span> <span class="fu">unlist</span>(K),</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">exclus =</span> <span class="fu">unlist</span>(exclus),</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">semcoh =</span> <span class="fu">unlist</span>(semcoh)) <span class="sc">%&gt;%</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">K =</span> <span class="fu">as_factor</span>(K)) <span class="sc">%&gt;%</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> exclus, <span class="at">y =</span> semcoh, <span class="at">color =</span> K), <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Semantic Coherence vs Exclusivity"</span>) <span class="sc">+</span></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Semantic Coherence"</span>) <span class="sc">+</span></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Exclusivity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="day2-tutorial_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>If <code>init.type="Spectral"</code> you can also set K=0 to use the algorithm of Lee and Mimno (2014) to set the number of topics</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>inaug_stm_fit <span class="ot">&lt;-</span> <span class="fu">stm</span>(<span class="at">documents =</span> out<span class="sc">$</span>documents, </span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">vocab =</span> out<span class="sc">$</span>vocab,</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> out<span class="sc">$</span>meta,</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">K =</span> <span class="dv">9</span>, </span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">prevalence =</span> <span class="sc">~</span><span class="fu">s</span>(Year) <span class="sc">+</span> Party, </span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Beginning Spectral Initialization 
+     Calculating the gram matrix...
+     Finding anchor words...
+    .........
+     Recovering initialization...
+    .
+Initialization complete.
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 1 (approx. per word bound = -4.944) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 2 (approx. per word bound = -4.927, relative change = 3.562e-03) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 3 (approx. per word bound = -4.919, relative change = 1.495e-03) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 4 (approx. per word bound = -4.915, relative change = 8.654e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 5 (approx. per word bound = -4.912, relative change = 5.865e-04) 
+Topic 1: shall, now, upon, oath, may 
+ Topic 2: we, america, new, let, together 
+ Topic 3: government, country, public, states, people 
+ Topic 4: war, nation, year, without, force 
+ Topic 5: thing, man, great, nation, upon 
+ Topic 6: freedom, nation, world, free, peace 
+ Topic 7: we, responsibility, government, people, can 
+ Topic 8: must, change, make, can, people 
+ Topic 9: union, government, states, power, constitution 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 6 (approx. per word bound = -4.910, relative change = 4.387e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 7 (approx. per word bound = -4.908, relative change = 3.504e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 8 (approx. per word bound = -4.907, relative change = 2.932e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 9 (approx. per word bound = -4.906, relative change = 2.534e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 10 (approx. per word bound = -4.904, relative change = 2.227e-04) 
+Topic 1: shall, upon, now, people, oath 
+ Topic 2: we, america, new, let, world 
+ Topic 3: government, country, public, states, people 
+ Topic 4: war, nation, year, force, we 
+ Topic 5: thing, man, nation, great, see 
+ Topic 6: freedom, nation, world, free, peace 
+ Topic 7: we, government, responsibility, people, peace 
+ Topic 8: must, change, make, can, world 
+ Topic 9: union, government, power, states, constitution 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 11 (approx. per word bound = -4.903, relative change = 1.987e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 12 (approx. per word bound = -4.903, relative change = 1.794e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 13 (approx. per word bound = -4.902, relative change = 1.633e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 14 (approx. per word bound = -4.901, relative change = 1.501e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 15 (approx. per word bound = -4.900, relative change = 1.362e-04) 
+Topic 1: shall, upon, law, now, people 
+ Topic 2: we, america, new, let, time 
+ Topic 3: government, country, public, states, people 
+ Topic 4: war, nation, year, force, united 
+ Topic 5: thing, man, nation, see, great 
+ Topic 6: freedom, nation, world, free, peace 
+ Topic 7: government, we, responsibility, people, peace 
+ Topic 8: must, can, change, make, world 
+ Topic 9: union, power, government, states, constitution 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 16 (approx. per word bound = -4.900, relative change = 1.226e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 17 (approx. per word bound = -4.899, relative change = 1.088e-04) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 18 (approx. per word bound = -4.899, relative change = 9.583e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 19 (approx. per word bound = -4.898, relative change = 8.397e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 20 (approx. per word bound = -4.898, relative change = 7.453e-05) 
+Topic 1: shall, upon, law, people, now 
+ Topic 2: we, america, new, let, time 
+ Topic 3: government, country, public, states, people 
+ Topic 4: war, great, nation, force, year 
+ Topic 5: thing, man, nation, see, life 
+ Topic 6: freedom, nation, world, free, peace 
+ Topic 7: government, we, responsibility, peace, people 
+ Topic 8: must, can, change, make, one 
+ Topic 9: union, power, government, states, constitution 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 21 (approx. per word bound = -4.898, relative change = 6.636e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 22 (approx. per word bound = -4.897, relative change = 5.945e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 23 (approx. per word bound = -4.897, relative change = 5.376e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 24 (approx. per word bound = -4.897, relative change = 4.898e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 25 (approx. per word bound = -4.897, relative change = 4.497e-05) 
+Topic 1: shall, upon, law, people, now 
+ Topic 2: we, america, new, time, let 
+ Topic 3: government, country, public, states, every 
+ Topic 4: war, great, nation, force, united 
+ Topic 5: thing, man, nation, see, life 
+ Topic 6: freedom, nation, world, free, peace 
+ Topic 7: government, we, responsibility, peace, must 
+ Topic 8: must, can, change, make, one 
+ Topic 9: union, power, government, constitution, states 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 26 (approx. per word bound = -4.896, relative change = 4.137e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 27 (approx. per word bound = -4.896, relative change = 3.842e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 28 (approx. per word bound = -4.896, relative change = 3.584e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 29 (approx. per word bound = -4.896, relative change = 3.345e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 30 (approx. per word bound = -4.896, relative change = 3.169e-05) 
+Topic 1: upon, shall, law, people, now 
+ Topic 2: we, america, new, time, let 
+ Topic 3: government, country, public, every, states 
+ Topic 4: war, great, nation, make, united 
+ Topic 5: thing, man, nation, see, life 
+ Topic 6: freedom, nation, world, free, peace 
+ Topic 7: government, we, responsibility, peace, world 
+ Topic 8: must, can, change, make, one 
+ Topic 9: union, power, government, constitution, states 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 31 (approx. per word bound = -4.896, relative change = 2.972e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 32 (approx. per word bound = -4.895, relative change = 2.793e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 33 (approx. per word bound = -4.895, relative change = 2.664e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 34 (approx. per word bound = -4.895, relative change = 2.496e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 35 (approx. per word bound = -4.895, relative change = 2.348e-05) 
+Topic 1: upon, shall, law, people, now 
+ Topic 2: we, america, new, time, world 
+ Topic 3: government, country, public, every, people 
+ Topic 4: war, great, make, united, force 
+ Topic 5: thing, man, nation, see, life 
+ Topic 6: freedom, nation, world, free, peace 
+ Topic 7: government, we, responsibility, peace, world 
+ Topic 8: must, can, change, make, one 
+ Topic 9: union, power, government, constitution, states 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 36 (approx. per word bound = -4.895, relative change = 2.227e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 37 (approx. per word bound = -4.895, relative change = 2.087e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 38 (approx. per word bound = -4.895, relative change = 1.984e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 39 (approx. per word bound = -4.895, relative change = 1.864e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 40 (approx. per word bound = -4.895, relative change = 1.779e-05) 
+Topic 1: upon, shall, law, people, now 
+ Topic 2: we, america, new, time, world 
+ Topic 3: government, country, public, every, citizen 
+ Topic 4: war, great, make, united, force 
+ Topic 5: thing, man, nation, life, see 
+ Topic 6: freedom, nation, world, free, peace 
+ Topic 7: government, we, responsibility, peace, world 
+ Topic 8: must, can, change, make, one 
+ Topic 9: union, power, government, constitution, states 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 41 (approx. per word bound = -4.895, relative change = 1.671e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 42 (approx. per word bound = -4.894, relative change = 1.568e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 43 (approx. per word bound = -4.894, relative change = 1.478e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 44 (approx. per word bound = -4.894, relative change = 1.418e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 45 (approx. per word bound = -4.894, relative change = 1.342e-05) 
+Topic 1: upon, law, shall, people, now 
+ Topic 2: we, america, new, time, world 
+ Topic 3: country, government, public, every, citizen 
+ Topic 4: war, great, make, united, force 
+ Topic 5: thing, man, nation, life, see 
+ Topic 6: freedom, nation, world, free, peace 
+ Topic 7: government, we, responsibility, peace, world 
+ Topic 8: must, can, change, make, one 
+ Topic 9: union, power, government, constitution, states 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 46 (approx. per word bound = -4.894, relative change = 1.269e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 47 (approx. per word bound = -4.894, relative change = 1.204e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 48 (approx. per word bound = -4.894, relative change = 1.174e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 49 (approx. per word bound = -4.894, relative change = 1.136e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 50 (approx. per word bound = -4.894, relative change = 1.062e-05) 
+Topic 1: upon, law, shall, people, now 
+ Topic 2: we, america, new, time, world 
+ Topic 3: country, government, public, every, citizen 
+ Topic 4: war, great, make, united, force 
+ Topic 5: thing, man, nation, see, life 
+ Topic 6: freedom, nation, world, free, peace 
+ Topic 7: government, we, responsibility, peace, world 
+ Topic 8: must, can, change, make, government 
+ Topic 9: union, power, government, constitution, states 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 51 (approx. per word bound = -4.894, relative change = 1.035e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Completing Iteration 52 (approx. per word bound = -4.894, relative change = 1.016e-05) 
+...........................................................
+Completed E-Step (0 seconds). 
+Completed M-Step. 
+Model Converged </code></pre>
+</div>
+</div>
+</section>
+<section id="estimate-effects" class="level2">
+<h2 class="anchored" data-anchor-id="estimate-effects">Estimate effects</h2>
+<p>It is then possible to analyze the results. In this case, by checking the variation in topic prevalence over time, and by party.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>estimate_inaug <span class="ot">&lt;-</span> <span class="fu">estimateEffect</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span> <span class="sc">~</span> <span class="fu">s</span>(Year) <span class="sc">+</span> Party,</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>                                 inaug_stm_fit,</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">meta =</span> out<span class="sc">$</span>meta,</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">uncertainty =</span> <span class="st">"Global"</span>)</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(year_topic, topics = 1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>))</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>){</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  estimate_inaug,</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">covariate =</span> <span class="st">"Year"</span>,</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"continuous"</span>,</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">topics =</span> i,</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> inaug_stm_fit,</span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">printlegend =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Time"</span>)</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="day2-tutorial_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>))</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>){</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot.estimateEffect</span>(</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  estimate_inaug,</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">covariate =</span> <span class="st">"Party"</span>,</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"difference"</span>,</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">cov.value1 =</span> <span class="st">"Democratic"</span>,</span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">cov.value2 =</span> <span class="st">"Republican"</span>,</span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">topics =</span> i,</span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> inaug_stm_fit,</span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">printlegend =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"← Republican     Democratic →"</span>,</span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Democratic vs Republican (D-R)"</span>,</span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.2</span>, <span class="fl">0.2</span>),</span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.5</span>,</span>
+<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">labeltype =</span> <span class="st">"custom"</span>,</span>
+<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">custom.labels =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">""</span>)</span>
+<span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="day2-tutorial_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="estimates" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="estimates">Estimates</h2>
+<p>The result can be read as a regression model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(estimate_inaug)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+estimateEffect(formula = 1:9 ~ s(Year) + Party, stmobj = inaug_stm_fit, 
+    metadata = out$meta, uncertainty = "Global")
+
+
+Topic 1:
+
+Coefficients:
+                             Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)                -0.6560642  0.2999152  -2.187  0.03419 * 
+s(Year)1                    0.9657122  0.3717516   2.598  0.01280 * 
+s(Year)2                    0.6685440  0.3153818   2.120  0.03983 * 
+s(Year)3                    0.7169954  0.3254208   2.203  0.03298 * 
+s(Year)4                    1.0737266  0.3139968   3.420  0.00138 **
+s(Year)5                    0.8424747  0.3212461   2.623  0.01203 * 
+s(Year)6                    0.6791383  0.3041562   2.233  0.03082 * 
+s(Year)7                    0.7288687  0.3114955   2.340  0.02400 * 
+s(Year)8                    0.6185376  0.3128653   1.977  0.05448 . 
+s(Year)9                    0.7332742  0.3126560   2.345  0.02370 * 
+s(Year)10                   0.6863272  0.3074015   2.233  0.03083 * 
+PartyDemocratic-Republican -0.0778787  0.0994000  -0.783  0.43763   
+PartyFederalist             0.1195849  0.1499224   0.798  0.42946   
+Partynone                   0.7672243  0.2803215   2.737  0.00898 **
+PartyRepublican             0.0006405  0.0281950   0.023  0.98198   
+PartyWhig                   0.0247918  0.0642640   0.386  0.70156   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+
+Topic 2:
+
+Coefficients:
+                            Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)                 0.159194   0.275049   0.579   0.5658  
+s(Year)1                   -0.092249   0.310864  -0.297   0.7681  
+s(Year)2                   -0.164481   0.273439  -0.602   0.5506  
+s(Year)3                   -0.122783   0.312284  -0.393   0.6961  
+s(Year)4                   -0.098119   0.281270  -0.349   0.7289  
+s(Year)5                   -0.073466   0.290830  -0.253   0.8018  
+s(Year)6                   -0.060987   0.282222  -0.216   0.8299  
+s(Year)7                    0.057262   0.296491   0.193   0.8478  
+s(Year)8                    0.594031   0.304308   1.952   0.0575 .
+s(Year)9                    0.046384   0.301654   0.154   0.8785  
+s(Year)10                   0.518333   0.287353   1.804   0.0783 .
+PartyDemocratic-Republican -0.008223   0.100854  -0.082   0.9354  
+PartyFederalist            -0.068284   0.162362  -0.421   0.6762  
+Partynone                  -0.120181   0.235861  -0.510   0.6130  
+PartyRepublican            -0.070150   0.036009  -1.948   0.0579 .
+PartyWhig                  -0.025729   0.065478  -0.393   0.6963  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+
+Topic 3:
+
+Coefficients:
+                           Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)                 0.89739    0.50796   1.767   0.0844 .
+s(Year)1                   -0.57591    0.58753  -0.980   0.3325  
+s(Year)2                    0.07553    0.52506   0.144   0.8863  
+s(Year)3                   -0.97702    0.56196  -1.739   0.0893 .
+s(Year)4                   -0.44988    0.51076  -0.881   0.3833  
+s(Year)5                   -0.78101    0.52481  -1.488   0.1440  
+s(Year)6                   -0.80381    0.51485  -1.561   0.1258  
+s(Year)7                   -0.88691    0.52150  -1.701   0.0962 .
+s(Year)8                   -0.86330    0.52334  -1.650   0.1063  
+s(Year)9                   -0.71904    0.52677  -1.365   0.1794  
+s(Year)10                  -0.83511    0.52123  -1.602   0.1164  
+PartyDemocratic-Republican -0.18159    0.18610  -0.976   0.3346  
+PartyFederalist             0.01745    0.30671   0.057   0.9549  
+Partynone                  -0.37717    0.41122  -0.917   0.3642  
+PartyRepublican            -0.02725    0.04284  -0.636   0.5282  
+PartyWhig                   0.08192    0.11245   0.728   0.4703  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+
+Topic 4:
+
+Coefficients:
+                           Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)                -0.41019    0.33566  -1.222   0.2283  
+s(Year)1                    0.13105    0.38345   0.342   0.7342  
+s(Year)2                    0.47780    0.33686   1.418   0.1633  
+s(Year)3                    0.46778    0.37991   1.231   0.2249  
+s(Year)4                    0.56383    0.34830   1.619   0.1128  
+s(Year)5                    0.39631    0.35063   1.130   0.2646  
+s(Year)6                    0.46536    0.34506   1.349   0.1845  
+s(Year)7                    0.44604    0.35054   1.272   0.2101  
+s(Year)8                    0.42641    0.35410   1.204   0.2351  
+s(Year)9                    0.41181    0.35459   1.161   0.2519  
+s(Year)10                   0.47667    0.34950   1.364   0.1797  
+PartyDemocratic-Republican  0.29777    0.13150   2.264   0.0286 *
+PartyFederalist             0.30649    0.20591   1.488   0.1439  
+Partynone                   0.40160    0.28898   1.390   0.1718  
+PartyRepublican             0.02766    0.03288   0.841   0.4048  
+PartyWhig                  -0.04556    0.08050  -0.566   0.5743  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+
+Topic 5:
+
+Coefficients:
+                             Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)                 0.3374745  0.4975994   0.678    0.501
+s(Year)1                   -0.1323070  0.5492672  -0.241    0.811
+s(Year)2                   -0.4817526  0.4983039  -0.967    0.339
+s(Year)3                   -0.0744738  0.5670069  -0.131    0.896
+s(Year)4                   -0.3888787  0.5040379  -0.772    0.445
+s(Year)5                   -0.0006305  0.5321625  -0.001    0.999
+s(Year)6                   -0.0066862  0.5116620  -0.013    0.990
+s(Year)7                   -0.2903559  0.5197831  -0.559    0.579
+s(Year)8                   -0.1463314  0.5268193  -0.278    0.783
+s(Year)9                   -0.2777969  0.5277732  -0.526    0.601
+s(Year)10                  -0.1956399  0.5140284  -0.381    0.705
+PartyDemocratic-Republican -0.0118565  0.1774551  -0.067    0.947
+PartyFederalist            -0.1412754  0.2999661  -0.471    0.640
+Partynone                  -0.2698651  0.4269787  -0.632    0.531
+PartyRepublican            -0.0726179  0.0497082  -1.461    0.151
+PartyWhig                  -0.0924995  0.1172027  -0.789    0.434
+
+
+Topic 6:
+
+Coefficients:
+                            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)                 0.186685   0.418899   0.446    0.658
+s(Year)1                   -0.003462   0.471555  -0.007    0.994
+s(Year)2                   -0.190691   0.421232  -0.453    0.653
+s(Year)3                   -0.159271   0.474074  -0.336    0.739
+s(Year)4                   -0.220197   0.426641  -0.516    0.608
+s(Year)5                   -0.241876   0.440493  -0.549    0.586
+s(Year)6                   -0.065019   0.429880  -0.151    0.880
+s(Year)7                    0.398757   0.442540   0.901    0.373
+s(Year)8                   -0.572770   0.447366  -1.280    0.207
+s(Year)9                    0.407283   0.455279   0.895    0.376
+s(Year)10                  -0.289771   0.432293  -0.670    0.506
+PartyDemocratic-Republican -0.008977   0.151854  -0.059    0.953
+PartyFederalist            -0.075178   0.254177  -0.296    0.769
+Partynone                  -0.168644   0.359689  -0.469    0.642
+PartyRepublican             0.068664   0.043387   1.583    0.121
+PartyWhig                   0.010496   0.098449   0.107    0.916
+
+
+Topic 7:
+
+Coefficients:
+                            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)                 0.096747   0.379711   0.255    0.800
+s(Year)1                    0.018962   0.429947   0.044    0.965
+s(Year)2                   -0.046506   0.378933  -0.123    0.903
+s(Year)3                    0.010050   0.438249   0.023    0.982
+s(Year)4                   -0.107207   0.390743  -0.274    0.785
+s(Year)5                    0.107546   0.404945   0.266    0.792
+s(Year)6                   -0.072010   0.393124  -0.183    0.856
+s(Year)7                   -0.042701   0.398436  -0.107    0.915
+s(Year)8                    0.174676   0.407118   0.429    0.670
+s(Year)9                   -0.236162   0.404217  -0.584    0.562
+s(Year)10                  -0.042249   0.391550  -0.108    0.915
+PartyDemocratic-Republican -0.045572   0.147148  -0.310    0.758
+PartyFederalist            -0.078189   0.226204  -0.346    0.731
+Partynone                  -0.081952   0.325836  -0.252    0.803
+PartyRepublican             0.033166   0.040568   0.818    0.418
+PartyWhig                  -0.003141   0.094894  -0.033    0.974
+
+
+Topic 8:
+
+Coefficients:
+                            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)                 0.058007   0.346890   0.167    0.868
+s(Year)1                   -0.054100   0.398536  -0.136    0.893
+s(Year)2                   -0.110797   0.345581  -0.321    0.750
+s(Year)3                    0.074318   0.395220   0.188    0.852
+s(Year)4                   -0.109914   0.354446  -0.310    0.758
+s(Year)5                    0.096857   0.367451   0.264    0.793
+s(Year)6                    0.199124   0.356652   0.558    0.580
+s(Year)7                   -0.093319   0.361749  -0.258    0.798
+s(Year)8                    0.046202   0.373882   0.124    0.902
+s(Year)9                   -0.047498   0.369585  -0.129    0.898
+s(Year)10                  -0.019955   0.357884  -0.056    0.956
+PartyDemocratic-Republican  0.032947   0.127849   0.258    0.798
+PartyFederalist            -0.007213   0.202854  -0.036    0.972
+Partynone                   0.025119   0.294464   0.085    0.932
+PartyRepublican             0.034428   0.035829   0.961    0.342
+PartyWhig                  -0.049514   0.082733  -0.598    0.553
+
+
+Topic 9:
+
+Coefficients:
+                            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)                 0.333138   0.355843   0.936    0.354
+s(Year)1                   -0.262287   0.394364  -0.665    0.510
+s(Year)2                   -0.227670   0.368189  -0.618    0.540
+s(Year)3                    0.058907   0.412951   0.143    0.887
+s(Year)4                   -0.266731   0.357028  -0.747    0.459
+s(Year)5                   -0.346621   0.370819  -0.935    0.355
+s(Year)6                   -0.334761   0.361622  -0.926    0.360
+s(Year)7                   -0.319509   0.367711  -0.869    0.390
+s(Year)8                   -0.282890   0.371225  -0.762    0.450
+s(Year)9                   -0.318967   0.372158  -0.857    0.396
+s(Year)10                  -0.301906   0.364843  -0.827    0.413
+PartyDemocratic-Republican  0.003670   0.141389   0.026    0.979
+PartyFederalist            -0.070476   0.220473  -0.320    0.751
+Partynone                  -0.176665   0.301264  -0.586    0.561
+PartyRepublican             0.005748   0.031769   0.181    0.857
+PartyWhig                   0.098983   0.110352   0.897    0.375</code></pre>
+</div>
+</div>
+</section>
+<section id="interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation">Interpretation</h2>
+<p>The eight topic looks slightly more prevalent in Democrats than Republican inaugural addresses.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(inaug_stm_fit, <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Topic 8 Top Words:
+     Highest Prob: must, can, change, make, government, one, great 
+     FREX: change, must, old, action, order, among, continue 
+     Lift: change, old, order, action, hold, continue, maintain 
+     Score: change, old, must, america, action, policy, order </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(inaug_stm_fit, <span class="at">type =</span> <span class="st">"summary"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="day2-tutorial_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>thoughts8 <span class="ot">&lt;-</span> <span class="fu">findThoughts</span>(inaug_stm_fit,</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">texts =</span> usa_inaugural_df<span class="sc">$</span>text,</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">n =</span> <span class="dv">2</span>,</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">topics =</span> <span class="dv">8</span>)<span class="sc">$</span>docs[[<span class="dv">1</span>]]</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plotQuote</span>(thoughts8, <span class="at">width =</span> <span class="dv">30</span>, <span class="at">main =</span> <span class="st">"Topic 6"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="day2-tutorial_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>inaug_stm_fit_corr <span class="ot">&lt;-</span> <span class="fu">topicCorr</span>(inaug_stm_fit)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(inaug_stm_fit_corr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="day2-tutorial_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-seeded-topic-models" class="level1">
+<h1>Seeded Topic Models</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>guardian <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"http://www.luigicurini.com/uploads/6/7/9/8/67985527/guardian.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Create a small dictionary of keywords (seed words) to define the desired topics.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>imm_frames <span class="ot">&lt;-</span> <span class="fu">dictionary</span>(<span class="fu">list</span>(<span class="at">securitarian =</span> <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"border"</span>, </span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"police"</span>, <span class="st">"detention"</span>,</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"illegal"</span>, <span class="st">"legal"</span>),</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">humanitarian =</span> <span class="fu">c</span>(<span class="st">"asylum"</span>, <span class="st">"child"</span>, </span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">"seeker"</span>, <span class="st">"refugee"</span>,</span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">"human"</span>, <span class="st">"right"</span>)))</span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>imm_frames</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Dictionary object with 2 key entries.
+- [securitarian]:
+  - control, border, police, detention, illegal, legal
+- [humanitarian]:
+  - asylum, child, seeker, refugee, human, right</code></pre>
+</div>
+</div>
+<p>Fit the model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>slda <span class="ot">&lt;-</span> <span class="fu">textmodel_seededlda</span>(ukimmig2010_dfm, imm_frames, <span class="at">residual =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">terms</span>(slda, <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      securitarian humanitarian  other        
+ [1,] "border"     "asylum"      "system"     
+ [2,] "control"    "british"     "people"     
+ [3,] "country"    "right"       "new"        
+ [4,] "illegal"    "immigrant"   "can"        
+ [5,] "work"       "much"        "ensure"     
+ [6,] "police"     "seeker"      "citizenship"
+ [7,] "eu"         "year"        "need"       
+ [8,] "detention"  "uk"          "end"        
+ [9,] "government" "child"       "make"       
+[10,] "student"    "people"      "migrant"    
+[11,] "uk"         "refugee"     "point"      
+[12,] "national"   "act"         "agency"     
+[13,] "must"       "take"        "house"      
+[14,] "live"       "allow"       "high"       
+[15,] "non"        "national"    "support"    
+[16,] "citizen"    "benefit"     "british"    
+[17,] "limit"      "arrive"      "give"       
+[18,] "ensure"     "citizenship" "thousand"   
+[19,] "future"     "high"        "economy"    
+[20,] "economic"   "work"        "priority"   </code></pre>
+</div>
+</div>
+<p>Check which documents are assigned to which topic.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">topics</span>(slda))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+securitarian humanitarian        other 
+           3            4            2 </code></pre>
+</div>
+</div>
 </section>
 <section id="sec-laboratory-using-real-world-data" class="level1">
 <h1>Laboratory with real-world data</h1>
@@ -226,7 +3005,13 @@ ul.task-list li input[type="checkbox"] {
 
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Griffiths, T. L., &amp; Steyvers, M. (2004). <a href="https://www.pnas.org/doi/10.1073/pnas.0307752101">Finding scientific topics</a>.&nbsp;<em>Proceedings of the National academy of Sciences</em>,&nbsp;<em>101</em>(suppl_1), 5228-5235.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

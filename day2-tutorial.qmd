@@ -2,10 +2,471 @@
 title: "Hands-on Tutorials (Day Two)"
 ---
 
-# Introduction to R for topic modeling {#sec-introduction-to-r-for-topic-modeling}
+# Topic modeling {#sec-introduction-to-r-for-topic-modeling}
 
-# Advanced topics in topic models {#sec-advanced-topics-in-topic-models}
+Install the required packages for this tutorial.
+
+```{r}
+# Package names
+packages <- c(
+  "tidyverse",
+  "tidytext",
+  "quanteda",
+  "textstem",
+  "topicmodels",
+  "ldatuning",
+  "topicdoc",
+  "stm",
+  "udpipe",
+  "parallel",
+  "doParallel",
+  "seededlda"
+)
+
+# Install packages not yet installed
+installed_packages <- packages %in% rownames(installed.packages())
+if (any(installed_packages == FALSE)) {
+  install.packages(packages[!installed_packages])
+}
+```
+
+```{r}
+library(tidyverse)
+library(tidytext)
+library(quanteda)
+library(textstem)
+library(topicmodels)
+library(ldatuning)
+library(topicdoc)
+library(stm)
+library(udpipe)
+library(parallel)
+library(doParallel)
+library(seededlda)
+```
+
+```{r}
+ukimmig2010 <- data.frame(text = quanteda::data_char_ukimmig2010)
+ukimmig2010$party <- names(quanteda::data_char_ukimmig2010)
+
+ukimmig2010 <- ukimmig2010 %>%
+  mutate(lemma = tolower(text)) %>%
+  mutate(lemma = lemmatize_strings(lemma))
+
+ukimmig2010_corpus <- quanteda::corpus(ukimmig2010,
+                                       docid_field = "party",
+                                       text_field = "lemma")
+
+ukimmig2010_dfm <- ukimmig2010_corpus %>%
+  quanteda::tokens(remove_punct = TRUE,
+         remove_symbols = TRUE,
+         remove_numbers = TRUE) %>%
+  tokens_tolower() %>%
+  tokens_remove(stopwords("en")) %>%
+  dfm() %>%
+  dfm_trim(min_docfreq = 0.5, max_docfreq = 0.99, 
+           docfreq_type = "prop") %>%
+  dfm_subset(ntoken(.) > 0)
+```
+
+```{r}
+ukimmig2010_dtm <- convert(ukimmig2010_dfm, to = "topicmodels")
+```
+
+
+The basic function to fit a topic model is `LDA`:
+
+```{r}
+topicModel <- LDA(ukimmig2010_dtm, 
+                  k = 5, 
+                  method="Gibbs")
+
+topicmodels::terms(topicModel, 5)
+```
+
+Considering the output of the function `LDA`, the `beta` matrix includes the information about the distribution of terms by topics.
+
+```{r}
+tidy_model <- tidy(topicModel)
+
+top_terms <- tidy_model %>%
+  group_by(topic) %>%
+  top_n(10, beta) %>%
+  ungroup() %>%
+  arrange(topic, -beta)
+
+top_terms %>%
+  mutate(term = reorder_within(term, beta, topic)) %>%
+  ggplot(aes(term, beta)) +
+  geom_bar(stat = "identity") +
+  scale_x_reordered() +
+  facet_wrap(~ topic, scales = "free_x") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) 
+
+```
+
+Information about the distribution of topics in each documents is in the matrix `gamma`.
+
+```{r}
+tidy_model_gamma <- tidy(topicModel, matrix = "gamma")
+head(tidy_model_gamma)
+```
+
+```{r}
+tidy_model_gamma <- tidy_model_gamma %>%
+  mutate(document = 
+           mgsub::mgsub(string = document,
+                        pattern = unique(tidy_model_gamma$document),
+                        replacement = names(data_char_ukimmig2010),
+                        fixed = TRUE))
+
+ggplot(tidy_model_gamma) +
+  geom_col(aes(x = topic, y = gamma)) +
+  facet_wrap(~ document, nrow = 3)
+```
+
+You may want to assign the most prevalent topic to each document in the corpus.
+
+```{r}
+docvars(ukimmig2010_corpus, "pred_topic") <- topicmodels::topics(topicModel)
+str(docvars(ukimmig2010_corpus))
+```
 
 # Advanced topic modeling methods {#sec-advanced-topic-modeling-methods}
+
+## Identify the number of topics
+
+There are different algorithms for estimating the optimal number of topics. The `ldatuning` package provides a function `FindTopicsNumber` that calculates different metrics to estimate the most preferable number of topics for LDA model.
+
+```{r}
+tn <- FindTopicsNumber(ukimmig2010_dtm, 
+                       topics = seq(5, 50, by = 5),
+                       metrics = c("Griffiths2004", 
+                                   "CaoJuan2009", 
+                                   "Arun2010", 
+                                   "Deveaud2014"))
+FindTopicsNumber_plot(tn)
+```
+
+------------------------------------------------------------------------
+
+Here, the `Griffiths2004` approach is actually based on the log-likelihood maximization and it is described in the related paper[^1]. It is also the default approach of `ldatuning`. The Deveaud2014 is also a common choice.
+
+[^1]: Griffiths, T. L., & Steyvers, M. (2004). [Finding scientific topics](https://www.pnas.org/doi/10.1073/pnas.0307752101). *Proceedings of the National academy of Sciences*, *101*(suppl_1), 5228-5235.
+
+```{r}
+ggplot(tn,
+       aes(x = topics, y = Griffiths2004)) +
+  geom_point() +
+  geom_line() + 
+  ggtitle("Griffiths2004")
+```
+
+Based on this indication, we can peraphs fit a model with about 15 topics.
+
+```{r}
+topicModel15 <- LDA(ukimmig2010_dtm, 
+                  k = 15, 
+                  method="Gibbs")
+
+topicmodels::terms(topicModel15, 5)
+
+tidy_model_gamma_15 <- tidy(topicModel15, matrix = "gamma")
+tidy_model_gamma_15 <- tidy_model_gamma_15 %>%
+  mutate(document = 
+           mgsub::mgsub(string = document,
+                        pattern = unique(tidy_model_gamma_15$document),
+                        replacement = names(data_char_ukimmig2010),
+                        fixed = TRUE))
+
+ggplot(tidy_model_gamma_15) +
+  geom_col(aes(x = topic, y = gamma)) +
+  facet_wrap(~ document, nrow = 3)
+```
+
+### Coherence and exclusivity
+
+The package `topicdoc` provides diagnostic measures for topic models. They can be used to compare different models. Usually, models with a different number of topics are being compared.
+
+```{r}
+topicModel_diag <- topic_diagnostics(topicModel, ukimmig2010_dtm)
+```
+
+A particularly useful and commonly-used metrics are **semantic coherence** and **exclusivity**. A good topic model should have coherent topics (i.e., about a single theme and not a mixture of different themes), which also are well distinguishable from each other, without overlaps (exclusivity).
+
+```{r}
+topicModel_diag %>%
+  mutate(topic = as_factor(topic_num)) %>%
+  ggplot() +
+  geom_point(aes(x = topic_coherence, y = topic_exclusivity, color = topic),
+             size = 3) +
+  ylab(label = "Semantic Coherence") +
+  xlab("Exclusivity") +
+  ggtitle("A topic model with 5 topics")
+```
+
+### Held-out likelihood (perplexity)
+
+**Perplexity** is a metric for the accuracy of a probability model in predicting a sample and can be used as a measure of a topic model's ability to predict new data. **The lower the perplexity, the better the model.**
+
+Topic models with different number of topics can be compared based on perplexity using **cross-validation**. This involves dividing data into subsets (usually 5), and using one subset as the validation set while using the remaining as the training set. This ensures that each data point has an equal opportunity of being part of the validation and training sets.
+
+This method is useful in evaluating the overall performance of the model on unseen data and in determining optimal values for tuning the number of topics.
+
+```{r}
+cluster <- makeCluster(detectCores(logical = TRUE) - 1) 
+registerDoParallel(cluster)
+
+clusterEvalQ(cluster, {
+   library(topicmodels)
+})
+
+burnin <- 1000
+iter <- 1000
+keep <- 50
+
+full_data <- ukimmig2010_dtm
+n <- nrow(full_data)
+folds <- 5
+splitfolds <- sample(1:folds, n, replace = TRUE)
+candidate_k <- c(2, 5, 7, 10, 15, 20, 50, 100)
+
+clusterExport(cluster, c("full_data", "burnin", "iter", "keep", "splitfolds", "folds", "candidate_k"))
+
+# we parallelize by the different number of topics.  
+# A processor is allocated a value of k, and does the cross-validation serially.  This is because it is assumed there are more candidate values of k than there are cross-validation folds, hence it will be more efficient to parallelise
+system.time({
+results <- foreach(j = 1:length(candidate_k), .combine = rbind) %dopar%{
+   k <- candidate_k[j]
+   results_1k <- matrix(0, nrow = folds, ncol = 2)
+   colnames(results_1k) <- c("k", "perplexity")
+   for(i in 1:folds){
+      train_set <- full_data[splitfolds != i , ]
+      valid_set <- full_data[splitfolds == i, ]
+      
+      fitted <- LDA(train_set, k = k, method = "Gibbs",
+                    control = list(burnin = burnin, iter = iter, keep = keep) )
+      results_1k[i,] <- c(k, perplexity(fitted, newdata = valid_set))
+   }
+   return(results_1k)
+}
+})
+stopCluster(cluster)
+
+results_df <- as.data.frame(results)
+
+ggplot(results_df, aes(x = k, y = perplexity)) +
+   geom_point() +
+   geom_smooth(se = FALSE) +
+   ggtitle("5-fold cross-validation") +
+   labs(x = "Candidate number of topics", 
+        y = "Perplexity when fitting the trained model to the hold-out set")
+```
+
+# Structural Topic Models {#sec-structural-topic-models}
+
+```{r}
+usa_inaugural_df <- read.csv(file = "data/usa_inaugural_df.csv")
+```
+
+```{r}
+# load the udpipe English model
+udpipe_english_model <- udpipe_load_model(file = "./english-ewt-ud-2.5-191206.udpipe")
+
+# annotate the text
+usa_inaugural_udpipe <- udpipe_annotate(udpipe_english_model, 
+                                  x = usa_inaugural_df$text, 
+                                  tagger = "default", 
+                                  parser = "none") %>%
+                  as.data.frame()
+```
+
+```{r}
+inaug_dfm <- usa_inaugural_df %>%
+  corpus() %>%
+  quanteda::tokens(remove_punct = TRUE,
+         remove_symbols = TRUE,
+         remove_numbers = TRUE) %>%
+  tokens_tolower() %>%
+  tokens_remove(stopwords("en")) %>%
+  # lemmatization
+  tokens_replace(
+    pattern = usa_inaugural_udpipe$token, 
+    replacement = usa_inaugural_udpipe$lemma,
+    valuetype = "fixed") %>%
+    dfm() %>%
+    dfm_trim(min_docfreq = 0.5, max_docfreq = 0.99, 
+           docfreq_type = "prop") %>%
+  dfm_subset(ntoken(.) > 0)
+```
+
+```{r}
+inaug_stm_dfm <- convert(inaug_dfm, to = "stm")
+```
+
+```{r}
+out <- prepDocuments(inaug_stm_dfm$documents, 
+                     inaug_stm_dfm$vocab, 
+                     inaug_stm_dfm$meta)
+```
+
+## Determine the number of topics
+
+There is not a "right" answer to the number of topics that are appropriate for a given corpus, but the function `searchK` uses a data-driven approach to selecting the number of topics. The function will perform several automated tests to help choose the number of topics.
+
+```{r}
+k_search <- searchK(out$documents, out$vocab, K = c(5, 10, 15, 20),
+                    prevalence = ~s(Year) + Party, 
+                    data = out$meta, init.type = "Spectral")
+
+plot.searchK(k_search)
+```
+
+```{r}
+k_search
+```
+
+```{r}
+k_search$results %>%
+  select(K, exclus, semcoh) %>%
+  mutate(K = unlist(K),
+         exclus = unlist(exclus),
+         semcoh = unlist(semcoh)) %>%
+  mutate(K = as_factor(K)) %>%
+  ggplot() +
+  geom_point(aes(x = exclus, y = semcoh, color = K), size = 5) +
+  ggtitle("Semantic Coherence vs Exclusivity") +
+  ylab("Semantic Coherence") +
+  xlab("Exclusivity")
+```
+
+If `init.type="Spectral"` you can also set K=0 to use the algorithm of Lee and Mimno (2014) to set the number of topics
+
+```{r echo=TRUE}
+inaug_stm_fit <- stm(documents = out$documents, 
+                     vocab = out$vocab,
+                     data = out$meta,
+                     K = 9, 
+                     prevalence = ~s(Year) + Party, 
+                     init.type = "Spectral")
+```
+
+## Estimate effects
+
+It is then possible to analyze the results. In this case, by checking the variation in topic prevalence over time, and by party.
+
+```{r}
+estimate_inaug <- estimateEffect(1:9 ~ s(Year) + Party,
+                                 inaug_stm_fit,
+                                 meta = out$meta,
+                                 uncertainty = "Global")
+# summary(year_topic, topics = 1)
+```
+
+```{r}
+par(mfrow=c(3,3))
+for(i in 1:9){
+  plot(
+  estimate_inaug,
+  covariate = "Year",
+  method = "continuous",
+  topics = i,
+  model = inaug_stm_fit,
+  printlegend = FALSE,
+  xlab = "Time")
+}
+```
+
+------------------------------------------------------------------------
+
+```{r}
+par(mfrow = c(3, 3))
+for(i in 1:9){
+  plot.estimateEffect(
+  estimate_inaug,
+  covariate = "Party",
+  method = "difference",
+  cov.value1 = "Democratic",
+  cov.value2 = "Republican",
+  topics = i,
+  model = inaug_stm_fit,
+  printlegend = FALSE,
+  xlab = "← Republican     Democratic →",
+  main = "Democratic vs Republican (D-R)",
+  xlim = c(-0.2, 0.2),
+  cex = 0.5,
+  labeltype = "custom",
+  custom.labels = c("", "")
+)
+}
+```
+
+## Estimates {.scrollable}
+
+The result can be read as a regression model.
+
+```{r}
+summary(estimate_inaug)
+```
+
+## Interpretation
+
+The eight topic looks slightly more prevalent in Democrats than Republican inaugural addresses.
+
+```{r}
+labelTopics(inaug_stm_fit, 8)
+```
+
+```{r}
+plot(inaug_stm_fit, type = "summary", xlim = c(0, 0.5))
+```
+
+```{r}
+thoughts8 <- findThoughts(inaug_stm_fit,
+                          texts = usa_inaugural_df$text,
+                          n = 2,
+                          topics = 8)$docs[[1]]
+
+plotQuote(thoughts8, width = 30, main = "Topic 6")
+
+```
+
+```{r}
+inaug_stm_fit_corr <- topicCorr(inaug_stm_fit)
+plot(inaug_stm_fit_corr)
+```
+
+# Seeded Topic Models {#sec-seeded-topic-models}
+
+```{r}
+guardian <- read.csv("http://www.luigicurini.com/uploads/6/7/9/8/67985527/guardian.csv")
+```
+
+Create a small dictionary of keywords (seed words) to define the desired topics.
+
+```{r}
+imm_frames <- dictionary(list(securitarian = c("control", "border", 
+                                               "police", "detention",
+                                               "illegal", "legal"),
+                        humanitarian = c("asylum", "child", 
+                                         "seeker", "refugee",
+                                         "human", "right")))
+
+imm_frames
+```
+
+Fit the model.
+
+```{r}
+set.seed(1234)
+slda <- textmodel_seededlda(ukimmig2010_dfm, imm_frames, residual = TRUE)
+print(terms(slda, 20))
+```
+
+Check which documents are assigned to which topic.
+
+```{r}
+table(topics(slda))
+```
 
 # Laboratory with real-world data {#sec-laboratory-using-real-world-data}
