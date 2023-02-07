@@ -475,6 +475,9 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>uk_immig_news <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/nicolarighetti/text-analysis-with-R/main/data/data_corpus_immigrationnews_df.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="cell">
+
+</div>
 </section>
 <section id="objects-and-functions" class="slide level2">
 <h2>Objects and Functions</h2>
@@ -505,11 +508,11 @@
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>  case A_var  B_var C_var      E_var                   F_var
-1 id_1 -0.33    red     9 2023-02-09           Coding is fun
-2 id_2  0.03   blue     6 2023-02-10 The cat is on the table
-3 id_3 -0.37  white     3 2023-02-13         Cogito ergo sum
-4 id_4 -0.29  green    10 2023-02-16      This is a sentence
-5 id_5  0.42 yellow     7 2023-02-17 Ceci n'est pas une pipe</code></pre>
+1 id_1 -0.59    red     1 2023-02-11           Coding is fun
+2 id_2 -0.12   blue     3 2023-02-12 The cat is on the table
+3 id_3 -1.05  white    10 2023-02-14         Cogito ergo sum
+4 id_4  1.40  green     5 2023-02-16      This is a sentence
+5 id_5 -0.06 yellow     2 2023-02-17 Ceci n'est pas une pipe</code></pre>
 </div>
 </div>
 </section>
@@ -1160,7 +1163,7 @@ dfm tfidf weighted dfm:</code></pre>
 <section class="slide level2">
 
 
-<img data-src="day1_files/figure-revealjs/unnamed-chunk-36-1.png" width="960" class="r-stretch"></section>
+<img data-src="day1_files/figure-revealjs/unnamed-chunk-37-1.png" width="960" class="r-stretch"></section>
 <section id="word-frequency-analysis" class="slide level2">
 <h2>Word frequency analysis</h2>
 <p>The <code>topfeatures</code> function returns the frequency of words.</p>
@@ -1320,7 +1323,28 @@ docs    negative positive neg_positive neg_negative
 
 <p>Let’s plot the results with <code>ggplot2</code>:</p>
 
-<img data-src="day1_files/figure-revealjs/unnamed-chunk-46-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="day1_files/figure-revealjs/unnamed-chunk-47-1.png" width="960" class="r-stretch"></section>
+<section id="validation" class="slide level2">
+<h2>Validation</h2>
+<p>Validation is a crucial problem of automated content analysis, and is usually made by comparing the performance of the dictionary against human coding. Also, the quality of manual annotations used for validation should be properly ensured<sup>1</sup>.</p>
+<aside><ol class="aside-footnotes"><li id="fn4"><p>Song, H., Tolochko, P., Eberl, J. M., Eisele, O., Greussing, E., Heidenreich, T., ... &amp; Boomgaarden, H. G. (2020). <a href="https://www.tandfonline.com/doi/pdf/10.1080/10584609.2020.1723752">In validations we trust? The impact of imperfect human annotations as a gold standard on the quality of validation of automated content analysis.</a>&nbsp;<em>Political Communication</em>,&nbsp;<em>37</em>(4), 550-572.</p></li></ol></aside></section>
+<section class="slide level2">
+
+<blockquote>
+<p>There are two ways of utilizing “human coding” in dictionary and SML analysis: on the one hand in the initial development stage (i.e., in constructing dictionaries, or in training SML algorithms), and on the other hand in the “validation” stage, evaluating the classification performances of the procedures (i.e., post-measurement validation)<sup>1</sup>.</p>
+</blockquote>
+<aside><ol class="aside-footnotes"><li id="fn5"><p>Song et al., 2020</p></li></ol></aside></section>
+<section class="slide level2">
+
+<blockquote>
+<p>[…] the literature often suggests that post-measurement validation based on “out-of-sample” data represents an ideal architecture of validation (e.g., DiMaggio, 2015; Grimmer &amp; Stewart, 2013; Lowe &amp; Benoit, 2013). Once a researcher has developed an algorithm (or simply used an existing one), separate held-out samples (i.e., data not used to model developing and training) are coded both by human coders and by automated procedures, evaluating whether the results from the latter converge into the former<sup>1</sup>.</p>
+</blockquote>
+<aside><ol class="aside-footnotes"><li id="fn6"><p>Idem</p></li></ol></aside></section>
+<section id="dictionary-development" class="slide level2">
+<h2>Dictionary development</h2>
+<p>Dictionary approaches follow a deductive logic, where terms are included in the dictionary because they are indicators for a theoretical concept. Dictionary development can be a very time-consuming task<sup>1</sup>.</p>
+<aside><ol class="aside-footnotes"><li id="fn7"><p>E.g., Gründl, J. (2022). <a href="https://journals.sagepub.com/doi/pdf/10.1177/1461444820976970">Populist ideas on social media: A dictionary-based measurement of populist communication.</a>&nbsp;<em>New Media &amp; Society</em>,&nbsp;<em>24</em>(6), 1481-1499.</p>
+<p>Dimitrova, D., Heidenreich, T., &amp; Georgiev, T. A. (2022). <a href="https://journals.sagepub.com/doi/abs/10.1177/14614448221088970">The relationship between humanitarian NGO communication and user engagement on Twitter.</a>&nbsp;<em>New Media &amp; Society</em>, 14614448221088970.</p></li></ol></aside></section></section>
 <section id="hands-on-tutorial-4" class="title-slide slide level1 center" data-background-color="#2780e3">
 <h1>Hands-on tutorial</h1>
 <p>Click <a href="https://nicolarighetti.github.io/text-analysis-with-R/day1-tutorial.html#using-dictionaries-in-r">here</a> to open the tutorial</p>
@@ -1328,6 +1352,11 @@ docs    negative positive neg_positive neg_negative
 
 <section id="wrap-up-and-key-takeaways" class="title-slide slide level1 center" data-background-color="#2780e3">
 <h1>Wrap up and key takeaways</h1>
+<ul>
+<li><p>Pre-processing and text as data</p></li>
+<li><p>Quanteda</p></li>
+<li><p>Supervised classification with dictionaris</p></li>
+</ul>
 
 <div class="footer footer-default">
 

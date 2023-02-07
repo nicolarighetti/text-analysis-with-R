@@ -383,6 +383,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/nicolarighetti/text-analysis-with-R/main/data/data-type-tutorial-day-1.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="cell">
+
+</div>
 <ol start="2" type="1">
 <li><strong>Save</strong> the data to your local folder “data” using the <code>write.csv</code> function.</li>
 </ol>
@@ -524,16 +527,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install the necessary packages</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"janitor"</span>)</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"udpipe"</span>)</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"quanteda"</span>)</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"quanteda.textstats"</span>)</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"quanteda.textplots"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"quanteda"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="load-data" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="load-data"><span class="header-section-number">2.1</span> Load data</h2>
-<p>The data set in this tutorial contains US presidential inaugural address texts, and metadata, from 1789 to present. Download the data set <a href="https://drive.google.com/file/d/1t3DArZXy--yWQHAT7wMdbQsspUmhR86B/view?usp=sharing">here</a> and save it to your data folder.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the packages</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'janitor'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    chisq.test, fisher.test</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(udpipe)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Package version: 3.2.4
 Unicode version: 14.0
@@ -545,18 +554,10 @@ ICU version: 70.1</code></pre>
 <div class="cell-output cell-output-stderr">
 <pre><code>See https://quanteda.io for tutorials and examples.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(udpipe)</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'janitor'</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
-
-    chisq.test, fisher.test</code></pre>
-</div>
-</div>
+<section id="load-data" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="load-data"><span class="header-section-number">2.1</span> Load data</h2>
+<p>The data set in this tutorial contains US presidential inaugural address texts, and metadata, from 1789 to present. Download the data set <a href="https://drive.google.com/file/d/1t3DArZXy--yWQHAT7wMdbQsspUmhR86B/view?usp=sharing">here</a> and save it to your data folder.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>inaugural_df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/data_inaugural.csv"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># janitor's function to create well formatted column names</span></span>
@@ -699,7 +700,7 @@ Attaching package: 'janitor'</code></pre>
 <span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"UPOS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="day1-tutorial_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+<p><img src="day1-tutorial_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>With this annotation, texts can be lemmatized or the analysis can be focused on specific words, such as nouns, while excluding others.</p>
@@ -1075,12 +1076,20 @@ dfm tfidf weighted dfm:</code></pre>
 </section>
 <section id="sec-exploring-text-data" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Exploring text data</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"quanteda.textstats"</span>)</span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"quanteda.textplots"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.textstats)</span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.textplots)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>We have already learned how to obtain basic statistics for the corpus, including aggregated statistics based on a grouping variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>inaug_corpus_party <span class="ot">&lt;-</span> <span class="fu">corpus_group</span>(inaug_corpus,</span>
-<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">groups =</span> party)</span>
-<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb109-4"><a href="#cb109-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(inaug_corpus_party, <span class="dv">3</span>)[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>inaug_corpus_party <span class="ot">&lt;-</span> <span class="fu">corpus_group</span>(inaug_corpus,</span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">groups =</span> party)</span>
+<span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-4"><a href="#cb111-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(inaug_corpus_party, <span class="dv">3</span>)[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   Text Types Tokens Sentences
 1            Democratic  5277  42003         1
@@ -1095,18 +1104,18 @@ dfm tfidf weighted dfm:</code></pre>
 <h2 data-number="4.1" class="anchored" data-anchor-id="lexical-diversity"><span class="header-section-number">4.1</span> Lexical Diversity</h2>
 <p>Many statistics can be computed. For example, lexical diversity (e.g., using Yule’s K).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">textstat_lexdiv</span>(</span>
-<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm</span>(<span class="fu">tokens</span>(inaug_corpus_party)), </span>
-<span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">measure =</span> <span class="st">"K"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb111-4"><a href="#cb111-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb111-5"><a href="#cb111-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">fct_reorder</span>(document, <span class="fu">desc</span>(K)), <span class="at">y=</span>K),</span>
-<span id="cb111-6"><a href="#cb111-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">"lightgreen"</span>, <span class="at">col =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb111-7"><a href="#cb111-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb111-8"><a href="#cb111-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Yule's K"</span>) <span class="sc">+</span></span>
-<span id="cb111-9"><a href="#cb111-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
-<span id="cb111-10"><a href="#cb111-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">textstat_lexdiv</span>(</span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm</span>(<span class="fu">tokens</span>(inaug_corpus_party)), </span>
+<span id="cb113-3"><a href="#cb113-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">measure =</span> <span class="st">"K"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb113-4"><a href="#cb113-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb113-5"><a href="#cb113-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">fct_reorder</span>(document, <span class="fu">desc</span>(K)), <span class="at">y=</span>K),</span>
+<span id="cb113-6"><a href="#cb113-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">"lightgreen"</span>, <span class="at">col =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb113-7"><a href="#cb113-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb113-8"><a href="#cb113-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Yule's K"</span>) <span class="sc">+</span></span>
+<span id="cb113-9"><a href="#cb113-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb113-10"><a href="#cb113-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="day1-tutorial_files/figure-html/unnamed-chunk-56-1.png" class="img-fluid" width="672"></p>
+<p><img src="day1-tutorial_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -1114,18 +1123,18 @@ dfm tfidf weighted dfm:</code></pre>
 <h2 data-number="4.2" class="anchored" data-anchor-id="word-frequency-analysis"><span class="header-section-number">4.2</span> Word frequency analysis</h2>
 <p>We have observed that frequency analysis can be conducted at the document or group level. It is possible to generate plots that display various frequencies and compare documents.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># top 5 features in the corpus</span></span>
-<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="fu">topfeatures</span>(inaug_noun_dfm, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># top 5 features in the corpus</span></span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="fu">topfeatures</span>(inaug_noun_dfm, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>government     people     nation         we      state 
        651        593        529        505        450 </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># top five features in each president sub-corpus</span></span>
-<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="fu">topfeatures</span>(inaug_noun_dfm, </span>
-<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">groups =</span> president, </span>
-<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="dv">5</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># top five features in each president sub-corpus</span></span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a><span class="fu">topfeatures</span>(inaug_noun_dfm, </span>
+<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">groups =</span> president, </span>
+<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="dv">5</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$Adams
 government     nation     people      union       upon 
@@ -1145,24 +1154,24 @@ $Buchanan
 </ul>
 <p>A simple word cloud.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.textplots)</span>
-<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>quanteda.textplots<span class="sc">::</span><span class="fu">textplot_wordcloud</span>(inaug_noun_dfm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.textplots)</span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>quanteda.textplots<span class="sc">::</span><span class="fu">textplot_wordcloud</span>(inaug_noun_dfm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="day1-tutorial_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid" width="672"></p>
+<p><img src="day1-tutorial_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>A comparison word cloud.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>dem_rep <span class="ot">&lt;-</span> <span class="fu">dfm_subset</span>(</span>
-<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a>  inaug_noun_dfm, party <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Democratic"</span>, <span class="st">"Republican"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm_group</span>(<span class="at">groups =</span> party)</span>
-<span id="cb117-4"><a href="#cb117-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-5"><a href="#cb117-5" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(dem_rep, </span>
-<span id="cb117-6"><a href="#cb117-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">comparison =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb117-7"><a href="#cb117-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">max_words =</span> <span class="dv">100</span>,</span>
-<span id="cb117-8"><a href="#cb117-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">color =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>dem_rep <span class="ot">&lt;-</span> <span class="fu">dfm_subset</span>(</span>
+<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>  inaug_noun_dfm, party <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Democratic"</span>, <span class="st">"Republican"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm_group</span>(<span class="at">groups =</span> party)</span>
+<span id="cb119-4"><a href="#cb119-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb119-5"><a href="#cb119-5" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(dem_rep, </span>
+<span id="cb119-6"><a href="#cb119-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">comparison =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb119-7"><a href="#cb119-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">max_words =</span> <span class="dv">100</span>,</span>
+<span id="cb119-8"><a href="#cb119-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">color =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="day1-tutorial_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid" width="672"></p>
+<p><img src="day1-tutorial_files/figure-html/unnamed-chunk-63-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -1171,12 +1180,12 @@ $Buchanan
 <p>“Keyness” is a metric that measures the differential occurrence of features across documents. In this context, the documents are determined based on a “target” document index in the <code>dfm</code>, with the reference group consisting of all remaining documents.</p>
 <p>What are Trump-specific words?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>inaug_noun_pres <span class="ot">&lt;-</span> <span class="fu">dfm_group</span>(inaug_noun_dfm, <span class="at">groups =</span> president)</span>
-<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>keyness_trump <span class="ot">&lt;-</span> <span class="fu">textstat_keyness</span>(inaug_noun_pres, </span>
-<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">target =</span> <span class="st">"Trump"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>inaug_noun_pres <span class="ot">&lt;-</span> <span class="fu">dfm_group</span>(inaug_noun_dfm, <span class="at">groups =</span> president)</span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>keyness_trump <span class="ot">&lt;-</span> <span class="fu">textstat_keyness</span>(inaug_noun_pres, </span>
+<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">target =</span> <span class="st">"Trump"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(keyness_trump)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(keyness_trump)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     feature      chi2            p n_target n_reference
 1      obama 190.84658 0.000000e+00        3           0
@@ -1188,9 +1197,9 @@ $Buchanan
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_keyness</span>(keyness_trump)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_keyness</span>(keyness_trump)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="day1-tutorial_files/figure-html/unnamed-chunk-63-1.png" class="img-fluid" width="672"></p>
+<p><img src="day1-tutorial_files/figure-html/unnamed-chunk-66-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -1198,10 +1207,10 @@ $Buchanan
 <h2 data-number="4.4" class="anchored" data-anchor-id="kwic"><span class="header-section-number">4.4</span> KWIC</h2>
 <p>A specific word is “trillion”. What are these words about? Let’s use the <code>kwic</code> function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>trump_corpus <span class="ot">&lt;-</span> <span class="fu">corpus_subset</span>(inaug_corpus, president <span class="sc">==</span> <span class="st">"Trump"</span>)</span>
-<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>trump_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(trump_corpus)</span>
-<span id="cb122-3"><a href="#cb122-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kwic</span>(trump_tokens, <span class="at">pattern =</span> <span class="st">"trillion"</span>, </span>
-<span id="cb122-4"><a href="#cb122-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">window =</span> <span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>trump_corpus <span class="ot">&lt;-</span> <span class="fu">corpus_subset</span>(inaug_corpus, president <span class="sc">==</span> <span class="st">"Trump"</span>)</span>
+<span id="cb124-2"><a href="#cb124-2" aria-hidden="true" tabindex="-1"></a>trump_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(trump_corpus)</span>
+<span id="cb124-3"><a href="#cb124-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kwic</span>(trump_tokens, <span class="at">pattern =</span> <span class="st">"trillion"</span>, </span>
+<span id="cb124-4"><a href="#cb124-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">window =</span> <span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Keyword-in-context with 0 matches.</code></pre>
 </div>
@@ -1214,9 +1223,9 @@ $Buchanan
 <h2 data-number="4.5" class="anchored" data-anchor-id="collocations"><span class="header-section-number">4.5</span> Collocations</h2>
 <p>Collocations are multi-word expressions, or adjacent fixed-length collocations.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">textstat_collocations</span>(inaug_tokens_clean, </span>
-<span id="cb124-2"><a href="#cb124-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">size =</span> <span class="dv">2</span>, <span class="at">min_count =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb124-3"><a href="#cb124-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">textstat_collocations</span>(inaug_tokens_clean, </span>
+<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">size =</span> <span class="dv">2</span>, <span class="at">min_count =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb126-3"><a href="#cb126-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      collocation count count_nested length   lambda        z
 1   united states   158            0      2 7.170000 38.90305
@@ -1229,11 +1238,11 @@ $Buchanan
 </div>
 <p>You may want to compound certain important collocations.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>coll_pp <span class="ot">&lt;-</span> <span class="fu">textstat_collocations</span>(inaug_tokens_clean, </span>
-<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">size =</span> <span class="dv">2</span>, <span class="at">min_count =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb126-3"><a href="#cb126-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(z <span class="sc">&gt;</span> <span class="dv">3</span>)</span>
-<span id="cb126-4"><a href="#cb126-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb126-5"><a href="#cb126-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(coll_pp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>coll_pp <span class="ot">&lt;-</span> <span class="fu">textstat_collocations</span>(inaug_tokens_clean, </span>
+<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">size =</span> <span class="dv">2</span>, <span class="at">min_count =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(z <span class="sc">&gt;</span> <span class="dv">3</span>)</span>
+<span id="cb128-4"><a href="#cb128-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-5"><a href="#cb128-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(coll_pp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      collocation count count_nested length   lambda        z
 1   united states   158            0      2 7.170000 38.90305
@@ -1245,14 +1254,14 @@ $Buchanan
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>inaug_tokens_comp <span class="ot">&lt;-</span> <span class="fu">tokens_compound</span>(inaug_tokens_clean, </span>
-<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">pattern =</span> coll_pp,</span>
-<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">join =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb128-4"><a href="#cb128-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-5"><a href="#cb128-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kwic</span>(inaug_tokens_comp, </span>
-<span id="cb128-6"><a href="#cb128-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">"united_*"</span>, <span class="st">"american_*"</span>), </span>
-<span id="cb128-7"><a href="#cb128-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">window =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb128-8"><a href="#cb128-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>inaug_tokens_comp <span class="ot">&lt;-</span> <span class="fu">tokens_compound</span>(inaug_tokens_clean, </span>
+<span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">pattern =</span> coll_pp,</span>
+<span id="cb130-3"><a href="#cb130-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">join =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb130-4"><a href="#cb130-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb130-5"><a href="#cb130-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kwic</span>(inaug_tokens_comp, </span>
+<span id="cb130-6"><a href="#cb130-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">"united_*"</span>, <span class="st">"american_*"</span>), </span>
+<span id="cb130-7"><a href="#cb130-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">window =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb130-8"><a href="#cb130-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Keyword-in-context with 6 matches.                                                                           
  [text1, 167]       people_united |  united_states  | government_instituted
@@ -1264,16 +1273,16 @@ $Buchanan
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compounding manually</span></span>
-<span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a>ps_tokens_comp <span class="ot">&lt;-</span> <span class="fu">tokens_compound</span>(inaug_tokens_clean, </span>
-<span id="cb130-3"><a href="#cb130-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">pattern =</span> <span class="fu">list</span>(</span>
-<span id="cb130-4"><a href="#cb130-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">c</span>(<span class="st">"american"</span>, <span class="st">"people"</span>), </span>
-<span id="cb130-5"><a href="#cb130-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">c</span>(<span class="st">"fellow"</span>, <span class="st">"citizen"</span>)),</span>
-<span id="cb130-6"><a href="#cb130-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">join =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb130-7"><a href="#cb130-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb130-8"><a href="#cb130-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kwic</span>(ps_tokens_comp, </span>
-<span id="cb130-9"><a href="#cb130-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">"american_*"</span>, <span class="st">"fellow_*"</span>), <span class="at">window =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb130-10"><a href="#cb130-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compounding manually</span></span>
+<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>ps_tokens_comp <span class="ot">&lt;-</span> <span class="fu">tokens_compound</span>(inaug_tokens_clean, </span>
+<span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">pattern =</span> <span class="fu">list</span>(</span>
+<span id="cb132-4"><a href="#cb132-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">c</span>(<span class="st">"american"</span>, <span class="st">"people"</span>), </span>
+<span id="cb132-5"><a href="#cb132-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">c</span>(<span class="st">"fellow"</span>, <span class="st">"citizen"</span>)),</span>
+<span id="cb132-6"><a href="#cb132-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">join =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb132-7"><a href="#cb132-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb132-8"><a href="#cb132-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kwic</span>(ps_tokens_comp, </span>
+<span id="cb132-9"><a href="#cb132-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">"american_*"</span>, <span class="st">"fellow_*"</span>), <span class="at">window =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb132-10"><a href="#cb132-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Keyword-in-context with 6 matches.                                                          
   [text1, 450]     hands | american_people | besides      
@@ -1289,11 +1298,11 @@ $Buchanan
 <h2 data-number="4.6" class="anchored" data-anchor-id="feature-co-occurrence-matrix"><span class="header-section-number">4.6</span> Feature co-occurrence matrix</h2>
 <p>The feature co-occurrence matrix measures the co-occurrence of features within a specified context. The context can be defined as a document or a window within a set of documents.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>inaug_noun_fcm <span class="ot">&lt;-</span> <span class="fu">fcm</span>(inaug_noun_dfm, </span>
-<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">context =</span> <span class="st">"document"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>inaug_noun_fcm <span class="ot">&lt;-</span> <span class="fu">fcm</span>(inaug_noun_dfm, </span>
+<span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">context =</span> <span class="st">"document"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(inaug_noun_fcm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(inaug_noun_fcm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Feature co-occurrence matrix of: 6 by 3,747 features.
                  features
@@ -1317,17 +1326,17 @@ features          incident life event greater
 </div>
 <p>A feature co-occurrence matrix can be visualized as a network, where edges represent the co-occurrence of features.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="co"># identify the top co</span></span>
-<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a>feat <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">topfeatures</span>(inaug_noun_fcm, <span class="dv">30</span>))</span>
-<span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb135-4"><a href="#cb135-4" aria-hidden="true" tabindex="-1"></a>inaug_noun_fcm_sub <span class="ot">&lt;-</span> <span class="fu">fcm_select</span>(inaug_noun_fcm, <span class="at">pattern =</span> feat)</span>
-<span id="cb135-5"><a href="#cb135-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb135-6"><a href="#cb135-6" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_network</span>(inaug_noun_fcm_sub, </span>
-<span id="cb135-7"><a href="#cb135-7" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># "min_freq": a frequency count threshold or proportion </span></span>
-<span id="cb135-8"><a href="#cb135-8" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># for co-occurrence frequencies of features to be included.</span></span>
-<span id="cb135-9"><a href="#cb135-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">min_freq =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="co"># identify the top co</span></span>
+<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a>feat <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">topfeatures</span>(inaug_noun_fcm, <span class="dv">30</span>))</span>
+<span id="cb137-3"><a href="#cb137-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb137-4"><a href="#cb137-4" aria-hidden="true" tabindex="-1"></a>inaug_noun_fcm_sub <span class="ot">&lt;-</span> <span class="fu">fcm_select</span>(inaug_noun_fcm, <span class="at">pattern =</span> feat)</span>
+<span id="cb137-5"><a href="#cb137-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb137-6"><a href="#cb137-6" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_network</span>(inaug_noun_fcm_sub, </span>
+<span id="cb137-7"><a href="#cb137-7" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># "min_freq": a frequency count threshold or proportion </span></span>
+<span id="cb137-8"><a href="#cb137-8" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># for co-occurrence frequencies of features to be included.</span></span>
+<span id="cb137-9"><a href="#cb137-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">min_freq =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="day1-tutorial_files/figure-html/unnamed-chunk-71-1.png" class="img-fluid" width="672"></p>
+<p><img src="day1-tutorial_files/figure-html/unnamed-chunk-74-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -1337,40 +1346,40 @@ features          incident life event greater
 <p>In this tutorial we learn to import and apply a dictionary, and to build and apply a user-defined dictionary.</p>
 <p>A Quanteda built-in dictionary is the <code>LSD2015</code> sentiment dictionary.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a>LSD2015 <span class="ot">&lt;-</span> data_dictionary_LSD2015</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a>LSD2015 <span class="ot">&lt;-</span> data_dictionary_LSD2015</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The dictionary can be applied to <code>dfm</code> with the <code>dfm_lookup</code> function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>inaug_lsd <span class="ot">&lt;-</span> <span class="fu">dfm_lookup</span>(inaug_noun_dfm, </span>
-<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">dictionary =</span> LSD2015)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a>inaug_lsd <span class="ot">&lt;-</span> <span class="fu">dfm_lookup</span>(inaug_noun_dfm, </span>
+<span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">dictionary =</span> LSD2015)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The resulting output can be analyzed in aggregated form using a grouping variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a>df_lsd <span class="ot">&lt;-</span> </span>
-<span id="cb138-2"><a href="#cb138-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># output from tokens_lookup</span></span>
-<span id="cb138-3"><a href="#cb138-3" aria-hidden="true" tabindex="-1"></a>  inaug_lsd <span class="sc">%&gt;%</span></span>
-<span id="cb138-4"><a href="#cb138-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># to dfm</span></span>
-<span id="cb138-5"><a href="#cb138-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb138-6"><a href="#cb138-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group data by variable</span></span>
-<span id="cb138-7"><a href="#cb138-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm_group</span>(<span class="at">groups =</span> party) <span class="sc">%&gt;%</span></span>
-<span id="cb138-8"><a href="#cb138-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert to data frame to perform data manipulation easily</span></span>
-<span id="cb138-9"><a href="#cb138-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">convert</span>(<span class="at">to =</span> <span class="st">"data.frame"</span>)</span>
-<span id="cb138-10"><a href="#cb138-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb138-11"><a href="#cb138-11" aria-hidden="true" tabindex="-1"></a><span class="co"># create a summary of the party-grouped corpus to get type and tokens statistics</span></span>
-<span id="cb138-12"><a href="#cb138-12" aria-hidden="true" tabindex="-1"></a>inaug_corpus_party_summ <span class="ot">&lt;-</span> <span class="fu">summary</span>(inaug_corpus_party)</span>
-<span id="cb138-13"><a href="#cb138-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb138-14"><a href="#cb138-14" aria-hidden="true" tabindex="-1"></a>df_lsd <span class="ot">&lt;-</span> df_lsd <span class="sc">%&gt;%</span></span>
-<span id="cb138-15"><a href="#cb138-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># merge the sentiment df and the types metrics by year</span></span>
-<span id="cb138-16"><a href="#cb138-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(inaug_corpus_party_summ[, <span class="fu">c</span>(<span class="st">"Tokens"</span>, <span class="st">"Text"</span>)], </span>
-<span id="cb138-17"><a href="#cb138-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"doc_id"</span> <span class="ot">=</span> <span class="st">"Text"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb138-18"><a href="#cb138-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># proportions out of total types</span></span>
-<span id="cb138-19"><a href="#cb138-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">neg_prop =</span> negative<span class="sc">/</span>Tokens,</span>
-<span id="cb138-20"><a href="#cb138-20" aria-hidden="true" tabindex="-1"></a>         <span class="at">pos_prop =</span> positive<span class="sc">/</span>Tokens) <span class="sc">%&gt;%</span></span>
-<span id="cb138-21"><a href="#cb138-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># difference in polarity and total emotions</span></span>
-<span id="cb138-22"><a href="#cb138-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> pos_prop <span class="sc">-</span> neg_prop,</span>
-<span id="cb138-23"><a href="#cb138-23" aria-hidden="true" tabindex="-1"></a>         <span class="at">emot =</span> pos_prop <span class="sc">+</span> neg_prop)</span>
-<span id="cb138-24"><a href="#cb138-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb138-25"><a href="#cb138-25" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_lsd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a>df_lsd <span class="ot">&lt;-</span> </span>
+<span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># output from tokens_lookup</span></span>
+<span id="cb140-3"><a href="#cb140-3" aria-hidden="true" tabindex="-1"></a>  inaug_lsd <span class="sc">%&gt;%</span></span>
+<span id="cb140-4"><a href="#cb140-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># to dfm</span></span>
+<span id="cb140-5"><a href="#cb140-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb140-6"><a href="#cb140-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group data by variable</span></span>
+<span id="cb140-7"><a href="#cb140-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm_group</span>(<span class="at">groups =</span> party) <span class="sc">%&gt;%</span></span>
+<span id="cb140-8"><a href="#cb140-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert to data frame to perform data manipulation easily</span></span>
+<span id="cb140-9"><a href="#cb140-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">convert</span>(<span class="at">to =</span> <span class="st">"data.frame"</span>)</span>
+<span id="cb140-10"><a href="#cb140-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb140-11"><a href="#cb140-11" aria-hidden="true" tabindex="-1"></a><span class="co"># create a summary of the party-grouped corpus to get type and tokens statistics</span></span>
+<span id="cb140-12"><a href="#cb140-12" aria-hidden="true" tabindex="-1"></a>inaug_corpus_party_summ <span class="ot">&lt;-</span> <span class="fu">summary</span>(inaug_corpus_party)</span>
+<span id="cb140-13"><a href="#cb140-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb140-14"><a href="#cb140-14" aria-hidden="true" tabindex="-1"></a>df_lsd <span class="ot">&lt;-</span> df_lsd <span class="sc">%&gt;%</span></span>
+<span id="cb140-15"><a href="#cb140-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># merge the sentiment df and the types metrics by year</span></span>
+<span id="cb140-16"><a href="#cb140-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(inaug_corpus_party_summ[, <span class="fu">c</span>(<span class="st">"Tokens"</span>, <span class="st">"Text"</span>)], </span>
+<span id="cb140-17"><a href="#cb140-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"doc_id"</span> <span class="ot">=</span> <span class="st">"Text"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb140-18"><a href="#cb140-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># proportions out of total types</span></span>
+<span id="cb140-19"><a href="#cb140-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">neg_prop =</span> negative<span class="sc">/</span>Tokens,</span>
+<span id="cb140-20"><a href="#cb140-20" aria-hidden="true" tabindex="-1"></a>         <span class="at">pos_prop =</span> positive<span class="sc">/</span>Tokens) <span class="sc">%&gt;%</span></span>
+<span id="cb140-21"><a href="#cb140-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># difference in polarity and total emotions</span></span>
+<span id="cb140-22"><a href="#cb140-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> pos_prop <span class="sc">-</span> neg_prop,</span>
+<span id="cb140-23"><a href="#cb140-23" aria-hidden="true" tabindex="-1"></a>         <span class="at">emot =</span> pos_prop <span class="sc">+</span> neg_prop)</span>
+<span id="cb140-24"><a href="#cb140-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb140-25"><a href="#cb140-25" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_lsd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 doc_id negative positive neg_positive neg_negative Tokens
 1            Democratic     1116     2321            0            0  42003
@@ -1390,10 +1399,10 @@ features          incident life event greater
 </div>
 <p>To plot data with <code>ggplot2</code> is always convenient to reshape it in “long” format.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a>df_lsd <span class="ot">&lt;-</span> df_lsd <span class="sc">%&gt;%</span></span>
-<span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>doc_id)</span>
-<span id="cb140-3"><a href="#cb140-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb140-4"><a href="#cb140-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_lsd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a>df_lsd <span class="ot">&lt;-</span> df_lsd <span class="sc">%&gt;%</span></span>
+<span id="cb142-2"><a href="#cb142-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>doc_id)</span>
+<span id="cb142-3"><a href="#cb142-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-4"><a href="#cb142-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_lsd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
   doc_id     name              value
@@ -1408,24 +1417,24 @@ features          incident life event greater
 </div>
 <p>Plot the results with <code>ggplot2</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a>df_lsd <span class="sc">%&gt;%</span></span>
-<span id="cb142-2"><a href="#cb142-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"neg_prop"</span>, <span class="st">"pos_prop"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb142-3"><a href="#cb142-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb142-4"><a href="#cb142-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> doc_id,</span>
-<span id="cb142-5"><a href="#cb142-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> value, <span class="at">group =</span> name, <span class="at">fill =</span> name), </span>
-<span id="cb142-6"><a href="#cb142-6" aria-hidden="true" tabindex="-1"></a>           <span class="co"># "dodge" to place columns side-by-side</span></span>
-<span id="cb142-7"><a href="#cb142-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb142-8"><a href="#cb142-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">neg_prop =</span> <span class="st">"skyblue"</span>,</span>
-<span id="cb142-9"><a href="#cb142-9" aria-hidden="true" tabindex="-1"></a>                                <span class="at">pos_prop =</span> <span class="st">"tomato"</span>),</span>
-<span id="cb142-10"><a href="#cb142-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Negative"</span>, <span class="st">"Positive"</span>),</span>
-<span id="cb142-11"><a href="#cb142-11" aria-hidden="true" tabindex="-1"></a>                    <span class="at">name =</span> <span class="st">"Emotions"</span>) <span class="sc">+</span></span>
-<span id="cb142-12"><a href="#cb142-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb142-13"><a href="#cb142-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb142-14"><a href="#cb142-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Proportions"</span>) <span class="sc">+</span></span>
-<span id="cb142-15"><a href="#cb142-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Simple sentiment analysis with Quanteda and LSD2015"</span>,</span>
-<span id="cb142-16"><a href="#cb142-16" aria-hidden="true" tabindex="-1"></a>          <span class="at">subtitle =</span> <span class="st">"Proportion of emotional words out of total tokens"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a>df_lsd <span class="sc">%&gt;%</span></span>
+<span id="cb144-2"><a href="#cb144-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"neg_prop"</span>, <span class="st">"pos_prop"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb144-3"><a href="#cb144-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb144-4"><a href="#cb144-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> doc_id,</span>
+<span id="cb144-5"><a href="#cb144-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> value, <span class="at">group =</span> name, <span class="at">fill =</span> name), </span>
+<span id="cb144-6"><a href="#cb144-6" aria-hidden="true" tabindex="-1"></a>           <span class="co"># "dodge" to place columns side-by-side</span></span>
+<span id="cb144-7"><a href="#cb144-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb144-8"><a href="#cb144-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">neg_prop =</span> <span class="st">"skyblue"</span>,</span>
+<span id="cb144-9"><a href="#cb144-9" aria-hidden="true" tabindex="-1"></a>                                <span class="at">pos_prop =</span> <span class="st">"tomato"</span>),</span>
+<span id="cb144-10"><a href="#cb144-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Negative"</span>, <span class="st">"Positive"</span>),</span>
+<span id="cb144-11"><a href="#cb144-11" aria-hidden="true" tabindex="-1"></a>                    <span class="at">name =</span> <span class="st">"Emotions"</span>) <span class="sc">+</span></span>
+<span id="cb144-12"><a href="#cb144-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb144-13"><a href="#cb144-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb144-14"><a href="#cb144-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Proportions"</span>) <span class="sc">+</span></span>
+<span id="cb144-15"><a href="#cb144-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Simple sentiment analysis with Quanteda and LSD2015"</span>,</span>
+<span id="cb144-16"><a href="#cb144-16" aria-hidden="true" tabindex="-1"></a>          <span class="at">subtitle =</span> <span class="st">"Proportion of emotional words out of total tokens"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="day1-tutorial_files/figure-html/unnamed-chunk-76-1.png" class="img-fluid" width="672"></p>
+<p><img src="day1-tutorial_files/figure-html/unnamed-chunk-79-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -1433,20 +1442,20 @@ features          incident life event greater
 </ul>
 <p>To create an user-defined dictionary:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a>my_dictionary <span class="ot">&lt;-</span></span>
-<span id="cb143-2"><a href="#cb143-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dictionary</span>(</span>
-<span id="cb143-3"><a href="#cb143-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(</span>
-<span id="cb143-4"><a href="#cb143-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">christmas =</span> <span class="fu">c</span>(<span class="st">"Christmas"</span>, <span class="st">"Santa"</span>, <span class="st">"holiday"</span>),</span>
-<span id="cb143-5"><a href="#cb143-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">opposition =</span> <span class="fu">c</span>(<span class="st">"Opposition"</span>, <span class="st">"reject"</span>, <span class="st">"notincorpus"</span>),</span>
-<span id="cb143-6"><a href="#cb143-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">taxing =</span> <span class="st">"taxing"</span>,</span>
-<span id="cb143-7"><a href="#cb143-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">taxation =</span> <span class="st">"taxation"</span>,</span>
-<span id="cb143-8"><a href="#cb143-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">taxregex =</span> <span class="st">"tax*"</span>,</span>
-<span id="cb143-9"><a href="#cb143-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">country =</span> <span class="st">"america"</span></span>
-<span id="cb143-10"><a href="#cb143-10" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb143-11"><a href="#cb143-11" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb143-12"><a href="#cb143-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb143-13"><a href="#cb143-13" aria-hidden="true" tabindex="-1"></a><span class="fu">dfm_lookup</span>(inaug_noun_dfm, </span>
-<span id="cb143-14"><a href="#cb143-14" aria-hidden="true" tabindex="-1"></a>           <span class="at">dictionary =</span> my_dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a>my_dictionary <span class="ot">&lt;-</span></span>
+<span id="cb145-2"><a href="#cb145-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dictionary</span>(</span>
+<span id="cb145-3"><a href="#cb145-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(</span>
+<span id="cb145-4"><a href="#cb145-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">christmas =</span> <span class="fu">c</span>(<span class="st">"Christmas"</span>, <span class="st">"Santa"</span>, <span class="st">"holiday"</span>),</span>
+<span id="cb145-5"><a href="#cb145-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">opposition =</span> <span class="fu">c</span>(<span class="st">"Opposition"</span>, <span class="st">"reject"</span>, <span class="st">"notincorpus"</span>),</span>
+<span id="cb145-6"><a href="#cb145-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">taxing =</span> <span class="st">"taxing"</span>,</span>
+<span id="cb145-7"><a href="#cb145-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">taxation =</span> <span class="st">"taxation"</span>,</span>
+<span id="cb145-8"><a href="#cb145-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">taxregex =</span> <span class="st">"tax*"</span>,</span>
+<span id="cb145-9"><a href="#cb145-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">country =</span> <span class="st">"america"</span></span>
+<span id="cb145-10"><a href="#cb145-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb145-11"><a href="#cb145-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb145-12"><a href="#cb145-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb145-13"><a href="#cb145-13" aria-hidden="true" tabindex="-1"></a><span class="fu">dfm_lookup</span>(inaug_noun_dfm, </span>
+<span id="cb145-14"><a href="#cb145-14" aria-hidden="true" tabindex="-1"></a>           <span class="at">dictionary =</span> my_dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Document-feature matrix of: 59 documents, 6 features (79.10% sparse) and 5 docvars.
        features

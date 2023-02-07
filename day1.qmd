@@ -127,8 +127,12 @@ my_data <- read.csv(file = "name_of_my_csv_data_file.csv")
 
 The `read.csv` function can read files stored locally and online (e.g., on GitHub repositories):
 
-```{r echo=TRUE}
+```{r eval=FALSE, echo=TRUE}
 uk_immig_news <- read.csv("https://raw.githubusercontent.com/nicolarighetti/text-analysis-with-R/main/data/data_corpus_immigrationnews_df.csv")
+```
+
+```{r}
+uk_immig_news <- read.csv("data/data_corpus_immigrationnews_df.csv")
 ```
 
 ## Objects and Functions
@@ -857,8 +861,40 @@ ggplot(dfmat_lsd) +
   ggtitle("Sentiment analysis (LSD2015)")
 ```
 
+## Validation
+
+Validation is a crucial problem of automated content analysis, and is usually made by comparing the performance of the dictionary against human coding. Also, the quality of manual annotations used for validation should be properly ensured[^4].
+
+[^4]: Song, H., Tolochko, P., Eberl, J. M., Eisele, O., Greussing, E., Heidenreich, T., \... & Boomgaarden, H. G. (2020). [In validations we trust? The impact of imperfect human annotations as a gold standard on the quality of validation of automated content analysis.](https://www.tandfonline.com/doi/pdf/10.1080/10584609.2020.1723752) *Political Communication*, *37*(4), 550-572.
+
+------------------------------------------------------------------------
+
+> There are two ways of utilizing "human coding" in dictionary and SML analysis: on the one hand in the initial development stage (i.e., in constructing dictionaries, or in training SML algorithms), and on the other hand in the "validation" stage, evaluating the classification performances of the procedures (i.e., post-measurement validation)[^5].
+
+[^5]: Song et al., 2020
+
+------------------------------------------------------------------------
+
+> \[...\] the literature often suggests that post-measurement validation based on "out-of-sample" data represents an ideal architecture of validation (e.g., DiMaggio, 2015; Grimmer & Stewart, 2013; Lowe & Benoit, 2013). Once a researcher has developed an algorithm (or simply used an existing one), separate held-out samples (i.e., data not used to model developing and training) are coded both by human coders and by automated procedures, evaluating whether the results from the latter converge into the former[^6].
+
+[^6]: Idem
+
+## Dictionary development
+
+Dictionary approaches follow a deductive logic, where terms are included in the dictionary because they are indicators for a theoretical concept. Dictionary development can be a very time-consuming task[^7].
+
+[^7]: E.g., Gründl, J. (2022). [Populist ideas on social media: A dictionary-based measurement of populist communication.](https://journals.sagepub.com/doi/pdf/10.1177/1461444820976970) *New Media & Society*, *24*(6), 1481-1499.
+
+    Dimitrova, D., Heidenreich, T., & Georgiev, T. A. (2022). [The relationship between humanitarian NGO communication and user engagement on Twitter.](https://journals.sagepub.com/doi/abs/10.1177/14614448221088970) *New Media & Society*, 14614448221088970.
+
 # Hands-on tutorial {background-color="#2780e3"}
 
 Click [here](https://nicolarighetti.github.io/text-analysis-with-R/day1-tutorial.html#using-dictionaries-in-r) to open the tutorial
 
 # Wrap up and key takeaways {background-color="#2780e3"}
+
+-   Pre-processing and text as data
+
+-   Quanteda
+
+-   Supervised classification with dictionaris

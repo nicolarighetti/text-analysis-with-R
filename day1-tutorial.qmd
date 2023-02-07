@@ -62,8 +62,13 @@ library(tidyverse)
 
 1.  Import a sample data set using the `read.csv` function and label it `df` (short for data frame). Observe that the `df` object is now available in your environment.
 
-```{r}
+```{r eval=FALSE}
 df <- read.csv("https://raw.githubusercontent.com/nicolarighetti/text-analysis-with-R/main/data/data-type-tutorial-day-1.csv")
+
+```
+
+```{r echo=FALSE}
+df <- read.csv("data/data-type-tutorial-day-1.csv")
 ```
 
 2.  **Save** the data to your local folder "data" using the `write.csv` function.
@@ -166,20 +171,18 @@ The majority of common text preparation operations for analysis are readily avai
 install.packages("janitor")
 install.packages("udpipe")
 install.packages("quanteda")
-install.packages("quanteda.textstats")
-install.packages("quanteda.textplots")
+```
+
+```{r}
+# load the packages
+library(janitor)
+library(udpipe)
+library(quanteda)
 ```
 
 ## Load data
 
 The data set in this tutorial contains US presidential inaugural address texts, and metadata, from 1789 to present. Download the data set [here](https://drive.google.com/file/d/1t3DArZXy--yWQHAT7wMdbQsspUmhR86B/view?usp=sharing) and save it to your data folder.
-
-```{r}
-library(tidyverse)
-library(quanteda)
-library(udpipe)
-library(janitor)
-```
 
 ```{r}
 inaugural_df <- read.csv("data/data_inaugural.csv") %>%
@@ -512,6 +515,16 @@ dim(inaug_dfm_trim)
 ```
 
 # Exploring text data {#sec-exploring-text-data}
+
+```{r eval=FALSE}
+install.packages("quanteda.textstats")
+install.packages("quanteda.textplots")
+```
+
+```{r}
+library(quanteda.textstats)
+library(quanteda.textplots)
+```
 
 We have already learned how to obtain basic statistics for the corpus, including aggregated statistics based on a grouping variable.
 
