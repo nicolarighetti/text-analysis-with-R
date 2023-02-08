@@ -93,11 +93,11 @@ textplot_keyness(keyness_trump)
 
 # use KWIC to check common words used by Trump
 # first subset the corpus
-trump_corpus <- corpus_subset(inaug_corpus, president == "Trump")
+trump_corpus <- corpus_subset(dat_corpus, President == "Trump")
 # tokenize
 trump_tokens <- tokens(trump_corpus)
 # kwic
-kwic(trump_tokens, pattern = "trillion", 
+kwic(trump_tokens, pattern = "america", 
      window = 5) 
 
 # collocations 
@@ -184,3 +184,4 @@ my_dictionary <-
 
 dfm_lookup(dat_dfm, 
            dictionary = my_dictionary)
+
