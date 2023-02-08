@@ -12,14 +12,10 @@ packages <- c(
   "tidyverse",
   "tidytext",
   "quanteda",
-  "textstem",
   "topicmodels",
   "ldatuning",
   "topicdoc",
   "stm",
-  "udpipe",
-  "parallel",
-  "doParallel",
   "seededlda"
 )
 
@@ -34,35 +30,55 @@ if (any(installed_packages == FALSE)) {
 library(tidyverse)
 library(tidytext)
 library(quanteda)
-library(textstem)
-library(topicmodels)
-library(ldatuning)
-library(topicdoc)
-library(stm)
 library(udpipe)
-library(parallel)
-library(doParallel)
+# topic modeling 
+library(topicmodels)
+# diagnostic for number of topics
+library(ldatuning)
+# diagnostic for topic models
+library(topicdoc) 
+# structural topic modeling
+library(stm)
+# seeded lda
 library(seededlda)
 ```
 
 ```{r}
+# load data 
 ukimmig2010 <- data.frame(text = quanteda::data_char_ukimmig2010)
 ukimmig2010$party <- names(quanteda::data_char_ukimmig2010)
 
+
 ukimmig2010 <- ukimmig2010 %>%
-  mutate(lemma = tolower(text)) %>%
-  mutate(lemma = lemmatize_strings(lemma))
+  # text to lower
+  mutate(clean_text = tolower(text)) %>%
+  # remove apostrophes
+  mutate(clean_text = gsub("'", " ", clean_text))
 
+# lemmatization: load the udpipe model
+ud_english <- udpipe_load_model("english-ewt-ud-2.5-191206.udpipe")
+
+# annotate the text
+annotated_text <- udpipe_annotate(ud_english, x = ukimmig2010$clean_text, 
+                                  tagger = "default", 
+                                  parser = "none")
+
+# create the corpus
 ukimmig2010_corpus <- quanteda::corpus(ukimmig2010,
-                                       docid_field = "party",
-                                       text_field = "lemma")
+                                       text_field = "clean_text")
 
-ukimmig2010_dfm <- ukimmig2010_corpus %>%
-  quanteda::tokens(remove_punct = TRUE,
-         remove_symbols = TRUE,
-         remove_numbers = TRUE) %>%
-  tokens_tolower() %>%
+# tokenize
+ukimmig2010_tokens <- ukimmig2010_corpus %>%
+  tokens(remove_punct = TRUE) %>%
+  # remove stopwords
   tokens_remove(stopwords("en")) %>%
+  # lemmatize strings
+  tokens_replace(pattern = annotated_text$token, 
+                 replacement = annotated_text$lemma,
+                 valuetype = "fixed")
+
+# dfm 
+ukimmig2010_dfm <- ukimmig2010_tokens %>%
   dfm() %>%
   dfm_trim(min_docfreq = 0.5, max_docfreq = 0.99, 
            docfreq_type = "prop") %>%
@@ -70,11 +86,11 @@ ukimmig2010_dfm <- ukimmig2010_corpus %>%
 ```
 
 ```{r}
-ukimmig2010_dtm <- convert(ukimmig2010_dfm, to = "topicmodels")
+ukimmig2010_dtm <- convert(ukimmig2010_dfm, 
+                           to = "topicmodels")
 ```
 
-
-The basic function to fit a topic model is `LDA`:
+The basic function to fit a topic model with `topicmodels` is `LDA`:
 
 ```{r}
 topicModel <- LDA(ukimmig2010_dtm, 
@@ -84,7 +100,7 @@ topicModel <- LDA(ukimmig2010_dtm,
 topicmodels::terms(topicModel, 5)
 ```
 
-Considering the output of the function `LDA`, the `beta` matrix includes the information about the distribution of terms by topics.
+The `beta` matrix includes the information about the distribution of terms by topics.
 
 ```{r}
 tidy_model <- tidy(topicModel)
@@ -132,11 +148,16 @@ docvars(ukimmig2010_corpus, "pred_topic") <- topicmodels::topics(topicModel)
 str(docvars(ukimmig2010_corpus))
 ```
 
+```{r}
+# convert to data frame
+df_topicmodel <- convert(ukimmig2010_corpus, to = "data.frame")
+```
+
 # Advanced topic modeling methods {#sec-advanced-topic-modeling-methods}
 
 ## Identify the number of topics
 
-There are different algorithms for estimating the optimal number of topics. The `ldatuning` package provides a function `FindTopicsNumber` that calculates different metrics to estimate the most preferable number of topics for LDA model.
+The `ldatuning` package provides a function `FindTopicsNumber` that calculates different metrics to estimate the most preferable number of topics for LDA model.
 
 ```{r}
 tn <- FindTopicsNumber(ukimmig2010_dtm, 
