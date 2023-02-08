@@ -1,6 +1,8 @@
 library(quanteda)
 library(udpipe)
 library(tidyverse)
+library(quanteda.textstats)
+library(quanteda.textplots)
 
 # load data 
 dat <- read.csv("data/data_inaugural.csv")
@@ -9,12 +11,11 @@ dat <- read.csv("data/data_inaugural.csv")
 names(dat)
 str(dat)
 
-# some text cleaning
-dat <- dat %>%
-  # text to lower
-  mutate(clean_text = tolower(texts)) %>%
-  # remove apostrophes
-  mutate(clean_text = gsub("'", " ", clean_text))
+# text to lower
+dat$clean_text <- tolower(dat$texts)
+
+ # remove apostrophes
+dat$clean_text <- gsub("'", " ", dat$clean_text)
 
 # lemmatization: load the udpipe model
 ud_english <- udpipe_load_model("english-ewt-ud-2.5-191206.udpipe")
@@ -24,12 +25,15 @@ annotated_text <- udpipe_annotate(ud_english, x = dat$clean_text,
                                   tagger = "default", 
                                   parser = "none")
 
+annotated_text <- as.data.frame(annotated_text)
+
 # create the corpus
 dat_corpus <- quanteda::corpus(dat,
                                text_field = "clean_text")
 
 # check docvars names
 names(docvars(dat_corpus))
+summary(dat_corpus)
 
 # tokenize
 dat_tokens <- dat_corpus %>%
@@ -51,19 +55,18 @@ dat_dfm <- dat_tokens %>%
   dfm_subset(ntoken(.) > 0)
 
 # top features
-topfeatures(dat_dfm, n = 10)
+topfeatures(dat_dfm, n = 20)
 
 # top five features in each president sub-corpus
 topfeatures(dat_dfm, 
             groups = President, 
-            n = 5)
+            n = 10)
 
 # KWIC
-kwic(dat_tokens, pattern = "people", window = 5)
+kwic(dat_tokens, pattern = "nation", window = 5)
+kwic(tokens(dat_corpus), pattern = "nation", window = 3)
 
 # install quanteda.textplots and create a wordcloud
-install.packages("quanteda.textplots")
-library(quanteda.textplots)
 quanteda.textplots::textplot_wordcloud(dat_dfm)
 
 # create a comparison world cloud
@@ -79,17 +82,25 @@ textplot_wordcloud(dem_rep,
 
 
 # install and load quanteda.textstats and identify keywords of Trump's speeches 
-install.packages("quanteda.textstats")
-library(quanteda.textstats)
 dat_dfm_presindent <- dfm_group(dat_dfm, groups = President)
 keyness_trump <- textstat_keyness(dat_dfm_presindent, 
                                   target = "Trump")
 
 # check the words
-head(keyness_trump)
+head(keyness_trump, n = 20)
 
 # plot keyness
 textplot_keyness(keyness_trump)
+
+# compare keyness Trump vs Obama
+trump_obama <- dfm_subset(dat_dfm_presindent, 
+                          subset = President %in% c("Trump", "Obama"))
+
+keyness_trump_obama <- textstat_keyness(trump_obama, 
+                                        target = "Obama")
+
+textplot_keyness(keyness_trump_obama)
+
 
 # use KWIC to check common words used by Trump
 # first subset the corpus
@@ -185,3 +196,159 @@ my_dictionary <-
 dfm_lookup(dat_dfm, 
            dictionary = my_dictionary)
 
+
+#####################
+# topic modeling ####
+#####################
+
+install.packages("topicmodels") 
+install.packages("topicdoc") # library for topic models validation
+install.packages("ldatuning")
+install.packages("tidytext") # library to reshape data frames in tidy format
+
+library(topicmodels)
+library(topicdoc)
+library(ldatuning)
+library(tidytext)
+
+# convert the dfm to a topicmodels object
+dat_dtm <- convert(dat_dfm, to = "topicmodels")
+
+# fit the topic model
+topicModel <- LDA(dat_dtm, 
+                  k = 5, 
+                  method="Gibbs")
+
+# get top 10 terms by topic
+topicmodels::terms(topicModel, 10)
+
+# create a tidy data frame
+tidy_model <- tidy(topicModel)
+
+# The beta matrix includes the information about the distribution of terms by topics.
+top_terms <- tidy_model %>%
+  group_by(topic) %>%
+  top_n(10, beta) %>%
+  ungroup() %>%
+  arrange(topic, -beta)
+
+# plot top terms
+top_terms %>%
+  mutate(term = reorder_within(term, beta, topic)) %>%
+  ggplot(aes(term, beta)) +
+  geom_bar(stat = "identity") +
+  scale_x_reordered() +
+  facet_wrap(~ topic, scales = "free_x") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) 
+
+# the gamma matrix includes information about the distribution of topics in each document
+tidy_model_gamma <- tidy(topicModel, matrix = "gamma")
+tidy_model_gamma
+
+# plot document distribution by 
+ggplot(tidy_model_gamma) +
+  geom_col(aes(x = topic, y = gamma)) +
+  facet_wrap(~ document, nrow = 3)
+
+# assign top topics to documents
+docvars(dat_corpus, "pred_topic") <- topicmodels::topics(topicModel)
+# convert to data frame
+dat_topic_df <- convert(dat_corpus, to = "data.frame") 
+# add the whole gamma matrix to the data frame
+dat_topic_df <- cbind(dat_topic_df, topicModel@gamma)
+
+
+# how many topics?
+topic_number <- FindTopicsNumber(dat_dtm, 
+                       topics = seq(5, 50, by = 5),
+                       metrics = c("Griffiths2004", 
+                                   "CaoJuan2009", 
+                                   "Arun2010", 
+                                   "Deveaud2014"))
+
+FindTopicsNumber_plot(topic_number)
+
+ggplot(topic_number,
+       aes(x = topics, y = Griffiths2004)) +
+  geom_point() +
+  geom_line() + 
+  ggtitle("Griffiths2004")
+
+
+# Based on this indication, we can perhaps fit a model with about 15 topics
+topicModel15 <- LDA(dat_dtm, 
+                    k = 15, 
+                    method="Gibbs")
+
+topicmodels::terms(topicModel15, 5)
+
+tidy_model_gamma_15 <- tidy(topicModel15, matrix = "gamma")
+
+ggplot(tidy_model_gamma_15) +
+  geom_col(aes(x = topic, y = gamma)) +
+  facet_wrap(~ document, nrow = 3)
+
+
+# The package topicdoc provides diagnostic measures for topic models. 
+# A particularly useful and commonly-used metrics are semantic coherence and exclusivity. 
+# A good topic model should have coherent topics (i.e., about a single theme and not a mixture of 
+# different themes), which also are well distinguishable from each other, without overlaps (exclusivity).
+
+topicModel20 <- LDA(dat_dtm, 
+                    k = 20, 
+                    method="Gibbs")
+topicModel10 <- LDA(dat_dtm, 
+                    k = 15, 
+                    method="Gibbs")
+topicModel10 <- LDA(dat_dtm, 
+                    k = 10, 
+                    method="Gibbs")
+topicModel5 <- LDA(dat_dtm, 
+                    k = 5, 
+                    method="Gibbs")
+
+topicModel_diag20 <- topic_diagnostics(topicModel20, dat_dtm)
+topicModel_diag15 <- topic_diagnostics(topicModel15, dat_dtm)
+topicModel_diag10 <- topic_diagnostics(topicModel10, dat_dtm)
+topicModel_diag5 <- topic_diagnostics(topicModel5, dat_dtm)
+
+topicModel_diag20
+topicModel_diag15
+topicModel_diag10
+topicModel_diag5
+
+topicModel_diag20 %>%
+  mutate(topic = as_factor(topic_num)) %>%
+  ggplot() +
+  geom_point(aes(x = topic_coherence, y = topic_exclusivity, color = topic),
+             size = 3) +
+  ylab(label = "Semantic Coherence") +
+  xlab("Exclusivity") +
+  ggtitle("A topic model with 5 topics")
+
+topicModel_diag15 %>%
+  mutate(topic = as_factor(topic_num)) %>%
+  ggplot() +
+  geom_point(aes(x = topic_coherence, y = topic_exclusivity, color = topic),
+             size = 3) +
+  ylab(label = "Semantic Coherence") +
+  xlab("Exclusivity") +
+  ggtitle("A topic model with 5 topics")
+
+topicModel_diag10 %>%
+  mutate(topic = as_factor(topic_num)) %>%
+  ggplot() +
+  geom_point(aes(x = topic_coherence, y = topic_exclusivity, color = topic),
+             size = 3) +
+  ylab(label = "Semantic Coherence") +
+  xlab("Exclusivity") +
+  ggtitle("A topic model with 5 topics")
+
+topicModel_diag5 %>%
+  mutate(topic = as_factor(topic_num)) %>%
+  ggplot() +
+  geom_point(aes(x = topic_coherence, y = topic_exclusivity, color = topic),
+             size = 3) +
+  ylab(label = "Semantic Coherence") +
+  xlab("Exclusivity") +
+  ggtitle("A topic model with 5 topics")
