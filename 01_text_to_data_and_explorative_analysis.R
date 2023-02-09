@@ -3,6 +3,8 @@ library(udpipe)
 library(tidyverse)
 library(quanteda.textstats)
 library(quanteda.textplots)
+library(quanteda.textmodels)
+library(factoextra)
 
 # load data 
 dat <- read.csv("data/data_inaugural.csv")
@@ -325,3 +327,156 @@ topicModel_diag5 %>%
   ylab(label = "Semantic Coherence") +
   xlab("Exclusivity") +
   ggtitle("A topic model with 5 topics")
+
+#################
+# Clustering ####
+#################
+# load data 
+dat <- read.csv("data/data_inaugural.csv")
+
+# check the data
+names(dat)
+str(dat)
+
+# text to lower
+dat$clean_text <- tolower(dat$texts)
+
+# remove apostrophes
+dat$clean_text <- gsub("'", " ", dat$clean_text)
+dat$clean_text <- gsub("‘", " ", dat$clean_text)
+
+# create the corpus
+dat_corpus <- quanteda::corpus(dat, text_field = "clean_text")
+
+# tokenize
+dat_tokens <- dat_corpus %>%
+  # remove punctuation
+  tokens(remove_punct = TRUE) %>%
+  # remove stopwords
+  tokens_remove(stopwords("en")) %>%
+  # select words with 2 or more characters
+  tokens_select(min_nchar = 2) %>%
+  # stemming
+  tokens_wordstem("en")
+
+
+# create the dfm 
+dat_dfm <- dat_tokens %>%
+  dfm() %>%
+  dfm_trim(min_docfreq = 0.5, max_docfreq = 0.99, 
+           docfreq_type = "prop") %>%
+  # this is to remove "empty" documents
+  dfm_subset(ntoken(.) > 0)
+
+
+# get euclidean distances 
+dat_inaug_dist <- textstat_dist(dat_dfm, method = "euclidean")
+dat_inaug_dist <- as.dist(dat_inaug_dist)
+
+# hierchical clustering the distance object
+inaug_cluster <- hclust(dat_inaug_dist)
+
+# label with document names
+inaug_cluster$labels <- docnames(dat_dfm)
+
+# plot as a dendrogram
+plot(inaug_cluster,
+     xlab = "",
+     sub = "",
+     main = "Euclidean Distance Hierarchical Clustering")
+
+# cut ?
+abline(h = 0.148, col="red", lty=2)
+
+# cut clusters at a distance of about 0.15
+clusters <- cutree(inaug_cluster, h = 0.148)
+
+# add clusters to the dfm
+docvars(dat_dfm, field = "clusters") <- as.numeric(clusters)
+
+# get top features by cluster
+topfeatures(dat_dfm, groups = clusters, n = 5)
+
+############
+# Wordscores
+############
+
+# download and put this file into your data folder
+# https://www.dropbox.com/s/uysdoep4unfz3zp/data_corpus_germanifestos.rds?dl=1"
+
+corp_ger <- readRDS("data/data_corpus_germanifestos.rds")
+
+# tokenize texts
+toks_ger <- quanteda::tokens(corp_ger, 
+                             remove_punct = TRUE,
+                             remove_numbers=TRUE, 
+                             remove_symbols = TRUE, 
+                             split_hyphens = TRUE, 
+                             remove_separators = TRUE)  %>%
+  tokens_wordstem(language = "de") %>%
+  tokens_remove(pattern = stopwords("de")) %>%
+  tokens_select(min_nchar = 2)
+
+# create a document-feature matrix
+dfmat_ger <- dfm(toks_ger)
+
+# fit the model
+tmod_ws <- textmodel_wordscores(dfmat_ger, 
+                                y = corp_ger$ref_score, 
+                                smooth = 1)
+
+# plot
+textplot_scale1d(tmod_ws, 
+                 highlighted = c(
+                   # monetary policy (währungspolitik)
+                   "wahrungspolit",
+                   "euro", 
+                   "hartz",
+                   "reichtum",
+                   "liberal",
+                   "stabilitatsunion",
+                   "burokrati",
+                   "basiskrankenversicher"), 
+                 highlighted_color = "red")
+
+# predict
+pred_ws <- predict(tmod_ws, 
+                   se.fit = TRUE, 
+                   newdata = dfmat_ger)
+
+textplot_scale1d(pred_ws)
+
+# plot
+textplot_scale1d(pred_ws, 
+                 margin = "documents",
+                 groups = docvars(corp_ger, "year"))
+
+#########################
+# Correspondence analysis
+#########################
+res_ca <- textmodel_ca(dat_dfm)
+
+textplot_scale1d(res_ca) +
+  ggtitle("Correspondence analysis on a one-dimensional scale",
+          subtitle = "Presidential speeches")
+
+fviz_ca(res_ca,
+            map = "rowprincipal", 
+            col.row = "contrib",
+            ) +
+  ylim(-1.5,1.5) +
+  ggtitle("Correspondence analysis on a multi-dimensional scale",
+          subtitle = "Immigration-related sections of 2010 UK party manifestos") +
+  geom_point(col="black") 
+
+
+explained_variance <- prop.table(res_ca$sv ^ 2)
+barplot(
+  explained_variance,
+  names = 1:length(explained_variance),
+  main = "Explained variance by dimension") 
+
+
+dim_words <- as.data.frame(res_ca$colcoord)
+head(dim_words[order(dim_words$Dim1),], 5)[1:3]
+tail(dim_words[order(dim_words$Dim1),], 5)[1:3]
