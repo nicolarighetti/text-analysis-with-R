@@ -501,36 +501,22 @@ v2 6.708204</code></pre>
 <section id="step-by-step-explanation" class="slide level2">
 <h2>Step by step explanation</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
-<span id="cb7-2"><a href="#cb7-2"></a>words <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"words"</span>, <span class="st">"lemma"</span>, <span class="st">"politics"</span>, <span class="st">"euro"</span>, <span class="st">"random"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">texts =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>))</span>
-<span id="cb7-4"><a href="#cb7-4"></a>texts <span class="ot">&lt;-</span> <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>){</span>
-<span id="cb7-5"><a href="#cb7-5"></a> df<span class="sc">$</span>texts[i] <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">sample</span>(words, <span class="at">size =</span> <span class="dv">4</span><span class="sc">+</span>i, <span class="at">replace =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb7-6"><a href="#cb7-6"></a>                   <span class="at">collapse =</span> <span class="st">" "</span>)</span>
-<span id="cb7-7"><a href="#cb7-7"></a>}</span>
-<span id="cb7-8"><a href="#cb7-8"></a></span>
-<span id="cb7-9"><a href="#cb7-9"></a>df<span class="sc">$</span>texts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "politics lemma euro lemma random"          
 [2] "politics lemma politics lemma words words" 
 [3] "euro euro lemma euro politics words random"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>refscores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>)</span>
-<span id="cb9-2"><a href="#cb9-2"></a>refscores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  2  3 NA</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>texts_dfm <span class="ot">&lt;-</span> <span class="fu">corpus</span>(df, <span class="at">text_field =</span> <span class="st">"texts"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  quanteda<span class="sc">::</span><span class="fu">tokens</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">dfm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
 <p>Get the relative frequency of words in each text. The term “lemma” has frequency 0.4 because it appears in 2 out of 5 tokens.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>refTexts_prop <span class="ot">&lt;-</span> <span class="fu">dfm_weight</span>(texts_dfm[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,] , <span class="st">"prop"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2"></a>refTexts_prop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>refTexts_prop <span class="ot">&lt;-</span> <span class="fu">dfm_weight</span>(texts_dfm[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,] , <span class="st">"prop"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>refTexts_prop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Document-feature matrix of: 2 documents, 5 features (30.00% sparse) and 0 docvars.
        features
@@ -544,9 +530,9 @@ docs     politics     lemma euro random     words
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>refTexts_prop <span class="ot">&lt;-</span> <span class="fu">t</span>(refTexts_prop)</span>
-<span id="cb14-2"><a href="#cb14-2"></a>refTexts_prob <span class="ot">&lt;-</span> refTexts_prop<span class="sc">/</span><span class="fu">rowSums</span>(refTexts_prop)</span>
-<span id="cb14-3"><a href="#cb14-3"></a>refTexts_prob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>refTexts_prop <span class="ot">&lt;-</span> <span class="fu">t</span>(refTexts_prop)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>refTexts_prob <span class="ot">&lt;-</span> refTexts_prop<span class="sc">/</span><span class="fu">rowSums</span>(refTexts_prop)</span>
+<span id="cb11-3"><a href="#cb11-3"></a>refTexts_prob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Document-feature matrix of: 5 documents, 2 features (30.00% sparse) and 0 docvars.
           features
@@ -563,15 +549,15 @@ docs           text1     text2
 
 <p>The resulting probabilities are weighted by the reference score to get the word scores (e.g., <span class="math inline">\(ws_{politics} = (0.3750000*2) + (0.6250000*3) = 2.625\)</span>)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>ws <span class="ot">&lt;-</span> refTexts_prob <span class="sc">%*%</span> refscores[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">t</span>(ws)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>ws <span class="ot">&lt;-</span> refTexts_prob <span class="sc">%*%</span> refscores[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">t</span>(ws)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1 x 5 Matrix of class "dgeMatrix"
      politics    lemma euro random words
 [1,]    2.625 2.454545    2      2     3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>ws_quanteda <span class="ot">&lt;-</span> <span class="fu">textmodel_wordscores</span>(texts_dfm, refscores)</span>
-<span id="cb18-2"><a href="#cb18-2"></a>ws_quanteda<span class="sc">$</span>wordscores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>ws_quanteda <span class="ot">&lt;-</span> <span class="fu">textmodel_wordscores</span>(texts_dfm, refscores)</span>
+<span id="cb15-2"><a href="#cb15-2"></a>ws_quanteda<span class="sc">$</span>wordscores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>politics    lemma     euro   random    words 
 2.625000 2.454545 2.000000 2.000000 3.000000 </code></pre>
@@ -583,15 +569,15 @@ docs           text1     text2
 <p>The score of the new text is the relative frequency of its words weighted by their word scores:</p>
 <p><span class="math display">\[0.1428571*2.625000 + \\ 0.1428571*2.454545 + \\0.4285714*2.000000 +\\ 0.1428571*2.000000 + \\0.1428571*3.000000 =\\ 2.297078 \]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>virgTexts_prop <span class="ot">&lt;-</span> <span class="fu">dfm_weight</span>(texts_dfm[<span class="dv">3</span>,] , <span class="st">"prop"</span>)</span>
-<span id="cb20-2"><a href="#cb20-2"></a>virgTexts_prop <span class="ot">&lt;-</span> <span class="fu">t</span>(virgTexts_prop)</span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="fu">sum</span>(virgTexts_prop <span class="sc">*</span> ws)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>virgTexts_prop <span class="ot">&lt;-</span> <span class="fu">dfm_weight</span>(texts_dfm[<span class="dv">3</span>,] , <span class="st">"prop"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2"></a>virgTexts_prop <span class="ot">&lt;-</span> <span class="fu">t</span>(virgTexts_prop)</span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="fu">sum</span>(virgTexts_prop <span class="sc">*</span> ws)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.297078</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">predict</span>(ws_quanteda, <span class="at">newdata =</span> texts_dfm[<span class="dv">3</span>,])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">predict</span>(ws_quanteda, <span class="at">newdata =</span> texts_dfm[<span class="dv">3</span>,])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   text3 
 2.297078 </code></pre>
@@ -614,7 +600,7 @@ docs           text1     text2
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>tmod_wf <span class="ot">&lt;-</span> <span class="fu">textmodel_wordfish</span>(dfmat_irish, <span class="at">dir =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>tmod_wf <span class="ot">&lt;-</span> <span class="fu">textmodel_wordfish</span>(dfmat_irish, <span class="at">dir =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <img data-src="day3_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch"></section></section>
@@ -631,7 +617,7 @@ docs           text1     text2
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>ukimmig2010_ca <span class="ot">&lt;-</span> <span class="fu">textmodel_ca</span>(ukimmig2010_dfm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>ukimmig2010_ca <span class="ot">&lt;-</span> <span class="fu">textmodel_ca</span>(ukimmig2010_dfm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn3"><p>the function documentation also describes specifics solutions in case of very big <code>dfm</code></p></li></ol></aside></section>
 <section id="visualization" class="slide level2">
@@ -665,22 +651,148 @@ docs           text1     text2
 <h3 id="interpretation">Interpretation</h3>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>                 Dim1       Dim2       Dim3       Dim4       Dim5        Dim6
-immigrants -1.4757253 1.09261013  0.5362865  0.9562903  0.7480091  0.05868254
-uk         -1.3571230 0.01572683 -0.4667974 -1.4086560  0.5329233  0.45252656
-illegal    -1.2923156 0.69105066  0.6747134  0.2127109 -0.7628531  0.06001234
-british    -1.2849680 0.17789721  1.1576895 -0.0187951  0.3159898 -0.36659279
-national   -0.8665846 0.29604152  0.7113248  1.1122953 -0.3102470 -0.15326332</code></pre>
+<pre><code>                 Dim1       Dim2       Dim3
+immigrants -1.4757253 1.09261013  0.5362865
+uk         -1.3571230 0.01572683 -0.4667974
+illegal    -1.2923156 0.69105066  0.6747134
+british    -1.2849680 0.17789721  1.1576895
+national   -0.8665846 0.29604152  0.7113248</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>              Dim1       Dim2        Dim3        Dim4       Dim5       Dim6
-migrants  1.474483 -0.3799395 -0.79485323 -0.42485632 -1.2708398 -2.1258263
-system    1.718433  0.5760113  1.02632056 -0.06015874 -0.1945961 -0.1132841
-economy   1.907573 -1.0411265  0.27259065  0.92954772  2.5672431 -2.0947149
-end       1.950402  0.3008484  0.05516631 -0.72519203 -0.4990176  3.0570908
-detention 2.539934  2.2957806 -2.30526219  0.67116321 -0.7910531  0.8031473</code></pre>
+<pre><code>              Dim1       Dim2        Dim3
+migrants  1.474483 -0.3799395 -0.79485323
+system    1.718433  0.5760113  1.02632056
+economy   1.907573 -1.0411265  0.27259065
+end       1.950402  0.3008484  0.05516631
+detention 2.539934  2.2957806 -2.30526219</code></pre>
 </div>
 </div>
+</section>
+<section id="step-by-step-explanation-1" class="slide level2">
+<h2>Step by step explanation</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                     Category of readership
+Level of education    Glance Fairly carefully Very carefully
+  Some primary             5                7              2
+  Primary completed       18               46             20
+  Some secondary          19               29             39
+  Secondary completed     12               40             49
+  Some tertiary            3                7             16</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Sum up all the values in the table and get the proportions</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                     Category of readership
+Level of education         Glance Fairly carefully Very carefully
+  Some primary        0.016025641       0.02243590    0.006410256
+  Primary completed   0.057692308       0.14743590    0.064102564
+  Some secondary      0.060897436       0.09294872    0.125000000
+  Secondary completed 0.038461538       0.12820513    0.157051282
+  Some tertiary       0.009615385       0.02243590    0.051282051</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Get the sum of columns and rows. Glance describe the reading habits of 18.3% of the sample and some primary education is held by 4.5% of the sample.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>          Glance Fairly carefully   Very carefully 
+       0.1826923        0.4134615        0.4038462 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Some primary   Primary completed      Some secondary Secondary completed 
+         0.04487179          0.26923077          0.27884615          0.32371795 
+      Some tertiary 
+         0.08333333 </code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Referring back to the original table of proportions, 1.6% of people glanced and had some primary education. Is this number big or small? We can compute the value that we would expected to see under the assumption that there is no relationship between education and readership. The proportion that glance at a newspaper is 18.2% and 4.5% have only Some primary education. Thus, if there is no relationship between education and readership, we would expect that 4.5% of 18.2% of people (i.e., 0.008 = 0.8%) have both glanced and have primary education.</p>
+</section>
+<section class="slide level2">
+
+<p>To get the expected values, we multiply each of the row totals (“row masses”) by each of the column totals (“column masses”).</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                         Glance Fairly carefully Very carefully
+Some primary        0.008197732       0.01855276     0.01812130
+Primary completed   0.049186391       0.11131657     0.10872781
+Some secondary      0.050943047       0.11529216     0.11261095
+Secondary completed 0.059140779       0.13384492     0.13073225
+Some tertiary       0.015224359       0.03445513     0.03365385</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>We compute the residuals by subtracting the expected proportions from the observed proportions. The residuals quantify the difference between the observed data and the data we would expect under the assumption that there is no relationship between the row and column categories of the table (i.e., education and readership, in our example). The biggest residual is -0.045 for Primary completed and Very thorough.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                     Category of readership
+Level of education          Glance Fairly carefully Very carefully
+  Some primary         0.007827909      0.003883136    -0.01171105
+  Primary completed    0.008505917      0.036119329    -0.04462525
+  Some secondary       0.009954389     -0.022343442     0.01238905
+  Secondary completed -0.020679241     -0.005639793     0.02631903
+  Some tertiary       -0.005608974     -0.012019231     0.01762821</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>By ignoring the number of people in each of the rows and columns, we end up being most likely to find results only in rows and columns with larger totals (masses). We can solve for this problem by dividing the residuals by the expected values, which gives us a table of indexed residuals (I). The indexed residuals have a straightforward interpretation. The further the value from the table, the larger the observed proportion relative to the expected proportion.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                     Category of readership
+Level of education        Glance Fairly carefully Very carefully
+  Some primary         0.9548872       0.20930233     -0.6462585
+  Primary completed    0.1729323       0.32447398     -0.4104308
+  Some secondary       0.1954023      -0.19379845      0.1100164
+  Secondary completed -0.3496613      -0.04213677      0.2013201
+  Some tertiary       -0.3684211      -0.34883721      0.5238095</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>The biggest value on the table is the .95 for Some primary and Glance. This tells us that people with some primary education are almost twice as likely to Glance at a newspaper as we would expect if there were no relationship between education and reading. Reading along this first row, we see that there is a weaker, but positive, indexed residual of 0.21 for Fairly thorough and Some primary. This tells us that people with some primary education were 21% more likely to be fairly thorough readers that we would expect.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                     Category of readership
+Level of education        Glance Fairly carefully Very carefully
+  Some primary         0.9548872       0.20930233     -0.6462585
+  Primary completed    0.1729323       0.32447398     -0.4104308
+  Some secondary       0.1954023      -0.19379845      0.1100164
+  Secondary completed -0.3496613      -0.04213677      0.2013201
+  Some tertiary       -0.3684211      -0.34883721      0.5238095</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>The further the point is from the origin, the stronger the associations between that point and the other points on the map. E.g., Glance is the one which is most discriminating in terms of the readership categories.</p>
+
+<img data-src="day3_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<p>Also, when you have a small angle from the lines connecting the points to the origin, the the association is relatively strong (i.e., a positive indexed residual). When there is a right angle there is no association (i.e., no residual). When there is a wide angle, a negative residual is the outcome.</p>
+
+<img data-src="day3_files/figure-revealjs/unnamed-chunk-35-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<p>People with only Primary completed are relatively unlikely to be Very carefully Those with Some primary are more likely to Glance. People with Primary completed are more likely to be Fairly thorough. The more education somebody has, the more likely they are to be Very thorough</p>
+
+<img data-src="day3_files/figure-revealjs/unnamed-chunk-36-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
 </section></section>
 <section>
 <section id="supervised-classification-methods" class="title-slide slide level1 center">
@@ -716,10 +828,10 @@ detention 2.539934  2.2957806 -2.30526219  0.67116321 -0.7910531  0.8031473</cod
 
 <p>For this demonstration, we randomly select 1500 reviews (75% of the labeled data) to be used as the training set, and the remaining 500 reviews (25%) will be the test set. Using the training set, we construct a Naive Bayes classifier. In the next step, we will use this classifier to predict the sentiment of the remaining reviews, which make up our test set.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># create a random sample of 1500 numbers without replacement</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a><span class="fu">set.seed</span>(<span class="dv">300</span>)</span>
-<span id="cb30-3"><a href="#cb30-3"></a>id_train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2000</span>, <span class="dv">1500</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb30-4"><a href="#cb30-4"></a><span class="fu">head</span>(id_train, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># create a random sample of 1500 numbers without replacement</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="fu">set.seed</span>(<span class="dv">300</span>)</span>
+<span id="cb35-3"><a href="#cb35-3"></a>id_train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2000</span>, <span class="dv">1500</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb35-4"><a href="#cb35-4"></a><span class="fu">head</span>(id_train, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  590  874 1602  985 1692  789  553 1980 1875 1705</code></pre>
 </div>
@@ -729,52 +841,52 @@ detention 2.539934  2.2957806 -2.30526219  0.67116321 -0.7910531  0.8031473</cod
 <h2>Training</h2>
 <p>We then create the usual Document Feature Matrix <code>dfm</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># create an ID for each item in the corpus</span></span>
-<span id="cb32-2"><a href="#cb32-2"></a>corp_movies<span class="sc">$</span>id_numeric <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ndoc</span>(corp_movies)</span>
-<span id="cb32-3"><a href="#cb32-3"></a></span>
-<span id="cb32-4"><a href="#cb32-4"></a><span class="co"># tokenize and create the dfm</span></span>
-<span id="cb32-5"><a href="#cb32-5"></a>toks_movies <span class="ot">&lt;-</span></span>
-<span id="cb32-6"><a href="#cb32-6"></a>  quanteda<span class="sc">::</span><span class="fu">tokens</span>(corp_movies,</span>
-<span id="cb32-7"><a href="#cb32-7"></a>         <span class="at">remove_punct =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb32-8"><a href="#cb32-8"></a>         <span class="at">remove_number =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb32-9"><a href="#cb32-9"></a>  <span class="fu">tokens_remove</span>(<span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb32-10"><a href="#cb32-10"></a>  <span class="fu">tokens_wordstem</span>()</span>
-<span id="cb32-11"><a href="#cb32-11"></a>dfmt_movie <span class="ot">&lt;-</span> <span class="fu">dfm</span>(toks_movies)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># create an ID for each item in the corpus</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>corp_movies<span class="sc">$</span>id_numeric <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ndoc</span>(corp_movies)</span>
+<span id="cb37-3"><a href="#cb37-3"></a></span>
+<span id="cb37-4"><a href="#cb37-4"></a><span class="co"># tokenize and create the dfm</span></span>
+<span id="cb37-5"><a href="#cb37-5"></a>toks_movies <span class="ot">&lt;-</span></span>
+<span id="cb37-6"><a href="#cb37-6"></a>  quanteda<span class="sc">::</span><span class="fu">tokens</span>(corp_movies,</span>
+<span id="cb37-7"><a href="#cb37-7"></a>         <span class="at">remove_punct =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb37-8"><a href="#cb37-8"></a>         <span class="at">remove_number =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb37-9"><a href="#cb37-9"></a>  <span class="fu">tokens_remove</span>(<span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb37-10"><a href="#cb37-10"></a>  <span class="fu">tokens_wordstem</span>()</span>
+<span id="cb37-11"><a href="#cb37-11"></a>dfmt_movie <span class="ot">&lt;-</span> <span class="fu">dfm</span>(toks_movies)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
 <p>We then create two <code>dfm</code> subset, one for the training and one for the test set.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># subset the dfm, getting the training set</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a>dfmat_training <span class="ot">&lt;-</span> <span class="fu">dfm_subset</span>(dfmt_movie, id_numeric <span class="sc">%in%</span> id_train)</span>
-<span id="cb33-3"><a href="#cb33-3"></a></span>
-<span id="cb33-4"><a href="#cb33-4"></a><span class="co"># subset the dfm, getting the test set (documents not in id_train)</span></span>
-<span id="cb33-5"><a href="#cb33-5"></a>dfmat_test <span class="ot">&lt;-</span> <span class="fu">dfm_subset</span>(dfmt_movie, <span class="sc">!</span>id_numeric <span class="sc">%in%</span> id_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># subset the dfm, getting the training set</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a>dfmat_training <span class="ot">&lt;-</span> <span class="fu">dfm_subset</span>(dfmt_movie, id_numeric <span class="sc">%in%</span> id_train)</span>
+<span id="cb38-3"><a href="#cb38-3"></a></span>
+<span id="cb38-4"><a href="#cb38-4"></a><span class="co"># subset the dfm, getting the test set (documents not in id_train)</span></span>
+<span id="cb38-5"><a href="#cb38-5"></a>dfmat_test <span class="ot">&lt;-</span> <span class="fu">dfm_subset</span>(dfmt_movie, <span class="sc">!</span>id_numeric <span class="sc">%in%</span> id_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Naive Bayes can consider only features that appear in both the training and test sets. Hence, we need to make the features identical using <code>dfm_match</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>dfmat_matched <span class="ot">&lt;-</span> <span class="fu">dfm_match</span>(dfmat_test, </span>
-<span id="cb34-2"><a href="#cb34-2"></a>                           <span class="at">features =</span> <span class="fu">featnames</span>(dfmat_training))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>dfmat_matched <span class="ot">&lt;-</span> <span class="fu">dfm_match</span>(dfmat_test, </span>
+<span id="cb39-2"><a href="#cb39-2"></a>                           <span class="at">features =</span> <span class="fu">featnames</span>(dfmat_training))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="fit-the-model" class="slide level2">
 <h2>Fit the model</h2>
 <p>We now train the naive Bayes classifier using the Quanteda function <code>textmodel_nb()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>tmod_nb <span class="ot">&lt;-</span> <span class="fu">textmodel_nb</span>(</span>
-<span id="cb35-2"><a href="#cb35-2"></a>  <span class="co"># the dfm on which the model will be fit</span></span>
-<span id="cb35-3"><a href="#cb35-3"></a>  dfmat_training, </span>
-<span id="cb35-4"><a href="#cb35-4"></a>  <span class="co"># training labels associated with each document in train. </span></span>
-<span id="cb35-5"><a href="#cb35-5"></a>  dfmat_training<span class="sc">$</span>sentiment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>tmod_nb <span class="ot">&lt;-</span> <span class="fu">textmodel_nb</span>(</span>
+<span id="cb40-2"><a href="#cb40-2"></a>  <span class="co"># the dfm on which the model will be fit</span></span>
+<span id="cb40-3"><a href="#cb40-3"></a>  dfmat_training, </span>
+<span id="cb40-4"><a href="#cb40-4"></a>  <span class="co"># training labels associated with each document in train. </span></span>
+<span id="cb40-5"><a href="#cb40-5"></a>  dfmat_training<span class="sc">$</span>sentiment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We now use the trained Naive Bayes model to predict the labels of the test set.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># get labels from the test set</span></span>
-<span id="cb36-2"><a href="#cb36-2"></a>actual_class <span class="ot">&lt;-</span> dfmat_matched<span class="sc">$</span>sentiment</span>
-<span id="cb36-3"><a href="#cb36-3"></a></span>
-<span id="cb36-4"><a href="#cb36-4"></a><span class="co"># predict the test set classes using the model</span></span>
-<span id="cb36-5"><a href="#cb36-5"></a>predicted_class <span class="ot">&lt;-</span> <span class="fu">predict</span>(tmod_nb, <span class="at">newdata =</span> dfmat_matched)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="co"># get labels from the test set</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a>actual_class <span class="ot">&lt;-</span> dfmat_matched<span class="sc">$</span>sentiment</span>
+<span id="cb41-3"><a href="#cb41-3"></a></span>
+<span id="cb41-4"><a href="#cb41-4"></a><span class="co"># predict the test set classes using the model</span></span>
+<span id="cb41-5"><a href="#cb41-5"></a>predicted_class <span class="ot">&lt;-</span> <span class="fu">predict</span>(tmod_nb, <span class="at">newdata =</span> dfmat_matched)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
@@ -871,56 +983,56 @@ actual_class neg pos
 </div>
 <p>The <code>undergrad</code> function takes the raw document texts and a word vector dictionary as input and convert the raw text into a document-feature matrix. The default word vector used is the Stanford GloVe pre-trained dataset. The <code>undergrad</code> function returns a set of feature summaries for each document after pre-processing the text.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="do">## Generate a word vector summary for each document</span></span>
-<span id="cb40-2"><a href="#cb40-2"></a>wordVec_summaries <span class="ot">&lt;-</span> <span class="fu">undergrad</span>(<span class="at">documentText =</span> <span class="fu">cleanme</span>(clinton<span class="sc">$</span>TEXT), </span>
-<span id="cb40-3"><a href="#cb40-3"></a>                               <span class="at">wordVecs =</span> <span class="cn">NULL</span>) <span class="co"># NULL=default Stanford GloVe</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="do">## Generate a word vector summary for each document</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a>wordVec_summaries <span class="ot">&lt;-</span> <span class="fu">undergrad</span>(<span class="at">documentText =</span> <span class="fu">cleanme</span>(clinton<span class="sc">$</span>TEXT), </span>
+<span id="cb45-3"><a href="#cb45-3"></a>                               <span class="at">wordVecs =</span> <span class="cn">NULL</span>) <span class="co"># NULL=default Stanford GloVe</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
 <p>Recently (2023) a new option was added to obtain document-level features using neural network transformer models, such as GPT or BERT, using the textEmbed function from the text package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="do">## Generate a word vector summary for the first twenty documents</span></span>
-<span id="cb41-2"><a href="#cb41-2"></a>wordVec_summaries <span class="ot">&lt;-</span> <span class="fu">undergrad</span>(<span class="at">documentText =</span> <span class="fu">tolower</span>(clinton<span class="sc">$</span>TEXT),</span>
-<span id="cb41-3"><a href="#cb41-3"></a>                              <span class="at">numericization_method =</span> <span class="st">"transformer_based"</span>) </span>
-<span id="cb41-4"><a href="#cb41-4"></a>                            <span class="co"># "vector_summaries" # faster</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="do">## Generate a word vector summary for the first twenty documents</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a>wordVec_summaries <span class="ot">&lt;-</span> <span class="fu">undergrad</span>(<span class="at">documentText =</span> <span class="fu">tolower</span>(clinton<span class="sc">$</span>TEXT),</span>
+<span id="cb46-3"><a href="#cb46-3"></a>                              <span class="at">numericization_method =</span> <span class="st">"transformer_based"</span>) </span>
+<span id="cb46-4"><a href="#cb46-4"></a>                            <span class="co"># "vector_summaries" # faster</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="estimate" class="slide level2">
 <h2>Estimate</h2>
 <p>Finally, the estimated proportions can be computed.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co"># Estimate category proportions</span></span>
-<span id="cb42-2"><a href="#cb42-2"></a><span class="fu">set.seed</span>(<span class="dv">2138</span>) <span class="co"># Set a seed if you choose</span></span>
-<span id="cb42-3"><a href="#cb42-3"></a>readme.estimates <span class="ot">&lt;-</span> <span class="fu">readme</span>(<span class="at">dfm =</span> wordVec_summaries, </span>
-<span id="cb42-4"><a href="#cb42-4"></a>                           <span class="at">labeledIndicator =</span> clinton<span class="sc">$</span>TRAININGSET, </span>
-<span id="cb42-5"><a href="#cb42-5"></a>                           <span class="at">categoryVec =</span> clinton<span class="sc">$</span>TRUTH)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="co"># Estimate category proportions</span></span>
+<span id="cb47-2"><a href="#cb47-2"></a><span class="fu">set.seed</span>(<span class="dv">2138</span>) <span class="co"># Set a seed if you choose</span></span>
+<span id="cb47-3"><a href="#cb47-3"></a>readme.estimates <span class="ot">&lt;-</span> <span class="fu">readme</span>(<span class="at">dfm =</span> wordVec_summaries, </span>
+<span id="cb47-4"><a href="#cb47-4"></a>                           <span class="at">labeledIndicator =</span> clinton<span class="sc">$</span>TRAININGSET, </span>
+<span id="cb47-5"><a href="#cb47-5"></a>                           <span class="at">categoryVec =</span> clinton<span class="sc">$</span>TRUTH)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="validate" class="slide level2">
 <h2>Validate</h2>
 <p>The model can be validated against the actual categories.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>res <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/ReadMe2_plotdata.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>res <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/ReadMe2_plotdata.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># Output proportions estimate</span></span>
-<span id="cb44-2"><a href="#cb44-2"></a>est <span class="ot">&lt;-</span> readme.estimates<span class="sc">$</span>point_readme</span>
-<span id="cb44-3"><a href="#cb44-3"></a><span class="co"># Compare to the truth</span></span>
-<span id="cb44-4"><a href="#cb44-4"></a>true <span class="ot">&lt;-</span></span>
-<span id="cb44-5"><a href="#cb44-5"></a>  <span class="fu">table</span>(clinton<span class="sc">$</span>TRUTH[clinton<span class="sc">$</span>TRAININGSET <span class="sc">==</span> <span class="dv">0</span>]) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">table</span>((clinton<span class="sc">$</span>TRUTH[clinton<span class="sc">$</span>TRAININGSET <span class="sc">==</span> <span class="dv">0</span>])))</span>
-<span id="cb44-6"><a href="#cb44-6"></a></span>
-<span id="cb44-7"><a href="#cb44-7"></a>res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ESTIMATE =</span> <span class="fu">as.numeric</span>(est),</span>
-<span id="cb44-8"><a href="#cb44-8"></a>                  <span class="at">REAL =</span> <span class="fu">as.numeric</span>(true))</span>
-<span id="cb44-9"><a href="#cb44-9"></a><span class="fu">rownames</span>(res) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"-2"</span>, <span class="st">"-1"</span>, <span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>)</span>
-<span id="cb44-10"><a href="#cb44-10"></a>res <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">as.matrix</span>(res))</span>
-<span id="cb44-11"><a href="#cb44-11"></a></span>
-<span id="cb44-12"><a href="#cb44-12"></a><span class="fu">barplot</span>(</span>
-<span id="cb44-13"><a href="#cb44-13"></a>  <span class="at">height =</span> res,</span>
-<span id="cb44-14"><a href="#cb44-14"></a>  <span class="at">beside =</span> T,</span>
-<span id="cb44-15"><a href="#cb44-15"></a>  <span class="at">legend.text =</span> <span class="fu">c</span>(<span class="st">"estimates"</span>, <span class="st">"real"</span>),</span>
-<span id="cb44-16"><a href="#cb44-16"></a>  <span class="at">args.legend =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="st">"topleft"</span>)</span>
-<span id="cb44-17"><a href="#cb44-17"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="co"># Output proportions estimate</span></span>
+<span id="cb49-2"><a href="#cb49-2"></a>est <span class="ot">&lt;-</span> readme.estimates<span class="sc">$</span>point_readme</span>
+<span id="cb49-3"><a href="#cb49-3"></a><span class="co"># Compare to the truth</span></span>
+<span id="cb49-4"><a href="#cb49-4"></a>true <span class="ot">&lt;-</span></span>
+<span id="cb49-5"><a href="#cb49-5"></a>  <span class="fu">table</span>(clinton<span class="sc">$</span>TRUTH[clinton<span class="sc">$</span>TRAININGSET <span class="sc">==</span> <span class="dv">0</span>]) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">table</span>((clinton<span class="sc">$</span>TRUTH[clinton<span class="sc">$</span>TRAININGSET <span class="sc">==</span> <span class="dv">0</span>])))</span>
+<span id="cb49-6"><a href="#cb49-6"></a></span>
+<span id="cb49-7"><a href="#cb49-7"></a>res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ESTIMATE =</span> <span class="fu">as.numeric</span>(est),</span>
+<span id="cb49-8"><a href="#cb49-8"></a>                  <span class="at">REAL =</span> <span class="fu">as.numeric</span>(true))</span>
+<span id="cb49-9"><a href="#cb49-9"></a><span class="fu">rownames</span>(res) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"-2"</span>, <span class="st">"-1"</span>, <span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>)</span>
+<span id="cb49-10"><a href="#cb49-10"></a>res <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">as.matrix</span>(res))</span>
+<span id="cb49-11"><a href="#cb49-11"></a></span>
+<span id="cb49-12"><a href="#cb49-12"></a><span class="fu">barplot</span>(</span>
+<span id="cb49-13"><a href="#cb49-13"></a>  <span class="at">height =</span> res,</span>
+<span id="cb49-14"><a href="#cb49-14"></a>  <span class="at">beside =</span> T,</span>
+<span id="cb49-15"><a href="#cb49-15"></a>  <span class="at">legend.text =</span> <span class="fu">c</span>(<span class="st">"estimates"</span>, <span class="st">"real"</span>),</span>
+<span id="cb49-16"><a href="#cb49-16"></a>  <span class="at">args.legend =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="st">"topleft"</span>)</span>
+<span id="cb49-17"><a href="#cb49-17"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="named-entity-recognition" class="slide level2">
@@ -930,32 +1042,32 @@ actual_class neg pos
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">library</span>(rvest)</span>
-<span id="cb45-2"><a href="#cb45-2"></a>page <span class="ot">=</span> <span class="fu">read_html</span>(<span class="st">'https://en.wikipedia.org/wiki/Berkshire_Hathaway'</span>)</span>
-<span id="cb45-3"><a href="#cb45-3"></a></span>
-<span id="cb45-4"><a href="#cb45-4"></a>text <span class="ot">=</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(page,<span class="st">'p'</span>))</span>
-<span id="cb45-5"><a href="#cb45-5"></a>text <span class="ot">=</span> text[text <span class="sc">!=</span> <span class="st">""</span>]</span>
-<span id="cb45-6"><a href="#cb45-6"></a>text <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">[[0-9]]|</span><span class="sc">\\</span><span class="st">[[0-9][0-9]]|</span><span class="sc">\\</span><span class="st">[[0-9][0-9][0-9]]"</span>,<span class="st">""</span>,text) <span class="co"># removing refrences [101] type</span></span>
-<span id="cb45-7"><a href="#cb45-7"></a></span>
-<span id="cb45-8"><a href="#cb45-8"></a><span class="co"># Make one complete document</span></span>
-<span id="cb45-9"><a href="#cb45-9"></a>text <span class="ot">=</span> <span class="fu">paste</span>(text, <span class="at">collapse =</span> <span class="st">" "</span>) </span>
-<span id="cb45-10"><a href="#cb45-10"></a></span>
-<span id="cb45-11"><a href="#cb45-11"></a>text <span class="ot">=</span> <span class="fu">as.String</span>(text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb50-2"><a href="#cb50-2"></a>page <span class="ot">=</span> <span class="fu">read_html</span>(<span class="st">'https://en.wikipedia.org/wiki/Berkshire_Hathaway'</span>)</span>
+<span id="cb50-3"><a href="#cb50-3"></a></span>
+<span id="cb50-4"><a href="#cb50-4"></a>text <span class="ot">=</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(page,<span class="st">'p'</span>))</span>
+<span id="cb50-5"><a href="#cb50-5"></a>text <span class="ot">=</span> text[text <span class="sc">!=</span> <span class="st">""</span>]</span>
+<span id="cb50-6"><a href="#cb50-6"></a>text <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">[[0-9]]|</span><span class="sc">\\</span><span class="st">[[0-9][0-9]]|</span><span class="sc">\\</span><span class="st">[[0-9][0-9][0-9]]"</span>,<span class="st">""</span>,text) <span class="co"># removing refrences [101] type</span></span>
+<span id="cb50-7"><a href="#cb50-7"></a></span>
+<span id="cb50-8"><a href="#cb50-8"></a><span class="co"># Make one complete document</span></span>
+<span id="cb50-9"><a href="#cb50-9"></a>text <span class="ot">=</span> <span class="fu">paste</span>(text, <span class="at">collapse =</span> <span class="st">" "</span>) </span>
+<span id="cb50-10"><a href="#cb50-10"></a></span>
+<span id="cb50-11"><a href="#cb50-11"></a>text <span class="ot">=</span> <span class="fu">as.String</span>(text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>sent_annot <span class="ot">=</span> <span class="fu">Maxent_Sent_Token_Annotator</span>()</span>
-<span id="cb46-2"><a href="#cb46-2"></a>word_annot <span class="ot">=</span> <span class="fu">Maxent_Word_Token_Annotator</span>()</span>
-<span id="cb46-3"><a href="#cb46-3"></a>people_annot <span class="ot">=</span> <span class="fu">Maxent_Entity_Annotator</span>(<span class="at">kind =</span> <span class="st">"person"</span>) <span class="co">#annotate person</span></span>
-<span id="cb46-4"><a href="#cb46-4"></a>loc_annot <span class="ot">=</span> <span class="fu">Maxent_Entity_Annotator</span>(<span class="at">kind =</span> <span class="st">"location"</span>) <span class="co">#annotate location</span></span>
-<span id="cb46-5"><a href="#cb46-5"></a></span>
-<span id="cb46-6"><a href="#cb46-6"></a>annot.l1 <span class="ot">=</span> NLP<span class="sc">::</span><span class="fu">annotate</span>(text, <span class="fu">list</span>(sent_annot,word_annot,loc_annot,people_annot))</span>
-<span id="cb46-7"><a href="#cb46-7"></a></span>
-<span id="cb46-8"><a href="#cb46-8"></a>k <span class="ot">&lt;-</span> <span class="fu">sapply</span>(annot.l1<span class="sc">$</span>features, <span class="st">`</span><span class="at">[[</span><span class="st">`</span>, <span class="st">"kind"</span>)</span>
-<span id="cb46-9"><a href="#cb46-9"></a>berk_locations <span class="ot">=</span> text[annot.l1[k <span class="sc">==</span> <span class="st">"location"</span>]]</span>
-<span id="cb46-10"><a href="#cb46-10"></a>berk_people <span class="ot">=</span> text[annot.l1[k <span class="sc">==</span> <span class="st">"person"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>sent_annot <span class="ot">=</span> <span class="fu">Maxent_Sent_Token_Annotator</span>()</span>
+<span id="cb51-2"><a href="#cb51-2"></a>word_annot <span class="ot">=</span> <span class="fu">Maxent_Word_Token_Annotator</span>()</span>
+<span id="cb51-3"><a href="#cb51-3"></a>people_annot <span class="ot">=</span> <span class="fu">Maxent_Entity_Annotator</span>(<span class="at">kind =</span> <span class="st">"person"</span>) <span class="co">#annotate person</span></span>
+<span id="cb51-4"><a href="#cb51-4"></a>loc_annot <span class="ot">=</span> <span class="fu">Maxent_Entity_Annotator</span>(<span class="at">kind =</span> <span class="st">"location"</span>) <span class="co">#annotate location</span></span>
+<span id="cb51-5"><a href="#cb51-5"></a></span>
+<span id="cb51-6"><a href="#cb51-6"></a>annot.l1 <span class="ot">=</span> NLP<span class="sc">::</span><span class="fu">annotate</span>(text, <span class="fu">list</span>(sent_annot,word_annot,loc_annot,people_annot))</span>
+<span id="cb51-7"><a href="#cb51-7"></a></span>
+<span id="cb51-8"><a href="#cb51-8"></a>k <span class="ot">&lt;-</span> <span class="fu">sapply</span>(annot.l1<span class="sc">$</span>features, <span class="st">`</span><span class="at">[[</span><span class="st">`</span>, <span class="st">"kind"</span>)</span>
+<span id="cb51-9"><a href="#cb51-9"></a>berk_locations <span class="ot">=</span> text[annot.l1[k <span class="sc">==</span> <span class="st">"location"</span>]]</span>
+<span id="cb51-10"><a href="#cb51-10"></a>berk_people <span class="ot">=</span> text[annot.l1[k <span class="sc">==</span> <span class="st">"person"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">

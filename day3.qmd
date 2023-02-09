@@ -73,7 +73,7 @@ inaug_cluster$labels <- docnames(dat_inaug_dfm)
 # docvars(dat_inaug_dfm, field = "clusters") <- as.numeric(clusters)
 ```
 
----
+------------------------------------------------------------------------
 
 ```{r}
 # plot as a dendrogram
@@ -93,7 +93,6 @@ clusters <- cutree(inaug_cluster, h = 0.148)
 # get top features by cluster
 topfeatures(dat_inaug_dfm, groups = clusters, n = 5)
 ```
-
 
 # Text scaling
 
@@ -153,7 +152,6 @@ tmod_ws <- textmodel_wordscores(dfmat_ger,
                                 smooth = 1)
 ```
 
-
 The plot shows estimated word positions in the reference text, where word frequencies are on the y-axis and word-score are on the x-axis.
 
 ```{r}
@@ -171,7 +169,7 @@ textplot_scale1d(tmod_ws,
                  highlighted_color = "red")
 ```
 
----
+------------------------------------------------------------------------
 
 We predict the Wordscores for the other texts.
 
@@ -184,7 +182,7 @@ textplot_scale1d(pred_ws)
 
 ```
 
----
+------------------------------------------------------------------------
 
 ```{r}
 textplot_scale1d(pred_ws, 
@@ -192,10 +190,9 @@ textplot_scale1d(pred_ws,
                  groups = docvars(corp_ger, "year"))
 ```
 
-
 ## Step by step explanation
 
-```{r echo=TRUE}
+```{r}
 set.seed(12345)
 words <- c("words", "lemma", "politics", "euro", "random")
 df <- data.frame(texts = c(NA, NA, NA))
@@ -214,7 +211,7 @@ texts_dfm <- corpus(df, text_field = "texts") %>%
   dfm()
 ```
 
----
+------------------------------------------------------------------------
 
 Get the relative frequency of words in each text. The term "lemma" has frequency 0.4 because it appears in 2 out of 5 tokens.
 
@@ -225,7 +222,7 @@ refTexts_prop
 
 We can now calculate the probability of reading the first text given that we read, for example, the word "politics": $0.2/(0.2+0.3333333) = 0.375$. This is done for every word in the reference texts.
 
----
+------------------------------------------------------------------------
 
 ```{r echo=TRUE}
 refTexts_prop <- t(refTexts_prop)
@@ -233,7 +230,7 @@ refTexts_prob <- refTexts_prop/rowSums(refTexts_prop)
 refTexts_prob
 ```
 
----
+------------------------------------------------------------------------
 
 The resulting probabilities are weighted by the reference score to get the word scores (e.g., $ws_{politics} = (0.3750000*2) + (0.6250000*3) = 2.625$)
 
@@ -245,7 +242,7 @@ ws_quanteda <- textmodel_wordscores(texts_dfm, refscores)
 ws_quanteda$wordscores
 ```
 
----
+------------------------------------------------------------------------
 
 The score of the new text is the relative frequency of its words weighted by their word scores:
 
@@ -267,15 +264,15 @@ Wordfish is a scaling model of one-dimensional document positions[^2] which does
 
 [^2]: Slapin, Jonathan and Sven-Oliver Proksch. 2008. "[A Scaling Model for Estimating Time-Series Party Positions from Texts](https://doi.org/10.1111/j.1540-5907.2008.00338.x)." *American Journal of Political Science* 52(3): 705-772.
 
----
+------------------------------------------------------------------------
 
 In their seminal paper where they proposed the WORDFISH scaling algorithm, Slapin & Proksch (2008) estimated *the positions of German political parties from 1990 to 2005 using word frequencies in party manifestos. The extracted positions reflect changes in the party system more accurately than existing time-series estimates. In addition, the method allows researchers to examine which words are important for placing parties on the left and on the right. We find that words with strong political connotations are the best discriminators between parties.*
 
----
+------------------------------------------------------------------------
 
 Speeches and document-level variables from the debate over the Irish budget of 2010.
 
-The corpus object for the 2010 budget speeches, with document-level variables for year, debate, serial number, first and last name of the speaker, and the speaker's party. A detailed explanation of Wordfish can be found  [here](http://www.luigicurini.com/uploads/6/7/9/8/67985527/lecture_3_2022.pdf).
+The corpus object for the 2010 budget speeches, with document-level variables for year, debate, serial number, first and last name of the speaker, and the speaker's party. A detailed explanation of Wordfish can be found [here](http://www.luigicurini.com/uploads/6/7/9/8/67985527/lecture_3_2022.pdf).
 
 ```{r}
 toks_irish <- quanteda::tokens(data_corpus_irishbudget2010, 
@@ -369,7 +366,7 @@ CA models extract several dimensions from the data. Retain for interpretation th
 
 [^4]: Bendixen, M. (1996). [A practical guide to the use of correspondence analysis in marketing research.](http://www.mindware-jp.com/xlstat/jp/file/corres3.pdf) Marketing Research On-Line, 1(1), 16-36, pag. 26.
 
----
+------------------------------------------------------------------------
 
 ```{r}
 explained_variance <- prop.table(ukimmig2010_ca$sv ^ 2)
@@ -385,15 +382,119 @@ barplot(
          col = "red3", lwd = 3, lty="dotted")
 ```
 
----
+------------------------------------------------------------------------
 
 ### Interpretation
 
 ```{r}
 dim_words <- as.data.frame(ukimmig2010_ca$colcoord)
-head(dim_words[order(dim_words$Dim1),], 5)
-tail(dim_words[order(dim_words$Dim1),], 5)
+head(dim_words[order(dim_words$Dim1),], 5)[1:3]
+tail(dim_words[order(dim_words$Dim1),], 5)[1:3]
 ```
+
+## Step by step explanation
+
+```{r}
+N = matrix(c(5, 18, 19, 12, 3, 7, 46, 29, 40, 7, 2, 20, 39, 49, 16), 
+           nrow = 5,
+           dimnames = list(
+             "Level of education" = c("Some primary", "Primary completed", "Some secondary", "Secondary completed", "Some tertiary"),
+             "Category of readership" = c("Glance", "Fairly carefully", "Very carefully")))  
+N
+```
+
+---
+
+Sum up all the values in the table and get the proportions
+
+```{r}
+n = sum(N) # summing up all the values in the table
+P = N / n # table of proportions
+P
+```
+
+---
+
+Get the sum of columns and rows. 
+Glance describe the reading habits of 18.3% of the sample and some primary education is held by 4.5% of the sample.
+
+```{r}
+column.masses = colSums(P) # "marge.col"
+column.masses # Glance describe the reading habits of 18.3% of the sample 
+
+row.masses = rowSums(P)
+row.masses # In the sample Some primary is held by 4.5% of the sample
+
+```
+
+---
+
+Referring back to the original table of proportions, 1.6% of people glanced and had some primary education. Is this number big or small? We can compute the value that we would expected to see under the assumption that there is no relationship between education and readership. The proportion that glance at a newspaper is 18.2% and 4.5% have only Some primary education. Thus, if there is no relationship between education and readership, we would expect that 4.5% of 18.2% of people (i.e., 0.008 = 0.8%) have both glanced and have primary education. 
+
+---
+
+To get the expected values, we multiply each of the row totals ("row masses") by each of the column totals ("column masses").
+
+```{r}
+E = row.masses %o% column.masses
+E
+```
+
+---
+
+We compute the residuals by subtracting the expected proportions from the observed proportions. The residuals quantify the difference between the observed data and the data we would expect under the assumption that there is no relationship between the row and column categories of the table (i.e., education and readership, in our example). The biggest residual is -0.045 for Primary completed and Very thorough.
+
+```{r}
+R = P - E
+R
+```
+
+---
+
+By ignoring the number of people in each of the rows and columns, we end up being most likely to find results only in rows and columns with larger totals (masses). We can solve for this problem by dividing the residuals by the expected values, which gives us a table of indexed residuals (I). The indexed residuals have a straightforward interpretation. The further the value from the table, the larger the observed proportion relative to the expected proportion. 
+
+```{r}
+I = R / E
+I
+```
+
+---
+
+The biggest value on the table is the .95 for Some primary and Glance. This tells us that people with some primary education are almost twice as likely to Glance at a newspaper as we would expect if there were no relationship between education and reading. Reading along this first row, we see that there is a weaker, but positive, indexed residual of 0.21 for Fairly thorough and Some primary. This tells us that people with some primary education were 21% more likely to be fairly thorough readers that we would expect.
+
+```{r}
+I
+```
+
+---
+
+The further the point is from the origin, the stronger the associations between that point and the other points on the map. E.g., Glance is the one which is most discriminating in terms of the readership categories.
+
+```{r}
+csres <- FactoMineR::CA(N, graph = F)
+factoextra::fviz_ca_biplot(csres, map = "rowprincipal", title = "Row Principal Coordinates")
+```
+
+---
+
+Also, when you have a small angle from the lines connecting the points to the origin, the the association is relatively strong (i.e., a positive indexed residual). When there is a right angle there is no association (i.e., no residual). When there is a wide angle, a negative residual is the outcome.
+
+```{r}
+factoextra::fviz_ca_biplot(csres, map = "rowprincipal", title = "Row Principal Coordinates")
+```
+
+---
+
+People with only Primary completed are relatively unlikely to be Very carefully
+Those with Some primary are more likely to Glance.
+People with Primary completed are more likely to be Fairly thorough.
+The more education somebody has, the more likely they are to be Very thorough
+
+```{r}
+factoextra::fviz_ca_biplot(csres, map = "rowprincipal", title = "Row Principal Coordinates")
+```
+
+---
 
 # Supervised classification methods
 
@@ -403,7 +504,7 @@ Naive Bayes is a machine learning approach for categorizing documents into **var
 
 Quanteda offers a quick way to fit Naive Bayes models. Let's follow the built-in example.
 
----
+------------------------------------------------------------------------
 
 The `data_corpus_moviereviews` from the `quanteda.textmodels` package includes **2000 movie reviews** that have been classified either as "positive" or "negative" (variable "**Sentiment**").
 
@@ -412,13 +513,13 @@ corp_movies <- data_corpus_moviereviews
 summary(corp_movies, 5)
 ```
 
---- 
+------------------------------------------------------------------------
 
 ## Validation
 
 In supervised machine learning, there is always a training and evaluation stage where the performance of the model is assessed. There are various evaluation techniques, the most basic of which involves dividing the labeled data into a training and test set.
 
-----
+------------------------------------------------------------------------
 
 For this demonstration, we randomly select 1500 reviews (75% of the labeled data) to be used as the training set, and the remaining 500 reviews (25%) will be the test set. Using the training set, we construct a Naive Bayes classifier. In the next step, we will use this classifier to predict the sentiment of the remaining reviews, which make up our test set.
 
@@ -429,7 +530,7 @@ id_train <- sample(1:2000, 1500, replace = FALSE)
 head(id_train, 10)
 ```
 
----
+------------------------------------------------------------------------
 
 ## Training
 
@@ -449,7 +550,7 @@ toks_movies <-
 dfmt_movie <- dfm(toks_movies)
 ```
 
----
+------------------------------------------------------------------------
 
 We then create two `dfm` subset, one for the training and one for the test set.
 
@@ -468,7 +569,7 @@ dfmat_matched <- dfm_match(dfmat_test,
                            features = featnames(dfmat_training))
 ```
 
----
+------------------------------------------------------------------------
 
 ## Fit the model
 
@@ -492,7 +593,7 @@ actual_class <- dfmat_matched$sentiment
 predicted_class <- predict(tmod_nb, newdata = dfmat_matched)
 ```
 
----
+------------------------------------------------------------------------
 
 The cross-table reveals that there are equal numbers of false positives and false negatives, indicating that the classifier made mistakes in both directions without consistently over- or under-estimating either class.
 
@@ -503,7 +604,7 @@ tab_class
 prop.table(tab_class, margin = 1)
 ```
 
----
+------------------------------------------------------------------------
 
 The function `confusionMatrix()` from the `caret` package to assess the performance of the classification.
 
@@ -511,7 +612,7 @@ The function `confusionMatrix()` from the `caret` package to assess the performa
 confusionMatrix(tab_class, mode = "everything", positive = "pos")
 ```
 
----
+------------------------------------------------------------------------
 
 **Precision**, **recall** and the **F1** score are frequently used to assess the classification performance.
 
@@ -525,13 +626,13 @@ The originary ReadMe algorithm has been developed by [Hopkins & King (2010)](htt
 
 > The central intuition of the original `readme` is that for any individual feature *S* in both the labeled and unlabeled set, we know that the average value of that feature *S* is equal to the sum of the conditional expectation of *S* in each category multiplied by the share of documents in that category. While we observe the average of *S* in the unlabeled set, we do not observe the conditional expectations of *S*. We estimate these conditional expectations using the labeled set conditional frequency and solve for the unlabeled set proportions via standard linear programming methods.
 
----
+------------------------------------------------------------------------
 
 > There are many possible features *S* that can be extracted from the text. The main contribution of `readme2` is to develop a way for selecting optimal sets of features from a large space of potential document summaries, morphing the space in which the readme regression is run to yield the best possible estimates of the category proportions. We begin by converting each document into a vector of summaries based on the word vector representations of each term in the document[^5].
 
 [^5]: https://github.com/iqss-research/readme-software
 
----
+------------------------------------------------------------------------
 
 ReadMe2 is a recent and improved version of the algorithm by Jerzak, King, & Strezhnev (2018). It uses pre-trained dictionaries of word vectors as part of the process of translating the words in documents to a numerical representation.
 
@@ -551,7 +652,7 @@ library(text)
 textrpp_install()
 ```
 
----
+------------------------------------------------------------------------
 
 In the provided [example](https://github.com/iqss-research/readme-software), the Clinton dataset of blog posts was used to demonstrate the method. It consists of 1,676 documents categorized into 6 mutually exclusive categories ("TRUTH").
 
@@ -619,7 +720,6 @@ barplot(
 )
 ```
 
-
 ## Named entity recognition
 
 Apache OpenNLP Maxent
@@ -646,7 +746,7 @@ text = paste(text, collapse = " ")
 text = as.String(text)
 ```
 
----
+------------------------------------------------------------------------
 
 ```{r echo=TRUE}
 sent_annot = Maxent_Sent_Token_Annotator()
