@@ -27,6 +27,70 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -330,99 +394,587 @@
 
 </section>
 <section>
-<section id="text-classification-techniques-beyond-topic-modeling" class="title-slide slide level1 center" data-background-color="#2780e3">
-<h1>Text classification techniques beyond topic modeling</h1>
-
-</section>
-<section id="unsupervised-text-classification" class="slide level2">
-<h2>Unsupervised text classification</h2>
-</section>
-<section id="supervised-text-classification" class="slide level2">
-<h2>Supervised text classification</h2>
-</section></section>
-<section>
 <section id="unsupervised-text-classification-methods" class="title-slide slide level1 center" data-background-color="#2780e3">
 <h1>Unsupervised text classification methods</h1>
+<div class="cell">
 
+</div>
 </section>
-<section id="text-scaling" class="slide level2">
-<h2>Text scaling</h2>
-</section>
-<section id="correspondence-analysis" class="slide level2">
-<h2>Correspondence analysis</h2>
+<section id="classification" class="slide level2">
+<h2>Classification</h2>
+<p><strong>Classification</strong> is a key aspect of both human and machine intelligence. <strong>Sentiment analysis</strong>, which involves identifying the positive or negative orientation expressed by an author towards a certain object, is a common example of text classification task. For example, a movie, book or product review on the internet conveys the author’s sentiment towards it, while an editorial or political article conveys sentiment towards a political candidate or action. The simplest form of classification is a <strong>binary</strong> classification task, such as determining if a text is positive or negative or if it is political or non-political.</p>
 </section>
 <section id="clustering" class="slide level2">
 <h2>Clustering</h2>
+<p>Clustering algorithms are unsupervised classification models used to group documents into categories. Clustering involves the use of <strong>similarity and dissimilarity measures</strong> to determine the subgroups within a set of observations. The labeling of these subgroups is then left up to the researcher. A widely used measure is Euclidean distance, the square root of the sum of the squared differences between the two vectors.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">0</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">6</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">sqrt</span>((<span class="dv">1-3</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">2-0</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">4-5</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">0-6</span>)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.708204</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">dist</span>(<span class="fu">rbind</span>(v1,v2), <span class="at">method =</span> <span class="st">"euclidean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         v1
+v2 6.708204</code></pre>
+</div>
+</div>
+</section>
+<section id="single-membership-and-mixed-membership-models" class="slide level2">
+<h2>Single membership and mixed membership models</h2>
+<p><strong>Single membership model</strong> and <strong>mixed</strong> membership models can be distinguished. In the case of a single membership model, it is assumed that each document belongs to only one category. This can be a restrictive assumption in many instances as a document may contain information about multiple categories. To address this, mixed membership models (also known as <strong>topic models</strong>) acknowledge that a document can be composed of a mixture of categories or topics.</p>
+</section>
+<section id="hierarchical-clustering" class="slide level2">
+<h2>Hierarchical clustering</h2>
+<p><strong>Hierarchical clustering</strong> is a common type of clustering that groups or splits data points based on a chosen distance measure. The grouping process is sequential and results in a <strong>dendrogram</strong>, which visually displays the separation between the groups.</p>
+<div class="cell">
+
+</div>
+</section>
+<section class="slide level2">
+
+
+<img data-src="day3_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><div class="cell">
+
+</div>
 </section></section>
-<section id="hands-on-tutorial" class="title-slide slide level1 center" data-background-color="#2780e3">
-<h1>Hands-on tutorial</h1>
-<p>Click [here](day3-tutorial.hmtl#/sec-unsupervised-text-classification-methods) to open the tutorial</p>
-</section>
+<section>
+<section id="text-scaling" class="title-slide slide level1 center">
+<h1>Text scaling</h1>
 
-<section id="coffee-break" class="title-slide slide level1 center" data-background-color="#daffad">
-<h1>Coffee Break</h1>
-<p>See you at 11:00</p>
 </section>
-
-<section id="laboratory-with-real-world-data-sets" class="title-slide slide level1 center" data-background-color="#2780e3">
-<h1>Laboratory with real-world data sets</h1>
-<p>Click [here](day3-tutorial.hmtl#/sec-unsupervised-text-classification-methods-laboratory-with-real-world-data-sets) to open the laboratory</p>
+<section id="manifest-and-latent-characteristics" class="slide level2">
+<h2>Manifest and latent characteristics</h2>
+<p>Textual analysis can focus on manifest or latent characteristics. Manifest characteristics can be <strong>observed</strong> in the text. Latent ones, can only be indirectly observed. For example, racist language used by a political speaker is directly manifest in the text, and the importance is whether it was used, not what it represents.</p>
 </section>
+<section class="slide level2">
 
-<section id="lunch" class="title-slide slide level1 center" data-background-color="#daffad">
-<h1>Lunch</h1>
-<p>See you at 1:00 pm</p>
+<p>Dimensions like ideology, on the contrary, cannot be directly observed but they have an effect on the way the text has been generated, for example influencing concepts and word choice. The dimension itself cannot be observed, only its effects. However, can be estimated based on these observable effects. The goal of scaling methods is to use observable outcomes, like words, to infer an actor’s position on a latent dimension, like ideology or policy preferences.</p>
 </section>
+<section id="wordscores" class="slide level2">
+<h2>Wordscores</h2>
+<p>Wordscores is a <strong>supervised</strong> text scaling method introduced in Laver, Benoit, and Garry (2003)<sup>1</sup> and widely used among political scientists.</p>
+<p>Researchers first identify <strong>reference texts</strong> known to represent the extremes of the political space (and possibly the center as well). This one-dimensional space is anchored by assigning reference values to the reference texts, ideally obtained from previous expert survey.</p>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Laver, Michael, Kenneth Benoit, and John Garry. 2003. <a href="https://www.cambridge.org/core/journals/american-political-science-review/article/abs/extracting-policy-positions-from-political-texts-using-words-as-data/4F4676E80A79E01EAAB88EF3F2D1B733">Extracting Policy Positions from Political Texts Using Words as Data.</a>American Political Science Review 97(2): 311–32.</p></li></ol></aside></section>
+<section class="slide level2">
 
+<p>Wordscore estimates document positions of new texts by comparing them to these set of <strong>reference texts</strong>. The dimension of reference texts is defined by the analyst. It can derive, for example, from quantitive estimates made by experts. Wordscore then estimates the position of the new texts by <strong>comparing their words</strong> to the words of the reference texts.</p>
+<p>Wordscores then counts the number of times each word occurs in the reference texts and compares these counts to word counts from the texts being analyzed. The manifestos are placed on a continuum between the refer- ence texts depending on how similar the word counts are to each reference text</p>
+</section>
+<section class="slide level2">
+
+<p>Wordscores uses probabilities to infer the positions of new texts on a known dimension. The estimated position of a new text is updated as reference’s words are found. Its logic is similar to that of machine learning algorithms.</p>
+<p>Benoit exemplifies the Wordscores implementation in Quanteda by using manifestos of the 2013 and 2017 German federal elections. The <code>ref_score</code> variable includes reference scores for 2013 German parties from the 2014 <a href="https://www.chesdata.eu">Chapel Hill Expert Survey</a>, which estimate party positioning on ideology and policy issues. The problem is to measure the position of 2017 manifestos based on the 2013 data.</p>
+</section>
+<section class="slide level2">
+
+<p>Wordscores is applied to the document-feature matrix.</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>tmod_ws <span class="ot">&lt;-</span> <span class="fu">textmodel_wordscores</span>(dfmat_ger, </span>
+<span id="cb5-2"><a href="#cb5-2"></a>                                <span class="at">y =</span> corp_ger<span class="sc">$</span>ref_score, </span>
+<span id="cb5-3"><a href="#cb5-3"></a>                                <span class="at">smooth =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The plot shows estimated word positions in the reference text, where word frequencies are on the y-axis and word-score are on the x-axis.</p>
+
+<img data-src="day3_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<p>We predict the Wordscores for the other texts.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>pred_ws <span class="ot">&lt;-</span> <span class="fu">predict</span>(tmod_ws, </span>
+<span id="cb6-2"><a href="#cb6-2"></a>                   <span class="at">se.fit =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb6-3"><a href="#cb6-3"></a>                   <span class="at">newdata =</span> dfmat_ger)</span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="fu">textplot_scale1d</span>(pred_ws)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="day3_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+
+<img data-src="day3_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<section id="step-by-step-explanation" class="slide level2">
+<h2>Step by step explanation</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a>words <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"words"</span>, <span class="st">"lemma"</span>, <span class="st">"politics"</span>, <span class="st">"euro"</span>, <span class="st">"random"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">texts =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>))</span>
+<span id="cb7-4"><a href="#cb7-4"></a>texts <span class="ot">&lt;-</span> <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>){</span>
+<span id="cb7-5"><a href="#cb7-5"></a> df<span class="sc">$</span>texts[i] <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">sample</span>(words, <span class="at">size =</span> <span class="dv">4</span><span class="sc">+</span>i, <span class="at">replace =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb7-6"><a href="#cb7-6"></a>                   <span class="at">collapse =</span> <span class="st">" "</span>)</span>
+<span id="cb7-7"><a href="#cb7-7"></a>}</span>
+<span id="cb7-8"><a href="#cb7-8"></a></span>
+<span id="cb7-9"><a href="#cb7-9"></a>df<span class="sc">$</span>texts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "politics lemma euro lemma random"          
+[2] "politics lemma politics lemma words words" 
+[3] "euro euro lemma euro politics words random"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>refscores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>refscores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  2  3 NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>texts_dfm <span class="ot">&lt;-</span> <span class="fu">corpus</span>(df, <span class="at">text_field =</span> <span class="st">"texts"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  quanteda<span class="sc">::</span><span class="fu">tokens</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">dfm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Get the relative frequency of words in each text. The term “lemma” has frequency 0.4 because it appears in 2 out of 5 tokens.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>refTexts_prop <span class="ot">&lt;-</span> <span class="fu">dfm_weight</span>(texts_dfm[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,] , <span class="st">"prop"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2"></a>refTexts_prop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Document-feature matrix of: 2 documents, 5 features (30.00% sparse) and 0 docvars.
+       features
+docs     politics     lemma euro random     words
+  text1 0.2000000 0.4000000  0.2    0.2 0        
+  text2 0.3333333 0.3333333  0      0   0.3333333</code></pre>
+</div>
+</div>
+<p>We can now calculate the probability of reading the first text given that we read, for example, the word “politics”: <span class="math inline">\(0.2/(0.2+0.3333333) = 0.375\)</span>. This is done for every word in the reference texts.</p>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>refTexts_prop <span class="ot">&lt;-</span> <span class="fu">t</span>(refTexts_prop)</span>
+<span id="cb14-2"><a href="#cb14-2"></a>refTexts_prob <span class="ot">&lt;-</span> refTexts_prop<span class="sc">/</span><span class="fu">rowSums</span>(refTexts_prop)</span>
+<span id="cb14-3"><a href="#cb14-3"></a>refTexts_prob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Document-feature matrix of: 5 documents, 2 features (30.00% sparse) and 0 docvars.
+          features
+docs           text1     text2
+  politics 0.3750000 0.6250000
+  lemma    0.5454545 0.4545455
+  euro     1.0000000 0        
+  random   1.0000000 0        
+  words    0         1.0000000</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>The resulting probabilities are weighted by the reference score to get the word scores (e.g., <span class="math inline">\(ws_{politics} = (0.3750000*2) + (0.6250000*3) = 2.625\)</span>)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>ws <span class="ot">&lt;-</span> refTexts_prob <span class="sc">%*%</span> refscores[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">t</span>(ws)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1 x 5 Matrix of class "dgeMatrix"
+     politics    lemma euro random words
+[1,]    2.625 2.454545    2      2     3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>ws_quanteda <span class="ot">&lt;-</span> <span class="fu">textmodel_wordscores</span>(texts_dfm, refscores)</span>
+<span id="cb18-2"><a href="#cb18-2"></a>ws_quanteda<span class="sc">$</span>wordscores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>politics    lemma     euro   random    words 
+2.625000 2.454545 2.000000 2.000000 3.000000 </code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>The score of the new text is the relative frequency of its words weighted by their word scores:</p>
+<p><span class="math display">\[0.1428571*2.625000 + \\ 0.1428571*2.454545 + \\0.4285714*2.000000 +\\ 0.1428571*2.000000 + \\0.1428571*3.000000 =\\ 2.297078 \]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>virgTexts_prop <span class="ot">&lt;-</span> <span class="fu">dfm_weight</span>(texts_dfm[<span class="dv">3</span>,] , <span class="st">"prop"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2"></a>virgTexts_prop <span class="ot">&lt;-</span> <span class="fu">t</span>(virgTexts_prop)</span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="fu">sum</span>(virgTexts_prop <span class="sc">*</span> ws)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.297078</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">predict</span>(ws_quanteda, <span class="at">newdata =</span> texts_dfm[<span class="dv">3</span>,])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   text3 
+2.297078 </code></pre>
+</div>
+</div>
+</section>
+<section id="wordfish" class="slide level2">
+<h2>Wordfish</h2>
+<p>Wordfish is a scaling model of one-dimensional document positions<sup>1</sup> which does not require reference scores/texts. In comparison to Wordscores, it is an <strong>unsupervised</strong> <strong>one-dimensional text scaling</strong> <strong>method</strong> that it estimates the positions of documents solely based on the observed word frequencies.</p>
+<aside><ol class="aside-footnotes"><li id="fn2"><p>Slapin, Jonathan and Sven-Oliver Proksch. 2008. “<a href="https://doi.org/10.1111/j.1540-5907.2008.00338.x">A Scaling Model for Estimating Time-Series Party Positions from Texts</a>.” <em>American Journal of Political Science</em> 52(3): 705-772.</p></li></ol></aside></section>
+<section class="slide level2">
+
+<p>In their seminal paper where they proposed the WORDFISH scaling algorithm, Slapin &amp; Proksch (2008) estimated <em>the positions of German political parties from 1990 to 2005 using word frequencies in party manifestos. The extracted positions reflect changes in the party system more accurately than existing time-series estimates. In addition, the method allows researchers to examine which words are important for placing parties on the left and on the right. We find that words with strong political connotations are the best discriminators between parties.</em></p>
+</section>
+<section class="slide level2">
+
+<p>Speeches and document-level variables from the debate over the Irish budget of 2010.</p>
+<p>The corpus object for the 2010 budget speeches, with document-level variables for year, debate, serial number, first and last name of the speaker, and the speaker’s party. A detailed explanation of Wordfish can be found <a href="http://www.luigicurini.com/uploads/6/7/9/8/67985527/lecture_3_2022.pdf">here</a>.</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>tmod_wf <span class="ot">&lt;-</span> <span class="fu">textmodel_wordfish</span>(dfmat_irish, <span class="at">dir =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<img data-src="day3_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch"></section></section>
+<section>
+<section id="correspondence-analysis" class="title-slide slide level1 center">
+<h1>Correspondence analysis</h1>
+<p>Correspondence analysis is a technique to scale documents on one or (usually) two or more dimensions. It is similar to principal component analysis but works for categorical variables (contingency table).</p>
+<p>The objective of Correspondence Analysis (CA) is to simplify a data matrix by <strong>reducing its dimensionality</strong> and <strong>displaying it in a lower dimensional space</strong>, similar to Principal Component Analysis.</p>
+</section>
+<section id="model-fitting" class="slide level2">
+<h2>Model fitting</h2>
+<p>After the usual pre-processing steps, a CA model can be fitted using the Quanteda <code>textmodel_ca</code> function, optimized for large scale textual data<sup>1</sup>. An even more flexible library to fit CA models (and not only) is <a href="http://factominer.free.fr">FactoMineR</a>.</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>ukimmig2010_ca <span class="ot">&lt;-</span> <span class="fu">textmodel_ca</span>(ukimmig2010_dfm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn3"><p>the function documentation also describes specifics solutions in case of very big <code>dfm</code></p></li></ol></aside></section>
+<section id="visualization" class="slide level2">
+<h2>Visualization</h2>
+<p>The resulting model can be represented on a one-dimensional or bi-dimensional scale.</p>
+
+<img data-src="day3_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+
+<img data-src="day3_files/figure-revealjs/unnamed-chunk-23-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+
+<img data-src="day3_files/figure-revealjs/unnamed-chunk-24-1.png" width="960" class="r-stretch"></section>
+<section id="choice-of-dimensions" class="slide level2">
+<h2>Choice of dimensions</h2>
+<p>CA models extract several dimensions from the data. Retain for interpretation the dimensions that cumulative explain most of the variance is common choice. Simple formulas have also been suggested in literature to select only the significant axes, defined as those whose explained variance is higher what would be expected by chance: <span class="math inline">\(max(\frac{100}{N_{row}}, \frac{100}{N_{col}})\)</span>)<sup>1</sup>.</p>
+<aside><ol class="aside-footnotes"><li id="fn4"><p>Bendixen, M. (1996). <a href="http://www.mindware-jp.com/xlstat/jp/file/corres3.pdf">A practical guide to the use of correspondence analysis in marketing research.</a> Marketing Research On-Line, 1(1), 16-36, pag. 26.</p></li></ol></aside></section>
+<section class="slide level2">
+
+<div class="cell">
+
+<div class="cell-output cell-output-stdout">
+<pre><code>numeric(0)</code></pre>
+</div>
+</div>
+<img data-src="day3_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<h3 id="interpretation">Interpretation</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                 Dim1       Dim2       Dim3       Dim4       Dim5        Dim6
+immigrants -1.4757253 1.09261013  0.5362865  0.9562903  0.7480091  0.05868254
+uk         -1.3571230 0.01572683 -0.4667974 -1.4086560  0.5329233  0.45252656
+illegal    -1.2923156 0.69105066  0.6747134  0.2127109 -0.7628531  0.06001234
+british    -1.2849680 0.17789721  1.1576895 -0.0187951  0.3159898 -0.36659279
+national   -0.8665846 0.29604152  0.7113248  1.1122953 -0.3102470 -0.15326332</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Dim1       Dim2        Dim3        Dim4       Dim5       Dim6
+migrants  1.474483 -0.3799395 -0.79485323 -0.42485632 -1.2708398 -2.1258263
+system    1.718433  0.5760113  1.02632056 -0.06015874 -0.1945961 -0.1132841
+economy   1.907573 -1.0411265  0.27259065  0.92954772  2.5672431 -2.0947149
+end       1.950402  0.3008484  0.05516631 -0.72519203 -0.4990176  3.0570908
+detention 2.539934  2.2957806 -2.30526219  0.67116321 -0.7910531  0.8031473</code></pre>
+</div>
+</div>
+</section></section>
 <section>
 <section id="supervised-classification-methods" class="title-slide slide level1 center">
 <h1>Supervised classification methods</h1>
 
 </section>
-<section id="overview-of-algorithms" class="slide level2">
-<h2>Overview of algorithms</h2>
+<section id="naive-bayes" class="slide level2">
+<h2>Naive Bayes</h2>
+<p>Naive Bayes is a machine learning approach for categorizing documents into <strong>various groups</strong> (two or more) through a supervised learning process. The classifier is <strong>trained</strong> using previously labeled documents, and is then used to predict the most probable category for new, unlabeled documents.</p>
+<p>Quanteda offers a quick way to fit Naive Bayes models. Let’s follow the built-in example.</p>
+</section>
+<section class="slide level2">
+
+<p>The <code>data_corpus_moviereviews</code> from the <code>quanteda.textmodels</code> package includes <strong>2000 movie reviews</strong> that have been classified either as “positive” or “negative” (variable “<strong>Sentiment</strong>”).</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Corpus consisting of 2000 documents, showing 5 documents:
+
+            Text Types Tokens Sentences sentiment   id1   id2
+ cv000_29416.txt   354    841         9       neg cv000 29416
+ cv001_19502.txt   156    278         1       neg cv001 19502
+ cv002_17424.txt   276    553         3       neg cv002 17424
+ cv003_12683.txt   313    555         2       neg cv003 12683
+ cv004_12641.txt   380    841         2       neg cv004 12641</code></pre>
+</div>
+</div>
+</section>
+<section id="validation" class="slide level2">
+<h2>Validation</h2>
+<p>In supervised machine learning, there is always a training and evaluation stage where the performance of the model is assessed. There are various evaluation techniques, the most basic of which involves dividing the labeled data into a training and test set.</p>
+</section>
+<section class="slide level2">
+
+<p>For this demonstration, we randomly select 1500 reviews (75% of the labeled data) to be used as the training set, and the remaining 500 reviews (25%) will be the test set. Using the training set, we construct a Naive Bayes classifier. In the next step, we will use this classifier to predict the sentiment of the remaining reviews, which make up our test set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># create a random sample of 1500 numbers without replacement</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="fu">set.seed</span>(<span class="dv">300</span>)</span>
+<span id="cb30-3"><a href="#cb30-3"></a>id_train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2000</span>, <span class="dv">1500</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb30-4"><a href="#cb30-4"></a><span class="fu">head</span>(id_train, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  590  874 1602  985 1692  789  553 1980 1875 1705</code></pre>
+</div>
+</div>
+</section>
+<section id="training" class="slide level2">
+<h2>Training</h2>
+<p>We then create the usual Document Feature Matrix <code>dfm</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># create an ID for each item in the corpus</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>corp_movies<span class="sc">$</span>id_numeric <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ndoc</span>(corp_movies)</span>
+<span id="cb32-3"><a href="#cb32-3"></a></span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="co"># tokenize and create the dfm</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a>toks_movies <span class="ot">&lt;-</span></span>
+<span id="cb32-6"><a href="#cb32-6"></a>  quanteda<span class="sc">::</span><span class="fu">tokens</span>(corp_movies,</span>
+<span id="cb32-7"><a href="#cb32-7"></a>         <span class="at">remove_punct =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb32-8"><a href="#cb32-8"></a>         <span class="at">remove_number =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-9"><a href="#cb32-9"></a>  <span class="fu">tokens_remove</span>(<span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb32-10"><a href="#cb32-10"></a>  <span class="fu">tokens_wordstem</span>()</span>
+<span id="cb32-11"><a href="#cb32-11"></a>dfmt_movie <span class="ot">&lt;-</span> <span class="fu">dfm</span>(toks_movies)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>We then create two <code>dfm</code> subset, one for the training and one for the test set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># subset the dfm, getting the training set</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>dfmat_training <span class="ot">&lt;-</span> <span class="fu">dfm_subset</span>(dfmt_movie, id_numeric <span class="sc">%in%</span> id_train)</span>
+<span id="cb33-3"><a href="#cb33-3"></a></span>
+<span id="cb33-4"><a href="#cb33-4"></a><span class="co"># subset the dfm, getting the test set (documents not in id_train)</span></span>
+<span id="cb33-5"><a href="#cb33-5"></a>dfmat_test <span class="ot">&lt;-</span> <span class="fu">dfm_subset</span>(dfmt_movie, <span class="sc">!</span>id_numeric <span class="sc">%in%</span> id_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Naive Bayes can consider only features that appear in both the training and test sets. Hence, we need to make the features identical using <code>dfm_match</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>dfmat_matched <span class="ot">&lt;-</span> <span class="fu">dfm_match</span>(dfmat_test, </span>
+<span id="cb34-2"><a href="#cb34-2"></a>                           <span class="at">features =</span> <span class="fu">featnames</span>(dfmat_training))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fit-the-model" class="slide level2">
+<h2>Fit the model</h2>
+<p>We now train the naive Bayes classifier using the Quanteda function <code>textmodel_nb()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>tmod_nb <span class="ot">&lt;-</span> <span class="fu">textmodel_nb</span>(</span>
+<span id="cb35-2"><a href="#cb35-2"></a>  <span class="co"># the dfm on which the model will be fit</span></span>
+<span id="cb35-3"><a href="#cb35-3"></a>  dfmat_training, </span>
+<span id="cb35-4"><a href="#cb35-4"></a>  <span class="co"># training labels associated with each document in train. </span></span>
+<span id="cb35-5"><a href="#cb35-5"></a>  dfmat_training<span class="sc">$</span>sentiment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We now use the trained Naive Bayes model to predict the labels of the test set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># get labels from the test set</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>actual_class <span class="ot">&lt;-</span> dfmat_matched<span class="sc">$</span>sentiment</span>
+<span id="cb36-3"><a href="#cb36-3"></a></span>
+<span id="cb36-4"><a href="#cb36-4"></a><span class="co"># predict the test set classes using the model</span></span>
+<span id="cb36-5"><a href="#cb36-5"></a>predicted_class <span class="ot">&lt;-</span> <span class="fu">predict</span>(tmod_nb, <span class="at">newdata =</span> dfmat_matched)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>The cross-table reveals that there are equal numbers of false positives and false negatives, indicating that the classifier made mistakes in both directions without consistently over- or under-estimating either class.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>            predicted_class
+actual_class neg pos
+         neg 213  45
+         pos  37 205</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            predicted_class
+actual_class       neg       pos
+         neg 0.8255814 0.1744186
+         pos 0.1528926 0.8471074</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>The function <code>confusionMatrix()</code> from the <code>caret</code> package to assess the performance of the classification.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+            predicted_class
+actual_class neg pos
+         neg 213  45
+         pos  37 205
+                                          
+               Accuracy : 0.836           
+                 95% CI : (0.8006, 0.8674)
+    No Information Rate : 0.5             
+    P-Value [Acc &gt; NIR] : &lt;2e-16          
+                                          
+                  Kappa : 0.672           
+                                          
+ Mcnemar's Test P-Value : 0.4395          
+                                          
+            Sensitivity : 0.8200          
+            Specificity : 0.8520          
+         Pos Pred Value : 0.8471          
+         Neg Pred Value : 0.8256          
+              Precision : 0.8471          
+                 Recall : 0.8200          
+                     F1 : 0.8333          
+             Prevalence : 0.5000          
+         Detection Rate : 0.4100          
+   Detection Prevalence : 0.4840          
+      Balanced Accuracy : 0.8360          
+                                          
+       'Positive' Class : pos             
+                                          </code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p><strong>Precision</strong>, <strong>recall</strong> and the <strong>F1</strong> score are frequently used to assess the classification performance.</p>
+<p>Precision is <code>TP / (TP + FP)</code>, where <code>TP</code> are the number of true positives and <code>FP</code> are the false positives. Recall divides the true positives by the sum of true positives and false negatives <code>TP / (TP + FN)</code>. Finally, the F1 score is a harmonic mean of precision and recall <code>2 * (Precision * Recall) / (Precision + Recall)</code>.</p>
 </section></section>
-<section id="hands-on-tutorial-1" class="title-slide slide level1 center" data-background-color="#2780e3">
-<h1>Hands-on tutorial</h1>
-<p>Click [here](day3-tutorial.hmtl#/sec-supervised-classification-methods) to open the tutorial.</p>
-</section>
-
-<section id="laboratory-with-real-world-data-sets-1" class="title-slide slide level1 center" data-background-color="#2780e3">
-<h1>Laboratory with real-world data sets</h1>
-<p>Click [here](day3-tutorial.hmtl#/sec-supervised-classification-methods-laboratory-with-real-world-data-sets) to open the laboratory.</p>
-</section>
-
-<section id="coffee-break-1" class="title-slide slide level1 center" data-background-color="#daffad">
-<h1>Coffee Break</h1>
-<p>See you at 15:30</p>
-</section>
-
 <section>
-<section id="overview-of-other-text-analysis-techniques" class="title-slide slide level1 center" data-background-color="#2780e3">
-<h1>Overview of other text analysis techniques</h1>
-
+<section id="readme2" class="title-slide slide level1 center">
+<h1>ReadMe2</h1>
+<p>The originary ReadMe algorithm has been developed by <a href="https://gking.harvard.edu/files/gking/files/words.pdf">Hopkins &amp; King (2010)</a> to estimate the proportion of unlabeled documents within given categories starting from a categorization scheme chosen by the user (e.g., sentiment ratings, policy topics, or any other mutually exclusive and exhaustive set of categories) and a small subset of text documents hand classified into the given categories.</p>
 </section>
-<section id="network-analysis" class="slide level2">
-<h2>network analysis</h2>
+<section class="slide level2">
+
+<blockquote>
+<p>The central intuition of the original <code>readme</code> is that for any individual feature <em>S</em> in both the labeled and unlabeled set, we know that the average value of that feature <em>S</em> is equal to the sum of the conditional expectation of <em>S</em> in each category multiplied by the share of documents in that category. While we observe the average of <em>S</em> in the unlabeled set, we do not observe the conditional expectations of <em>S</em>. We estimate these conditional expectations using the labeled set conditional frequency and solve for the unlabeled set proportions via standard linear programming methods.</p>
+</blockquote>
+</section>
+<section class="slide level2">
+
+<blockquote>
+<p>There are many possible features <em>S</em> that can be extracted from the text. The main contribution of <code>readme2</code> is to develop a way for selecting optimal sets of features from a large space of potential document summaries, morphing the space in which the readme regression is run to yield the best possible estimates of the category proportions. We begin by converting each document into a vector of summaries based on the word vector representations of each term in the document<sup>1</sup>.</p>
+</blockquote>
+<aside><ol class="aside-footnotes"><li id="fn5"><p>https://github.com/iqss-research/readme-software</p></li></ol></aside></section>
+<section class="slide level2">
+
+<p>ReadMe2 is a recent and improved version of the algorithm by Jerzak, King, &amp; Strezhnev (2018). It uses pre-trained dictionaries of word vectors as part of the process of translating the words in documents to a numerical representation.</p>
+<p>To work with package, a Python installation as well as several additional packages (and downloads) are required, such as <code>tensorflow</code>, an R interface to <a href="https://tensorflow.rstudio.com">TensorFlow API</a>, an open source machine learning library; the pre-trained dataset <a href="https://nlp.stanford.edu/projects/glove/">Stanford GloVe: Global Vectors for Word Representation</a>; a neural network transformer models via the <a href="https://www.r-text.org"><code>text</code> package</a>.</p>
+<div class="cell">
+
+</div>
+</section>
+<section class="slide level2">
+
+<p>In the provided <a href="https://github.com/iqss-research/readme-software">example</a>, the Clinton dataset of blog posts was used to demonstrate the method. It consists of 1,676 documents categorized into 6 mutually exclusive categories (“TRUTH”).</p>
+<div class="cell">
+
+</div>
+<p>The <code>undergrad</code> function takes the raw document texts and a word vector dictionary as input and convert the raw text into a document-feature matrix. The default word vector used is the Stanford GloVe pre-trained dataset. The <code>undergrad</code> function returns a set of feature summaries for each document after pre-processing the text.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="do">## Generate a word vector summary for each document</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a>wordVec_summaries <span class="ot">&lt;-</span> <span class="fu">undergrad</span>(<span class="at">documentText =</span> <span class="fu">cleanme</span>(clinton<span class="sc">$</span>TEXT), </span>
+<span id="cb40-3"><a href="#cb40-3"></a>                               <span class="at">wordVecs =</span> <span class="cn">NULL</span>) <span class="co"># NULL=default Stanford GloVe</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Recently (2023) a new option was added to obtain document-level features using neural network transformer models, such as GPT or BERT, using the textEmbed function from the text package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="do">## Generate a word vector summary for the first twenty documents</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a>wordVec_summaries <span class="ot">&lt;-</span> <span class="fu">undergrad</span>(<span class="at">documentText =</span> <span class="fu">tolower</span>(clinton<span class="sc">$</span>TEXT),</span>
+<span id="cb41-3"><a href="#cb41-3"></a>                              <span class="at">numericization_method =</span> <span class="st">"transformer_based"</span>) </span>
+<span id="cb41-4"><a href="#cb41-4"></a>                            <span class="co"># "vector_summaries" # faster</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="estimate" class="slide level2">
+<h2>Estimate</h2>
+<p>Finally, the estimated proportions can be computed.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co"># Estimate category proportions</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a><span class="fu">set.seed</span>(<span class="dv">2138</span>) <span class="co"># Set a seed if you choose</span></span>
+<span id="cb42-3"><a href="#cb42-3"></a>readme.estimates <span class="ot">&lt;-</span> <span class="fu">readme</span>(<span class="at">dfm =</span> wordVec_summaries, </span>
+<span id="cb42-4"><a href="#cb42-4"></a>                           <span class="at">labeledIndicator =</span> clinton<span class="sc">$</span>TRAININGSET, </span>
+<span id="cb42-5"><a href="#cb42-5"></a>                           <span class="at">categoryVec =</span> clinton<span class="sc">$</span>TRUTH)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="validate" class="slide level2">
+<h2>Validate</h2>
+<p>The model can be validated against the actual categories.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>res <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/ReadMe2_plotdata.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># Output proportions estimate</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a>est <span class="ot">&lt;-</span> readme.estimates<span class="sc">$</span>point_readme</span>
+<span id="cb44-3"><a href="#cb44-3"></a><span class="co"># Compare to the truth</span></span>
+<span id="cb44-4"><a href="#cb44-4"></a>true <span class="ot">&lt;-</span></span>
+<span id="cb44-5"><a href="#cb44-5"></a>  <span class="fu">table</span>(clinton<span class="sc">$</span>TRUTH[clinton<span class="sc">$</span>TRAININGSET <span class="sc">==</span> <span class="dv">0</span>]) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">table</span>((clinton<span class="sc">$</span>TRUTH[clinton<span class="sc">$</span>TRAININGSET <span class="sc">==</span> <span class="dv">0</span>])))</span>
+<span id="cb44-6"><a href="#cb44-6"></a></span>
+<span id="cb44-7"><a href="#cb44-7"></a>res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ESTIMATE =</span> <span class="fu">as.numeric</span>(est),</span>
+<span id="cb44-8"><a href="#cb44-8"></a>                  <span class="at">REAL =</span> <span class="fu">as.numeric</span>(true))</span>
+<span id="cb44-9"><a href="#cb44-9"></a><span class="fu">rownames</span>(res) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"-2"</span>, <span class="st">"-1"</span>, <span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>)</span>
+<span id="cb44-10"><a href="#cb44-10"></a>res <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">as.matrix</span>(res))</span>
+<span id="cb44-11"><a href="#cb44-11"></a></span>
+<span id="cb44-12"><a href="#cb44-12"></a><span class="fu">barplot</span>(</span>
+<span id="cb44-13"><a href="#cb44-13"></a>  <span class="at">height =</span> res,</span>
+<span id="cb44-14"><a href="#cb44-14"></a>  <span class="at">beside =</span> T,</span>
+<span id="cb44-15"><a href="#cb44-15"></a>  <span class="at">legend.text =</span> <span class="fu">c</span>(<span class="st">"estimates"</span>, <span class="st">"real"</span>),</span>
+<span id="cb44-16"><a href="#cb44-16"></a>  <span class="at">args.legend =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="st">"topleft"</span>)</span>
+<span id="cb44-17"><a href="#cb44-17"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="named-entity-recognition" class="slide level2">
-<h2>named entity recognition</h2>
-</section>
-<section id="word-embeddings" class="slide level2">
-<h2>word embeddings</h2>
-</section></section>
-<section id="hands-on-tutorial-2" class="title-slide slide level1 center" data-background-color="#2780e3">
-<h1>Hands-on tutorial</h1>
-<p>Click [here](day2-tutorial.hmtl#/sec-other-text-analysis-techniques) to open the tutorial</p>
-</section>
+<h2>Named entity recognition</h2>
+<p>Apache OpenNLP Maxent</p>
+<div class="cell">
 
-<section id="conclusions-and-wrap-up-of-the-seminar" class="title-slide slide level1 center" data-background-color="#2780e3">
-<h1>Conclusions and wrap up of the seminar</h1>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb45-2"><a href="#cb45-2"></a>page <span class="ot">=</span> <span class="fu">read_html</span>(<span class="st">'https://en.wikipedia.org/wiki/Berkshire_Hathaway'</span>)</span>
+<span id="cb45-3"><a href="#cb45-3"></a></span>
+<span id="cb45-4"><a href="#cb45-4"></a>text <span class="ot">=</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(page,<span class="st">'p'</span>))</span>
+<span id="cb45-5"><a href="#cb45-5"></a>text <span class="ot">=</span> text[text <span class="sc">!=</span> <span class="st">""</span>]</span>
+<span id="cb45-6"><a href="#cb45-6"></a>text <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">[[0-9]]|</span><span class="sc">\\</span><span class="st">[[0-9][0-9]]|</span><span class="sc">\\</span><span class="st">[[0-9][0-9][0-9]]"</span>,<span class="st">""</span>,text) <span class="co"># removing refrences [101] type</span></span>
+<span id="cb45-7"><a href="#cb45-7"></a></span>
+<span id="cb45-8"><a href="#cb45-8"></a><span class="co"># Make one complete document</span></span>
+<span id="cb45-9"><a href="#cb45-9"></a>text <span class="ot">=</span> <span class="fu">paste</span>(text, <span class="at">collapse =</span> <span class="st">" "</span>) </span>
+<span id="cb45-10"><a href="#cb45-10"></a></span>
+<span id="cb45-11"><a href="#cb45-11"></a>text <span class="ot">=</span> <span class="fu">as.String</span>(text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>sent_annot <span class="ot">=</span> <span class="fu">Maxent_Sent_Token_Annotator</span>()</span>
+<span id="cb46-2"><a href="#cb46-2"></a>word_annot <span class="ot">=</span> <span class="fu">Maxent_Word_Token_Annotator</span>()</span>
+<span id="cb46-3"><a href="#cb46-3"></a>people_annot <span class="ot">=</span> <span class="fu">Maxent_Entity_Annotator</span>(<span class="at">kind =</span> <span class="st">"person"</span>) <span class="co">#annotate person</span></span>
+<span id="cb46-4"><a href="#cb46-4"></a>loc_annot <span class="ot">=</span> <span class="fu">Maxent_Entity_Annotator</span>(<span class="at">kind =</span> <span class="st">"location"</span>) <span class="co">#annotate location</span></span>
+<span id="cb46-5"><a href="#cb46-5"></a></span>
+<span id="cb46-6"><a href="#cb46-6"></a>annot.l1 <span class="ot">=</span> NLP<span class="sc">::</span><span class="fu">annotate</span>(text, <span class="fu">list</span>(sent_annot,word_annot,loc_annot,people_annot))</span>
+<span id="cb46-7"><a href="#cb46-7"></a></span>
+<span id="cb46-8"><a href="#cb46-8"></a>k <span class="ot">&lt;-</span> <span class="fu">sapply</span>(annot.l1<span class="sc">$</span>features, <span class="st">`</span><span class="at">[[</span><span class="st">`</span>, <span class="st">"kind"</span>)</span>
+<span id="cb46-9"><a href="#cb46-9"></a>berk_locations <span class="ot">=</span> text[annot.l1[k <span class="sc">==</span> <span class="st">"location"</span>]]</span>
+<span id="cb46-10"><a href="#cb46-10"></a>berk_people <span class="ot">=</span> text[annot.l1[k <span class="sc">==</span> <span class="st">"person"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Warren Buffett" "Charlie Munger" "Heinz Company"  "Oliver Chace"  
+[5] "Samuel Slater" </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Omaha"                "Nebraska"             "United States"       
+[4] "Valley Falls Company" "Valley Falls"        </code></pre>
+</div>
+</div>
 
 <div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
+
     </div>
   </div>
 
@@ -634,6 +1186,44 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

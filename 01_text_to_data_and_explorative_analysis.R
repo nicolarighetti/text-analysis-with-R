@@ -16,6 +16,8 @@ dat$clean_text <- tolower(dat$texts)
 
  # remove apostrophes
 dat$clean_text <- gsub("'", " ", dat$clean_text)
+dat$clean_text <- gsub("‘", " ", dat$clean_text)
+
 
 # lemmatization: load the udpipe model
 ud_english <- udpipe_load_model("english-ewt-ud-2.5-191206.udpipe")
@@ -41,6 +43,8 @@ dat_tokens <- dat_corpus %>%
   tokens(remove_punct = TRUE) %>%
   # remove stopwords
   tokens_remove(stopwords("en")) %>%
+  # select words with 2 or more characters
+  tokens_select(min_nchar = 2) %>%
   # lemmatization
   tokens_replace(pattern = annotated_text$token, 
                  replacement = annotated_text$lemma,
@@ -123,18 +127,17 @@ kwic(inaug_tokens_comp,
      pattern = c("years_*", "american_*"), 
      window = 4) 
 
-
+###################
 # Dictionaries ####
+###################
 LSD2015 <- data_dictionary_LSD2015
 
 inaug_lsd <- dfm_lookup(dat_dfm, 
                         dictionary = LSD2015)
 
-df_lsd <- 
-  # output from tokens_lookup
-  inaug_lsd %>%
-  # to dfm
-  dfm() %>% 
+head(inaug_lsd)
+
+df_lsd <- inaug_lsd %>%
   # group data by variable
   dfm_group(groups = President) %>%
   # convert to data frame to perform data manipulation easily
@@ -160,15 +163,15 @@ head(df_lsd)
 df_lsd <- df_lsd %>%
   pivot_longer(-doc_id)
 
-head(df_lsd)
+head(df_lsd, n=20)
 
 df_lsd %>%
   filter(name %in% c("neg_prop", "pos_prop")) %>%
   ggplot() +
-  geom_col(aes(x = doc_id,
+  geom_col(aes(x = fct_reorder(doc_id, -value),
                y = value, group = name, fill = name), 
            # "dodge" to place columns side-by-side
-           position = "dodge") +
+           position = "stack") +
   scale_fill_manual(values = c(neg_prop = "skyblue",
                                pos_prop = "tomato"),
                     labels = c("Negative", "Positive"),
@@ -184,8 +187,8 @@ df_lsd %>%
 my_dictionary <-
   dictionary(
     list(
-      christmas = c("Christmas", "Santa", "holiday"),
-      opposition = c("Opposition", "reject", "notincorpus"),
+      america = c("america*", "usa"),
+      great = c("great", "reject", "notincorpus"),
       taxing = "taxing",
       taxation = "taxation",
       taxregex = "tax*",
@@ -203,7 +206,7 @@ dfm_lookup(dat_dfm,
 
 install.packages("topicmodels") 
 install.packages("topicdoc") # library for topic models validation
-install.packages("ldatuning")
+install.packages("ldatuning") # find the number of topics
 install.packages("tidytext") # library to reshape data frames in tidy format
 
 library(topicmodels)
@@ -217,15 +220,17 @@ dat_dtm <- convert(dat_dfm, to = "topicmodels")
 # fit the topic model
 topicModel <- LDA(dat_dtm, 
                   k = 5, 
-                  method="Gibbs")
+                  method = "Gibbs")
 
 # get top 10 terms by topic
-topicmodels::terms(topicModel, 10)
+terms(topicModel, 10)
 
 # create a tidy data frame
 tidy_model <- tidy(topicModel)
+head(tidy_model, n=20)
 
-# The beta matrix includes the information about the distribution of terms by topics.
+# The beta matrix includes the information about 
+# the distribution of terms by topics.
 top_terms <- tidy_model %>%
   group_by(topic) %>%
   top_n(10, beta) %>%
@@ -241,7 +246,8 @@ top_terms %>%
   facet_wrap(~ topic, scales = "free_x") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) 
 
-# the gamma matrix includes information about the distribution of topics in each document
+# the gamma matrix includes information about the distribution 
+# of topics in each document
 tidy_model_gamma <- tidy(topicModel, matrix = "gamma")
 tidy_model_gamma
 
@@ -251,16 +257,19 @@ ggplot(tidy_model_gamma) +
   facet_wrap(~ document, nrow = 3)
 
 # assign top topics to documents
-docvars(dat_corpus, "pred_topic") <- topicmodels::topics(topicModel)
+docvars(dat_corpus, "pred_topic") <- topics(topicModel)
+names(docvars(dat_corpus))
 # convert to data frame
 dat_topic_df <- convert(dat_corpus, to = "data.frame") 
 # add the whole gamma matrix to the data frame
 dat_topic_df <- cbind(dat_topic_df, topicModel@gamma)
 
 
-# how many topics?
+#######################
+# how many topics? ####
+######################
 topic_number <- FindTopicsNumber(dat_dtm, 
-                       topics = seq(5, 50, by = 5),
+                       topics = seq(5, 100, by = 5),
                        metrics = c("Griffiths2004", 
                                    "CaoJuan2009", 
                                    "Arun2010", 
@@ -276,73 +285,37 @@ ggplot(topic_number,
 
 
 # Based on this indication, we can perhaps fit a model with about 15 topics
-topicModel15 <- LDA(dat_dtm, 
-                    k = 15, 
+topicModel30 <- LDA(dat_dtm, 
+                    k = 30, 
                     method="Gibbs")
 
-topicmodels::terms(topicModel15, 5)
+topicmodels::terms(topicModel30, 5)
 
-tidy_model_gamma_15 <- tidy(topicModel15, matrix = "gamma")
+tidy_model_gamma_30 <- tidy(topicModel30, matrix = "gamma")
 
-ggplot(tidy_model_gamma_15) +
+ggplot(tidy_model_gamma_30) +
   geom_col(aes(x = topic, y = gamma)) +
   facet_wrap(~ document, nrow = 3)
-
 
 # The package topicdoc provides diagnostic measures for topic models. 
 # A particularly useful and commonly-used metrics are semantic coherence and exclusivity. 
 # A good topic model should have coherent topics (i.e., about a single theme and not a mixture of 
 # different themes), which also are well distinguishable from each other, without overlaps (exclusivity).
 
-topicModel20 <- LDA(dat_dtm, 
-                    k = 20, 
-                    method="Gibbs")
-topicModel10 <- LDA(dat_dtm, 
-                    k = 15, 
-                    method="Gibbs")
-topicModel10 <- LDA(dat_dtm, 
-                    k = 10, 
-                    method="Gibbs")
-topicModel5 <- LDA(dat_dtm, 
-                    k = 5, 
-                    method="Gibbs")
+topicModel_diag5 <- topic_diagnostics(topicModel, dat_dtm)
+topicModel_diag30 <- topic_diagnostics(topicModel30, dat_dtm)
 
-topicModel_diag20 <- topic_diagnostics(topicModel20, dat_dtm)
-topicModel_diag15 <- topic_diagnostics(topicModel15, dat_dtm)
-topicModel_diag10 <- topic_diagnostics(topicModel10, dat_dtm)
-topicModel_diag5 <- topic_diagnostics(topicModel5, dat_dtm)
-
-topicModel_diag20
-topicModel_diag15
-topicModel_diag10
 topicModel_diag5
+topicModel_diag30
 
-topicModel_diag20 %>%
+topicModel_diag30 %>%
   mutate(topic = as_factor(topic_num)) %>%
   ggplot() +
   geom_point(aes(x = topic_coherence, y = topic_exclusivity, color = topic),
              size = 3) +
   ylab(label = "Semantic Coherence") +
   xlab("Exclusivity") +
-  ggtitle("A topic model with 5 topics")
-
-topicModel_diag15 %>%
-  mutate(topic = as_factor(topic_num)) %>%
-  ggplot() +
-  geom_point(aes(x = topic_coherence, y = topic_exclusivity, color = topic),
-             size = 3) +
-  ylab(label = "Semantic Coherence") +
-  xlab("Exclusivity") +
-  ggtitle("A topic model with 5 topics")
-
-topicModel_diag10 %>%
-  mutate(topic = as_factor(topic_num)) %>%
-  ggplot() +
-  geom_point(aes(x = topic_coherence, y = topic_exclusivity, color = topic),
-             size = 3) +
-  ylab(label = "Semantic Coherence") +
-  xlab("Exclusivity") +
-  ggtitle("A topic model with 5 topics")
+  ggtitle("A topic model with 30 topics")
 
 topicModel_diag5 %>%
   mutate(topic = as_factor(topic_num)) %>%

@@ -3,44 +3,668 @@ title: "Advanced techniques in text analysis with R"
 format: revealjs
 ---
 
-# Text classification techniques beyond topic modeling {background-color="#2780e3"}
-## Unsupervised text classification 
-## Supervised text classification
-
 # Unsupervised text classification methods {background-color="#2780e3"}
-## Text scaling
-## Correspondence analysis
+
+```{r}
+library(quanteda)
+library(quanteda.textmodels)
+library(quanteda.textplots)
+library(quanteda.textstats)
+library(tidyverse)
+library(textstem)
+library(factoextra)
+library(caret)
+```
+
+## Classification
+
+**Classification** is a key aspect of both human and machine intelligence. **Sentiment analysis**, which involves identifying the positive or negative orientation expressed by an author towards a certain object, is a common example of text classification task. For example, a movie, book or product review on the internet conveys the author's sentiment towards it, while an editorial or political article conveys sentiment towards a political candidate or action. The simplest form of classification is a **binary** classification task, such as determining if a text is positive or negative or if it is political or non-political.
+
 ## Clustering
-# Hands-on tutorial {background-color="#2780e3"}
-Click \[here\](day3-tutorial.hmtl#/sec-unsupervised-text-classification-methods) to open the tutorial
 
-# Coffee Break {background-color="#daffad"}
-See you at 11:00
+Clustering algorithms are unsupervised classification models used to group documents into categories. Clustering involves the use of **similarity and dissimilarity measures** to determine the subgroups within a set of observations. The labeling of these subgroups is then left up to the researcher. A widely used measure is Euclidean distance, the square root of the sum of the squared differences between the two vectors.
 
-# Laboratory with real-world data sets {background-color="#2780e3"}
-Click \[here\](day3-tutorial.hmtl#/sec-unsupervised-text-classification-methods-laboratory-with-real-world-data-sets) to open the laboratory
+```{r echo=TRUE}
+v1 <- c(1,2,4,0)
+v2 <- c(3,0,5,6)
 
-# Lunch {background-color="#daffad"}
-See you at 1:00 pm
+sqrt((1-3)^2 + (2-0)^2 + (4-5)^2 + (0-6)^2)
+
+dist(rbind(v1,v2), method = "euclidean")
+```
+
+## Single membership and mixed membership models
+
+**Single membership model** and **mixed** membership models can be distinguished. In the case of a single membership model, it is assumed that each document belongs to only one category. This can be a restrictive assumption in many instances as a document may contain information about multiple categories. To address this, mixed membership models (also known as **topic models**) acknowledge that a document can be composed of a mixture of categories or topics.
+
+## Hierarchical clustering
+
+**Hierarchical clustering** is a common type of clustering that groups or splits data points based on a chosen distance measure. The grouping process is sequential and results in a **dendrogram**, which visually displays the separation between the groups.
+
+```{r}
+dat_inaug <- read.csv("./data/data_inaugural.csv")
+
+dat_inaug_corpus <- corpus(dat_inaug, text_field = "texts")
+
+dat_inaug_tokens <- quanteda::tokens(dat_inaug_corpus,
+                           remove_punct = TRUE) %>%
+                    tokens_remove(stopwords("en")) %>%
+                    tokens_wordstem("en")
+
+dat_inaug_dfm <- dfm(dat_inaug_tokens) %>%
+  # trim the too rare and frequent terms
+    dfm_trim(min_docfreq = 0.5, max_docfreq = 0.99,
+             docfreq_type = "prop") %>%
+  # normalize dfm (proportions)
+   dfm_weight(scheme = "prop")
+
+# get euclidean distances 
+dat_inaug_dist <- textstat_dist(dat_inaug_dfm,
+                                method = "euclidean")
+dat_inaug_dist <- as.dist(dat_inaug_dist)
+
+# hierchical clustering the distance object
+inaug_cluster <- hclust(dat_inaug_dist)
+
+# label with document names
+inaug_cluster$labels <- docnames(dat_inaug_dfm)
+
+# add clusters to the dfm
+# docvars(dat_inaug_dfm, field = "clusters") <- as.numeric(clusters)
+```
+
+---
+
+```{r}
+# plot as a dendrogram
+plot(inaug_cluster,
+     xlab = "",
+     sub = "",
+     main = "Euclidean Distance on Normalized Token Frequency")
+
+# cut ?
+abline(h = 0.148, col="red", lty=2)
+
+# cut clusters at a distance of about 0.15
+clusters <- cutree(inaug_cluster, h = 0.148)
+```
+
+```{r eval=FALSE}
+# get top features by cluster
+topfeatures(dat_inaug_dfm, groups = clusters, n = 5)
+```
+
+
+# Text scaling
+
+## Manifest and latent characteristics
+
+Textual analysis can focus on manifest or latent characteristics. Manifest characteristics can be **observed** in the text. Latent ones, can only be indirectly observed. For example, racist language used by a political speaker is directly manifest in the text, and the importance is whether it was used, not what it represents.
+
+------------------------------------------------------------------------
+
+Dimensions like ideology, on the contrary, cannot be directly observed but they have an effect on the way the text has been generated, for example influencing concepts and word choice. The dimension itself cannot be observed, only its effects. However, can be estimated based on these observable effects. The goal of scaling methods is to use observable outcomes, like words, to infer an actor's position on a latent dimension, like ideology or policy preferences.
+
+## Wordscores
+
+Wordscores is a **supervised** text scaling method introduced in Laver, Benoit, and Garry (2003)[^1] and widely used among political scientists.
+
+[^1]: Laver, Michael, Kenneth Benoit, and John Garry. 2003. [Extracting Policy Positions from Political Texts Using Words as Data.](https://www.cambridge.org/core/journals/american-political-science-review/article/abs/extracting-policy-positions-from-political-texts-using-words-as-data/4F4676E80A79E01EAAB88EF3F2D1B733)American Political Science Review 97(2): 311--32.
+
+Researchers first identify **reference texts** known to represent the extremes of the political space (and possibly the center as well). This one-dimensional space is anchored by assigning reference values to the reference texts, ideally obtained from previous expert survey.
+
+------------------------------------------------------------------------
+
+Wordscore estimates document positions of new texts by comparing them to these set of **reference texts**. The dimension of reference texts is defined by the analyst. It can derive, for example, from quantitive estimates made by experts. Wordscore then estimates the position of the new texts by **comparing their words** to the words of the reference texts.
+
+Wordscores then counts the number of times each word occurs in the reference texts and compares these counts to word counts from the texts being analyzed. The manifestos are placed on a continuum between the refer- ence texts depending on how similar the word counts are to each reference text
+
+------------------------------------------------------------------------
+
+Wordscores uses probabilities to infer the positions of new texts on a known dimension. The estimated position of a new text is updated as reference's words are found. Its logic is similar to that of machine learning algorithms.
+
+Benoit exemplifies the Wordscores implementation in Quanteda by using manifestos of the 2013 and 2017 German federal elections. The `ref_score` variable includes reference scores for 2013 German parties from the 2014 [Chapel Hill Expert Survey](https://www.chesdata.eu), which estimate party positioning on ideology and policy issues. The problem is to measure the position of 2017 manifestos based on the 2013 data.
+
+------------------------------------------------------------------------
+
+Wordscores is applied to the document-feature matrix.
+
+```{r}
+corp_ger <- readRDS("data/data_corpus_germanifestos.rds")
+
+# tokenize texts
+toks_ger <- quanteda::tokens(corp_ger, 
+                             remove_punct = TRUE,
+                             remove_numbers=TRUE, 
+                             remove_symbols = TRUE, 
+                             split_hyphens = TRUE, 
+                             remove_separators = TRUE)  %>%
+  tokens_wordstem(language = "de") %>%
+  tokens_remove(pattern = stopwords("de")) %>%
+  tokens_select(min_nchar = 2)
+
+# create a document-feature matrix
+dfmat_ger <- dfm(toks_ger)
+```
+
+```{r echo=TRUE}
+tmod_ws <- textmodel_wordscores(dfmat_ger, 
+                                y = corp_ger$ref_score, 
+                                smooth = 1)
+```
+
+
+The plot shows estimated word positions in the reference text, where word frequencies are on the y-axis and word-score are on the x-axis.
+
+```{r}
+textplot_scale1d(tmod_ws, 
+                 highlighted = c(
+                   # monetary policy (währungspolitik)
+                   "wahrungspolit",
+                   "euro", 
+                   "hartz",
+                   "reichtum",
+                   "liberal",
+                   "stabilitatsunion",
+                   "burokrati",
+                   "basiskrankenversicher"), 
+                 highlighted_color = "red")
+```
+
+---
+
+We predict the Wordscores for the other texts.
+
+```{r echo=TRUE}
+pred_ws <- predict(tmod_ws, 
+                   se.fit = TRUE, 
+                   newdata = dfmat_ger)
+
+textplot_scale1d(pred_ws)
+
+```
+
+---
+
+```{r}
+textplot_scale1d(pred_ws, 
+                 margin = "documents",
+                 groups = docvars(corp_ger, "year"))
+```
+
+
+## Step by step explanation
+
+```{r echo=TRUE}
+set.seed(12345)
+words <- c("words", "lemma", "politics", "euro", "random")
+df <- data.frame(texts = c(NA, NA, NA))
+texts <- for(i in 1:3){
+ df$texts[i] <- paste(sample(words, size = 4+i, replace = TRUE), 
+                   collapse = " ")
+}
+
+df$texts
+
+refscores <- c(2, 3, NA)
+refscores
+
+texts_dfm <- corpus(df, text_field = "texts") %>%
+  quanteda::tokens() %>%
+  dfm()
+```
+
+---
+
+Get the relative frequency of words in each text. The term "lemma" has frequency 0.4 because it appears in 2 out of 5 tokens.
+
+```{r echo=TRUE}
+refTexts_prop <- dfm_weight(texts_dfm[1:2,] , "prop")
+refTexts_prop
+```
+
+We can now calculate the probability of reading the first text given that we read, for example, the word "politics": $0.2/(0.2+0.3333333) = 0.375$. This is done for every word in the reference texts.
+
+---
+
+```{r echo=TRUE}
+refTexts_prop <- t(refTexts_prop)
+refTexts_prob <- refTexts_prop/rowSums(refTexts_prop)
+refTexts_prob
+```
+
+---
+
+The resulting probabilities are weighted by the reference score to get the word scores (e.g., $ws_{politics} = (0.3750000*2) + (0.6250000*3) = 2.625$)
+
+```{r echo=TRUE}
+ws <- refTexts_prob %*% refscores[1:2]
+t(ws)
+
+ws_quanteda <- textmodel_wordscores(texts_dfm, refscores)
+ws_quanteda$wordscores
+```
+
+---
+
+The score of the new text is the relative frequency of its words weighted by their word scores:
+
+$$0.1428571*2.625000 + \\ 0.1428571*2.454545 + \\0.4285714*2.000000 +\\ 0.1428571*2.000000 + \\0.1428571*3.000000 =\\ 2.297078 $$
+
+```{r echo=TRUE}
+virgTexts_prop <- dfm_weight(texts_dfm[3,] , "prop")
+virgTexts_prop <- t(virgTexts_prop)
+sum(virgTexts_prop * ws)
+```
+
+```{r echo=TRUE}
+predict(ws_quanteda, newdata = texts_dfm[3,])
+```
+
+## Wordfish
+
+Wordfish is a scaling model of one-dimensional document positions[^2] which does not require reference scores/texts. In comparison to Wordscores, it is an **unsupervised** **one-dimensional text scaling** **method** that it estimates the positions of documents solely based on the observed word frequencies.
+
+[^2]: Slapin, Jonathan and Sven-Oliver Proksch. 2008. "[A Scaling Model for Estimating Time-Series Party Positions from Texts](https://doi.org/10.1111/j.1540-5907.2008.00338.x)." *American Journal of Political Science* 52(3): 705-772.
+
+---
+
+In their seminal paper where they proposed the WORDFISH scaling algorithm, Slapin & Proksch (2008) estimated *the positions of German political parties from 1990 to 2005 using word frequencies in party manifestos. The extracted positions reflect changes in the party system more accurately than existing time-series estimates. In addition, the method allows researchers to examine which words are important for placing parties on the left and on the right. We find that words with strong political connotations are the best discriminators between parties.*
+
+---
+
+Speeches and document-level variables from the debate over the Irish budget of 2010.
+
+The corpus object for the 2010 budget speeches, with document-level variables for year, debate, serial number, first and last name of the speaker, and the speaker's party. A detailed explanation of Wordfish can be found  [here](http://www.luigicurini.com/uploads/6/7/9/8/67985527/lecture_3_2022.pdf).
+
+```{r}
+toks_irish <- quanteda::tokens(data_corpus_irishbudget2010, 
+                     remove_punct = TRUE)
+dfmat_irish <- dfm(toks_irish)
+```
+
+```{r echo=TRUE}
+tmod_wf <- textmodel_wordfish(dfmat_irish, dir = c(6, 5))
+```
+
+```{r}
+textplot_scale1d(tmod_wf)
+```
+
+# Correspondence analysis
+
+Correspondence analysis is a technique to scale documents on one or (usually) two or more dimensions. It is similar to principal component analysis but works for categorical variables (contingency table).
+
+The objective of Correspondence Analysis (CA) is to simplify a data matrix by **reducing its dimensionality** and **displaying it in a lower dimensional space**, similar to Principal Component Analysis.
+
+## Model fitting
+
+After the usual pre-processing steps, a CA model can be fitted using the Quanteda `textmodel_ca` function, optimized for large scale textual data[^3]. An even more flexible library to fit CA models (and not only) is [FactoMineR](http://factominer.free.fr).
+
+[^3]: the function documentation also describes specifics solutions in case of very big `dfm`
+
+```{r}
+ukimmig2010 <- data.frame(text = quanteda::data_char_ukimmig2010)
+ukimmig2010$party <- names(quanteda::data_char_ukimmig2010)
+
+ukimmig2010 <- ukimmig2010 %>%
+  mutate(lemma = tolower(text))
+
+ukimmig2010_corpus <- quanteda::corpus(ukimmig2010,
+                                       docid_field = "party",
+                                       text_field = "lemma")
+
+ukimmig2010_dfm <- ukimmig2010_corpus %>%
+  quanteda::tokens(remove_punct = TRUE,
+         remove_symbols = TRUE,
+         remove_numbers = TRUE) %>%
+  tokens_tolower() %>%
+  tokens_remove(stopwords("en")) %>%
+  dfm() %>%
+  dfm_trim(min_docfreq = 0.5, max_docfreq = 0.99, 
+           docfreq_type = "prop") %>%
+  dfm_subset(ntoken(.) > 0)
+```
+
+```{r echo=TRUE}
+ukimmig2010_ca <- textmodel_ca(ukimmig2010_dfm)
+```
+
+## Visualization
+
+The resulting model can be represented on a one-dimensional or bi-dimensional scale.
+
+```{r}
+textplot_scale1d(ukimmig2010_ca) +
+  ggtitle("Correspondence analysis on a one-dimensional scale",
+          subtitle = "Immigration-related sections of 2010 UK party manifestos")
+```
+
+------------------------------------------------------------------------
+
+```{r}
+
+fviz_ca_row(ukimmig2010_ca,
+            col.row = "contrib") +
+  ylim(-1.5,1.5) +
+   ggtitle("Correspondence analysis on a multi-dimensional scale",
+          subtitle = "Immigration-related sections of 2010 UK party manifestos") +
+  geom_point(col="black") 
+```
+
+------------------------------------------------------------------------
+
+```{r}
+fviz_ca_col(ukimmig2010_ca,
+            col.col = "contrib") +
+  ylim(-1.5,2) +
+   ggtitle("Correspondence analysis on a multi-dimensional scale",
+          subtitle = "Immigration-related sections of 2010 UK party manifestos") +
+  geom_point(col="black") 
+```
+
+## Choice of dimensions
+
+CA models extract several dimensions from the data. Retain for interpretation the dimensions that cumulative explain most of the variance is common choice. Simple formulas have also been suggested in literature to select only the significant axes, defined as those whose explained variance is higher what would be expected by chance: $max(\frac{100}{N_{row}}, \frac{100}{N_{col}})$)[^4].
+
+[^4]: Bendixen, M. (1996). [A practical guide to the use of correspondence analysis in marketing research.](http://www.mindware-jp.com/xlstat/jp/file/corres3.pdf) Marketing Research On-Line, 1(1), 16-36, pag. 26.
+
+---
+
+```{r}
+explained_variance <- prop.table(ukimmig2010_ca$sv ^ 2)
+barplot(
+  explained_variance,
+  names = 1:length(explained_variance),
+  col = c(rep("blue", 3), rep("grey", 3)),
+  main = "Explained variance by dimension",
+  sub = "Dimensions to retain for interpretation (Bendixen, 1996) are shown in blue"
+) + 
+  abline(h = max(1 / (length(ukimmig2010_ca$colmass) - 1), 
+                 1 / (length(ukimmig2010_ca$rowmass) - 1)),
+         col = "red3", lwd = 3, lty="dotted")
+```
+
+---
+
+### Interpretation
+
+```{r}
+dim_words <- as.data.frame(ukimmig2010_ca$colcoord)
+head(dim_words[order(dim_words$Dim1),], 5)
+tail(dim_words[order(dim_words$Dim1),], 5)
+```
 
 # Supervised classification methods
-## Overview of algorithms
-# Hands-on tutorial {background-color="#2780e3"}
-Click \[here\](day3-tutorial.hmtl#/sec-supervised-classification-methods) to open the tutorial.
 
-# Laboratory with real-world data sets {background-color="#2780e3"}
-Click \[here\](day3-tutorial.hmtl#/sec-supervised-classification-methods-laboratory-with-real-world-data-sets) to open the laboratory.
+## Naive Bayes
 
-# Coffee Break {background-color="#daffad"}
-See you at 15:30
+Naive Bayes is a machine learning approach for categorizing documents into **various groups** (two or more) through a supervised learning process. The classifier is **trained** using previously labeled documents, and is then used to predict the most probable category for new, unlabeled documents.
 
-# Overview of other text analysis techniques {background-color="#2780e3"}
-## network analysis
-## named entity recognition
-## word embeddings
+Quanteda offers a quick way to fit Naive Bayes models. Let's follow the built-in example.
 
-# Hands-on tutorial {background-color="#2780e3"}
-Click \[here\](day2-tutorial.hmtl#/sec-other-text-analysis-techniques) to open the tutorial
+---
 
-# Conclusions and wrap up of the seminar {background-color="#2780e3"}
+The `data_corpus_moviereviews` from the `quanteda.textmodels` package includes **2000 movie reviews** that have been classified either as "positive" or "negative" (variable "**Sentiment**").
 
+```{r}
+corp_movies <- data_corpus_moviereviews
+summary(corp_movies, 5)
+```
+
+--- 
+
+## Validation
+
+In supervised machine learning, there is always a training and evaluation stage where the performance of the model is assessed. There are various evaluation techniques, the most basic of which involves dividing the labeled data into a training and test set.
+
+----
+
+For this demonstration, we randomly select 1500 reviews (75% of the labeled data) to be used as the training set, and the remaining 500 reviews (25%) will be the test set. Using the training set, we construct a Naive Bayes classifier. In the next step, we will use this classifier to predict the sentiment of the remaining reviews, which make up our test set.
+
+```{r echo=TRUE}
+# create a random sample of 1500 numbers without replacement
+set.seed(300)
+id_train <- sample(1:2000, 1500, replace = FALSE)
+head(id_train, 10)
+```
+
+---
+
+## Training
+
+We then create the usual Document Feature Matrix `dfm`.
+
+```{r echo=TRUE}
+# create an ID for each item in the corpus
+corp_movies$id_numeric <- 1:ndoc(corp_movies)
+
+# tokenize and create the dfm
+toks_movies <-
+  quanteda::tokens(corp_movies,
+         remove_punct = TRUE,
+         remove_number = TRUE) %>%
+  tokens_remove(pattern = stopwords("en")) %>%
+  tokens_wordstem()
+dfmt_movie <- dfm(toks_movies)
+```
+
+---
+
+We then create two `dfm` subset, one for the training and one for the test set.
+
+```{r  echo=TRUE}
+# subset the dfm, getting the training set
+dfmat_training <- dfm_subset(dfmt_movie, id_numeric %in% id_train)
+
+# subset the dfm, getting the test set (documents not in id_train)
+dfmat_test <- dfm_subset(dfmt_movie, !id_numeric %in% id_train)
+```
+
+Naive Bayes can consider only features that appear in both the training and test sets. Hence, we need to make the features identical using `dfm_match`.
+
+```{r  echo=TRUE}
+dfmat_matched <- dfm_match(dfmat_test, 
+                           features = featnames(dfmat_training))
+```
+
+---
+
+## Fit the model
+
+We now train the naive Bayes classifier using the Quanteda function `textmodel_nb()`.
+
+```{r echo=TRUE}
+tmod_nb <- textmodel_nb(
+  # the dfm on which the model will be fit
+  dfmat_training, 
+  # training labels associated with each document in train. 
+  dfmat_training$sentiment)
+```
+
+We now use the trained Naive Bayes model to predict the labels of the test set.
+
+```{r echo=TRUE}
+# get labels from the test set
+actual_class <- dfmat_matched$sentiment
+
+# predict the test set classes using the model
+predicted_class <- predict(tmod_nb, newdata = dfmat_matched)
+```
+
+---
+
+The cross-table reveals that there are equal numbers of false positives and false negatives, indicating that the classifier made mistakes in both directions without consistently over- or under-estimating either class.
+
+```{r}
+tab_class <- table(actual_class, predicted_class)
+tab_class
+
+prop.table(tab_class, margin = 1)
+```
+
+---
+
+The function `confusionMatrix()` from the `caret` package to assess the performance of the classification.
+
+```{r}
+confusionMatrix(tab_class, mode = "everything", positive = "pos")
+```
+
+---
+
+**Precision**, **recall** and the **F1** score are frequently used to assess the classification performance.
+
+Precision is `TP / (TP + FP)`, where `TP` are the number of true positives and `FP` are the false positives. Recall divides the true positives by the sum of true positives and false negatives `TP / (TP + FN)`. Finally, the F1 score is a harmonic mean of precision and recall `2 * (Precision * Recall) / (Precision + Recall)`.
+
+# ReadMe2
+
+The originary ReadMe algorithm has been developed by [Hopkins & King (2010)](https://gking.harvard.edu/files/gking/files/words.pdf) to estimate the proportion of unlabeled documents within given categories starting from a categorization scheme chosen by the user (e.g., sentiment ratings, policy topics, or any other mutually exclusive and exhaustive set of categories) and a small subset of text documents hand classified into the given categories.
+
+------------------------------------------------------------------------
+
+> The central intuition of the original `readme` is that for any individual feature *S* in both the labeled and unlabeled set, we know that the average value of that feature *S* is equal to the sum of the conditional expectation of *S* in each category multiplied by the share of documents in that category. While we observe the average of *S* in the unlabeled set, we do not observe the conditional expectations of *S*. We estimate these conditional expectations using the labeled set conditional frequency and solve for the unlabeled set proportions via standard linear programming methods.
+
+---
+
+> There are many possible features *S* that can be extracted from the text. The main contribution of `readme2` is to develop a way for selecting optimal sets of features from a large space of potential document summaries, morphing the space in which the readme regression is run to yield the best possible estimates of the category proportions. We begin by converting each document into a vector of summaries based on the word vector representations of each term in the document[^5].
+
+[^5]: https://github.com/iqss-research/readme-software
+
+---
+
+ReadMe2 is a recent and improved version of the algorithm by Jerzak, King, & Strezhnev (2018). It uses pre-trained dictionaries of word vectors as part of the process of translating the words in documents to a numerical representation.
+
+To work with package, a Python installation as well as several additional packages (and downloads) are required, such as `tensorflow`, an R interface to [TensorFlow API](https://tensorflow.rstudio.com), an open source machine learning library; the pre-trained dataset [Stanford GloVe: Global Vectors for Word Representation](https://nlp.stanford.edu/projects/glove/); a neural network transformer models via the [`text` package](https://www.r-text.org).
+
+```{r eval=FALSE, echo=FALSE}
+# install required packages and data sets
+devtools::install_github("iqss-research/readme-software/readme")
+devtools::install_github("rstudio/tensorflow")
+
+library(tensorflow)
+install_tensorflow()
+download_wordvecs() 
+
+install.packages("text")
+library(text)
+textrpp_install()
+```
+
+---
+
+In the provided [example](https://github.com/iqss-research/readme-software), the Clinton dataset of blog posts was used to demonstrate the method. It consists of 1,676 documents categorized into 6 mutually exclusive categories ("TRUTH").
+
+```{r eval=FALSE, echo=FALSE}
+library(readme)
+data(clinton, package="readme")
+```
+
+The `undergrad` function takes the raw document texts and a word vector dictionary as input and convert the raw text into a document-feature matrix. The default word vector used is the Stanford GloVe pre-trained dataset. The `undergrad` function returns a set of feature summaries for each document after pre-processing the text.
+
+```{r eval=FALSE, echo=TRUE}
+## Generate a word vector summary for each document
+wordVec_summaries <- undergrad(documentText = cleanme(clinton$TEXT), 
+                               wordVecs = NULL) # NULL=default Stanford GloVe
+```
+
+------------------------------------------------------------------------
+
+Recently (2023) a new option was added to obtain document-level features using neural network transformer models, such as GPT or BERT, using the textEmbed function from the text package.
+
+```{r eval=FALSE, echo=TRUE}
+## Generate a word vector summary for the first twenty documents
+wordVec_summaries <- undergrad(documentText = tolower(clinton$TEXT),
+                              numericization_method = "transformer_based") 
+                            # "vector_summaries" # faster
+```
+
+## Estimate
+
+Finally, the estimated proportions can be computed.
+
+```{r eval=FALSE, echo=TRUE}
+# Estimate category proportions
+set.seed(2138) # Set a seed if you choose
+readme.estimates <- readme(dfm = wordVec_summaries, 
+                           labeledIndicator = clinton$TRAININGSET, 
+                           categoryVec = clinton$TRUTH)
+```
+
+## Validate
+
+The model can be validated against the actual categories.
+
+```{r eval=FALSE, echo=TRUE}
+res <- readRDS("data/ReadMe2_plotdata.rds")
+```
+
+```{r eval=FALSE, echo=TRUE}
+# Output proportions estimate
+est <- readme.estimates$point_readme
+# Compare to the truth
+true <-
+  table(clinton$TRUTH[clinton$TRAININGSET == 0]) / sum(table((clinton$TRUTH[clinton$TRAININGSET == 0])))
+
+res <- data.frame(ESTIMATE = as.numeric(est),
+                  REAL = as.numeric(true))
+rownames(res) <- c("-2", "-1", "1", "2", "3", "4")
+res <- t(as.matrix(res))
+
+barplot(
+  height = res,
+  beside = T,
+  legend.text = c("estimates", "real"),
+  args.legend = list(x = "topleft")
+)
+```
+
+
+## Named entity recognition
+
+Apache OpenNLP Maxent
+
+```{r}
+library(NLP)
+library(openNLP)
+library(rvest)
+# install.packages("openNLPmodels.en", dependencies=TRUE, repos = "http://datacube.wu.ac.at/")
+library(openNLPmodels.en)
+```
+
+```{r echo=TRUE}
+library(rvest)
+page = read_html('https://en.wikipedia.org/wiki/Berkshire_Hathaway')
+
+text = html_text(html_nodes(page,'p'))
+text = text[text != ""]
+text = gsub("\\[[0-9]]|\\[[0-9][0-9]]|\\[[0-9][0-9][0-9]]","",text) # removing refrences [101] type
+
+# Make one complete document
+text = paste(text, collapse = " ") 
+
+text = as.String(text)
+```
+
+---
+
+```{r echo=TRUE}
+sent_annot = Maxent_Sent_Token_Annotator()
+word_annot = Maxent_Word_Token_Annotator()
+people_annot = Maxent_Entity_Annotator(kind = "person") #annotate person
+loc_annot = Maxent_Entity_Annotator(kind = "location") #annotate location
+
+annot.l1 = NLP::annotate(text, list(sent_annot,word_annot,loc_annot,people_annot))
+
+k <- sapply(annot.l1$features, `[[`, "kind")
+berk_locations = text[annot.l1[k == "location"]]
+berk_people = text[annot.l1[k == "person"]]
+```
+
+```{r}
+head(unique(berk_people), 5)
+```
+
+```{r}
+head(unique(berk_locations), 5)
+```
