@@ -1,5 +1,7 @@
 # Text Analysis with R
 
+****** Work in Progress *******
+
 This three-day seminar is intended for communication and social sciences researchers at the Ph.D. and postdoc levels who want an overview of the computational techniques available for analyzing text data. The most important analytic techniques and their R software implementations will be presented. Hands-on tutorials will guide participants in the analysis of real-world data.
 
 The seminar introduces basic concepts and principles of computational text analysis and their implementation in R. It offers an overview of the most common approaches, from exploratory analysis to the supervised, semi-supervised, and unsupervised text analysis methods, including dictionary-based analysis, topic modeling, and machine learning classification techniques. It guides the participants step by step through the different phases of a text data analysis project, from data collection and preprocessing to the R coding necessary to conduct the analysis, and offers the opportunity to apply methodological knowledge to real-world data during hands-on coding sessions. A detailed program is outlined below.
